@@ -153,68 +153,105 @@ Business Info → Owner Info → Business Type → Processing Volume → Bank Ac
 
 ## 10. EXECUTIVE FAQ KNOWLEDGE
 
-### Integration & Timeline
-*   **Demo to Live:** 6-8 weeks typical, can accelerate to 4 weeks for priority partners
-*   **Integration Type:** One API (REST) with SDK options for web, mobile, and core banking
-*   **Deployment:** 100% cloud-hosted SaaS — no on-premise software required
-*   **Dedicated Support:** Yes, Fiserv assigns integration specialists for each bank
-*   **What I Say:** "From this demo to live integration is typically 6-8 weeks. We assign dedicated integration specialists to your team."
+> **SOURCE OF TRUTH:** bank-sample-questions-and-info-for-answers.md
+> Use these EXACT figures when answering bank executive questions.
 
-### Scalability & Volume
-*   **Transaction Volume:** Handles millions of daily transactions across 6M+ merchants
-*   **Uptime:** 99.99% availability SLA
-*   **Architecture:** Auto-scaling cloud infrastructure
-*   **What I Say:** "The Offer Engine powers 6 million merchants. We auto-scale for peak volumes—Black Friday, tax season, you name it."
+### Q1: How long from demo to live?
+*   **ANSWER: 2-6 weeks** (depending on bank readiness)
+*   Single API integration + iFrame embedding
+*   Includes: API Setup (1-2 days) → iFrame Integration (3-5 days) → UAT (1-2 weeks) → Go-Live
+*   **What I Say:** "From this demo to live is typically 2-6 weeks. Banks with dedicated dev resources can go live in as little as 2 weeks."
 
-### Application Workflow (Post-Submit)
-*   **Instant Decisioning:** 85% of applications approved instantly
-*   **Underwriting Review:** 24-48 hours for applications needing manual review
-*   **Device Fulfillment:** Ships within 2-3 business days after approval
-*   **Merchant Notification:** Email + SMS at each step
-*   **What I Say:** "85% of applications get instant approval. Device ships in 2-3 days. The merchant gets updates at every step."
+### Q2: How do you handle higher volumes?
+*   **ANSWER: 500M+ transactions/month** on multi-region AWS
+*   US-East + US-West regions, 200,000+ requests/second combined
+*   99.99% uptime SLA with automatic failover
+*   Peak tested: 500,000 concurrent sessions (Black Friday level)
+*   **What I Say:** "We handle 500 million transactions per month across multiple AWS regions. Peak capacity is 500,000 concurrent sessions."
 
-### Product Offerings by Category
-*   **Payment Processing:** Accept cards, contactless, wallets
-*   **Point of Sale:** Clover Go, Flex, Mini, Station
-*   **Business Funding:** Clover Capital, Business Credit Line
-*   **Software Add-ons:** Inventory, payroll, loyalty, online ordering
-*   **What I Say:** "Three categories: payments, hardware, and funding. Each configurable per bank."
+### Q3: What happens after application is submitted?
+*   **ANSWER: MID/TID → KYB/KYC → Underwriting → Provisioning → Shipping**
+*   MID/TID Generation: Instant - 2 hours
+*   KYB/KYC Verification: 1-4 hours (automated)
+*   Underwriting: 4-24 hours
+*   Device Shipping: 1-5 days from Atlanta
+*   **Total to first transaction: 24-48 hours** with Priority Overnight
+*   **What I Say:** "After submit: instant MID generation, automated KYB/KYC, then underwriting typically same-day. Device ships from Atlanta. Total: as fast as 24-48 hours."
 
-### Pricing & Configuration
-*   **Bank-Configurable:** Yes, banks can set custom pricing, margins, and bundled offers
-*   **Revenue Share:** Flexible models — transaction-based, subscription, or hybrid
-*   **Transparent Pricing:** Merchants see clear pricing before committing
-*   **What I Say:** "All pricing is configurable. You set the rates, margins, and bundles for your merchant base."
+### Q4: Do you provide integration specialists?
+*   **ANSWER: Yes, absolutely!**
+*   Technical Account Manager (TAM) - dedicated per bank
+*   Integration Engineer - business hours + on-call
+*   Solutions Architect - as needed
+*   QA Specialist during testing, 24/7 support during launch
+*   Includes: Kickoff Workshop, API Portal, Sandbox, SDKs, Slack/Teams channel, weekly syncs, 30-day hypercare
+*   **What I Say:** "Yes. You get a dedicated TAM, integration engineer, and solutions architect. We also give you sandbox, SDKs, and a direct Slack channel to our team."
 
-### White-Label & Branding
-*   **Fonts:** Fully customizable to match bank brand guidelines
-*   **Colors:** Complete theming support
-*   **Logo:** Bank branding throughout the experience
-*   **Messaging:** Configurable copy and CTAs
-*   **What I Say:** "Everything you see is white-labeled. Your fonts, your colors, your logo. Merchants see their bank, not Fiserv."
+### Q5: What are the high-level integration features?
+*   **ANSWER:** RESTful API (OAuth 2.0), Webhooks, iFrame Integration, White-Label Ready, SSO (SAML 2.0 + OAuth), PCI DSS Level 1, Multi-Language
+*   Advanced: Instant Boarding, Portfolio Analytics, Targeted Offers, AI-Powered Underwriting, Mobile-First
+*   **What I Say:** "Modern REST API, webhooks, iFrame integration, full white-labeling, SSO support, and PCI Level 1 compliance out of the box."
 
-### Rollout Strategy
-*   **Segmentation:** Target by merchant size, industry, geography, or product fit
-*   **A/B Testing:** Built-in experimentation for offer placement and messaging
-*   **Phased Rollout:** Pilot with subset before full launch
-*   **What I Say:** "You can target specific segments—restaurants in the Midwest, or high-volume retailers. Start with a pilot, then scale."
+### Q6: What products can we offer?
+*   **Food & Drink:** Restaurant Starter ($0/mo), Pro ($14.95/mo), Enterprise ($49.95/mo)
+*   **Retail:** Basic ($0/mo), Plus ($29.95/mo), Enterprise ($79.95/mo)
+*   **Services:** Lite ($0/mo), Pro ($19.95/mo), Premium ($59.95/mo)
+*   Transaction rates: 2.6% + $0.10 (basic) to 1.9% + $0.10 (enterprise)
+*   **What I Say:** "Three categories: Food & Drink, Retail, and Services. Each has three tiers. Banks can customize all pricing."
 
-### Abandonment Recovery
-*   **Save & Continue:** Merchants can pause and resume applications
-*   **Email Reminders:** Automated follow-ups for abandoned applications
-*   **Progress Persistence:** All data saved, merchant picks up where they left off
-*   **Human Handoff:** Option to route to Fiserv sales rep
-*   **What I Say:** "If a merchant abandons, we save their progress and send reminders. They can also connect with a Fiserv rep."
+### Q7: What's the pricing / revenue model?
+*   **Hardware:** Clover Go ($49-99), Flex ($299-499), Mini ($499-749), Station ($999-1,349)
+*   **Bank Revenue Share:** 60-70% of interchange markup, 50-60% of software fees, 100% of hardware margin
+*   **Sample Revenue:** $790,000/month per 1,000 merchants
+*   **What I Say:** "Banks get 60-70% of interchange markup, 50-60% of software fees, and 100% of hardware margin. You set retail pricing."
 
-### Human Support During Onboarding
-*   **Live Chat:** Available during application (optional bank feature)
-*   **Phone Support:** Click-to-call to Fiserv sales
-*   **Callback Request:** Schedule a call at merchant's convenience
-*   **What I Say:** "Merchants can reach a Fiserv salesperson anytime—live chat, phone, or callback. Your choice to enable."
+### Q8: Can we target specific customer segments?
+*   **ANSWER: Yes, granular filtering**
+*   Filter by: Customer ID, Tax ID (EIN/SSN), Account Type, Geography (ZIP, state), Business Size, Industry (SIC/NAICS)
+*   Phased rollout: Pilot (50) → Soft Launch (500) → Expansion (5,000) → Full (50,000+)
+*   **What I Say:** "You can target by industry, geography, account type, or even specific customer IDs. Most banks start with a 50-merchant pilot."
 
-### Existing Clover Merchants (SSO)
-*   **Single Sign-On:** Supported via OAuth 2.0 integration
-*   **Dashboard Access:** Existing Clover merchants can access their dashboard from the bank portal
-*   **Unified Experience:** Managed through same Offer Engine
-*   **What I Say:** "Existing Clover merchants? Yes, they can SSO into their dashboard right from your portal. Same unified experience."
+### Q9: Is pricing fully bank-configurable?
+*   **ANSWER: Yes, 100% flexible**
+*   Configurable: Transaction rates (Interchange Plus, Flat, Tiered), Monthly fees, Hardware pricing, Setup fees, PCI fees, Chargeback fees, ETFs
+*   Features: Admin portal, A/B testing, promotional pricing, bundle discounts
+*   **What I Say:** "Everything is configurable—rates, fees, bundles, promotions. You control it all through an admin portal."
+
+### Q10: Is branding fully customizable?
+*   **ANSWER: Yes, full white-label via Branding API**
+*   Customizable: Logo, favicon, colors, fonts, imagery, content, domain (merchants.yourbank.com), email templates
+*   Setup time: Basic (1 day) → Standard (3-5 days) → Premium (2-3 weeks)
+*   **What I Say:** "Full white-label. Your logo, fonts, colors, even your own subdomain. Merchants see their bank, not Fiserv."
+
+### Q11: What happens if a merchant abandons?
+*   **ANSWER: Business Consultant follow-up with 35-45% recovery rate**
+*   0-2 hours: Automated email + SMS
+*   24-48 hours: Personalized email → Phone call → Manager escalation
+*   7+ days: Long-term nurture campaign
+*   All progress saved, merchant resumes where they left off
+*   **What I Say:** "We save progress and send reminders automatically. If they don't return, a Business Consultant calls within 48 hours. We recover 35-45% of abandoned applications."
+
+### Q12: Can merchants contact a Fiserv salesperson during application?
+*   **ANSWER: Yes, multiple touchpoints**
+*   "Connect to Sales" button on every screen (<30 sec response)
+*   Live Chat widget (real-time)
+*   Schedule Callback (within 1 hour)
+*   Phone Hotline (immediate)
+*   Triggered prompts when merchants hesitate, navigate back, or view pricing
+*   **What I Say:** "Yes. Live chat, phone, or callback—all available during the application. We even prompt them when they hesitate."
+
+### Q13: Can existing Clover merchants SSO into their dashboard?
+*   **ANSWER: Yes, SAML 2.0 and OAuth 2.0 supported**
+*   Seamless session handoff, no re-authentication
+*   Deep linking to specific dashboard sections
+*   Full access: transactions, payments, inventory, employees, analytics
+*   **What I Say:** "Yes. Existing Clover merchants SSO right into their dashboard from your portal. One click, no re-login."
+
+### Q14: Is on-premise software required?
+*   **ANSWER: No! 100% cloud-hosted**
+*   Bank needs: 1 API endpoint + iFrame embed + SSO token (JWT)
+*   No: on-premise servers, databases, middleware, VPN, PCI scope expansion
+*   Simple: `<iframe src="https://dma.fiserv.com/apply?bank_id=...&token=...">`
+*   **What I Say:** "Zero footprint. Everything runs in Fiserv's PCI-compliant cloud. You just make one API call and embed an iFrame."
+
 
