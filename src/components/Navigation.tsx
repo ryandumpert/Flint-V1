@@ -36,7 +36,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
 
   // ============================================
   // FISERV OFFER ENGINE NAVIGATION
-  // Guides bank executives through the demo
+  // Maps to the 5 CHAPTERS conversation structure
   // ============================================
   const navItems: Array<{
     id: string;
@@ -46,22 +46,22 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
       {
         id: 'home',
         label: 'HOME',
-        teleQuery: '(M) Show platform overview'
+        teleQuery: '(M) Welcome - show me the 5 chapters overview'
       },
       {
         id: 'bank-view',
         label: 'BANK VIEW',
-        teleQuery: '(M) Show me the bank portal with the offer'
+        teleQuery: '(M) Chapter 4 - Show me the bank experience with the portal and first onboarding step'
       },
       {
         id: 'onboarding',
         label: 'ONBOARDING',
-        teleQuery: '(M) Show me the merchant onboarding flow'
+        teleQuery: '(M) Chapter 5 - Show me the complete onboarding flow and celebration'
       },
       {
         id: 'offers',
         label: 'OFFERS',
-        teleQuery: '(M) What offers can we show merchants?'
+        teleQuery: '(M) What offers are available - POS, Capital, Credit Line?'
       },
       {
         id: 'integration',
@@ -71,7 +71,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
       {
         id: 'next',
         label: 'NEXT STEPS',
-        teleQuery: "(M) What's next? How do we proceed?"
+        teleQuery: "(M) I want to schedule a meeting with Fiserv"
       }
     ];
 
