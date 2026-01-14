@@ -35,8 +35,8 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
   }, []);
 
   // ============================================
-  // FISERV DMA BUYER JOURNEY NAVIGATION
-  // Guides enterprise bank buyers through platform discovery
+  // FISERV OFFER ENGINE NAVIGATION
+  // Guides bank executives through the demo
   // ============================================
   const navItems: Array<{
     id: string;
@@ -49,36 +49,36 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
         teleQuery: '(M) Show platform overview'
       },
       {
-        id: 'value',
-        label: 'VALUE',
-        teleQuery: '(M) What problems does this solve?'
+        id: 'bank-view',
+        label: 'BANK VIEW',
+        teleQuery: '(M) Show me the bank portal with the offer'
       },
       {
-        id: 'platform',
-        label: 'PLATFORM',
-        teleQuery: '(M) Show me the full onboarding journey'
+        id: 'onboarding',
+        label: 'ONBOARDING',
+        teleQuery: '(M) Show me the merchant onboarding flow'
       },
       {
-        id: 'benefits',
-        label: 'BENEFITS',
-        teleQuery: '(M) What are the main benefits?'
+        id: 'offers',
+        label: 'OFFERS',
+        teleQuery: '(M) What offers can we show merchants?'
       },
       {
-        id: 'pricing',
-        label: 'PRICING',
-        teleQuery: '(M) Show me the fee structure'
+        id: 'integration',
+        label: 'INTEGRATION',
+        teleQuery: '(M) How does the One API integration work?'
       },
       {
         id: 'next',
         label: 'NEXT STEPS',
-        teleQuery: '(M) What\'s next? How do we proceed?'
+        teleQuery: "(M) What's next? How do we proceed?"
       }
     ];
 
-  // Emerald styling for Fiserv DMA
-  const buttonBaseStyles = "bg-emerald-500 border-emerald-500 text-black hover:bg-emerald-400 hover:border-emerald-400";
-  const glowColor = "from-emerald-500/20 via-emerald-500/10";
-  const edgeGlowColor = "via-emerald-500/30";
+  // White styling for clean look
+  const buttonBaseStyles = "bg-white border-white text-black hover:bg-white/90 hover:border-white/90";
+  const glowColor = "from-white/20 via-white/10";
+  const edgeGlowColor = "via-white/30";
 
   return (
     <nav

@@ -132,8 +132,8 @@ button,
     --card: 0 0% 100%;
     --card-foreground: 0 0% 0%;
 
-    /* Primary: Gold/Tan - Warm muted accent that complements the design */
-    --primary: 43 53% 54%;
+    /* Primary: White - Clean accent color */
+    --primary: 0 0% 100%;
     --primary-foreground: 0 0% 0%;
 
     /* Secondary: Dark Teal - Matches LEAP card, used for greens throughout */

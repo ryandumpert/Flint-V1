@@ -1,13 +1,13 @@
 /**
  * useOnboardingFlow
  * Hook to manage state and progression through the static onboarding flow
+ * 
+ * NOTE: Currently returns immediately complete - no onboarding flow.
+ * Structure preserved for future merchant onboarding mockups.
  */
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { OnboardingData } from '@/types/onboarding';
-import { ONBOARDING_FLOW } from '@/data/onboardingFlow';
-
-const LOCAL_STORAGE_KEY = 'fiserv_dma_onboarding_complete';
 
 interface UseOnboardingFlowReturn {
     // State
@@ -31,108 +31,26 @@ interface UseOnboardingFlowReturn {
 }
 
 export const useOnboardingFlow = (): UseOnboardingFlowReturn => {
-    const [currentStepIndex, setCurrentStepIndex] = useState(0);
-    const [isOnboardingComplete, setIsOnboardingComplete] = useState(false);
-    const [isTransitioning, setIsTransitioning] = useState(false);
-    const [userData, setUserDataState] = useState<OnboardingData>({
-        // Pre-populated demo data - Sara AlHarbi profile
-        loginId: '1234567890',
-        phoneNumber: '501234567',
-        countryCode: '+966',
-        // Basic Info from sample customer persona
-        firstName: 'Sara',
-        lastName: 'AlHarbi',
-        email: 'sara.alharbi@example.com',
-        dateOfBirth: { day: 15, month: 6, year: 2003 }, // Makes her ~22 years old
-        gender: 'female',
-        city: 'Riyadh',
-    });
+    // No onboarding flow - immediately complete
+    const [currentStepIndex] = useState(0);
+    const [isOnboardingComplete] = useState(true); // Always complete
+    const [isTransitioning] = useState(false);
+    const [userData, setUserDataState] = useState<OnboardingData>({});
 
-    // Check localStorage on mount (but always start from beginning)
-    useEffect(() => {
-        try {
-            const savedComplete = localStorage.getItem(LOCAL_STORAGE_KEY);
-            // We track if they've onboarded before, but they still go through onboarding
-            if (savedComplete === 'true') {
-                setUserDataState(prev => ({ ...prev, isReturningUser: true }));
-            }
-        } catch (error) {
-            // localStorage not available
-        }
-    }, []);
+    // With empty flow, these are no-ops
+    const totalSteps = 1;
+    const progress = 100;
+    const currentStepId = 'complete';
 
-    // Get current step info
-    const currentStep = ONBOARDING_FLOW[currentStepIndex];
-    const currentStepId = currentStep?.id || 'home';
-    const totalSteps = ONBOARDING_FLOW.length;
-    const progress = ((currentStepIndex + 1) / totalSteps) * 100;
-
-    // Navigate to next step
-    const goToNext = useCallback(() => {
-        if (currentStepIndex < totalSteps - 1) {
-            setCurrentStepIndex(prev => prev + 1);
-        }
-    }, [currentStepIndex, totalSteps]);
-
-    // Navigate to previous step
-    const goToBack = useCallback(() => {
-        if (currentStepIndex > 0) {
-            setCurrentStepIndex(prev => prev - 1);
-        }
-    }, [currentStepIndex]);
-
-    // Skip current step (same as next for most steps)
-    const goToSkip = useCallback(() => {
-        const current = ONBOARDING_FLOW[currentStepIndex];
-
-        // If skip triggers transition, complete onboarding
-        if (current?.skipTriggersTransition) {
-            setIsTransitioning(true);
-            // Transition will be handled by Index.tsx
-        } else {
-            // Otherwise just go to next step
-            goToNext();
-        }
-    }, [currentStepIndex, goToNext]);
-
-    // Complete onboarding flow
-    const completeOnboarding = useCallback(() => {
-        setIsTransitioning(true);
-
-        // After transition animation, mark as complete
-        setTimeout(() => {
-            setIsOnboardingComplete(true);
-            setIsTransitioning(false);
-
-            // Save to localStorage
-            try {
-                localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
-            } catch (error) {
-                // localStorage not available
-            }
-
-            // Record completion timestamp
-            setUserDataState(prev => ({ ...prev, completedAt: new Date().toISOString() }));
-        }, 3000); // 3 second transition animation
-    }, []);
-
-    // Update user data
+    // No-op actions (preserved for API compatibility)
+    const goToNext = useCallback(() => { }, []);
+    const goToBack = useCallback(() => { }, []);
+    const goToSkip = useCallback(() => { }, []);
+    const completeOnboarding = useCallback(() => { }, []);
     const setUserData = useCallback((data: Partial<OnboardingData>) => {
         setUserDataState(prev => ({ ...prev, ...data }));
     }, []);
-
-    // Reset onboarding (for testing)
-    const resetOnboarding = useCallback(() => {
-        setCurrentStepIndex(0);
-        setIsOnboardingComplete(false);
-        setIsTransitioning(false);
-        setUserDataState({});
-        try {
-            localStorage.removeItem(LOCAL_STORAGE_KEY);
-        } catch (error) {
-            // localStorage not available
-        }
-    }, []);
+    const resetOnboarding = useCallback(() => { }, []);
 
     return {
         currentStepIndex,

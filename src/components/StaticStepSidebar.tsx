@@ -5,7 +5,11 @@
 
 import React from 'react';
 import { Check, Shield } from 'lucide-react';
-import { SIDEBAR_STEPS, getSidebarStepIndex, getCompletedSidebarSteps } from '@/data/onboardingFlow';
+
+// Empty sidebar steps - onboarding flow disabled
+const SIDEBAR_STEPS: { key: string; label: string; sublabel: string }[] = [];
+const getSidebarStepIndex = (_stepId: string): number => -1;
+const getCompletedSidebarSteps = (_stepId: string): number => 0;
 
 interface StaticStepSidebarProps {
     currentStepId: string;
@@ -14,7 +18,7 @@ interface StaticStepSidebarProps {
 export const StaticStepSidebar: React.FC<StaticStepSidebarProps> = ({ currentStepId }) => {
     const currentSidebarIndex = getSidebarStepIndex(currentStepId);
     const completedSteps = getCompletedSidebarSteps(currentStepId);
-    const totalSteps = SIDEBAR_STEPS.length;
+    const totalSteps = SIDEBAR_STEPS.length || 1;
 
     return (
         <div className="hidden lg:flex flex-col w-72 min-w-72 h-full min-h-[600px] pt-6">

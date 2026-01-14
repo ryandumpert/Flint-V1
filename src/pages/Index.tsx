@@ -32,59 +32,71 @@ import { StaticJourneyNav } from "@/components/StaticJourneyNav";
 import { useOnboardingFlow } from "@/hooks/useOnboardingFlow";
 
 
-// Welcome section - Fiserv DMA Enterprise Sales Platform
+// Welcome section - Fiserv DMA Introduction
 const WELCOME_VARIANTS = [
   {
-    badge: "FISERV DMA",
-    title: "Digital Merchant Acquisition Platform",
-    subtitle: "Guide your bank through the complete merchant lifecycle—from onboarding to long-term relationship management",
+    badge: "FISERV DIGITAL MERCHANT ACQUISITION",
+    title: "The Future of Bank-Merchant Relationships",
+    subtitle: "Embed contextual offers into your digital banking—grow revenue while strengthening merchant loyalty",
     generativeSubsections: [
       {
-        id: "welcome-grid",
+        id: "value-props",
         templateId: "FeatureGrid",
         props: {
-          columns: 4,
-          showStats: true,
+          columns: 3,
+          showStats: false,
           features: [
             {
-              id: "f1",
-              title: "Merchant Onboarding",
-              subtitle: "Compliance & KYC",
-              description: "Digital-first application with automated underwriting and real-time identity verification.",
-              icon: "file",
-              stat: "3 days",
-              statLabel: "Avg. time to live",
-              actionPhrase: "Show me merchant onboarding"
+              id: "v1",
+              title: "Value to Banks",
+              subtitle: "New Revenue Stream",
+              description: "Monetize your digital channels with embedded merchant offers. One API integration, your branding, zero disruption.",
+              icon: "trending",
+              actionPhrase: "Tell me more about value for banks"
             },
             {
-              id: "f2",
-              title: "Transaction Operations",
-              subtitle: "Daily processing",
-              description: "Real-time transaction visibility, card type analysis, and self-service merchant portals.",
-              icon: "zap",
-              stat: "2 sec",
-              statLabel: "Transaction latency",
-              actionPhrase: "Show me transaction operations"
+              id: "v2",
+              title: "Value to Merchants",
+              subtitle: "Right Offer, Right Time",
+              description: "Merchants get relevant products when they need them—POS systems, capital, credit lines—all within their trusted banking portal.",
+              icon: "users",
+              actionPhrase: "Tell me more about value for merchants"
             },
             {
-              id: "f3",
-              title: "Settlement & Fees",
-              subtitle: "Financial clarity",
-              description: "Itemized fee transparency, gross-to-net breakdowns, and automated reconciliation.",
-              icon: "dollar",
-              stat: "95%",
-              statLabel: "Auto-processed",
-              actionPhrase: "Show me settlement and fees"
+              id: "v3",
+              title: "Why It Works",
+              subtitle: "Trust + Timing = Conversion",
+              description: "Merchants trust their bank. Contextual offers at the right moment convert better than cold outreach. You stay in the relationship.",
+              icon: "check",
+              actionPhrase: "Tell me why this model works"
+            }
+          ]
+        }
+      },
+      {
+        id: "cta-section",
+        templateId: "FeatureGrid",
+        props: {
+          columns: 2,
+          showStats: false,
+          features: [
+            {
+              id: "cta1",
+              title: "See the Bank Experience",
+              subtitle: "What merchants see",
+              description: "Preview how offers appear seamlessly in your digital portal—non-intrusive, branded, contextual.",
+              icon: "eye",
+              highlight: true,
+              actionPhrase: "Show me the bank portal with the offer"
             },
             {
-              id: "f4",
-              title: "Merchant Relationships",
-              subtitle: "Long-term value",
-              description: "Historical trends, proactive alerts, and tools that position your bank as a financial partner.",
-              icon: "heart",
-              stat: "22%",
-              statLabel: "Higher retention",
-              actionPhrase: "Show me merchant relationship tools"
+              id: "cta2",
+              title: "See the Onboarding Flow",
+              subtitle: "10 frictionless steps",
+              description: "Walk through the merchant journey from offer click to product activation—mobile-friendly, compliant, low abandonment.",
+              icon: "layers",
+              highlight: true,
+              actionPhrase: "Show me the merchant onboarding flow"
             }
           ]
         }

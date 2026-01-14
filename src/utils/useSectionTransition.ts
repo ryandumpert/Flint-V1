@@ -10,23 +10,23 @@ export const useSectionTransition = (activeSection: string) => {
       // Trigger entrance animation with depth effects
       setIsEntering(true);
       setShowScrollHint(false);
-      
+
       // Show scroll hint after entrance animation completes
       const scrollHintTimer = setTimeout(() => {
         setShowScrollHint(true);
       }, 600);
-      
+
       // Reset animation state after animation completes
       const timer = setTimeout(() => {
         setIsEntering(false);
       }, 600);
-      
+
       return () => {
         clearTimeout(timer);
         clearTimeout(scrollHintTimer);
       };
     }
-    
+
     setPreviousSection(activeSection);
   }, [activeSection, previousSection]);
 
@@ -34,6 +34,7 @@ export const useSectionTransition = (activeSection: string) => {
     isEntering,
     shouldAnimate: isEntering,
     showScrollHint,
-    scrollHintClass: showScrollHint ? 'animate-scroll-hint' : ''
+    // Scroll hint animation disabled - was preventing scrolling during bounce
+    scrollHintClass: ''
   };
 };

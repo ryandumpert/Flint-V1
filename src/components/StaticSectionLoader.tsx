@@ -6,10 +6,12 @@
 
 import React, { Suspense } from 'react';
 import { STATIC_TEMPLATE_REGISTRY } from '@/data/staticTemplateRegistry';
-import { ONBOARDING_FLOW } from '@/data/onboardingFlow';
-import { OnboardingData } from '@/types/onboarding';
+import { OnboardingData, OnboardingStepConfig } from '@/types/onboarding';
 import { StaticStepSidebar } from '@/components/StaticStepSidebar';
 import { SectionLoadingFallback } from '@/components/SectionLoadingFallback';
+
+// Empty onboarding flow - flow disabled
+const ONBOARDING_FLOW: OnboardingStepConfig[] = [];
 
 interface StaticSectionLoaderProps {
     currentStepIndex: number;
