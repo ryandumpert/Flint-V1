@@ -161,6 +161,111 @@ currentStep?: number
 
 **Use Case:** "Show me the full onboarding journey" / "Where are we in the process?"
 
+### TimelineRoadmap
+Visual timeline showing phases with milestones and durations.
+```
+phases: { id, title, duration, description, milestones?[], status? }[]
+totalDuration?: string, startLabel?, endLabel?
+```
+
+### MetricsGrid
+Display key stats/metrics in visual grid.
+```
+metrics: { id, value, label, sublabel?, trend?, icon?, highlight? }[]
+columns?: 2|3|4
+```
+
+### WorkflowDiagram
+Visual process flowchart with status indicators.
+```
+steps: { id, title, description?, duration?, status?, branches?[] }[]
+title?, orientation?: horizontal|vertical
+```
+
+### PricingTable
+Pricing tiers with features and CTAs.
+```
+tiers: { id, name, price, period?, description, features[], highlighted?, badge?, ctaLabel?, ctaActionPhrase? }[]
+note?
+```
+
+### ProductCatalog
+Products grouped by category with expandable sections.
+```
+categories: { id, name, icon?, description?, products: { id, name, description, price?, features?[], actionPhrase? }[] }[]
+expandFirst?
+```
+
+### ComparisonTable
+Side-by-side feature comparison.
+```
+options: { id, name, description?, highlighted? }[]
+features: { name, category?, values: (boolean|string)[] }[]
+```
+
+### FAQAccordion
+Expandable FAQ list with search.
+```
+items: { id, question, answer, category? }[]
+searchable?, expandFirst?
+```
+
+### ContactCard
+Human support options with CTAs.
+```
+contacts: { id, type: phone|email|chat|calendar|person, title, value?, description?, available?, actionPhrase? }[]
+title?, subtitle?
+```
+
+### SegmentSelector
+Customer segment targeting selector.
+```
+categories: { id, name, segments: { id, name, description, icon?, count?, percentage?, selected? }[] }[]
+multiSelect?, ctaLabel?, ctaActionPhrase?
+```
+
+### BrandingPreview
+White-label customization with live preview.
+```
+options: { id, name, type: color|font|logo|theme, value, preview? }[]
+bankName?, previewMode?: portal|onboarding|card
+```
+
+### StatusTracker
+Application/order status with timeline.
+```
+steps: { id, title, description?, timestamp?, status, icon? }[]
+title?, referenceNumber?
+```
+
+### ArchitectureDiagram
+System architecture with layers and components.
+```
+layers: { id, name, components: { id, name, description?, icon?, highlight? }[] }[]
+connections?[], title?, subtitle?
+```
+
+### ChecklistCard
+Interactive checklist with progress.
+```
+items: { id, title, description?, status, actionPhrase? }[]
+title?, subtitle?, showProgress?
+```
+
+### TeamCards
+Team member/specialist cards.
+```
+members: { id, name, role, department?, email?, phone?, imageUrl?, specialty?, actionPhrase? }[]
+title?, subtitle?, columns?: 2|3|4
+```
+
+### QuickActions
+Grid of action buttons.
+```
+actions: { id, title, description?, icon?, color?, actionPhrase }[]
+title?, subtitle?, columns?: 2|3|4
+```
+
 ---
 
 ## 🚀 NAVIGATION MENU
@@ -913,6 +1018,378 @@ currentStep?: number
   }]
 }
 ```
+
+---
+
+## 🏦 EXECUTIVE FAQ SHOT PROMPTS
+
+### Demo to Live Timeline
+**User:** "How long does it take to move from this demo to live integration?" / "Timeline to production?"
+```json
+{ "badge": "TIMELINE", "title": "Demo to Live Integration",
+  "subtitle": "Typical implementation roadmap",
+  "generativeSubsections": [{
+    "id": "timeline-roadmap",
+    "templateId": "TimelineRoadmap",
+    "props": {
+      "totalDuration": "6-8 weeks",
+      "startLabel": "Demo",
+      "endLabel": "Go Live",
+      "phases": [
+        { "id": "p1", "title": "Contract & Kickoff", "duration": "Week 1", "description": "Sign agreements, assign integration specialists", "milestones": ["Contract signed", "Team assigned"], "status": "completed" },
+        { "id": "p2", "title": "API Integration", "duration": "Weeks 2-4", "description": "Connect One API to your banking platform", "milestones": ["API keys", "Test environment", "Offer embed"], "status": "current" },
+        { "id": "p3", "title": "Branding & Config", "duration": "Week 5", "description": "Apply your brand, configure pricing and offers", "milestones": ["Brand assets", "Pricing setup"], "status": "upcoming" },
+        { "id": "p4", "title": "UAT & Go Live", "duration": "Weeks 6-8", "description": "User acceptance testing, soft launch, full deployment", "milestones": ["UAT complete", "Pilot launch", "Full rollout"], "status": "upcoming" }
+      ]
+    }
+  }]
+}
+```
+
+### Volume & Scalability
+**User:** "How are you handling higher volumes?" / "Can this scale?"
+```json
+{ "badge": "SCALABILITY", "title": "Enterprise-Grade Scale",
+  "subtitle": "Built to handle your growth",
+  "generativeSubsections": [{
+    "id": "scale-metrics",
+    "templateId": "MetricsGrid",
+    "props": {
+      "columns": 4,
+      "metrics": [
+        { "id": "m1", "value": "6M+", "label": "Active Merchants", "sublabel": "On Fiserv platform", "icon": "users", "highlight": true },
+        { "id": "m2", "value": "99.99%", "label": "Uptime SLA", "sublabel": "Guaranteed availability", "icon": "shield" },
+        { "id": "m3", "value": "∞", "label": "Auto-Scaling", "sublabel": "Handles any volume", "icon": "trending" },
+        { "id": "m4", "value": "<100ms", "label": "Response Time", "sublabel": "API latency", "icon": "zap" }
+      ]
+    }
+  }]
+}
+```
+
+### Application Workflow Post-Submit
+**User:** "What workflow does it go through once application is submitted?" / "What happens after submit?"
+```json
+{ "badge": "WORKFLOW", "title": "Post-Submission Workflow",
+  "subtitle": "What happens after the merchant clicks submit",
+  "generativeSubsections": [{
+    "id": "post-submit-workflow",
+    "templateId": "WorkflowDiagram",
+    "props": {
+      "steps": [
+        { "id": "w1", "title": "Application Received", "description": "Data validation and fraud screening", "duration": "Instant", "status": "completed" },
+        { "id": "w2", "title": "Underwriting Decision", "description": "85% instant approval, 15% manual review", "duration": "0-48 hrs", "status": "active", "branches": [
+          { "id": "b1", "title": "Instant Approval", "duration": "< 30 sec" },
+          { "id": "b2", "title": "Manual Review", "duration": "24-48 hrs" }
+        ]},
+        { "id": "w3", "title": "Merchant Notification", "description": "Email + SMS confirmation", "duration": "Instant", "status": "pending" },
+        { "id": "w4", "title": "Device Fulfillment", "description": "FedEx ships to merchant", "duration": "2-3 days", "status": "pending" },
+        { "id": "w5", "title": "Activation", "description": "Merchant sets up and starts processing", "duration": "Same day", "status": "pending" }
+      ]
+    }
+  }]
+}
+```
+
+### Integration Specialists
+**User:** "Does Fiserv provide dedicated integration specialists?" / "Who helps us integrate?"
+```json
+{ "badge": "YOUR TEAM", "title": "Dedicated Integration Support",
+  "subtitle": "Your assigned Fiserv specialists",
+  "generativeSubsections": [{
+    "id": "team-cards",
+    "templateId": "TeamCards",
+    "props": {
+      "columns": 3,
+      "members": [
+        { "id": "t1", "name": "Integration Lead", "role": "Technical Lead", "department": "Fiserv API Team", "specialty": "Oversees API integration, resolves blockers, weekly syncs" },
+        { "id": "t2", "name": "Solutions Architect", "role": "Solutions Architect", "department": "Fiserv Engineering", "specialty": "Custom integrations, edge cases, performance optimization" },
+        { "id": "t3", "name": "Success Manager", "role": "Customer Success", "department": "Fiserv Partnerships", "specialty": "Rollout strategy, training, ongoing support" }
+      ]
+    }
+  }]
+}
+```
+
+### High-Level Integration Features
+**User:** "What are the high level features of this integration?"
+```json
+{ "badge": "FEATURES", "title": "Integration Capabilities",
+  "subtitle": "What the One API gives you",
+  "generativeSubsections": [{
+    "id": "feature-checklist",
+    "templateId": "ChecklistCard",
+    "props": {
+      "showProgress": false,
+      "items": [
+        { "id": "f1", "title": "Single REST API", "description": "One endpoint for all offer types", "status": "completed" },
+        { "id": "f2", "title": "SDK Options", "description": "Web, iOS, Android, Core Banking", "status": "completed" },
+        { "id": "f3", "title": "White-Label Theming", "description": "Your brand, fonts, colors", "status": "completed" },
+        { "id": "f4", "title": "Real-Time Analytics", "description": "Track impressions, clicks, conversions", "status": "completed" },
+        { "id": "f5", "title": "Webhook Events", "description": "Application status callbacks", "status": "completed" },
+        { "id": "f6", "title": "Compliance Built-In", "description": "KYC, AML, regulatory requirements", "status": "completed" }
+      ]
+    }
+  }]
+}
+```
+
+### Product Offerings by Category
+**User:** "What are product offerings by category?" / "What can we offer?"
+```json
+{ "badge": "CATALOG", "title": "Product Offerings by Category",
+  "subtitle": "What you can offer your merchants",
+  "generativeSubsections": [{
+    "id": "product-catalog",
+    "templateId": "ProductCatalog",
+    "props": {
+      "expandFirst": true,
+      "categories": [
+        { "id": "c1", "name": "Payment Processing", "icon": "card", "description": "Accept all payment types", "products": [
+          { "id": "p1", "name": "Card Present", "description": "In-store transactions via terminals", "features": ["EMV chip", "Contactless", "Apple Pay"] },
+          { "id": "p2", "name": "Card Not Present", "description": "Online and phone orders", "features": ["Virtual terminal", "eCommerce", "Invoicing"] }
+        ]},
+        { "id": "c2", "name": "Point of Sale Hardware", "icon": "phone", "description": "Clover device family", "products": [
+          { "id": "p3", "name": "Clover Go", "description": "Mobile card reader", "price": "$49" },
+          { "id": "p4", "name": "Clover Flex", "description": "Handheld POS", "price": "$499" },
+          { "id": "p5", "name": "Clover Station", "description": "Full countertop system", "price": "$1,349" }
+        ]},
+        { "id": "c3", "name": "Business Funding", "icon": "building", "description": "Capital and credit products", "products": [
+          { "id": "p6", "name": "Clover Capital", "description": "Merchant cash advance", "features": ["24hr approval", "No fixed payments"] },
+          { "id": "p7", "name": "Business Credit Line", "description": "Revolving credit", "features": ["Flexible terms", "Draw as needed"] }
+        ]}
+      ]
+    }
+  }]
+}
+```
+
+### Pricing Details
+**User:** "Provide pricing details based on these product offerings" / "What does pricing look like?"
+```json
+{ "badge": "PRICING", "title": "Product Pricing Overview",
+  "subtitle": "Transparent pricing for merchants",
+  "generativeSubsections": [{
+    "id": "pricing-table",
+    "templateId": "PricingTable",
+    "props": {
+      "note": "All pricing is configurable per bank. These are example rates.",
+      "tiers": [
+        { "id": "t1", "name": "Payments Plan", "price": "$0", "period": "month", "description": "Basic payment processing", "features": [
+          { "text": "2.6% + $0.10 per transaction", "included": true },
+          { "text": "Accept all card types", "included": true },
+          { "text": "Next-day deposits", "included": true },
+          { "text": "Software add-ons", "included": false }
+        ], "ctaLabel": "Select", "ctaActionPhrase": "Show Payments Plan details" },
+        { "id": "t2", "name": "Essentials Plan", "price": "$14.95", "period": "month", "description": "Payments + business tools", "highlighted": true, "badge": "POPULAR", "features": [
+          { "text": "2.3% + $0.10 per transaction", "included": true },
+          { "text": "Accept all card types", "included": true },
+          { "text": "Same-day deposits", "included": true },
+          { "text": "Inventory management", "included": true }
+        ], "ctaLabel": "Select", "ctaActionPhrase": "Show Essentials Plan details" },
+        { "id": "t3", "name": "Counter Service", "price": "$44.95", "period": "month", "description": "Full restaurant solution", "features": [
+          { "text": "1.9% + $0.10 per transaction", "included": true },
+          { "text": "Online ordering", "included": true },
+          { "text": "Kitchen display", "included": true },
+          { "text": "Table management", "included": true }
+        ], "ctaLabel": "Select", "ctaActionPhrase": "Show Counter Service details" }
+      ]
+    }
+  }]
+}
+```
+
+### Segment Rollout Strategy
+**User:** "How do I roll this out to a certain segment of my customer base?" / "Targeted rollout?"
+```json
+{ "badge": "TARGETING", "title": "Segment-Based Rollout",
+  "subtitle": "Target specific merchant groups",
+  "generativeSubsections": [{
+    "id": "segment-selector",
+    "templateId": "SegmentSelector",
+    "props": {
+      "multiSelect": true,
+      "ctaLabel": "Configure Segments",
+      "ctaActionPhrase": "Save my segment configuration",
+      "categories": [
+        { "id": "c1", "name": "By Industry", "segments": [
+          { "id": "s1", "name": "Restaurants", "description": "Food & beverage merchants", "icon": "industry", "count": "12,400", "percentage": "28% of portfolio" },
+          { "id": "s2", "name": "Retail", "description": "Brick & mortar stores", "icon": "industry", "count": "18,200", "percentage": "41% of portfolio" },
+          { "id": "s3", "name": "Services", "description": "Professional services", "icon": "industry", "count": "13,800", "percentage": "31% of portfolio" }
+        ]},
+        { "id": "c2", "name": "By Volume", "segments": [
+          { "id": "s4", "name": "High Volume", "description": ">$50K monthly", "icon": "volume", "count": "4,200", "percentage": "9% of portfolio" },
+          { "id": "s5", "name": "Mid Volume", "description": "$10K-$50K monthly", "icon": "volume", "count": "18,600", "percentage": "42% of portfolio" },
+          { "id": "s6", "name": "Low Volume", "description": "<$10K monthly", "icon": "volume", "count": "21,600", "percentage": "49% of portfolio" }
+        ]}
+      ]
+    }
+  }]
+}
+```
+
+### Bank-Configurable Pricing
+**User:** "Are the costs and pricing shown in DMA configurable for each bank?"
+```json
+{ "badge": "CONFIGURATION", "title": "Bank-Configurable Pricing",
+  "subtitle": "You control the economics",
+  "generativeSubsections": [{
+    "id": "config-features",
+    "templateId": "IconList",
+    "props": {
+      "layout": "grid",
+      "columns": 2,
+      "items": [
+        { "id": "c1", "title": "Custom Transaction Rates", "description": "Set your own processing fees per segment", "icon": "dollar" },
+        { "id": "c2", "title": "Revenue Share Models", "description": "Transaction-based, subscription, or hybrid", "icon": "chart" },
+        { "id": "c3", "title": "Device Pricing", "description": "Markup or subsidize hardware costs", "icon": "package" },
+        { "id": "c4", "title": "Bundled Offers", "description": "Create custom product bundles", "icon": "layers" },
+        { "id": "c5", "title": "Promotional Pricing", "description": "Time-limited discounts and offers", "icon": "tag" },
+        { "id": "c6", "title": "Segment-Based Rates", "description": "Different pricing by merchant type", "icon": "users" }
+      ]
+    }
+  }]
+}
+```
+
+### Branding & White-Label Customization
+**User:** "Are the fonts, offerings, and branding customizable for my bank?"
+```json
+{ "badge": "WHITE-LABEL", "title": "Full Brand Customization",
+  "subtitle": "Your brand, everywhere",
+  "generativeSubsections": [{
+    "id": "branding-preview",
+    "templateId": "BrandingPreview",
+    "props": {
+      "bankName": "First Financial Bank",
+      "previewMode": "card",
+      "options": [
+        { "id": "c1", "name": "Primary Blue", "type": "color", "value": "#0066cc" },
+        { "id": "c2", "name": "Teal", "type": "color", "value": "#0891b2" },
+        { "id": "c3", "name": "Forest", "type": "color", "value": "#059669" },
+        { "id": "c4", "name": "Burgundy", "type": "color", "value": "#be123c" },
+        { "id": "f1", "name": "Inter", "type": "font", "value": "Inter" },
+        { "id": "f2", "name": "Roboto", "type": "font", "value": "Roboto" },
+        { "id": "f3", "name": "Open Sans", "type": "font", "value": "Open Sans" }
+      ]
+    }
+  }]
+}
+```
+
+### Abandonment Recovery
+**User:** "What happens if the merchant abandons the application?"
+```json
+{ "badge": "RECOVERY", "title": "Abandonment Recovery",
+  "subtitle": "We don't let merchants slip away",
+  "generativeSubsections": [{
+    "id": "recovery-workflow",
+    "templateId": "WorkflowDiagram",
+    "props": {
+      "steps": [
+        { "id": "r1", "title": "Progress Saved", "description": "All entered data preserved automatically", "status": "completed" },
+        { "id": "r2", "title": "Email Reminder (24h)", "description": "Friendly reminder with resume link", "status": "completed" },
+        { "id": "r3", "title": "SMS Follow-Up (48h)", "description": "Text message with direct link", "status": "active" },
+        { "id": "r4", "title": "Human Outreach (72h)", "description": "Fiserv rep calls to assist", "status": "pending" }
+      ]
+    }
+  }]
+}
+```
+
+### Contact Fiserv During Application
+**User:** "Can the merchant contact a Fiserv salesperson during the application process?"
+```json
+{ "badge": "SUPPORT", "title": "Human Support Options",
+  "subtitle": "Help is always available",
+  "generativeSubsections": [{
+    "id": "contact-options",
+    "templateId": "ContactCard",
+    "props": {
+      "title": "Merchant Support During Onboarding",
+      "subtitle": "Multiple ways to get help",
+      "contacts": [
+        { "id": "h1", "type": "chat", "title": "Live Chat", "value": "Available 8am-8pm ET", "description": "Instant help within the application", "available": true },
+        { "id": "h2", "type": "phone", "title": "Click to Call", "value": "1-800-FISERV", "description": "Speak with a specialist", "available": true },
+        { "id": "h3", "type": "calendar", "title": "Schedule Callback", "description": "Book a time that works", "available": true },
+        { "id": "h4", "type": "email", "title": "Email Support", "value": "support@fiserv.com", "description": "Response within 4 hours" }
+      ]
+    }
+  }]
+}
+```
+
+### Existing Clover Merchant SSO
+**User:** "Can an existing Clover merchant access their Clover dashboard through single sign on from DMA?"
+```json
+{ "badge": "SSO", "title": "Single Sign-On for Existing Merchants",
+  "subtitle": "Seamless dashboard access",
+  "generativeSubsections": [{
+    "id": "sso-features",
+    "templateId": "IconList",
+    "props": {
+      "layout": "vertical",
+      "items": [
+        { "id": "s1", "title": "OAuth 2.0 Integration", "description": "Industry-standard secure authentication", "icon": "shield" },
+        { "id": "s2", "title": "One-Click Dashboard", "description": "Merchants access Clover from your portal", "icon": "zap" },
+        { "id": "s3", "title": "Unified Experience", "description": "Same Offer Engine powers new and existing merchants", "icon": "users" },
+        { "id": "s4", "title": "Transaction History", "description": "View sales, refunds, deposits in portal", "icon": "chart" }
+      ]
+    }
+  }]
+}
+```
+
+### On-Premise Deployment
+**User:** "Is there any need to deploy any software within the bank for DMA to work?"
+```json
+{ "badge": "ARCHITECTURE", "title": "100% Cloud-Hosted SaaS",
+  "subtitle": "No on-premise software required",
+  "generativeSubsections": [{
+    "id": "architecture",
+    "templateId": "ArchitectureDiagram",
+    "props": {
+      "title": "DMA Integration Architecture",
+      "subtitle": "Simple, secure, zero footprint",
+      "layers": [
+        { "id": "l1", "name": "Your Bank", "components": [
+          { "id": "c1", "name": "Digital Banking Portal", "description": "Your existing platform", "icon": "globe" },
+          { "id": "c2", "name": "One API Call", "description": "Single endpoint", "icon": "zap", "highlight": true }
+        ]},
+        { "id": "l2", "name": "Fiserv Cloud", "components": [
+          { "id": "c3", "name": "Offer Engine", "description": "SaaS platform", "icon": "cloud", "highlight": true },
+          { "id": "c4", "name": "Underwriting", "description": "Risk & compliance", "icon": "shield" },
+          { "id": "c5", "name": "Fulfillment", "description": "Device shipping", "icon": "database" }
+        ]}
+      ]
+    }
+  }]
+}
+```
+
+### Quick Actions Menu
+**User:** "What can I explore?" / "Show me the menu"
+```json
+{ "badge": "EXPLORE", "title": "Explore the Offer Engine",
+  "subtitle": "Choose a topic to dive deeper",
+  "generativeSubsections": [{
+    "id": "quick-actions",
+    "templateId": "QuickActions",
+    "props": {
+      "columns": 3,
+      "actions": [
+        { "id": "a1", "title": "Bank Portal Demo", "description": "See the embedded offer", "icon": "eye", "color": "cyan", "actionPhrase": "Show me the bank portal view" },
+        { "id": "a2", "title": "Onboarding Flow", "description": "Walk through 10 steps", "icon": "play", "color": "green", "actionPhrase": "Show me onboarding step 1" },
+        { "id": "a3", "title": "Product Catalog", "description": "What you can offer", "icon": "settings", "color": "purple", "actionPhrase": "What are product offerings by category?" },
+        { "id": "a4", "title": "Integration Timeline", "description": "Demo to live", "icon": "zap", "color": "orange", "actionPhrase": "How long to go live?" },
+        { "id": "a5", "title": "Pricing Options", "description": "Costs and tiers", "icon": "help", "color": "blue", "actionPhrase": "Show me pricing details" },
+        { "id": "a6", "title": "White-Label Demo", "description": "Your brand preview", "icon": "settings", "color": "cyan", "actionPhrase": "Can I customize the branding?" }
+      ]
+    }
+  }]
+}
+```
+
 
 ---
 

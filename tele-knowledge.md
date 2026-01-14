@@ -117,3 +117,71 @@ Business Info → Owner Info → Business Type → Processing Volume → Bank Ac
 8. **Shipping Address** — Where to send device
 9. **Review & Sign** — Terms and e-signature
 10. **Confirmation** — Order confirmation and tracking
+
+## 10. EXECUTIVE FAQ KNOWLEDGE
+
+### Integration & Timeline
+*   **Demo to Live:** 6-8 weeks typical, can accelerate to 4 weeks for priority partners
+*   **Integration Type:** One API (REST) with SDK options for web, mobile, and core banking
+*   **Deployment:** 100% cloud-hosted SaaS — no on-premise software required
+*   **Dedicated Support:** Yes, Fiserv assigns integration specialists for each bank
+*   **What I Say:** "From this demo to live integration is typically 6-8 weeks. We assign dedicated integration specialists to your team."
+
+### Scalability & Volume
+*   **Transaction Volume:** Handles millions of daily transactions across 6M+ merchants
+*   **Uptime:** 99.99% availability SLA
+*   **Architecture:** Auto-scaling cloud infrastructure
+*   **What I Say:** "The Offer Engine powers 6 million merchants. We auto-scale for peak volumes—Black Friday, tax season, you name it."
+
+### Application Workflow (Post-Submit)
+*   **Instant Decisioning:** 85% of applications approved instantly
+*   **Underwriting Review:** 24-48 hours for applications needing manual review
+*   **Device Fulfillment:** Ships within 2-3 business days after approval
+*   **Merchant Notification:** Email + SMS at each step
+*   **What I Say:** "85% of applications get instant approval. Device ships in 2-3 days. The merchant gets updates at every step."
+
+### Product Offerings by Category
+*   **Payment Processing:** Accept cards, contactless, wallets
+*   **Point of Sale:** Clover Go, Flex, Mini, Station
+*   **Business Funding:** Clover Capital, Business Credit Line
+*   **Software Add-ons:** Inventory, payroll, loyalty, online ordering
+*   **What I Say:** "Three categories: payments, hardware, and funding. Each configurable per bank."
+
+### Pricing & Configuration
+*   **Bank-Configurable:** Yes, banks can set custom pricing, margins, and bundled offers
+*   **Revenue Share:** Flexible models — transaction-based, subscription, or hybrid
+*   **Transparent Pricing:** Merchants see clear pricing before committing
+*   **What I Say:** "All pricing is configurable. You set the rates, margins, and bundles for your merchant base."
+
+### White-Label & Branding
+*   **Fonts:** Fully customizable to match bank brand guidelines
+*   **Colors:** Complete theming support
+*   **Logo:** Bank branding throughout the experience
+*   **Messaging:** Configurable copy and CTAs
+*   **What I Say:** "Everything you see is white-labeled. Your fonts, your colors, your logo. Merchants see their bank, not Fiserv."
+
+### Rollout Strategy
+*   **Segmentation:** Target by merchant size, industry, geography, or product fit
+*   **A/B Testing:** Built-in experimentation for offer placement and messaging
+*   **Phased Rollout:** Pilot with subset before full launch
+*   **What I Say:** "You can target specific segments—restaurants in the Midwest, or high-volume retailers. Start with a pilot, then scale."
+
+### Abandonment Recovery
+*   **Save & Continue:** Merchants can pause and resume applications
+*   **Email Reminders:** Automated follow-ups for abandoned applications
+*   **Progress Persistence:** All data saved, merchant picks up where they left off
+*   **Human Handoff:** Option to route to Fiserv sales rep
+*   **What I Say:** "If a merchant abandons, we save their progress and send reminders. They can also connect with a Fiserv rep."
+
+### Human Support During Onboarding
+*   **Live Chat:** Available during application (optional bank feature)
+*   **Phone Support:** Click-to-call to Fiserv sales
+*   **Callback Request:** Schedule a call at merchant's convenience
+*   **What I Say:** "Merchants can reach a Fiserv salesperson anytime—live chat, phone, or callback. Your choice to enable."
+
+### Existing Clover Merchants (SSO)
+*   **Single Sign-On:** Supported via OAuth 2.0 integration
+*   **Dashboard Access:** Existing Clover merchants can access their dashboard from the bank portal
+*   **Unified Experience:** Managed through same Offer Engine
+*   **What I Say:** "Existing Clover merchants? Yes, they can SSO into their dashboard right from your portal. Same unified experience."
+
