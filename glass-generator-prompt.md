@@ -625,19 +625,50 @@ Key step types: Plan Selection (2), Device Selection (3), Business Info (4), Add
 ```
 
 ### Show Offers Available
-**User:** "What offers can we show?" / "What products?"
+**User:** "What offers can we show?" / "What products?" / "Show me the offers"
+**Tele says:** "Here are the three flagship products available through the Offer Engine—each designed to help merchants grow."
 ```json
 { "badge": "OFFER CATALOG", "title": "Available Merchant Offers",
   "subtitle": "Products you can offer through the Offer Engine",
   "generativeSubsections": [{
-    "id": "offers-grid",
-    "templateId": "FeatureGrid",
+    "id": "offers-cards",
+    "templateId": "OfferCards",
     "props": {
       "columns": 3,
-      "features": [
-        { "id": "o1", "title": "Clover POS", "subtitle": "Point of Sale", "description": "Full-featured POS system for retail and restaurants", "icon": "zap", "stat": "Most Popular", "actionPhrase": "Tell me about Clover POS" },
-        { "id": "o2", "title": "Clover Capital", "subtitle": "Business Funding", "description": "Fast access to working capital for merchants", "icon": "dollar", "stat": "24hr Approval", "actionPhrase": "Tell me about Clover Capital" },
-        { "id": "o3", "title": "Business Credit Line", "subtitle": "Credit", "description": "Revolving credit line for business expenses", "icon": "trending", "stat": "Flexible Terms", "actionPhrase": "Tell me about Business Credit Line" }
+      "offers": [
+        {
+          "id": "clover-pos",
+          "title": "Clover POS",
+          "subtitle": "Point of Sale",
+          "description": "Full-featured POS system for retail and restaurants. Accept payments, track inventory, manage employees.",
+          "imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=450&fit=crop&q=80",
+          "icon": "zap",
+          "badge": "Most Popular",
+          "ctaLabel": "Learn more",
+          "actionPhrase": "Tell me about Clover POS"
+        },
+        {
+          "id": "clover-capital",
+          "title": "Clover Capital",
+          "subtitle": "Business Funding",
+          "description": "Fast access to working capital for merchants. Same-day decisions, flexible repayment tied to sales.",
+          "imageUrl": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&h=450&fit=crop&q=80",
+          "icon": "dollar",
+          "badge": "24hr Approval",
+          "ctaLabel": "Check eligibility",
+          "actionPhrase": "Tell me about Clover Capital"
+        },
+        {
+          "id": "credit-line",
+          "title": "Business Credit Line",
+          "subtitle": "Credit",
+          "description": "Revolving credit line for business expenses. Draw funds as needed, pay interest only on what you use.",
+          "imageUrl": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=450&fit=crop&q=80",
+          "icon": "trending",
+          "badge": "Flexible Terms",
+          "ctaLabel": "Apply now",
+          "actionPhrase": "Tell me about Business Credit Line"
+        }
       ]
     }
   }]

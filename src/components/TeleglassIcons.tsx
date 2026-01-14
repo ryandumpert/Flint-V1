@@ -28,7 +28,7 @@ const getAvatarClasses = (state: AvatarState) => {
     case 'off':
       return `${base} avatar-inactive-glow border-white/30`;
     case 'connecting':
-      return `${base} avatar-connecting-pulse border-primary`;
+      return `${base} avatar-connecting-pulse border-[#ff6600]`;
     case 'connected':
       return `${base} avatar-connected-glow`;
     default:
@@ -38,9 +38,9 @@ const getAvatarClasses = (state: AvatarState) => {
 
 const getIconClasses = (isActive: boolean, isWarning = false) => {
   const base = "w-8 h-8 sm:w-10 sm:h-10 rounded-full cursor-pointer flex items-center justify-center transition-all duration-300 ease-in-out";
-  if (isWarning) return `${base} bg-destructive/80 backdrop-blur-md text-white hover:shadow-glow hover:scale-[1.02]`;
-  if (isActive) return `${base} glass-medium text-white hover:scale-[1.02]`;
-  return `${base} glass-subtle text-white/70 hover:scale-[1.02]`;
+  if (isWarning) return `${base} bg-red-500/80 backdrop-blur-md text-white hover:shadow-glow hover:scale-[1.02]`;
+  if (isActive) return `${base} bg-white/10 border border-white/20 backdrop-blur-md text-white hover:bg-white/15 hover:scale-[1.02]`;
+  return `${base} bg-black/20 border border-white/10 backdrop-blur-md text-white/70 hover:bg-black/30 hover:scale-[1.02]`;
 };
 
 export const TeleglassIcons: React.FC<TeleglassIconsProps> = ({
