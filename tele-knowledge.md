@@ -102,22 +102,83 @@ Provides the Offer Engine technology and onboarding workflow. This demo shows ba
 
 ## 4. WHAT THE BANK EXECUTIVE NEEDS TO SEE
 
-### Screen Set 1: Bank Portal (Offer Embedded)
-Show how the offer appears in the bank's existing interface—well-placed, non-intrusive, relevant, clear CTA.
+### Screen Set 1: Bank Portal (BankPortalMockup Template)
+The **bank portal** is what merchants see every day—their checking account, transfers, invoices, payments. The Offer Engine places **contextual offer cards** directly in this interface.
 
-### Screen Set 2: Onboarding Flow (10 Steps)
-Show the merchant's journey after clicking an offer—low friction, clear progress, builds confidence.
+**What the portal shows:**
+- Merchant's account balances and recent transactions
+- The offer card carousel (Clover POS, Clover Capital, Credit Line)
+- Each offer has a clear CTA button ("Apply Now", "Check Eligibility")
+- Native look and feel—merchant never feels like they left their bank
 
-## 5. THE MERCHANT JOURNEY
+**Why it matters to bankers:**
+- "This is where your merchants already are"
+- "The offer doesn't interrupt—it enhances"
+- "Your brand, your relationship, your revenue"
+
+### Screen Set 2: Onboarding Flow (OnboardingStep Template)
+When a merchant clicks an offer, they enter the **10-step onboarding flow**. This is the Fiserv-powered application process.
+
+**What each step does:**
+
+| Step | Name | What Merchant Does | Duration |
+|------|------|-------------------|----------|
+| 1 | Business Category | Selects retail/services/food | 1 min |
+| 2 | Plan Selection | Chooses POS plan tier | 2 min |
+| 3 | Device Selection | Picks Clover device (Go, Flex, Mini) | 2 min |
+| 4 | Business Info | Legal name, structure, tax info | 3 min |
+| 5 | Business Address | Location and years in business | 2 min |
+| 6 | Sales Projections | Expected monthly volume | 1 min |
+| 7 | Owner Information | Personal details for KYC | 2 min |
+| 8 | Billing & Shipping | Payment method and shipping address | 2 min |
+| 9 | Review Agreement | E-sign terms and conditions | 2 min |
+| 10 | Confirmation | 🎉 Application submitted! | 1 min |
+
+**Total time:** 15-20 minutes  
+**Completion rate:** High (mobile-friendly, progress visible)  
+**Device shipping:** 1-5 business days after approval
+
+**Why it matters to bankers:**
+- "10 steps sounds like a lot, but watch how fast this goes"
+- "Merchants won't abandon—the progress bar keeps them moving"
+- "Fully compliant with KYC/AML—Fiserv handles the complexity"
+
+---
+
+## 5. WHEN TO SHOW ACTUAL SCREENS
+
+**IMPORTANT:** When the banker asks about:
+- The portal experience → Show **BankPortalMockup**
+- What merchants see → Show **BankPortalMockup**
+- The onboarding process → Show **OnboardingStep** or **OnboardingJourney**
+- How fast/easy it is → Show **OnboardingStep** (walking through steps)
+- The application flow → Show **OnboardingStep** examples
+
+**Prefer actual screens (BankPortalMockup, OnboardingStep) over abstract templates (FeatureGrid, IconList) when the conversation is about:**
+- The merchant experience
+- What the portal looks like
+- How onboarding works
+- The application process
+
+**Use multiple templates together:**
+- Show BankPortalMockup + OnboardingStep together to show the full journey
+- Combine FeatureGrid (overview) + OnboardingStep (detail)
+- Stack templates to give rich, immersive responses
+
+---
+
+## 6. THE MERCHANT JOURNEY
 
 1. Merchant logs into bank portal (accounts, transfers, bills)
 2. Sees offer card from Offer Engine
 3. Clicks offer
 4. Goes through 10-step Fiserv onboarding
-5. Gets their product (POS, Capital, Credit Line)
+5. Application approved (usually same day)
+6. Device shipped (1-5 business days)
+7. Merchant starts processing payments
 
-**10 Onboarding Steps:**
-Business Info → Owner Info → Business Type → Processing Volume → Bank Account → Device Selection → Shipping → Review & Sign → Payment → Confirmation
+**The 10 Onboarding Steps:**
+Business Category → Plan Selection → Device Selection → Business Info → Business Address → Sales Projections → Owner Information → Billing & Shipping → Review Agreement → Confirmation 🎉
 
 ## 6. MY SALES APPROACH
 
