@@ -27,7 +27,7 @@ export const UnifiedSectionHeader = ({
       {isPrimary && (
         <Badge
           variant="vision"
-          className={`text-xs font-bold tracking-wider
+          className={`hidden md:inline-flex text-xs font-bold tracking-wider
             ${animate ? 'animate-regenerate' : ''}`}
         >
           {badge}
