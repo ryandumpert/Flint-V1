@@ -49,19 +49,14 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
         teleQuery: '(M) Welcome - show me the 5 chapters overview'
       },
       {
-        id: 'bank-view',
-        label: 'BANK VIEW',
-        teleQuery: '(M) Chapter 4 - Show me the bank experience with the portal and first onboarding step'
+        id: 'bank-portal',
+        label: 'BANK PORTAL',
+        teleQuery: '(M) Show me the bank portal with the offer'
       },
       {
-        id: 'onboarding',
-        label: 'ONBOARDING',
-        teleQuery: '(M) Chapter 5 - Show me the complete onboarding flow and celebration'
-      },
-      {
-        id: 'offers',
-        label: 'OFFERS',
-        teleQuery: '(M) What offers are available - POS, Capital, Credit Line?'
+        id: 'offer-onboarding',
+        label: 'OFFER ONBOARDING',
+        teleQuery: '(M) Show me the complete onboarding flow'
       },
       {
         id: 'integration',
@@ -69,7 +64,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
         teleQuery: '(M) How does the One API integration work?'
       },
       {
-        id: 'next',
+        id: 'next-steps',
         label: 'NEXT STEPS',
         teleQuery: "(M) I want to schedule a meeting with Fiserv"
       }
@@ -125,16 +120,13 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
                     }}
                     variant="ghost"
                     size="sm"
-                    className={`relative h-7 px-3 text-[11px] font-medium
-                    backdrop-blur-md
-                    border rounded-full
-                    transition-all duration-500
-                    hover:-translate-y-0.5 hover:shadow-[var(--shadow-glow-cyan)]
-                    active:translate-y-0 active:scale-95
-                    ${buttonBaseStyles}`}
+                    className={`relative px-2 text-[13px] font-medium tracking-wide
+                    transition-all duration-300
+                    hover:opacity-80
+                    text-white bg-transparent border-0
+                    h-auto py-1`}
                   >
                     <span className="relative z-10">{item.label}</span>
-                    <div className={`absolute inset-0 rounded-full opacity-0 hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r ${glowColor} to-transparent blur-xl`} />
                   </Button>
                 ))}
               </div>

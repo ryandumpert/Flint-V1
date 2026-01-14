@@ -303,20 +303,18 @@ Live updates: Tele re-renders with new props as conversation progresses. Confirm
 
 ## 🚀 NAVIGATION MENU
 
-| # | Label | Chapter | What It Shows |
-|---|-------|---------|---------------|
-| 1 | **HOME** | Welcome | The 5 chapters overview |
-| 2 | **BANK VIEW** | Chapter 4 | BankPortalMockup + OnboardingStep preview |
-| 3 | **ONBOARDING** | Chapter 5 | OnboardingJourney + celebration preview |
-| 4 | **OFFERS** | — | Types of offers (POS, Capital, Credit) |
-| 5 | **INTEGRATION** | — | One API details |
-| 6 | **NEXT STEPS** | — | MeetingScheduler to book follow-up |
+| # | Label | What It Shows |
+|---|-------|---------------|
+| 1 | **HOME** | The 5 chapters overview |
+| 2 | **BANK PORTAL** | BankPortalMockup with offer cards |
+| 3 | **OFFER ONBOARDING** | OnboardingJourney + steps |
+| 4 | **INTEGRATION** | One API details |
+| 5 | **NEXT STEPS** | MeetingScheduler to book follow-up |
 
-**Menu → Chapter Mapping:**
+**Menu Actions:**
 - HOME = Welcome (all 5 chapter tiles)
-- BANK VIEW = Chapter 4: See the Bank Experience
-- ONBOARDING = Chapter 5: See the Onboarding Flow
-- OFFERS = Show available Clover products
+- BANK PORTAL = Show the bank portal with embedded offers
+- OFFER ONBOARDING = Show the complete onboarding flow
 - INTEGRATION = One API technical overview
 - NEXT STEPS = Schedule meeting with Fiserv
 
