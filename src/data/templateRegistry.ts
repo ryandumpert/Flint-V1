@@ -13,7 +13,7 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
     OnboardingStep: lazy(() => import("@/components/templates/OnboardingStep").then(m => ({ default: m.OnboardingStep }))),
     OnboardingFlow: lazy(() => import("@/components/templates/OnboardingFlow").then(m => ({ default: m.OnboardingFlow }))),
 
-    // Conversational Templates (12)
+    // Conversational Templates (15)
     TimelineRoadmap: lazy(() => import("@/components/templates/TimelineRoadmap").then(m => ({ default: m.TimelineRoadmap }))),
     MetricsGrid: lazy(() => import("@/components/templates/MetricsGrid").then(m => ({ default: m.MetricsGrid }))),
     WorkflowDiagram: lazy(() => import("@/components/templates/WorkflowDiagram").then(m => ({ default: m.WorkflowDiagram }))),
@@ -29,4 +29,7 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
     ChecklistCard: lazy(() => import("@/components/templates/ChecklistCard").then(m => ({ default: m.ChecklistCard }))),
     TeamCards: lazy(() => import("@/components/templates/TeamCards").then(m => ({ default: m.TeamCards }))),
     QuickActions: lazy(() => import("@/components/templates/QuickActions").then(m => ({ default: m.QuickActions }))),
+
+    // Scheduling (live-update)
+    MeetingScheduler: lazy(() => import("@/components/templates/MeetingScheduler").then(m => ({ default: m.MeetingScheduler }))),
 };

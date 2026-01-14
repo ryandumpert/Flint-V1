@@ -266,6 +266,30 @@ actions: { id, title, description?, icon?, color?, actionPhrase }[]
 title?, subtitle?, columns?: 2|3|4
 ```
 
+### MeetingScheduler ⭐ LIVE-UPDATE
+Dynamic scheduling template that updates as user provides date/time.
+```
+meetingDate?: string, meetingTime?: string, meetingDuration?: string
+meetingType?: video|phone|in-person
+hostName?, hostRole?, hostCompany?, hostImageUrl?
+availableSlots?: { id, time, available }[]
+isConfirmed?: boolean, confirmationMessage?
+ctaLabel?, ctaActionPhrase?
+```
+
+**Key Features:**
+- Date/time fields show placeholder until user provides values
+- Confirm button only appears when date AND time are set
+- Live updates: re-render with new props as conversation progresses
+- Confirmation screen with meeting summary
+- Host info with avatar
+
+**Live Update Flow:**
+1. User: "I want to schedule a meeting" → Tele shows MeetingScheduler (empty)
+2. User: "How about tomorrow?" → Tele updates `meetingDate: "Tomorrow, January 14"`
+3. User: "2pm works" → Tele updates `meetingTime: "2:00 PM"` → Confirm button appears
+4. User clicks Confirm → Tele updates `isConfirmed: true` → Success screen
+
 ---
 
 ## 🚀 NAVIGATION MENU
@@ -1390,6 +1414,102 @@ title?, subtitle?, columns?: 2|3|4
 }
 ```
 
+
+### Book a Meeting (Initial)
+**User:** "Let's schedule a call" / "I want to book a meeting" / "Can we set up a demo?"
+```json
+{ "badge": "SCHEDULE", "title": "Book Your Follow-Up",
+  "subtitle": "Let's connect to discuss next steps",
+  "generativeSubsections": [{
+    "id": "scheduler",
+    "templateId": "MeetingScheduler",
+    "props": {
+      "title": "Schedule a Meeting with Fiserv",
+      "subtitle": "Just tell me when works for you",
+      "hostName": "Fiserv Integration Team",
+      "hostRole": "Solutions Specialist",
+      "hostCompany": "Fiserv",
+      "meetingDuration": "30 minutes",
+      "meetingType": "video",
+      "ctaLabel": "Confirm Meeting",
+      "ctaActionPhrase": "Confirm my meeting booking"
+    }
+  }]
+}
+```
+
+### Book a Meeting (With Date)
+**User:** "How about tomorrow?" / "January 15th works" / "Next Tuesday"
+```json
+{ "badge": "SCHEDULE", "title": "Book Your Follow-Up",
+  "subtitle": "Just tell me what time",
+  "generativeSubsections": [{
+    "id": "scheduler",
+    "templateId": "MeetingScheduler",
+    "props": {
+      "title": "Schedule a Meeting with Fiserv",
+      "subtitle": "Just tell me what time works",
+      "hostName": "Fiserv Integration Team",
+      "hostRole": "Solutions Specialist",
+      "hostCompany": "Fiserv",
+      "meetingDate": "Tomorrow, January 14, 2026",
+      "meetingDuration": "30 minutes",
+      "meetingType": "video",
+      "ctaLabel": "Confirm Meeting",
+      "ctaActionPhrase": "Confirm my meeting booking"
+    }
+  }]
+}
+```
+
+### Book a Meeting (With Date + Time)
+**User:** "2pm works" / "Let's do 10am" / "3:30 in the afternoon"
+```json
+{ "badge": "SCHEDULE", "title": "Book Your Follow-Up",
+  "subtitle": "Ready to confirm",
+  "generativeSubsections": [{
+    "id": "scheduler",
+    "templateId": "MeetingScheduler",
+    "props": {
+      "title": "Schedule a Meeting with Fiserv",
+      "subtitle": "Click to confirm your meeting",
+      "hostName": "Fiserv Integration Team",
+      "hostRole": "Solutions Specialist",
+      "hostCompany": "Fiserv",
+      "meetingDate": "Tomorrow, January 14, 2026",
+      "meetingTime": "2:00 PM",
+      "meetingDuration": "30 minutes",
+      "meetingType": "video",
+      "ctaLabel": "Confirm Meeting",
+      "ctaActionPhrase": "Confirm my meeting booking"
+    }
+  }]
+}
+```
+
+### Book a Meeting (Confirmed)
+**User:** "Confirm my meeting booking"
+```json
+{ "badge": "CONFIRMED", "title": "Meeting Booked!",
+  "subtitle": "You're on the calendar",
+  "generativeSubsections": [{
+    "id": "scheduler-confirmed",
+    "templateId": "MeetingScheduler",
+    "props": {
+      "title": "Meeting Confirmed",
+      "hostName": "Fiserv Integration Team",
+      "hostRole": "Solutions Specialist",
+      "hostCompany": "Fiserv",
+      "meetingDate": "Tomorrow, January 14, 2026",
+      "meetingTime": "2:00 PM",
+      "meetingDuration": "30 minutes",
+      "meetingType": "video",
+      "isConfirmed": true,
+      "confirmationMessage": "We'll send you a calendar invite shortly. Looking forward to discussing how DMA can help your bank serve merchants better."
+    }
+  }]
+}
+```
 
 ---
 
