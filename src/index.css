@@ -927,16 +927,16 @@ button,
 
     0%,
     100% {
-      box-shadow: 0 0 0 0 hsl(217 91% 60% / 0.4), 0 0 0 0 hsl(180 70% 45% / 0.4);
+      box-shadow: 0 0 0 0 hsl(24 100% 50% / 0.4), 0 0 0 0 hsl(24 100% 60% / 0.4);
       transform: scale(1);
     }
 
     50% {
       box-shadow:
-        0 0 0 8px hsl(217 91% 60% / 0.2),
-        0 0 0 12px hsl(180 70% 45% / 0.1),
-        0 0 20px hsl(217 91% 60% / 0.3),
-        0 0 30px hsl(180 70% 45% / 0.2);
+        0 0 0 8px hsl(24 100% 50% / 0.2),
+        0 0 0 12px hsl(24 100% 60% / 0.1),
+        0 0 20px hsl(24 100% 50% / 0.3),
+        0 0 30px hsl(24 100% 60% / 0.2);
       transform: scale(1.05);
     }
   }
@@ -959,15 +959,15 @@ button,
 
     0%,
     100% {
-      box-shadow: 0 0 0 0 hsl(217 91% 60% / 0.6);
+      box-shadow: 0 0 0 0 hsl(24 100% 50% / 0.6);
       transform: scale(1);
     }
 
     50% {
       box-shadow:
-        0 0 0 10px hsl(217 91% 60% / 0.3),
-        0 0 0 20px hsl(217 91% 60% / 0.1),
-        0 0 25px hsl(217 91% 60% / 0.4);
+        0 0 0 10px hsl(24 100% 50% / 0.3),
+        0 0 0 20px hsl(24 100% 50% / 0.1),
+        0 0 25px hsl(24 100% 50% / 0.4);
       transform: scale(1.08);
     }
   }
@@ -1298,12 +1298,12 @@ button,
     0%,
     100% {
       border: 1px solid transparent;
-      background: linear-gradient(135deg, hsl(185 65% 45%), hsl(180 70% 45%)) border-box;
+      background: linear-gradient(135deg, hsl(24 100% 50%), hsl(24 100% 60%)) border-box;
       box-shadow:
-        0 0 0 0 hsl(185 65% 45% / 0.9),
-        0 0 50px hsl(185 65% 45% / 0.8),
-        0 0 70px hsl(180 70% 45% / 0.6),
-        0 0 90px hsl(185 65% 45% / 0.5);
+        0 0 0 0 hsl(24 100% 50% / 0.9),
+        0 0 50px hsl(24 100% 50% / 0.8),
+        0 0 70px hsl(24 100% 60% / 0.6),
+        0 0 90px hsl(24 100% 50% / 0.5);
     }
 
     50% {
@@ -1311,9 +1311,9 @@ button,
       background: hsl(0 0% 100%) border-box;
       box-shadow:
         0 0 0 1px hsl(0 0% 100% / 0.95),
-        0 0 60px hsl(185 65% 45% / 0.9),
-        0 0 80px hsl(180 70% 45% / 0.7),
-        0 0 100px hsl(185 65% 45% / 0.6);
+        0 0 60px hsl(24 100% 50% / 0.9),
+        0 0 80px hsl(24 100% 60% / 0.7),
+        0 0 100px hsl(24 100% 50% / 0.6);
       transform: scale(1.02);
     }
   }
@@ -1324,12 +1324,12 @@ button,
       0%,
       100% {
         border: 3px solid transparent;
-        background: linear-gradient(135deg, hsl(185 65% 45%), hsl(180 70% 45%)) border-box;
+        background: linear-gradient(135deg, hsl(24 100% 50%), hsl(24 100% 60%)) border-box;
         box-shadow:
-          0 0 0 0 hsl(185 65% 45% / 0.9),
-          0 0 50px hsl(185 65% 45% / 0.8),
-          0 0 70px hsl(180 70% 45% / 0.6),
-          0 0 90px hsl(185 65% 45% / 0.5);
+          0 0 0 0 hsl(24 100% 50% / 0.9),
+          0 0 50px hsl(24 100% 50% / 0.8),
+          0 0 70px hsl(24 100% 60% / 0.6),
+          0 0 90px hsl(24 100% 50% / 0.5);
       }
 
       50% {
@@ -1337,9 +1337,9 @@ button,
         background: hsl(0 0% 100%) border-box;
         box-shadow:
           0 0 0 3px hsl(0 0% 100% / 0.95),
-          0 0 60px hsl(185 65% 45% / 0.9),
-          0 0 80px hsl(180 70% 45% / 0.7),
-          0 0 100px hsl(185 65% 45% / 0.6);
+          0 0 60px hsl(24 100% 50% / 0.9),
+          0 0 80px hsl(24 100% 60% / 0.7),
+          0 0 100px hsl(24 100% 50% / 0.6);
         transform: scale(1.02);
       }
     }
@@ -1347,7 +1347,7 @@ button,
 
   .avatar-connected-glow {
     filter: grayscale(0) brightness(1.2) contrast(1.2);
-    background: linear-gradient(135deg, hsl(185 65% 45%), hsl(180 70% 45%)) border-box;
+    background: linear-gradient(135deg, hsl(24 100% 50%), hsl(24 100% 60%)) border-box;
     border: 1px solid transparent;
     animation-name: avatar-connected-pulse !important;
     animation-duration: 12s !important;
