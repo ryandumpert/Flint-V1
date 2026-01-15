@@ -16,7 +16,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   const [isOpen, setIsOpen] = React.useState(defaultOpen);
 
   return (
-    <div className="border-b border-white/10">
+    <div className="border-b border-mist/10">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex w-full items-center justify-between py-4 text-left font-medium text-white hover:text-white/80 transition-all duration-200"

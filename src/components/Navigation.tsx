@@ -35,7 +35,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
   }, []);
 
   // ============================================
-  // AI-WORKS INTERNAL ENABLEMENT NAVIGATION
+  // AI/WORKS INTERNAL ENABLEMENT NAVIGATION
   // 6 Menu items for complete enablement coverage
   // ============================================
   const navItems: Array<{
@@ -128,8 +128,8 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
                     className={`relative px-4 text-[13px] font-semibold tracking-wide
                     transition-all duration-300
                     text-mist/90 hover:text-mist hover:bg-mist/10
-                    border border-transparent hover:border-flamingo/30
-                    rounded-full backdrop-blur-md
+                    border border-transparent hover:border-flamingo/40
+                    rounded-full backdrop-blur-sm
                     h-auto py-2`}
                   >
                     <span className="relative z-10">{item.label}</span>
@@ -169,13 +169,13 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
         />
       )}
 
-      {/* Mobile Slide-in Menu - CLEAN MINIMAL */}
+      {/* Mobile Slide-in Menu - LIGHT FROST GLASS */}
       <div
         style={{
           zIndex: 50
         }}
         className={`fixed top-0 right-0 h-full w-80 max-w-[85vw]
-          bg-onyx/80 backdrop-blur-2xl border-l border-mist/10
+          bg-onyx/70 backdrop-blur-sm border-l border-mist/10
           xl:hidden transform transition-all duration-500 ease-out ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
           }`}
       >
@@ -190,7 +190,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
             }}
             className="p-2 rounded-full text-mist bg-mist/5 border border-mist/10
               hover:bg-mist/10 hover:border-mist/20 hover:rotate-90
-              backdrop-blur-md transition-all duration-500"
+              backdrop-blur-sm transition-all duration-500"
           >
             <X className="w-5 h-5" />
           </button>
@@ -214,8 +214,8 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
               variant="outline"
               size="lg"
               className={`relative w-full justify-start px-6 py-5 text-xl font-bold
-                backdrop-blur-xl
-                border border-mist/20 hover:border-mist/40
+                backdrop-blur-sm
+                border border-mist/20 hover:border-flamingo/50
                 bg-mist/10 hover:bg-mist/15
                 text-mist
                 rounded-full

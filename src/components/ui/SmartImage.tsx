@@ -101,7 +101,7 @@ export const SmartImage = React.forwardRef<HTMLImageElement, SmartImageProps>(({
                     setUseFallback(true);
                     setGeneratedUrl(null);
                 }}
-                className={`transition-opacity duration-500 opacity-100 ${className}`}
+                className={`smart-image transition-opacity duration-500 opacity-100 ${className}`}
                 {...props}
             />
         );
@@ -118,7 +118,7 @@ export const SmartImage = React.forwardRef<HTMLImageElement, SmartImageProps>(({
                     console.warn(`[SmartImage] Failed to load local asset: ${asset.path}. Attempting generation...`);
                     generateImage(assetId);
                 }}
-                className={className}
+                className={`smart-image ${className}`}
                 {...props}
             />
         );
@@ -132,7 +132,7 @@ export const SmartImage = React.forwardRef<HTMLImageElement, SmartImageProps>(({
                 ref={ref}
                 src={`${import.meta.env.BASE_URL}${fallbackPath.startsWith('/') ? fallbackPath.slice(1) : fallbackPath}`}
                 alt={alt || "Learning content"}
-                className={className}
+                className={`smart-image ${className}`}
                 {...props}
             />
         );
@@ -140,7 +140,7 @@ export const SmartImage = React.forwardRef<HTMLImageElement, SmartImageProps>(({
 
     // Case 5: Error State (no fallback, show retry)
     return (
-        <div ref={ref as React.LegacyRef<HTMLDivElement>} className={`relative group flex flex-col items-center justify-center bg-onyx/40 backdrop-blur-md border border-mist/10 rounded-2xl p-6 text-center overflow-hidden min-h-[200px] ${className}`}>
+        <div ref={ref as React.LegacyRef<HTMLDivElement>} className={`relative group flex flex-col items-center justify-center bg-onyx/40 backdrop-blur-sm border border-mist/10 rounded-2xl p-6 text-center overflow-hidden min-h-[200px] ${className}`}>
             {/* Subtle gradient background */}
             <div className="absolute inset-0 bg-gradient-to-br from-flamingo/5 via-transparent to-wave/5" />
 

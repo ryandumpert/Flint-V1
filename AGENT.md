@@ -1,4 +1,4 @@
-# 🤖 AGENT.md - Thoughtworks AI-Works Development Reference
+# 🤖 AGENT.md - Thoughtworks AI/Works Development Reference
 
 > **Internal Enablement Platform**
 > Last updated: January 14, 2026
@@ -7,10 +7,10 @@
 
 ## 1. PROJECT OVERVIEW
 
-This is the **Thoughtworks AI-Works** internal enablement platform—an AI-powered guide for Thoughtworks employees learning about and selling the AI-Works Platform.
+This is the **Thoughtworks AI/Works** internal enablement platform—an AI-powered guide for Thoughtworks employees learning about and selling the AI/Works Platform.
 
 ### What This Platform Does
-Catherine (the AI agent) helps **Thoughtworks employees** understand the AI-Works Platform by:
+Catherine (the AI agent) helps **Thoughtworks employees** understand the AI/Works Platform by:
 1. Explaining the Super Spec and Architectural Synthesis approach
 2. Training on the 3 Environments (Developer Portal, IDE, AIOps)
 3. Providing competitive intelligence for sales conversations
@@ -236,4 +236,4 @@ Add shot prompts to `glass-prompt.md`:
 
 ---
 
-*This document is the authoritative technical reference for the Thoughtworks AI-Works platform.*
+*This document is the authoritative technical reference for the Thoughtworks AI/Works platform.*

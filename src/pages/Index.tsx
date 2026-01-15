@@ -29,10 +29,10 @@ import { OnboardingTransition } from "@/components/OnboardingTransition";
 import { Logo } from "@/components/Logo";
 
 
-// Welcome section - Thoughtworks AI-Works Introduction
+// Welcome section - Thoughtworks AI/Works Introduction
 const WELCOME_VARIANTS = [
   {
-    badge: "THOUGHTWORKS AI-WORKS",
+    badge: "THOUGHTWORKS AI/WORKS",
     title: "Architectural Synthesis for the Enterprise",
     subtitle: "The Super Spec Engine—specification first, code follows, zero technical debt",
     generativeSubsections: [
@@ -81,7 +81,7 @@ const WELCOME_VARIANTS = [
               id: "cta1",
               title: "The 3 Environments",
               subtitle: "Developer Portal, IDE, AIOps",
-              description: "Explore the three environments where AI-Works operates—from context to code to production operations.",
+              description: "Explore the three environments where AI/Works operates—from context to code to production operations.",
               icon: "eye",
               highlight: true,
               actionPhrase: "Show me the 3 environments"
@@ -90,7 +90,7 @@ const WELCOME_VARIANTS = [
               id: "cta2",
               title: "Competitive Edge",
               subtitle: "vs. Globant, Ascendion, Deloitte",
-              description: "See how AI-Works positions against competitors. 30 years of architectural wisdom defeats 4,000 agents.",
+              description: "See how AI/Works positions against competitors. 30 years of architectural wisdom defeats 4,000 agents.",
               icon: "layers",
               highlight: true,
               actionPhrase: "Show me competitive positioning"

@@ -138,7 +138,7 @@ export const DynamicSectionLoader: React.FC<DynamicSectionLoaderProps> = ({
                 }}
               >
                 <Suspense fallback={
-                  <div className="relative h-64 overflow-hidden rounded-2xl border border-mist/10 bg-onyx/40 backdrop-blur-md">
+                  <div className="relative h-64 overflow-hidden rounded-2xl border border-mist/10 bg-onyx/40 backdrop-blur-sm">
                     <div className="absolute inset-0 bg-gradient-to-br from-flamingo/5 via-transparent to-wave/5 animate-pulse" />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="w-8 h-8 border-2 border-flamingo/30 border-t-flamingo rounded-full animate-spin" />

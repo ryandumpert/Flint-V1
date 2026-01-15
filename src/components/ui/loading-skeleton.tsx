@@ -15,7 +15,7 @@ export const Skeleton = ({
   lines = 1,
   ...props 
 }: SkeletonProps) => {
-  const baseClasses = "animate-pulse bg-white/10 rounded";
+  const baseClasses = "animate-pulse bg-mist/10 rounded";
   
   const variantClasses = {
     text: "h-4 w-full",

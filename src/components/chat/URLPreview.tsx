@@ -12,7 +12,7 @@ export const URLPreview = ({ openGraphData, onClick }: URLPreviewProps) => {
   return (
     <div
       onClick={onClick}
-      className="mt-2 cursor-pointer group border border-white/20 rounded-lg overflow-hidden bg-black/30 backdrop-blur-sm hover:bg-black/40 hover:border-white/30 transition-all duration-300 hover:scale-[1.02]"
+      className="mt-2 cursor-pointer group border border-mist/20 rounded-lg overflow-hidden bg-black/30 backdrop-blur-sm hover:bg-black/40 hover:border-mist/30 transition-all duration-300 hover:scale-[1.02]"
     >
       {/* Image Section */}
       {openGraphData.image && (

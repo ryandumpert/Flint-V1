@@ -95,7 +95,7 @@ export const RippleEffect: React.FC<{
       {ripples.map((ripple) => (
         <span
           key={ripple.id}
-          className="absolute rounded-full bg-white/30 animate-[ripple_0.6s_ease-out]"
+          className="absolute rounded-full bg-mist/30 animate-[ripple_0.6s_ease-out]"
           style={{
             left: ripple.x,
             top: ripple.y,

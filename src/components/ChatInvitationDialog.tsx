@@ -56,7 +56,7 @@ export function ChatInvitationDialog({ open, type, onAccept, onDecline }: ChatIn
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="gap-2 sm:gap-0">
-          <Button variant="outline" onClick={handleDeclineClick} className="glass-medium glass-medium-hover text-white border-white/20">
+          <Button variant="outline" onClick={handleDeclineClick} className="glass-medium glass-medium-hover text-white border-mist/20">
             Decline
           </Button>
           <Button onClick={handleAcceptClick} className="glass-strong glass-strong-hover text-white">

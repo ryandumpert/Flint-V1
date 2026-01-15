@@ -20,21 +20,29 @@ export default {
     extend: {
       colors: {
         /* ============================================
-         * STRICT 4-COLOR PALETTE - NO EXCEPTIONS
+         * 8-COLOR BRAND PALETTE
          * ============================================
-         * Mist Gray:     #EDF1F3 - Light backgrounds, text
-         * Onyx Black:    #000000 - Dark backgrounds
-         * Flamingo Pink: #F2617A - Primary accent, CTAs
-         * Wave Blue:     #003D4F - Secondary accent, headers
+         * Mist Gray:      #EDF1F3 - Light backgrounds, text, icons
+         * Onyx Black:     #000000 - Dark backgrounds
+         * Flamingo Pink:  #F2617A - Primary accent, CTAs (call to action)
+         * Wave Blue:      #003D4F - Secondary accent, headers
+         * Turmeric Yellow:#CC850A - Buttons, warnings
+         * Jade Green:     #6B9E78 - Success states, accents
+         * Sapphire Blue:  #47A1AD - Buttons, links
+         * Amethyst Purple:#634F7D - Special accents
          * ============================================ */
 
-        // The 4 Core Colors
+        // The 8 Brand Colors
         mist: '#EDF1F3',
         onyx: '#000000',
         flamingo: '#F2617A',
         wave: '#003D4F',
+        turmeric: '#CC850A',
+        jade: '#6B9E78',
+        sapphire: '#47A1AD',
+        amethyst: '#634F7D',
 
-        // Semantic mappings (all derive from the 4 colors)
+        // Semantic mappings
         border: "var(--border)",
         input: "var(--input)",
         ring: "var(--ring)",

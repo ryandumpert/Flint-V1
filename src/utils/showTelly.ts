@@ -52,7 +52,7 @@ export const createUseCaseClickHandler = (
   ripple.style.width = ripple.style.height = `${size}px`;
   ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
   ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
-  ripple.className = "absolute rounded-full bg-white/10 pointer-events-none animate-glass-ripple";
+  ripple.className = "absolute rounded-full bg-mist/10 pointer-events-none animate-glass-ripple";
 
   card.appendChild(ripple);
   setTimeout(() => ripple.remove(), 1200);
@@ -82,7 +82,7 @@ export const createPathwayClickHandler = (
   ripple.style.width = ripple.style.height = `${size}px`;
   ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
   ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
-  ripple.className = "absolute rounded-full bg-white/10 pointer-events-none animate-glass-ripple";
+  ripple.className = "absolute rounded-full bg-mist/10 pointer-events-none animate-glass-ripple";
 
   card.appendChild(ripple);
   setTimeout(() => ripple.remove(), 1200);

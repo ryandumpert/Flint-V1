@@ -164,7 +164,7 @@ export const OnboardingTransition: React.FC<OnboardingTransitionProps> = ({
                             key={index}
                             className={`
                 w-2 h-2 rounded-full transition-all duration-300
-                ${index <= phase ? 'bg-primary scale-100' : 'bg-white/20 scale-75'}
+                ${index <= phase ? 'bg-primary scale-100' : 'bg-mist/20 scale-75'}
               `}
                         />
                     ))}

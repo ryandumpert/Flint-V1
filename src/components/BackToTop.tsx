@@ -33,11 +33,11 @@ export const BackToTop = () => {
       onClick={scrollToTop}
       className={`
         fixed bottom-8 right-8 z-50
-        bg-white/5 backdrop-blur-xl border border-white/20
+        bg-mist/5 backdrop-blur-sm border border-mist/20
         rounded-2xl p-3.5
         shadow-[var(--shadow-float-mid)]
         transition-all duration-500
-        hover:bg-white/10 hover:border-white/30
+        hover:bg-mist/10 hover:border-mist/30
         hover:-translate-y-1 hover:shadow-[var(--shadow-glow-cyan)]
         active:translate-y-0 active:scale-95
         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50

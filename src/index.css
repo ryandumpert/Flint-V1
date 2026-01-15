@@ -95,32 +95,38 @@ button,
      * 
      * LAYER ARCHITECTURE:
      * - Tele (Background): Deep atmospheric space, Tele avatar
-     * - Glass (Foreground): Floating UI panels, cards, navigation
+     * - Glass (Foreground): Floating UI panels with LIGHT frost/blur
      * - Depth: Everything has Z-space positioning
      * 
      * ============================================
-     * STRICT 4-COLOR PALETTE
+     * 8-COLOR BRAND PALETTE
      * ============================================
-     * Mist Gray:     #EDF1F3 - Light backgrounds, text
-     * Onyx Black:    #000000 - Dark backgrounds
-     * Flamingo Pink: #F2617A - Primary accent, CTAs
-     * Wave Blue:     #003D4F - Secondary accent, headers
-     * 
-     * NO OTHER COLORS. NO EXCEPTIONS.
+     * Mist Gray:      #EDF1F3 - Light backgrounds, text, icons (WHITE ON DARK)
+     * Onyx Black:     #000000 - Dark backgrounds
+     * Flamingo Pink:  #F2617A - Primary CTAs (call to action)
+     * Wave Blue:      #003D4F - Secondary accent, headers
+     * Turmeric Yellow:#CC850A - Buttons, warnings
+     * Jade Green:     #6B9E78 - Success states, accents
+     * Sapphire Blue:  #47A1AD - Buttons, links
+     * Amethyst Purple:#634F7D - Special accents
      * ============================================ */
 
     /* ============================================
-     * THE 4 CORE COLORS
+     * THE 8 BRAND COLORS
      * ============================================ */
     --color-mist: #EDF1F3;
     --color-onyx: #000000;
     --color-flamingo: #F2617A;
     --color-wave: #003D4F;
+    --color-turmeric: #CC850A;
+    --color-jade: #6B9E78;
+    --color-sapphire: #47A1AD;
+    --color-amethyst: #634F7D;
 
     /* ============================================
      * SEMANTIC COLOR MAPPINGS
      * ============================================ */
-    
+
     /* Backgrounds */
     --background: var(--color-onyx);
     --foreground: var(--color-mist);
@@ -899,6 +905,173 @@ button,
   .glass-button:hover {
     @apply bg-white/20;
     box-shadow: 0 10px 36px rgba(0, 0, 0, 0.3), 0 5px 18px rgba(0, 0, 0, 0.22), 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  /* ============================================
+   * SEMANTIC TEMPLATE CLASSES
+   * Use these in components instead of inline Tailwind
+   * ============================================ */
+
+  /* Template Container - Light frost glass panel */
+  .glass-template-container {
+    @apply backdrop-blur-sm rounded-2xl p-6;
+    background: rgba(237, 241, 243, 0.1);
+    /* mist/10 */
+    border: 1px solid rgba(237, 241, 243, 0.2);
+    /* mist/20 */
+  }
+
+  /* Image Container - For template image sections */
+  .glass-image-container {
+    @apply rounded-xl overflow-hidden;
+    background: linear-gradient(to bottom right, rgba(237, 241, 243, 0.1), rgba(237, 241, 243, 0.05));
+    border: 1px solid rgba(237, 241, 243, 0.1);
+  }
+
+  /* ============================================
+   * BUTTON SEMANTIC CLASSES - 8-COLOR PALETTE
+   * Flamingo: CTAs (call to action)
+   * Sapphire: Default buttons
+   * Turmeric: Secondary buttons
+   * ============================================ */
+
+  /* CTA Button - Flamingo Pink (#F2617A) */
+  .btn-cta {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold transition-all duration-300;
+    background: rgba(242, 97, 122, 0.8);
+    /* flamingo/80 */
+    border: 1px solid rgba(242, 97, 122, 0.6);
+    /* flamingo/60 */
+    color: #EDF1F3;
+    /* mist */
+  }
+
+  .btn-cta:hover {
+    background: #F2617A;
+    /* flamingo */
+    transform: translateY(-1px);
+  }
+
+  .btn-cta:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  /* Sapphire Button - Default (#47A1AD) */
+  .btn-sapphire {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold transition-all duration-300 backdrop-blur-sm;
+    background: rgba(71, 161, 173, 0.7);
+    /* sapphire/70 */
+    border: 1px solid rgba(71, 161, 173, 0.5);
+    /* sapphire/50 */
+    color: #EDF1F3;
+    /* mist */
+  }
+
+  .btn-sapphire:hover {
+    background: rgba(71, 161, 173, 0.9);
+    /* sapphire/90 */
+    border-color: rgba(71, 161, 173, 0.7);
+    transform: translateY(-1px);
+  }
+
+  /* Turmeric Button - Secondary (#CC850A) */
+  .btn-turmeric {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold transition-all duration-300 backdrop-blur-sm;
+    background: rgba(204, 133, 10, 0.7);
+    /* turmeric/70 */
+    border: 1px solid rgba(204, 133, 10, 0.5);
+    /* turmeric/50 */
+    color: #EDF1F3;
+    /* mist */
+  }
+
+  .btn-turmeric:hover {
+    background: rgba(204, 133, 10, 0.9);
+    /* turmeric/90 */
+    border-color: rgba(204, 133, 10, 0.7);
+    transform: translateY(-1px);
+  }
+
+  /* Ghost Button - Minimal */
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold transition-all duration-300;
+    background: transparent;
+    border: 1px solid rgba(237, 241, 243, 0.3);
+    /* mist/30 */
+    color: #EDF1F3;
+    /* mist */
+  }
+
+  .btn-ghost:hover {
+    background: rgba(237, 241, 243, 0.1);
+    /* mist/10 */
+    border-color: rgba(237, 241, 243, 0.5);
+    /* mist/50 */
+  }
+
+  /* Text styling for templates */
+  .text-template-title {
+    @apply text-xl font-semibold;
+    color: #EDF1F3;
+    /* mist */
+  }
+
+  .text-template-subtitle {
+    @apply text-sm;
+    color: #F2617A;
+    /* flamingo */
+  }
+
+  .text-template-content {
+    @apply leading-relaxed;
+    color: rgba(237, 241, 243, 0.7);
+    /* mist/70 */
+  }
+
+  .text-template-bullet {
+    @apply text-sm;
+    color: rgba(237, 241, 243, 0.8);
+    /* mist/80 */
+  }
+
+  /* ============================================
+   * IMAGE STYLING - LIVING GLASS AESTHETIC
+   * 10% transparent by default, zoom + full opacity on hover
+   * ============================================ */
+
+  /* Global image styling - applies to all images */
+  .glass-image,
+  .glass-template-container img,
+  .glass-image-container img,
+  [class*="template"] img,
+  .content-section img {
+    opacity: 0.9;
+    /* 10% transparent */
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: scale(1);
+  }
+
+  .glass-image:hover,
+  .glass-template-container img:hover,
+  .glass-image-container img:hover,
+  [class*="template"] img:hover,
+  .content-section img:hover {
+    opacity: 1;
+    /* Full opacity */
+    transform: scale(1.03);
+    /* Slight zoom */
+  }
+
+  /* SmartImage component styling */
+  .smart-image {
+    opacity: 0.9;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: scale(1);
+  }
+
+  .smart-image:hover {
+    opacity: 1;
+    transform: scale(1.03);
   }
 
   /* Avatar Animation States */

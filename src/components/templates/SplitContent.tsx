@@ -2,6 +2,12 @@
  * SplitContent
  * Image on one side, text content on the other.
  * Perfect for feature explanations and detailed breakdowns.
+ * 
+ * STYLING: Uses centralized CSS classes from index.css
+ * - .glass-template-container for the main panel
+ * - .glass-image-container for image section
+ * - .btn-cta for CTA buttons
+ * - .text-template-* for typography
  */
 
 import React from "react";
@@ -47,7 +53,7 @@ export const SplitContent: React.FC<SplitContentProps> = ({
 
     const ImageSection = () => (
         <div className="flex-shrink-0 w-full md:w-2/5">
-            <div className="aspect-[4/3] rounded-xl overflow-hidden bg-gradient-to-br from-mist/10 to-mist/5 border border-mist/10">
+            <div className="aspect-[4/3] glass-image-container">
                 {imageUrl ? (
                     <img
                         src={imageUrl}
@@ -63,7 +69,7 @@ export const SplitContent: React.FC<SplitContentProps> = ({
                     />
                 ) : (
                     <div className="w-full h-full flex items-center justify-center p-4">
-                        <p className="text-sm text-mist/40 text-center">
+                        <p className="text-template-bullet text-center opacity-40">
                             Visual representation
                         </p>
                     </div>
@@ -76,14 +82,14 @@ export const SplitContent: React.FC<SplitContentProps> = ({
         <div className="flex-1 space-y-4">
             {/* Title & Subtitle */}
             <div>
-                <h3 className="text-xl font-semibold text-mist mb-1">{title}</h3>
+                <h3 className="text-template-title mb-1">{title}</h3>
                 {subtitle && (
-                    <p className="text-sm text-flamingo">{subtitle}</p>
+                    <p className="text-template-subtitle">{subtitle}</p>
                 )}
             </div>
 
             {/* Main Content */}
-            <p className="text-mist/70 leading-relaxed">{content}</p>
+            <p className="text-template-content">{content}</p>
 
             {/* Bullet Points */}
             {bulletPoints.length > 0 && (
@@ -99,12 +105,12 @@ export const SplitContent: React.FC<SplitContentProps> = ({
                                 {actionPhrase ? (
                                     <button
                                         onClick={() => handleAction(actionPhrase)}
-                                        className="text-sm text-mist/80 hover:text-flamingo transition-colors text-left"
+                                        className="text-template-bullet hover:text-flamingo transition-colors text-left"
                                     >
                                         {text}
                                     </button>
                                 ) : (
-                                    <span className="text-sm text-mist/80">{text}</span>
+                                    <span className="text-template-bullet">{text}</span>
                                 )}
                             </li>
                         );
@@ -112,11 +118,11 @@ export const SplitContent: React.FC<SplitContentProps> = ({
                 </ul>
             )}
 
-            {/* CTA Button */}
+            {/* CTA Button - Uses centralized .btn-cta class */}
             {ctaLabel && ctaActionPhrase && (
                 <button
                     onClick={() => handleAction(ctaActionPhrase)}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-flamingo/20 text-flamingo border border-flamingo/30 hover:bg-flamingo/30 transition-colors"
+                    className="btn-cta"
                 >
                     {ctaLabel}
                     <ChevronRight className="w-4 h-4" />
@@ -126,7 +132,7 @@ export const SplitContent: React.FC<SplitContentProps> = ({
     );
 
     return (
-        <div className="backdrop-blur-md bg-mist/10 border border-mist/20 rounded-2xl p-6">
+        <div className="glass-template-container">
             <div className={`flex flex-col md:flex-row gap-6 ${imagePosition === "right" ? "md:flex-row-reverse" : ""
                 }`}>
                 <ImageSection />

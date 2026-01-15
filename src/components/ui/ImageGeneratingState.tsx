@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import avatarImage from '@/assets/avatar_profile.png';
+import { playThinkingSound, stopThinkingSound } from '@/utils/soundGenerator';
 
 interface ImageGeneratingStateProps {
     prompt: string;
@@ -9,10 +10,19 @@ interface ImageGeneratingStateProps {
 /**
  * ImageGeneratingState - 4-Color Palette Version
  * Uses only: mist, onyx, flamingo, wave
+ * Plays thinking sound while generating
  */
 export const ImageGeneratingState: React.FC<ImageGeneratingStateProps> = ({ prompt, className = '' }) => {
+    // Play thinking sound while generating
+    useEffect(() => {
+        playThinkingSound();
+        return () => {
+            stopThinkingSound();
+        };
+    }, []);
+
     return (
-        <div className={`relative flex flex-col items-center justify-center bg-gradient-to-br from-onyx/60 via-wave/20 to-onyx/80 backdrop-blur-xl border border-mist/20 rounded-3xl p-12 text-center min-h-[400px] overflow-hidden ${className}`}>
+        <div className={`relative flex flex-col items-center justify-center bg-gradient-to-br from-onyx/60 via-wave/20 to-onyx/80 backdrop-blur-sm border border-mist/20 rounded-3xl p-12 text-center min-h-[400px] overflow-hidden ${className}`}>
             {/* Animated gradient background */}
             <div className="absolute inset-0 bg-gradient-to-br from-flamingo/10 via-wave/5 to-flamingo/10 animate-pulse" />
 

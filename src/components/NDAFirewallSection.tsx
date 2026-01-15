@@ -282,7 +282,7 @@ const NDAFirewallSection = ({
           />
 
           {/* Main Glass Card */}
-          <div className="glass-strong rounded-2xl p-8 md:p-12 border border-white/10 shadow-elegant">
+          <div className="glass-strong rounded-2xl p-8 md:p-12 border border-mist/10 shadow-elegant">
             {/* Government Header */}
             <div className="flex justify-center items-center gap-4 mb-10">
               <Building2 className="w-10 h-10 text-white/70" />
@@ -315,8 +315,8 @@ const NDAFirewallSection = ({
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleEmailPhoneSubmit()}
                     disabled={isValidating}
-                    className="text-center text-lg h-14 bg-white/5 border-white/20 text-white placeholder:text-white/40
-                              focus-visible:ring-white/30 focus-visible:border-white/40"
+                    className="text-center text-lg h-14 bg-mist/5 border-mist/20 text-white placeholder:text-white/40
+                              focus-visible:ring-white/30 focus-visible:border-mist/40"
                   />
 
                   <div className="flex justify-center">
@@ -370,8 +370,8 @@ const NDAFirewallSection = ({
                       onPaste={index === 0 ? handleCodePaste : undefined}
                       disabled={isValidating}
                       className="w-12 h-14 md:w-14 md:h-16 text-center text-2xl font-bold
-                                bg-white/10 border-white/30 text-white
-                                focus-visible:ring-white/50 focus-visible:border-white/60
+                                bg-mist/10 border-mist/30 text-white
+                                focus-visible:ring-white/50 focus-visible:border-mist/60
                                 disabled:opacity-50 transition-all duration-200"
                     />
                   ))}

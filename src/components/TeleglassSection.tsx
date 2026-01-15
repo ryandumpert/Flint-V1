@@ -738,7 +738,7 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
 
   return (
     <>
-      <ThinkingIndicator isActive={navigationIsLoading || isConnecting} />
+      {/* ThinkingIndicator removed - animation now shows around avatar */}
       {/* Normal positioning when chat glass is closed */}
       <TeleglassIcons
         isChatGlassOpen={isChatGlassOpen}
@@ -755,16 +755,17 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
         isVoiceConnected={isVoiceConnected}
         onSmileyToggle={handleSmileyToggle}
         isSmileyOn={isSmileyOn}
+        isLoading={navigationIsLoading || isConnecting}
       />
 
-      {/* Chat Glass Panel - CLEAN MINIMAL */}
+      {/* Chat Glass Panel - NEARLY INVISIBLE - Avatar fully visible */}
       <div
         className={`fixed teleglass-panel top-0 h-dvh z-50
           transform transition-all duration-500 ease-out ${isChatGlassOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
           }
           ${isLightboardMode
-            ? 'bg-mist/20 border-l border-mist/30 backdrop-blur-2xl'
-            : 'bg-onyx/70 border-l border-mist/10 backdrop-blur-2xl'
+            ? 'bg-mist/10 border-l border-mist/15'
+            : 'bg-onyx/15 border-l border-mist/5'
           }
         flex flex-col
         xl:right-0
@@ -782,7 +783,7 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
         </div>
 
         {isP2PActive && (
-          <div className={`mx-3 sm:mx-4 mt-3 px-3 py-2 rounded-full text-sm flex items-center gap-2 backdrop-blur-xl ${isLightboardMode
+          <div className={`mx-3 sm:mx-4 mt-3 px-3 py-2 rounded-full text-sm flex items-center gap-2 backdrop-blur-sm ${isLightboardMode
             ? 'bg-mist/20 border border-mist/30 text-mist'
             : 'bg-wave/20 border border-wave/30 text-mist'
             }`}>
@@ -807,7 +808,7 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
               >
                 {msg.role === 'assistant' && (
                   <div className={`chat-avatar w-7 h-7 sm:w-9 sm:h-9 rounded-full 
-                    backdrop-blur-xl flex items-center justify-center flex-shrink-0
+                    backdrop-blur-sm flex items-center justify-center flex-shrink-0
                     ${isLightboardMode
                       ? 'bg-mist/20 border border-mist/30'
                       : 'bg-mist/10 border border-mist/20'
@@ -818,13 +819,13 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
                 <div className={`chat-message-bubble max-w-[75%] sm:max-w-[70%] p-3 sm:p-4 rounded-2xl
                   transform transition-all duration-500
                   hover:scale-[1.01]
-                  border backdrop-blur-xl text-sm sm:text-base text-mist ${isLightboardMode
+                  border backdrop-blur-sm text-sm sm:text-base text-mist ${isLightboardMode
                     ? msg.role === 'user'
                       ? 'bg-mist/20 border-mist/30'
                       : 'bg-mist/15 border-mist/25'
                     : msg.role === 'user'
                       ? 'bg-mist/15 border-mist/20'
-                      : 'bg-onyx/50 border-mist/10'
+                      : 'bg-onyx/40 border-mist/10'
                   }`}>
                   {/* Tool Call and RAG Search Indicators (only shown in Smart Mode) */}
                   {isSmartMode && msg.role === 'assistant' && (msg as any).metadata && (
@@ -890,7 +891,7 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
                 </div>
                 {msg.role === 'user' && (
                   <div className={`chat-avatar w-7 h-7 sm:w-9 sm:h-9 rounded-full
-                    backdrop-blur-xl flex items-center justify-center flex-shrink-0
+                    backdrop-blur-sm flex items-center justify-center flex-shrink-0
                     ${isLightboardMode
                       ? 'bg-mist/20 border border-mist/30'
                       : 'bg-mist/10 border border-mist/20'
@@ -905,16 +906,16 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
           {isTyping && (
             <div className="flex justify-start items-start space-x-2 animate-chat-bubble-enter opacity-0 chat-delay-1">
               <div className={`chat-avatar w-7 h-7 sm:w-9 sm:h-9 rounded-full
-                backdrop-blur-xl flex items-center justify-center flex-shrink-0
+                backdrop-blur-sm flex items-center justify-center flex-shrink-0
                 ${isLightboardMode
                   ? 'bg-mist/20 border border-mist/30'
                   : 'bg-mist/10 border border-mist/20'
                 }`}>
                 <Bot className="chat-icon w-4 h-4 sm:w-5 sm:h-5 text-mist" />
               </div>
-              <div className={`backdrop-blur-xl p-3 sm:p-4 rounded-2xl border ${isLightboardMode
+              <div className={`backdrop-blur-sm p-3 sm:p-4 rounded-2xl border ${isLightboardMode
                 ? 'bg-mist/15 border-mist/25'
-                : 'bg-onyx/50 border-mist/10'
+                : 'bg-onyx/40 border-mist/10'
                 }`}>
                 <div className="flex space-x-1.5">
                   <div className="w-2 h-2 bg-mist/60 rounded-full animate-typing-pulse"></div>
@@ -927,7 +928,7 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
         </div>
 
         {/* Chat Input Area - CLEAN MINIMAL */}
-        <div className="border-t border-mist/10 bg-onyx/40 backdrop-blur-xl">
+        <div className="border-t border-mist/10 bg-onyx/40 backdrop-blur-sm">
           <div className="flex space-x-2 px-3 sm:px-4 pb-3 sm:pb-4 pt-3">
             <input
               type="text"
@@ -936,7 +937,7 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
               onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
               placeholder="Type your message..."
               className={`flex-1 px-5 sm:px-6 py-2.5 sm:py-3
-                backdrop-blur-xl rounded-full
+                backdrop-blur-sm rounded-full
                 text-mist placeholder:text-mist/40 text-sm sm:text-base
                 transition-all duration-300
                 ${isLightboardMode
@@ -950,12 +951,12 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
               onClick={handleSendMessage}
               size="sm"
               className={`rounded-full w-11 h-11 sm:w-12 sm:h-12 p-0
-                backdrop-blur-xl text-mist transition-all duration-300
+                backdrop-blur-sm text-mist transition-all duration-300
                 active:scale-95
                 disabled:opacity-50 disabled:cursor-not-allowed
                 ${isLightboardMode
                   ? 'bg-mist/20 border border-mist/30 hover:bg-mist/30'
-                  : 'bg-mist/15 border border-mist/20 hover:bg-mist/25'
+                  : 'bg-sapphire/70 border border-sapphire/50 hover:bg-sapphire/90'
                 }`}
               disabled={!chatMessage.trim()}
             >
