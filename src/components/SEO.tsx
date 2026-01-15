@@ -88,7 +88,7 @@ export const sectionSEO = {
 
   platform: {
     title: 'Platform Overview | AI/Works',
-    description: 'Explore the 10 components of AI/Works: from reverse engineering to AIOps, the complete agentic development platform.',
+    description: 'Explore the 10 components of AI/Works: from reverse engineering to AIOps, the complete Agentic Delivery Platform.',
     keywords: ['platform overview', 'Super Spec', 'CodeConcise', 'Control Plane', 'AIOps'],
   },
 

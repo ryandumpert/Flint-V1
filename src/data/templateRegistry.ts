@@ -196,6 +196,13 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
      */
     ScenarioCard: lazy(() => import("@/components/templates/ScenarioCard").then(m => ({ default: m.ScenarioCard }))),
 
+    /**
+     * RolePlayScore
+     * USE WHEN: Role-play training mode, scoring responses, sales practice feedback
+     * PROPS: { persona, question, overallScore, criteria?[], whatWorked?[], toImprove?[], betterPhrase?, nextQuestion?, isFinalAssessment?, strongestArea?, biggestOpportunity?, actionItems?[], actionPhrase }
+     */
+    RolePlayScore: lazy(() => import("@/components/templates/RolePlayScore").then(m => ({ default: m.RolePlayScore }))),
+
     // ==========================================
     // WAVE 2: LISTS & DATA
     // ==========================================

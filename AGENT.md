@@ -1,13 +1,13 @@
 # 🤖 AGENT.md - Thoughtworks AI/Works Development Reference
 
 > **Internal Enablement Platform**
-> Last updated: January 14, 2026
+> Last updated: January 15, 2026
 
 ---
 
 ## 1. PROJECT OVERVIEW
 
-This is the **Thoughtworks AI/Works** internal enablement platform—an AI-powered guide for Thoughtworks employees learning about and selling the AI/Works Platform.
+This is the **Thoughtworks AI/Works** internal enablement platform—an AI-powered guide for Thoughtworks employees learning about and selling the AI/Works **Agentic Delivery Platform**.
 
 ### What This Platform Does
 Catherine (the AI agent) helps **Thoughtworks employees** understand the AI/Works Platform by:
@@ -45,7 +45,7 @@ Catherine (the AI agent) helps **Thoughtworks employees** understand the AI/Work
 
 ## 2. TEMPLATE LIBRARY
 
-**50 templates available** — See `glass-prompt.md` for complete reference with:
+**51 templates available** — See `glass-prompt.md` for complete reference with:
 - `GOOD FOR` — What each template is suited for
 - `Props` — Required and optional props
 - `actionPhrase` — Required for volumetric navigation
@@ -290,7 +290,7 @@ npm run build                 # Build production
 
 ---
 
-## 9. COMPETITIVE POSITIONING
+## 10. COMPETITIVE POSITIONING
 
 | Competitor | Their Claim | Our Counter |
 |------------|-------------|-------------|
@@ -301,7 +301,7 @@ npm run build                 # Build production
 
 ---
 
-## 10. PRICING & ENGAGEMENT
+## 11. PRICING & ENGAGEMENT
 
 | Phase | Duration | Description |
 |-------|----------|-------------|
@@ -313,7 +313,7 @@ npm run build                 # Build production
 
 ---
 
-## 11. WORKFLOWS (Slash Commands)
+## 12. WORKFLOWS (Slash Commands)
 
 Use these workflows to modify the platform:
 
@@ -333,15 +333,36 @@ Add a new template component:
 
 ### /add-knowledge
 Add domain knowledge to `tele-knowledge.md`:
-- Keep under 150 lines
+- Keep under 600 lines
 - Use bullet format with key points
 - Include example phrases Catherine might say
 
 ### /tele-should
 Add shot prompts to `glass-prompt.md`:
-- Keep under 200 lines
+- Keep under 1200 lines
 - Format: USER trigger → JSON → CATHERINE SAYS
 - Follow JSON structure: `badge`, `title`, `subtitle`, `generativeSubsections`
+
+---
+
+## 13. ROLE-PLAY TRAINING MODE
+
+Catherine can role-play as buyer personas to help salespeople practice their pitch.
+
+### Trigger Phrases
+- "Practice with me" / "Role-play as a CIO"
+- "Pretend you're a skeptical CFO"
+- "Train me on objection handling"
+
+### How It Works
+1. Catherine adopts a persona (CIO, CFO, CTO, VP Engineering, CISO)
+2. Poses challenging questions based on that persona's priorities
+3. Scores the salesperson's response (1-10) on clarity, relevance, proof points, objection handling, next steps
+4. Provides specific feedback and better phrase suggestions
+5. After 3-5 exchanges, gives overall assessment with action items
+
+### Template Used
+- `RolePlayScore` — Displays score breakdown, what worked, improvements, and action items
 
 ---
 

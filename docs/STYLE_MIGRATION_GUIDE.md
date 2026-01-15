@@ -1,6 +1,10 @@
 # Template Style Migration Guide
 ## From Light Mode → Static Template Dark Glass Style
 
+> **⚠️ NOTE: This guide is for reference only.**
+> Templates should use **centralized CSS classes** from `src/index.css`, not inline Tailwind.
+> See classes like `.glass-template-container`, `.glass-card-standard`, `.text-template-title` etc.
+
 ### Color Token Mapping
 
 | Light Mode (Current) | Dark Glass Mode (Target) |

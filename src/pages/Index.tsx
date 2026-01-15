@@ -32,9 +32,9 @@ import { Logo } from "@/components/Logo";
 // Welcome section - Thoughtworks AI/Works Introduction
 const WELCOME_VARIANTS = [
   {
-    badge: "SPARKS THE EXTRAORDINARY",
+    badge: "AGENTIC DELIVERY PLATFORM",
     title: "AI/Works by Thoughtworks",
-    subtitle: "30 years of architectural wisdom, now encoded into intelligent agents",
+    subtitle: "30 years of architectural wisdom, encoded into intelligent delivery agents",
     generativeSubsections: [
       // Stakeholder Questions Carousel
       {
@@ -44,46 +44,52 @@ const WELCOME_VARIANTS = [
           autoPlayInterval: 60000,
           cards: [
             {
-              question: "I'm pitching AI/Works to a skeptical CIO—how do I win them over?",
-              subtext: "Sales & Client Principals",
+              question: "My CIO says 'we've been burned by AI before'—how do I respond?",
+              subtext: "Objection Handling",
               imageUrl: "/assets/welcome-card.jpg",
-              actionPhrase: "Show me how to pitch AI/Works to a skeptical CIO"
+              actionPhrase: "Show me how to handle AI skepticism objections"
             },
             {
-              question: "I'm competing against Globant on a major deal—what's our edge?",
-              subtext: "Sales & Business Development",
+              question: "What makes AI/Works different from every other AI platform?",
+              subtext: "Differentiation",
               imageUrl: "/assets/welcome-card.jpg",
-              actionPhrase: "Show me how AI/Works beats Globant in competitive deals"
+              actionPhrase: "Show me what makes AI/Works unique"
             },
             {
-              question: "I'm working on a legacy modernization project—how does AI/Works help?",
-              subtext: "Developers & Architects",
+              question: "The client has a mainframe from 1985—can we actually help?",
+              subtext: "Legacy Modernization",
               imageUrl: "/assets/welcome-card.jpg",
-              actionPhrase: "Show me how AI/Works handles legacy modernization"
+              actionPhrase: "Show me how to pitch legacy modernization"
             },
             {
-              question: "I want to learn about the Super Spec Engine—what is it?",
-              subtext: "Technical Teams",
+              question: "What's the fastest way to get a client from skeptic to signed?",
+              subtext: "The 3-3-3 Model",
               imageUrl: "/assets/welcome-card.jpg",
-              actionPhrase: "Show me how the Super Spec Engine works"
+              actionPhrase: "Show me the 3-3-3 delivery model"
             },
             {
-              question: "I need to explain the 3-3-3 delivery model to a client—help me?",
-              subtext: "Client Principals & Delivery Leads",
+              question: "The CFO wants hard ROI numbers before approving—what do I say?",
+              subtext: "ROI & Business Case",
               imageUrl: "/assets/welcome-card.jpg",
-              actionPhrase: "Show me the 3-3-3 delivery model explained"
+              actionPhrase: "Show me ROI numbers and value story"
             },
             {
-              question: "I'm an architect evaluating AI tools—how is this different?",
-              subtext: "Enterprise Architects",
+              question: "Give me a real success story I can share in my next pitch",
+              subtext: "Proof Points",
               imageUrl: "/assets/welcome-card.jpg",
-              actionPhrase: "Show me what makes AI/Works different from other AI tools"
+              actionPhrase: "Show me case studies and proof"
             },
             {
-              question: "I want to see the ROI numbers—what can I tell my executives?",
-              subtext: "Executive Sponsors",
+              question: "I need to quote a price range—what am I working with?",
+              subtext: "Pricing",
               imageUrl: "/assets/welcome-card.jpg",
-              actionPhrase: "Show me the ROI and business case for AI/Works"
+              actionPhrase: "Show me pricing and quoting guidance"
+            },
+            {
+              question: "Grill me—pretend you're a skeptical buyer and test my pitch",
+              subtext: "Practice Mode",
+              imageUrl: "/assets/welcome-card.jpg",
+              actionPhrase: "Show me role-play training and start practice"
             }
           ]
         }
@@ -731,7 +737,7 @@ const Index = () => {
           return false;
         }
 
-        if (parsed === "welcome") {
+        if (parsed === "welcome" || parsed?.action === "goHome") {
           handleAcknowledgment("welcome");
           setDynamicSectionData(null);
           setActiveSubSection(null);

@@ -119,11 +119,11 @@ export const TeleglassIcons: React.FC<TeleglassIconsProps> = ({
         top: 'var(--teleglass-top)',
       } : undefined}
     >
-      {/* Speaker Icon */}
+      {/* Speaker Icon - Hidden on mobile */}
       {isConnected && (
         <div
           onClick={onSoundToggle}
-          className={`${getIconClasses(isSoundOn, !isSoundOn)} transition-opacity duration-300 ${shouldShowSpeaker ? 'opacity-100' : 'opacity-0'}`}
+          className={`hidden sm:flex ${getIconClasses(isSoundOn, !isSoundOn)} transition-opacity duration-300 ${shouldShowSpeaker ? 'opacity-100' : 'opacity-0'}`}
           style={{ pointerEvents: 'auto' }}
         >
           {isSoundOn ? <Volume2 className="w-5 h-5 text-mist" /> : <VolumeX className="w-5 h-5 text-mist" />}
@@ -158,7 +158,7 @@ export const TeleglassIcons: React.FC<TeleglassIconsProps> = ({
           className="rounded-full bg-flamingo/90 border border-flamingo/70 hover:bg-flamingo text-mist transition-all duration-300 font-bold uppercase text-sm tracking-wide flex items-center gap-2 px-6 py-2"
           size="default"
         >
-          Talk to Catherine
+          START
           <ArrowRight className="w-4 h-4 text-mist" />
         </Button>
       )}

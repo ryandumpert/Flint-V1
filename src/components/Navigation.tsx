@@ -49,14 +49,9 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
         teleQuery: 'Show me AI/Works overview'
       },
       {
-        id: 'super-spec',
-        label: 'SUPER SPEC',
-        teleQuery: 'Show me how Super Spec works'
-      },
-      {
-        id: 'environments',
-        label: 'ENVIRONMENTS',
-        teleQuery: 'Show me the 3 environments'
+        id: '333-model',
+        label: '3-3-3 MODEL',
+        teleQuery: 'Show me the 3-3-3 delivery model'
       },
       {
         id: 'competitive',
@@ -64,14 +59,24 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
         teleQuery: 'Show me competitive positioning'
       },
       {
-        id: 'technical',
-        label: 'TECHNICAL',
-        teleQuery: 'Show me technical stack'
+        id: 'objections',
+        label: 'OBJECTIONS',
+        teleQuery: 'Show me how to handle objections'
+      },
+      {
+        id: 'case-studies',
+        label: 'CASE STUDIES',
+        teleQuery: 'Show me case studies and proof points'
       },
       {
         id: 'pricing',
         label: 'PRICING',
         teleQuery: 'Show me pricing and engagement'
+      },
+      {
+        id: 'practice',
+        label: 'PRACTICE',
+        teleQuery: 'Show me role-play training mode and start a practice session'
       }
     ];
 
@@ -109,7 +114,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
               </div>
 
               {/* Desktop Navigation - VISIBLE ON DARK BACKGROUND */}
-              <div className="hidden xl:flex items-end space-x-3">
+              <div className="hidden xl:flex items-end space-x-1.5">
                 {navItems.map((item) => (
                   <Button
                     key={item.id}

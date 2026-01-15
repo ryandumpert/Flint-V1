@@ -60,18 +60,18 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
 
     return (
         <div
-            className="w-full overflow-hidden"
+            className="w-full overflow-x-clip overflow-y-visible py-4"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
         >
             {/* Scrolling Container */}
             <div
                 ref={scrollRef}
-                className="relative overflow-hidden mb-8"
+                className="relative overflow-x-clip overflow-y-visible mb-8"
             >
                 {/* Scrolling Track */}
                 <div
-                    className={`flex gap-6 ${isPaused ? '' : 'animate-carousel-scroll'}`}
+                    className="flex gap-6 animate-carousel-scroll"
                     style={{
                         width: 'fit-content',
                         animationDuration: `${autoPlayInterval}ms`,
@@ -87,7 +87,7 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
                             onClick={() => handleCardClick(card.actionPhrase, idx)}
                         >
                             {/* Image - Flush to top */}
-                            <div className="aspect-[16/9] w-full overflow-hidden">
+                            <div className="aspect-[4/3] w-full overflow-hidden">
                                 <img
                                     src={card.imageUrl}
                                     alt=""
