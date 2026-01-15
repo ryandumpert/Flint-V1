@@ -1035,6 +1035,204 @@ button,
   }
 
   /* ============================================
+   * TEMPLATE LAYOUT CLASSES
+   * Grid and flex layouts for templates
+   * ============================================ */
+
+  /* Grid layouts */
+  .template-grid-2 {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+  }
+
+  .template-grid-3 {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+
+  .template-grid-4 {
+    @apply grid grid-cols-2 md:grid-cols-4 gap-4;
+  }
+
+  /* Flex layouts */
+  .template-flex-row {
+    @apply flex flex-wrap gap-4;
+  }
+
+  .template-flex-col {
+    @apply flex flex-col gap-4;
+  }
+
+  /* ============================================
+   * CARD VARIANTS
+   * Different card styles for templates
+   * ============================================ */
+
+  /* Base card - minimal glass */
+  .glass-card-minimal {
+    @apply rounded-xl p-4 transition-all duration-300;
+    background: rgba(237, 241, 243, 0.05);
+    border: 1px solid rgba(237, 241, 243, 0.1);
+  }
+
+  .glass-card-minimal:hover {
+    background: rgba(237, 241, 243, 0.1);
+    border-color: rgba(237, 241, 243, 0.2);
+    transform: translateY(-2px);
+  }
+
+  /* Standard card - medium glass */
+  .glass-card-standard {
+    @apply rounded-2xl p-5 transition-all duration-300;
+    background: rgba(237, 241, 243, 0.1);
+    border: 1px solid rgba(237, 241, 243, 0.15);
+  }
+
+  .glass-card-standard:hover {
+    background: rgba(237, 241, 243, 0.15);
+    border-color: rgba(237, 241, 243, 0.25);
+    transform: translateY(-2px);
+  }
+
+  /* Featured card - prominent glass */
+  .glass-card-featured {
+    @apply rounded-2xl p-6 transition-all duration-300;
+    background: rgba(237, 241, 243, 0.15);
+    border: 1px solid rgba(237, 241, 243, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+
+  .glass-card-featured:hover {
+    background: rgba(237, 241, 243, 0.2);
+    border-color: rgba(237, 241, 243, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Clickable card - interactive with cursor */
+  .glass-card-clickable {
+    @apply cursor-pointer;
+  }
+
+  /* ============================================
+   * LIST STYLES
+   * Bullet lists, numbered lists, icon lists
+   * ============================================ */
+
+  .template-list {
+    @apply space-y-2;
+  }
+
+  .template-list-item {
+    @apply flex items-start gap-3;
+    color: rgba(237, 241, 243, 0.8);
+  }
+
+  .template-list-icon {
+    @apply w-5 h-5 flex-shrink-0 mt-0.5;
+    color: #F2617A;
+    /* flamingo */
+  }
+
+  .template-list-icon-sapphire {
+    @apply w-5 h-5 flex-shrink-0 mt-0.5;
+    color: #47A1AD;
+    /* sapphire */
+  }
+
+  /* ============================================
+   * BADGE/TAG STYLES
+   * Labels, tags, status indicators
+   * ============================================ */
+
+  .template-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide;
+    background: rgba(242, 97, 122, 0.2);
+    color: #F2617A;
+    border: 1px solid rgba(242, 97, 122, 0.3);
+  }
+
+  .template-badge-sapphire {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide;
+    background: rgba(71, 161, 173, 0.2);
+    color: #47A1AD;
+    border: 1px solid rgba(71, 161, 173, 0.3);
+  }
+
+  .template-badge-turmeric {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide;
+    background: rgba(204, 133, 10, 0.2);
+    color: #CC850A;
+    border: 1px solid rgba(204, 133, 10, 0.3);
+  }
+
+  .template-badge-mist {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide;
+    background: rgba(237, 241, 243, 0.1);
+    color: #EDF1F3;
+    border: 1px solid rgba(237, 241, 243, 0.2);
+  }
+
+  /* ============================================
+   * METRIC/STAT STYLES
+   * Numbers, statistics, KPIs
+   * ============================================ */
+
+  .template-metric {
+    @apply text-center;
+  }
+
+  .template-metric-value {
+    @apply text-3xl md:text-4xl font-bold;
+    color: #EDF1F3;
+  }
+
+  .template-metric-label {
+    @apply text-sm mt-1;
+    color: rgba(237, 241, 243, 0.6);
+  }
+
+  .template-metric-highlight {
+    color: #F2617A;
+    /* flamingo */
+  }
+
+  /* ============================================
+   * DIVIDERS AND SEPARATORS
+   * ============================================ */
+
+  .template-divider {
+    @apply my-4;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(237, 241, 243, 0.2), transparent);
+  }
+
+  .template-divider-vertical {
+    @apply mx-4;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(237, 241, 243, 0.2), transparent);
+  }
+
+  /* ============================================
+   * ICON CONTAINER STYLES
+   * Consistent icon presentation
+   * ============================================ */
+
+  .template-icon-container {
+    @apply w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0;
+    background: rgba(242, 97, 122, 0.15);
+    border: 1px solid rgba(242, 97, 122, 0.3);
+  }
+
+  .template-icon-container-lg {
+    @apply w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0;
+    background: rgba(242, 97, 122, 0.15);
+    border: 1px solid rgba(242, 97, 122, 0.3);
+  }
+
+  .template-icon-container svg {
+    color: #F2617A;
+  }
+
+  /* ============================================
    * IMAGE STYLING - LIVING GLASS AESTHETIC
    * 10% transparent by default, zoom + full opacity on hover
    * ============================================ */

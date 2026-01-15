@@ -154,7 +154,93 @@ sendToTele("Show me more about this feature");  // ALWAYS starts with "Show"
 
 ---
 
-## 7. DEVELOPMENT COMMANDS
+## 7. CENTRALIZED STYLING SYSTEM ⚠️ CRITICAL
+
+### The Rule
+**ALL STYLES MUST BE CENTRALIZED IN `src/index.css`**
+
+Templates and components should NEVER use inline Tailwind classes for styling. Instead, they must use semantic CSS classes defined in the centralized style library.
+
+### 8-Color Brand Palette
+| Color | Hex | Use |
+|-------|-----|-----|
+| **Mist** | `#EDF1F3` | Text, icons (white on dark) |
+| **Onyx** | `#000000` | Backgrounds |
+| **Flamingo** | `#F2617A` | CTAs, primary actions |
+| **Wave** | `#003D4F` | Dark green background |
+| **Turmeric** | `#CC850A` | Secondary buttons |
+| **Jade** | `#1A4D2E` | Success states |
+| **Sapphire** | `#47A1AD` | Default buttons |
+| **Amethyst** | `#6B5B95` | Accents |
+
+### Available CSS Classes
+
+**Containers:**
+- `.glass-template-container` — Main template panel
+- `.glass-image-container` — Image sections
+
+**Cards:**
+- `.glass-card-minimal` — Subtle cards
+- `.glass-card-standard` — Standard cards
+- `.glass-card-featured` — Prominent cards
+- `.glass-card-clickable` — Interactive cursor
+
+**Buttons:**
+- `.btn-cta` — Flamingo (primary CTA)
+- `.btn-sapphire` — Sapphire (default)
+- `.btn-turmeric` — Turmeric (secondary)
+- `.btn-ghost` — Minimal outline
+
+**Typography:**
+- `.text-template-title` — Headings
+- `.text-template-subtitle` — Subtitles (flamingo)
+- `.text-template-content` — Body text
+- `.text-template-bullet` — List items
+
+**Layouts:**
+- `.template-grid-2`, `.template-grid-3`, `.template-grid-4` — Grid layouts
+- `.template-flex-row`, `.template-flex-col` — Flex layouts
+
+**Lists:**
+- `.template-list` — Container
+- `.template-list-item` — Row
+- `.template-list-icon` — Icon (flamingo)
+
+**Badges:**
+- `.template-badge` — Flamingo
+- `.template-badge-sapphire`, `.template-badge-turmeric`, `.template-badge-mist`
+
+**Metrics:**
+- `.template-metric`, `.template-metric-value`, `.template-metric-label`
+
+**Icons:**
+- `.template-icon-container`, `.template-icon-container-lg`
+
+**Dividers:**
+- `.template-divider`, `.template-divider-vertical`
+
+### ❌ DON'T DO THIS
+```tsx
+// BAD - Inline Tailwind classes
+<div className="bg-mist/10 border border-mist/20 rounded-2xl p-6 backdrop-blur-sm">
+```
+
+### ✅ DO THIS
+```tsx
+// GOOD - Centralized CSS class
+<div className="glass-template-container">
+```
+
+### Adding New Styles
+When you need a new style that doesn't exist:
+1. **Add it to `src/index.css`** in the appropriate section
+2. **Name it semantically** (e.g., `.glass-card-pricing` not `.bg-mist-10-rounded`)
+3. **Document it** in this AGENT.md file
+4. **Use it** in templates via the class name
+
+---
+
+## 8. DEVELOPMENT COMMANDS
 
 ```bash
 npm run dev -- --port 1010    # Start dev server
@@ -164,7 +250,7 @@ npm run build                 # Build production
 
 ---
 
-## 8. THE ENABLEMENT FLOW
+## 9. THE ENABLEMENT FLOW
 
 ### Catherine's 3-Phase Journey
 1. **Introduction** — Explain the Super Spec and 3-3-3 Delivery Model
