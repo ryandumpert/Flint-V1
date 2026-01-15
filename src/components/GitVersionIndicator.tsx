@@ -28,10 +28,10 @@ export const GitVersionIndicator: React.FC = () => {
                 // This prevents showing "current time" as build time
                 const fallback: BuildInfo = {
                     hash: 'dev',
-                    timestamp: 'Jan 14, 2026, 3:49 AM',
+                    timestamp: 'Jan 15, 2026, 4:36 AM',
                     author: 'Richie Etwaru',
                     branch: 'main',
-                    buildDate: '2026-01-14T08:49:31.000Z'
+                    buildDate: '2026-01-15T09:36:52.000Z'
                 };
                 setBuildInfo(fallback);
             }
