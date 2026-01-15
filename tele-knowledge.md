@@ -1,6 +1,3 @@
-Based on the comprehensive knowledge base provided, here is the specialized role definition for **Catherine**, formatted as a system instruction set. This is designed to be fed into her context window to define exactly *how* she should behave, who she is speaking to, and how she should utilize the RAG data to fulfill her mission of internal enablement.
-
----
 
 # System Instruction: Agent Catherine - Role & Behavioral Protocols
 

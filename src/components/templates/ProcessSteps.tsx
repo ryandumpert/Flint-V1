@@ -43,8 +43,6 @@ export const ProcessSteps: React.FC<ProcessStepsProps> = ({
             {title && <h3 className="text-template-title text-xl mb-6">{title}</h3>}
 
             <div className="relative">
-                {/* Vertical line */}
-                <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-mist/20" />
 
                 <div className="space-y-4">
                     {steps?.map((step, index) => (

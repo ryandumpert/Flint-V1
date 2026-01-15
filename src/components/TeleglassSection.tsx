@@ -819,7 +819,7 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
                 <div className={`chat-message-bubble max-w-[75%] sm:max-w-[70%] p-3 sm:p-4 rounded-2xl
                   transform transition-all duration-500
                   hover:scale-[1.01]
-                  border backdrop-blur-sm text-sm sm:text-base text-mist ${isLightboardMode
+                  border backdrop-blur-md text-sm sm:text-base text-mist ${isLightboardMode
                     ? msg.role === 'user'
                       ? 'bg-black/35 border-black/45'
                       : 'bg-black/30 border-black/40'
@@ -913,7 +913,7 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
                 }`}>
                 <Bot className="chat-icon w-4 h-4 sm:w-5 sm:h-5 text-mist" />
               </div>
-              <div className={`backdrop-blur-sm p-3 sm:p-4 rounded-2xl border ${isLightboardMode
+              <div className={`backdrop-blur-md p-3 sm:p-4 rounded-2xl border ${isLightboardMode
                 ? 'bg-black/30 border-black/40'
                 : 'bg-black/45 border-black/55'
                 }`}>

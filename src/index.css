@@ -915,17 +915,74 @@ button,
   /* Template Container - Tinted dark glass panel */
   .glass-template-container {
     @apply backdrop-blur-sm rounded-2xl p-6;
-    background: rgba(0, 0, 0, 0.4);
-    /* onyx/40 - tinted glass */
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    /* onyx/50 */
+    background: rgba(255, 255, 255, 0.08);
+    /* white tint - frosted glass */
+    border: 1px solid rgba(255, 255, 255, 0.15);
   }
 
   /* Image Container - For template image sections */
   .glass-image-container {
     @apply rounded-xl overflow-hidden;
-    background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4));
-    border: 1px solid rgba(0, 0, 0, 0.4);
+    background: linear-gradient(to bottom right, rgba(17, 34, 51, 0.3), rgba(17, 34, 51, 0.4));
+    border: 1px solid rgba(17, 34, 51, 0.4);
+  }
+
+  /* ============================================
+   * DARK TEAL GLASS UTILITIES
+   * For Teleglass chat panel and system UI
+   * Color: (17, 34, 51) - dark teal
+   * ============================================ */
+
+  .teal-glass-30 {
+    background: rgba(17, 34, 51, 0.30);
+  }
+
+  .teal-glass-35 {
+    background: rgba(17, 34, 51, 0.35);
+  }
+
+  .teal-glass-40 {
+    background: rgba(17, 34, 51, 0.40);
+  }
+
+  .teal-glass-45 {
+    background: rgba(17, 34, 51, 0.45);
+  }
+
+  .teal-glass-50 {
+    background: rgba(17, 34, 51, 0.50);
+  }
+
+  .teal-glass-55 {
+    background: rgba(17, 34, 51, 0.55);
+  }
+
+  .teal-border-30 {
+    border-color: rgba(17, 34, 51, 0.30);
+  }
+
+  .teal-border-40 {
+    border-color: rgba(17, 34, 51, 0.40);
+  }
+
+  .teal-border-45 {
+    border-color: rgba(17, 34, 51, 0.45);
+  }
+
+  .teal-border-50 {
+    border-color: rgba(17, 34, 51, 0.50);
+  }
+
+  .teal-border-55 {
+    border-color: rgba(17, 34, 51, 0.55);
+  }
+
+  .teal-border-60 {
+    border-color: rgba(17, 34, 51, 0.60);
+  }
+
+  .teal-border-65 {
+    border-color: rgba(17, 34, 51, 0.65);
   }
 
   /* ============================================
@@ -1157,45 +1214,45 @@ button,
   /* Base card - minimal tinted glass */
   .glass-card-minimal {
     @apply rounded-xl p-4 transition-all duration-300;
-    background: rgba(0, 0, 0, 0.25);
-    /* onyx/25 - tinted glass */
-    border: 1px solid rgba(0, 0, 0, 0.35);
+    background: rgba(17, 34, 51, 0.35);
+    /* dark-teal/35 - prominent tinted glass */
+    border: 1px solid rgba(17, 34, 51, 0.45);
   }
 
   .glass-card-minimal:hover {
-    background: rgba(0, 0, 0, 0.35);
-    border-color: rgba(0, 0, 0, 0.45);
+    background: rgba(17, 34, 51, 0.45);
+    border-color: rgba(17, 34, 51, 0.55);
     transform: translateY(-2px);
   }
 
   /* Standard card - medium tinted glass */
   .glass-card-standard {
     @apply rounded-2xl p-5 transition-all duration-300;
-    background: rgba(0, 0, 0, 0.35);
-    /* onyx/35 - tinted glass */
-    border: 1px solid rgba(0, 0, 0, 0.45);
+    background: rgba(17, 34, 51, 0.45);
+    /* dark-teal/45 - strong tinted glass */
+    border: 1px solid rgba(17, 34, 51, 0.55);
   }
 
   .glass-card-standard:hover {
-    background: rgba(0, 0, 0, 0.45);
-    border-color: rgba(0, 0, 0, 0.55);
+    background: rgba(17, 34, 51, 0.55);
+    border-color: rgba(17, 34, 51, 0.65);
     transform: translateY(-2px);
   }
 
   /* Featured card - prominent tinted glass */
   .glass-card-featured {
     @apply rounded-2xl p-6 transition-all duration-300;
-    background: rgba(0, 0, 0, 0.45);
-    /* onyx/45 - tinted glass */
-    border: 1px solid rgba(0, 0, 0, 0.55);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    background: rgba(17, 34, 51, 0.55);
+    /* dark-teal/55 - heavy tinted glass */
+    border: 1px solid rgba(17, 34, 51, 0.65);
+    box-shadow: 0 8px 32px rgba(17, 34, 51, 0.45);
   }
 
   .glass-card-featured:hover {
-    background: rgba(0, 0, 0, 0.55);
-    border-color: rgba(0, 0, 0, 0.65);
+    background: rgba(17, 34, 51, 0.65);
+    border-color: rgba(17, 34, 51, 0.75);
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 12px 40px rgba(17, 34, 51, 0.55);
   }
 
   /* Clickable card - interactive with cursor */
@@ -2302,11 +2359,12 @@ button,
   /* ============================================
    * WELCOME CAROUSEL - Infinite Scroll Animation
    * ============================================ */
-  
+
   @keyframes carousel-scroll {
     0% {
       transform: translateX(0);
     }
+
     100% {
       transform: translateX(-50%);
     }
@@ -2318,7 +2376,7 @@ button,
 
   /* Glow shadow for carousel cards on hover */
   .shadow-glow {
-    box-shadow: 
+    box-shadow:
       0 0 20px rgba(65, 150, 217, 0.3),
       0 0 40px rgba(65, 150, 217, 0.15),
       0 4px 20px rgba(0, 0, 0, 0.3);

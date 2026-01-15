@@ -226,7 +226,7 @@ export const TeleglassIcons: React.FC<TeleglassIconsProps> = ({
                 alt="Catherine Avatar"
                 className={`w-full h-full object-cover rounded-full transition-all duration-300 ${avatarState === 'off' ? 'filter grayscale brightness-75 hover:grayscale-0 hover:brightness-100' :
                   avatarState === 'connecting' ? '' :
-                    'filter-none brightness-110'
+                    'filter-none brightness-125'
                   }`}
                 width={40}
                 height={40}
