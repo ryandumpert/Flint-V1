@@ -25,9 +25,9 @@ export const UniversalSubsection: React.FC<UniversalSubsectionProps> = ({
     console.warn(`[UniversalSubsection] Static subsection "${id}" requested. Use generative templates instead.`);
 
     return (
-        <div className="p-8 border border-white/10 bg-white/5 rounded-lg text-white/60">
-            <h3 className="font-bold text-white/80">Static Content</h3>
-            <p>Subsection ID: <code className="text-emerald-400">{id}</code></p>
+        <div className="p-8 border border-mist/10 bg-mist/5 rounded-lg text-mist/60">
+            <h3 className="font-bold text-mist/80">Static Content</h3>
+            <p>Subsection ID: <code className="text-flamingo">{id}</code></p>
             <p className="text-sm mt-2">This content should be migrated to generative templates.</p>
         </div>
     );

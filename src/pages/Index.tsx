@@ -29,12 +29,12 @@ import { OnboardingTransition } from "@/components/OnboardingTransition";
 import { Logo } from "@/components/Logo";
 
 
-// Welcome section - Fiserv DMA Introduction
+// Welcome section - Thoughtworks AI-Works Introduction
 const WELCOME_VARIANTS = [
   {
-    badge: "FISERV DIGITAL MERCHANT ACQUISITION",
-    title: "The Future of Bank-Merchant Relationships",
-    subtitle: "Embed contextual offers into your digital banking—grow revenue while strengthening merchant loyalty",
+    badge: "THOUGHTWORKS AI-WORKS",
+    title: "Architectural Synthesis for the Enterprise",
+    subtitle: "The Super Spec Engine—specification first, code follows, zero technical debt",
     generativeSubsections: [
       {
         id: "value-props",
@@ -45,27 +45,27 @@ const WELCOME_VARIANTS = [
           features: [
             {
               id: "v1",
-              title: "Value to Banks",
-              subtitle: "New Revenue Stream",
-              description: "Monetize your digital channels with embedded merchant offers. One API integration, your branding, zero disruption.",
+              title: "Super Spec Engine",
+              subtitle: "Specification First",
+              description: "We generate the specification first—ADRs, functional requirements, UX designs—then the code follows, ensuring architectural integrity.",
               icon: "trending",
-              actionPhrase: "Show me more about value for banks"
+              actionPhrase: "Show me how the Super Spec works"
             },
             {
               id: "v2",
-              title: "Value to Merchants",
-              subtitle: "Right Offer, Right Time",
-              description: "Merchants get relevant products when they need them—POS systems, capital, credit lines—all within their trusted banking portal.",
+              title: "3-3-3 Delivery",
+              subtitle: "Validate → Prototype → Production",
+              description: "3 days to validate, 3 weeks to prototype, 3 months to production. Enterprise speed without enterprise chaos.",
               icon: "users",
-              actionPhrase: "Show me more about value for merchants"
+              actionPhrase: "Show me the 3-3-3 delivery model"
             },
             {
               id: "v3",
-              title: "Why It Works",
-              subtitle: "Trust + Timing = Conversion",
-              description: "Merchants trust their bank. Contextual offers at the right moment convert better than cold outreach. You stay in the relationship.",
+              title: "Legacy + Greenfield",
+              subtitle: "We Handle Both",
+              description: "Unlike competitors who only do new development, we modernize legacy systems while building new. Your mainframe and your microservices.",
               icon: "check",
-              actionPhrase: "Show me why this model works"
+              actionPhrase: "Show me legacy modernization"
             }
           ]
         }
@@ -79,21 +79,21 @@ const WELCOME_VARIANTS = [
           features: [
             {
               id: "cta1",
-              title: "See the Bank Portal Experience",
-              subtitle: "What merchants see",
-              description: "Preview how offers appear seamlessly in your digital portal—non-intrusive, branded, contextual.",
+              title: "The 3 Environments",
+              subtitle: "Developer Portal, IDE, AIOps",
+              description: "Explore the three environments where AI-Works operates—from context to code to production operations.",
               icon: "eye",
               highlight: true,
-              actionPhrase: "Show me the bank portal with the offer"
+              actionPhrase: "Show me the 3 environments"
             },
             {
               id: "cta2",
-              title: "See the Onboarding Flow",
-              subtitle: "10 frictionless steps",
-              description: "Walk through the merchant journey from offer click to product activation—mobile-friendly, compliant, low abandonment.",
+              title: "Competitive Edge",
+              subtitle: "vs. Globant, Ascendion, Deloitte",
+              description: "See how AI-Works positions against competitors. 30 years of architectural wisdom defeats 4,000 agents.",
               icon: "layers",
               highlight: true,
-              actionPhrase: "Show me the merchant onboarding flow"
+              actionPhrase: "Show me competitive positioning"
             }
           ]
         }
@@ -104,7 +104,7 @@ const WELCOME_VARIANTS = [
 
 
 
-const STORAGE_KEY = "fiserv-access";
+const STORAGE_KEY = "aiworks-access";
 const API_BASE_URL = (import.meta.env.VITE_PROMPT_TOOL_API_URL || "https://prompt.mobeus.ai").replace(/\/$/, "");
 
 // SUBSECTION-ONLY ARCHITECTURE: "Welcome" is now a generative template too.
@@ -1190,7 +1190,7 @@ const Index = () => {
 
   if (isCheckingAuth) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-black text-white">
+      <div className="min-h-screen flex items-center justify-center bg-onyx text-mist">
         <span className="text-lg font-medium">Loading...</span>
       </div>
     );
@@ -1377,24 +1377,24 @@ const PasswordGate = ({ onSubmit, onInputChange, isSubmitting, error }: Password
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black">
-      <form onSubmit={handleSubmit} className="w-full max-w-sm rounded-lg bg-white p-8 shadow-xl space-y-4">
-        <h1 className="text-2xl font-semibold text-center text-gray-900">Enter Access Password</h1>
-        <p className="text-sm text-gray-600 text-center">Access to this experience requires an authorized password.</p>
+    <div className="min-h-screen flex items-center justify-center bg-onyx">
+      <form onSubmit={handleSubmit} className="w-full max-w-sm rounded-lg bg-mist p-8 shadow-xl space-y-4">
+        <h1 className="text-2xl font-semibold text-center text-onyx">Enter Access Password</h1>
+        <p className="text-sm text-onyx/70 text-center">Access to this experience requires an authorized password.</p>
         <input
           type="password"
           value={password}
           onChange={handleChange}
-          className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+          className="w-full rounded-md border border-onyx/30 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-flamingo"
           placeholder="Password"
           autoFocus
           disabled={isSubmitting}
         />
-        {error ? <p className="text-sm text-red-600 text-center">{error}</p> : null}
+        {error ? <p className="text-sm text-flamingo text-center">{error}</p> : null}
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full rounded-md bg-black py-2 text-white transition hover:bg-gray-900 disabled:bg-gray-500"
+          className="w-full rounded-md bg-onyx py-2 text-mist transition hover:bg-wave disabled:bg-wave/50"
         >
           {isSubmitting ? "Verifying..." : "Unlock"}
         </button>

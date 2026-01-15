@@ -98,72 +98,74 @@ button,
      * - Glass (Foreground): Floating UI panels, cards, navigation
      * - Depth: Everything has Z-space positioning
      * 
-     * COLOR PHILOSOPHY:
-     * All colors MUST be HSL format without hsl() wrapper
-     * Example: --primary: 210 70% 50%; (CORRECT)
-     * 
-     * PRIMARY (Cyan Blue) - Main brand, internal pathway
-     * SECONDARY (Emerald Green) - Partner pathway, success
-     * TERTIARY (Amber Orange) - Patient pathway, attention
-     * 
-     * All glass surfaces use white/black with opacity for depth
-     * ============================================ */
-
-    /* ============================================
-     * STRICT COLOR SYSTEM - WHITE BACKGROUND MODE
      * ============================================
-     * 
-     * ONLY THREE COLORS ALLOWED:
-     * 1. Primary (Blue): 210 70% 50% - Internal/Pharma pathway
-     * 2. Secondary (Green): 145 60% 45% - Partner/Ecosystem pathway  
-     * 3. Tertiary (Orange): 25 95% 53% - Patient/Customer pathway
-     * 
-     * ALL TEXT MUST BE BLACK: 0 0% 0%
-     * ALL BACKGROUNDS MUST USE: white with opacity (white/25, white/30, etc.)
+     * STRICT 4-COLOR PALETTE
+     * ============================================
+     * Mist Gray:     #EDF1F3 - Light backgrounds, text
+     * Onyx Black:    #000000 - Dark backgrounds
+     * Flamingo Pink: #F2617A - Primary accent, CTAs
+     * Wave Blue:     #003D4F - Secondary accent, headers
      * 
      * NO OTHER COLORS. NO EXCEPTIONS.
      * ============================================ */
 
-    /* Core Colors */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    /* ============================================
+     * THE 4 CORE COLORS
+     * ============================================ */
+    --color-mist: #EDF1F3;
+    --color-onyx: #000000;
+    --color-flamingo: #F2617A;
+    --color-wave: #003D4F;
 
-    /* Card & Surface Colors */
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+    /* ============================================
+     * SEMANTIC COLOR MAPPINGS
+     * ============================================ */
+    
+    /* Backgrounds */
+    --background: var(--color-onyx);
+    --foreground: var(--color-mist);
 
-    /* Primary: White - Clean accent color */
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 0%;
+    /* Cards & Surfaces */
+    --card: rgba(237, 241, 243, 0.05);
+    --card-foreground: var(--color-mist);
 
-    /* Secondary: Dark Teal - Matches LEAP card, used for greens throughout */
-    --secondary: 175 77% 18%;
-    --secondary-foreground: 0 0% 100%;
+    /* Primary Accent (Flamingo Pink) - CTAs, buttons, highlights */
+    --primary: var(--color-flamingo);
+    --primary-foreground: var(--color-mist);
 
-    /* Tertiary: Orange - Patient/Customer pathway */
-    --tertiary: 25 95% 53%;
-    --tertiary-foreground: 0 0% 0%;
+    /* Secondary Accent (Wave Blue) - Headers, icons, subtle highlights */
+    --secondary: var(--color-wave);
+    --secondary-foreground: var(--color-mist);
 
-    /* UI Colors - Simplified */
-    --muted: 0 0% 80%;
-    --muted-foreground: 0 0% 0%;
+    /* Accent (same as primary for simplicity) */
+    --accent: var(--color-flamingo);
+    --accent-foreground: var(--color-mist);
 
-    --accent: 38 95% 50%;
-    --accent-foreground: 0 0% 0%;
+    /* Muted */
+    --muted: rgba(237, 241, 243, 0.3);
+    --muted-foreground: rgba(237, 241, 243, 0.7);
 
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 0 0% 0%;
+    /* Destructive (use flamingo as the only "warm" color) */
+    --destructive: var(--color-flamingo);
+    --destructive-foreground: var(--color-mist);
 
-    --border: 0 0% 0% / 0.2;
-    --input: 0 0% 80%;
-    --ring: 38 95% 50%;
+    /* Borders & Inputs */
+    --border: rgba(237, 241, 243, 0.15);
+    --input: rgba(237, 241, 243, 0.1);
+    --ring: var(--color-flamingo);
 
-    /* Volumetric Glass Shadows - Elegant Depth System */
-    --shadow-float-near: 0 4px 24px rgba(0, 0, 0, 0.18), 0 12px 48px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
-    --shadow-float-mid: 0 8px 32px rgba(0, 0, 0, 0.22), 0 20px 64px rgba(0, 0, 0, 0.14), 0 0 0 1px rgba(255, 255, 255, 0.08);
-    --shadow-float-far: 0 16px 48px rgba(0, 0, 0, 0.28), 0 32px 96px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.1);
-    --shadow-glow-cyan: 0 0 48px rgba(245, 158, 11, 0.35), 0 0 96px rgba(245, 158, 11, 0.18), 0 4px 20px rgba(245, 158, 11, 0.2);
-    --shadow-glow-ambient: 0 0 80px rgba(255, 255, 255, 0.06), 0 0 40px rgba(255, 255, 255, 0.03);
+    /* ============================================
+     * SHADOWS & GLOWS (using palette colors)
+     * ============================================ */
+    --shadow-float-near: 0 4px 24px rgba(0, 0, 0, 0.18), 0 12px 48px rgba(0, 0, 0, 0.1);
+    --shadow-float-mid: 0 8px 32px rgba(0, 0, 0, 0.22), 0 20px 64px rgba(0, 0, 0, 0.14);
+    --shadow-float-far: 0 16px 48px rgba(0, 0, 0, 0.28), 0 32px 96px rgba(0, 0, 0, 0.18);
+    --shadow-glow-accent: 0 0 48px rgba(242, 97, 122, 0.35), 0 0 96px rgba(242, 97, 122, 0.18);
+    --shadow-glow-wave: 0 0 48px rgba(0, 61, 79, 0.35), 0 0 96px rgba(0, 61, 79, 0.18);
+    --shadow-glow-ambient: 0 0 80px rgba(237, 241, 243, 0.06), 0 0 40px rgba(237, 241, 243, 0.03);
+
+    /* Legacy shadow names (mapped to new) */
+    --shadow-glow-cyan: var(--shadow-glow-accent);
 
     /* Volumetric Glass Animations - Elegant Floating */
     --transition-float: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -181,11 +183,8 @@ button,
 
     /* Chat Glass - Responsive Widths */
     --chat-glass-width: 20.16rem;
-    /* Desktop: 322px (110% increase) */
     --chat-glass-width-tablet: 19.8rem;
-    /* Tablet: 317px */
     --chat-glass-width-mobile: 85vw;
-    /* Mobile: 85% of viewport */
     --teleglass-top: 2rem;
     --teleglass-right: 1rem;
 

@@ -140,27 +140,27 @@ export const SmartImage = React.forwardRef<HTMLImageElement, SmartImageProps>(({
 
     // Case 5: Error State (no fallback, show retry)
     return (
-        <div ref={ref as React.LegacyRef<HTMLDivElement>} className={`relative group flex flex-col items-center justify-center bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 text-center overflow-hidden min-h-[200px] ${className}`}>
+        <div ref={ref as React.LegacyRef<HTMLDivElement>} className={`relative group flex flex-col items-center justify-center bg-onyx/40 backdrop-blur-md border border-mist/10 rounded-2xl p-6 text-center overflow-hidden min-h-[200px] ${className}`}>
             {/* Subtle gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-transparent to-orange-500/5" />
+            <div className="absolute inset-0 bg-gradient-to-br from-flamingo/5 via-transparent to-wave/5" />
 
             {/* Icon with glow */}
             <div className="relative mb-4">
-                <div className="absolute inset-0 bg-red-500/10 blur-xl rounded-full" />
-                <ImageOff className="w-12 h-12 text-red-400/80 relative z-10" />
+                <div className="absolute inset-0 bg-flamingo/10 blur-xl rounded-full" />
+                <ImageOff className="w-12 h-12 text-flamingo/80 relative z-10" />
             </div>
 
             {/* Error message */}
-            <h3 className="text-sm font-semibold text-white/90 mb-2">Image Unavailable</h3>
-            <p className="text-xs text-white/50 mb-4 max-w-[240px] leading-relaxed">
+            <h3 className="text-sm font-semibold text-mist/90 mb-2">Image Unavailable</h3>
+            <p className="text-xs text-mist/50 mb-4 max-w-[240px] leading-relaxed">
                 {generationError ? `Generation error: ${generationError}` : (error ? "Failed to load image" : "Unknown Asset ID")}
             </p>
 
             {/* Prompt display */}
             {showPromptOnMissing && (
-                <div className="w-full max-w-[280px] bg-black/30 backdrop-blur-sm border border-white/5 rounded-lg p-3 text-left mb-4">
-                    <p className="text-[10px] uppercase tracking-widest text-white/40 font-bold mb-1">Source</p>
-                    <p className="text-xs text-white/60 italic leading-relaxed line-clamp-3">"{assetId}"</p>
+                <div className="w-full max-w-[280px] bg-onyx/30 backdrop-blur-sm border border-mist/5 rounded-lg p-3 text-left mb-4">
+                    <p className="text-[10px] uppercase tracking-widest text-mist/40 font-bold mb-1">Source</p>
+                    <p className="text-xs text-mist/60 italic leading-relaxed line-clamp-3">"{assetId}"</p>
                 </div>
             )}
 
@@ -168,7 +168,7 @@ export const SmartImage = React.forwardRef<HTMLImageElement, SmartImageProps>(({
             <Button
                 variant="outline"
                 size="sm"
-                className="gap-2 bg-white/5 hover:bg-white/10 border-white/10 hover:border-white/20 text-white/80 hover:text-white transition-all duration-300"
+                className="gap-2 bg-mist/5 hover:bg-mist/10 border-mist/10 hover:border-mist/20 text-mist/80 hover:text-mist transition-all duration-300"
                 onClick={() => generateImage(assetId)}
             >
                 <RefreshCw className="w-3 h-3" />

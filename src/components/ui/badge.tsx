@@ -3,17 +3,24 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
+/**
+ * Badge Component - CLEAN MINIMAL STYLE
+ * - All text: mist gray
+ * - No shadows/glows
+ * - Pill-shaped
+ */
 const badgeVariants = cva(
-  "inline-flex items-center rounded-2xl border px-3 py-1.5 text-xs font-bold uppercase tracking-wider transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 backdrop-blur-md",
+  "inline-flex items-center rounded-full border px-4 py-1.5 text-xs font-bold uppercase tracking-wider transition-all duration-300 backdrop-blur-md text-mist",
   {
     variants: {
       variant: {
-        default: "bg-primary text-black border-primary shadow-[var(--shadow-float-near)] hover:bg-primary/90 hover:border-primary/90 hover:-translate-y-0.5",
-        destructive: "bg-destructive text-white border-destructive shadow-[var(--shadow-float-near)] hover:bg-destructive/90 hover:border-destructive/90 hover:-translate-y-0.5",
-        outline: "bg-primary/10 border-primary/30 text-primary shadow-[var(--shadow-float-near)] hover:bg-primary/20 hover:border-primary/40 hover:-translate-y-0.5",
-        vision: "bg-primary text-black border-primary hover:bg-primary/80 hover:border-primary/80 hover:-translate-y-0.5",
-        partner: "bg-secondary text-white border-secondary shadow-[var(--shadow-float-near)] hover:bg-secondary/90 hover:-translate-y-0.5",
-        usecase: "bg-primary/20 border-primary/40 text-primary shadow-[var(--shadow-float-near)] hover:bg-primary/30 hover:border-primary/50 hover:-translate-y-0.5",
+        default: "bg-flamingo/80 border-flamingo/60",
+        vision: "bg-flamingo/80 border-flamingo/60",
+        outline: "bg-mist/10 border-mist/30",
+        secondary: "bg-wave/50 border-wave/40",
+        destructive: "bg-flamingo/60 border-flamingo/40",
+        partner: "bg-wave/50 border-wave/40",
+        usecase: "bg-mist/10 border-mist/30",
       },
     },
     defaultVariants: {

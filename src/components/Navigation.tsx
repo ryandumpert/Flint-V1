@@ -1,7 +1,7 @@
 import { useState, useLayoutEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { default as fiservLogo } from "@/assets/fiserv-logo.png";
+import { default as aiworksLogo } from "@/assets/aiworks-logo.png";
 import { handleAcknowledgment } from "@/utils/acknowledgmentHelpers";
 import { sendToTele } from "@/utils/teleInteraction";
 import { useSound } from "@/hooks/useSound";
@@ -35,8 +35,8 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
   }, []);
 
   // ============================================
-  // FISERV OFFER ENGINE NAVIGATION
-  // 6 Menu items for complete demo coverage
+  // AI-WORKS INTERNAL ENABLEMENT NAVIGATION
+  // 6 Menu items for complete enablement coverage
   // ============================================
   const navItems: Array<{
     id: string;
@@ -49,36 +49,36 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
         teleQuery: '(M) Show me the welcome overview'
       },
       {
-        id: 'bank-portal',
-        label: 'BANK PORTAL',
-        teleQuery: '(M) Show me the bank portal with the offer'
+        id: 'super-spec',
+        label: 'SUPER SPEC',
+        teleQuery: '(M) Show me how the Super Spec works'
       },
       {
-        id: 'devices',
-        label: 'DEVICES',
-        teleQuery: '(M) Show me the Clover device comparison'
+        id: 'environments',
+        label: 'ENVIRONMENTS',
+        teleQuery: '(M) Show me the 3 environments'
       },
       {
-        id: 'onboarding',
-        label: 'ONBOARDING',
-        teleQuery: '(M) Show me step 1 of the merchant onboarding'
+        id: 'competitive',
+        label: 'COMPETITIVE',
+        teleQuery: '(M) Show me competitive positioning'
       },
       {
-        id: 'integration',
-        label: 'INTEGRATION',
-        teleQuery: '(M) Show me how the One API integration works'
+        id: 'technical',
+        label: 'TECHNICAL',
+        teleQuery: '(M) Show me the technical stack support'
       },
       {
-        id: 'next-steps',
-        label: 'BOOK DEMO',
-        teleQuery: '(M) Show me how to schedule a meeting with Fiserv'
+        id: 'pricing',
+        label: 'PRICING',
+        teleQuery: '(M) Show me pricing and engagement model'
       }
     ];
 
-  // White styling for clean look
-  const buttonBaseStyles = "bg-white border-white text-black hover:bg-white/90 hover:border-white/90";
-  const glowColor = "from-white/20 via-white/10";
-  const edgeGlowColor = "via-white/30";
+  // Mist styling for clean look
+  const buttonBaseStyles = "bg-mist border-mist text-onyx hover:bg-mist/90 hover:border-mist/90";
+  const glowColor = "from-mist/20 via-mist/10";
+  const edgeGlowColor = "via-mist/30";
 
   return (
     <nav
@@ -101,14 +101,14 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
               {/* Logo */}
               <div className="no-lightboard flex items-center">
                 <img
-                  src={fiservLogo}
-                  alt="Fiserv DMA"
+                  src={aiworksLogo}
+                  alt="AIworks"
                   className="no-lightboard h-[27px] w-auto object-contain max-w-none"
                   style={{ aspectRatio: 'auto' }}
                 />
               </div>
 
-              {/* Desktop Navigation */}
+              {/* Desktop Navigation - VISIBLE ON DARK BACKGROUND */}
               <div className="hidden xl:flex items-end space-x-3">
                 {navItems.map((item) => (
                   <Button
@@ -125,11 +125,12 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
                     }}
                     variant="ghost"
                     size="sm"
-                    className={`relative px-2 text-[13px] font-medium tracking-wide
+                    className={`relative px-4 text-[13px] font-semibold tracking-wide
                     transition-all duration-300
-                    hover:opacity-80
-                    text-white bg-transparent border-0
-                    h-auto py-1`}
+                    text-mist/90 hover:text-mist hover:bg-mist/10
+                    border border-transparent hover:border-flamingo/30
+                    rounded-full backdrop-blur-md
+                    h-auto py-2`}
                   >
                     <span className="relative z-10">{item.label}</span>
                   </Button>
@@ -146,7 +147,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
                     playUniversalSound();
                     setIsMenuOpen(!isMenuOpen);
                   }}
-                  className="xl:hidden p-2 rounded-full text-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300 mr-3"
+                  className="xl:hidden p-2 rounded-full text-mist hover:bg-mist/10 backdrop-blur-sm transition-all duration-300 mr-3"
                 >
                   {isMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
                 </button>
@@ -159,7 +160,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
       {/* Backdrop Overlay */}
       {isMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 xl:hidden transition-opacity duration-300"
+          className="fixed inset-0 bg-onyx/50 backdrop-blur-sm z-50 xl:hidden transition-opacity duration-300"
           onClick={() => {
             handleAcknowledgment('nav-menu-close');
             playUniversalSound();
@@ -168,28 +169,27 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
         />
       )}
 
-      {/* Mobile Slide-in Menu */}
+      {/* Mobile Slide-in Menu - CLEAN MINIMAL */}
       <div
         style={{
-          zIndex: 50,
-          boxShadow: 'var(--shadow-float-far), var(--shadow-glow-cyan)'
+          zIndex: 50
         }}
         className={`fixed top-0 right-0 h-full w-80 max-w-[85vw]
-          bg-black/20 backdrop-blur-2xl border-l border-white/10
+          bg-onyx/80 backdrop-blur-2xl border-l border-mist/10
           xl:hidden transform transition-all duration-500 ease-out ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
           }`}
       >
-        <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-emerald-500/50 via-emerald-500/30 to-transparent`} />
-        <div className="relative flex items-center justify-between p-6 border-b border-white/10">
-          <h2 className="text-lg font-bold text-white">Navigate</h2>
+        <div className="absolute top-0 left-0 right-0 h-px bg-mist/10" />
+        <div className="relative flex items-center justify-between p-6 border-b border-mist/10">
+          <h2 className="text-lg font-bold text-mist">Navigate</h2>
           <button
             onClick={() => {
               handleAcknowledgment('nav-menu-close');
               playUniversalSound();
               setIsMenuOpen(false);
             }}
-            className="p-2 rounded-full text-white bg-white/5 border border-white/10
-              hover:bg-white/10 hover:border-white/20 hover:rotate-90
+            className="p-2 rounded-full text-mist bg-mist/5 border border-mist/10
+              hover:bg-mist/10 hover:border-mist/20 hover:rotate-90
               backdrop-blur-md transition-all duration-500"
           >
             <X className="w-5 h-5" />
@@ -211,20 +211,21 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
                 }
                 setIsMenuOpen(false);
               }}
-              variant="ghost"
+              variant="outline"
               size="lg"
               className={`relative w-full justify-start px-6 py-5 text-xl font-bold
-                backdrop-blur-md
-                border rounded-2xl
-                transition-all duration-500
-                hover:-translate-x-2 hover:shadow-[var(--shadow-float-near)]
+                backdrop-blur-xl
+                border border-mist/20 hover:border-mist/40
+                bg-mist/10 hover:bg-mist/15
+                text-mist
+                rounded-full
+                transition-all duration-300
+                hover:-translate-x-2
                 active:translate-x-0 active:scale-95
-                animate-stagger-enter opacity-0
-                ${buttonBaseStyles}`}
+                animate-stagger-enter opacity-0`}
               style={{ animationDelay: `${index * 0.05}s`, animationFillMode: 'forwards' }}
             >
               <span className="relative z-10">{item.label}</span>
-              <div className={`absolute inset-0 rounded-2xl opacity-0 hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r ${glowColor} to-transparent blur-xl`} />
             </Button>
           ))}
         </div>

@@ -22,25 +22,35 @@ interface TeleglassIconsProps {
   isSmileyOn: boolean;
 }
 
+/**
+ * CLEAN MINIMAL STYLE
+ * - All icons: mist gray
+ * - No shadows/glows
+ */
 const getAvatarClasses = (state: AvatarState) => {
   const base = "w-8 h-8 sm:w-10 sm:h-10 rounded-full cursor-pointer transition-all border-2";
   switch (state) {
     case 'off':
-      return `${base} avatar-inactive-glow border-white/30`;
+      return `${base} border-mist/30 bg-mist/5 backdrop-blur-md`;
     case 'connecting':
-      return `${base} avatar-connecting-pulse border-[#ff6600]`;
+      return `${base} border-flamingo/60 bg-flamingo/10 backdrop-blur-md animate-pulse`;
     case 'connected':
-      return `${base} avatar-connected-glow`;
+      return `${base} border-flamingo/80 bg-mist/10 backdrop-blur-md`;
     default:
       return base;
   }
 };
 
 const getIconClasses = (isActive: boolean, isWarning = false) => {
-  const base = "w-8 h-8 sm:w-10 sm:h-10 rounded-full cursor-pointer flex items-center justify-center transition-all duration-300 ease-in-out";
-  if (isWarning) return `${base} bg-red-500/80 backdrop-blur-md text-white hover:shadow-glow hover:scale-[1.02]`;
-  if (isActive) return `${base} bg-white/10 border border-white/20 backdrop-blur-md text-white hover:bg-white/15 hover:scale-[1.02]`;
-  return `${base} bg-black/20 border border-white/10 backdrop-blur-md text-white/70 hover:bg-black/30 hover:scale-[1.02]`;
+  const base = "w-8 h-8 sm:w-10 sm:h-10 rounded-full cursor-pointer flex items-center justify-center transition-all duration-300 ease-in-out backdrop-blur-xl border text-mist";
+
+  if (isWarning) {
+    return `${base} bg-flamingo/60 border-flamingo/40 hover:bg-flamingo/80 hover:scale-[1.05]`;
+  }
+  if (isActive) {
+    return `${base} bg-mist/15 border-mist/30 hover:bg-mist/25 hover:scale-[1.05]`;
+  }
+  return `${base} bg-mist/5 border-mist/20 hover:bg-mist/10 hover:border-mist/30 hover:scale-[1.05]`;
 };
 
 export const TeleglassIcons: React.FC<TeleglassIconsProps> = ({
@@ -67,7 +77,6 @@ export const TeleglassIcons: React.FC<TeleglassIconsProps> = ({
   const [useStaticPosition, setUseStaticPosition] = useState(!isChatGlassOpen);
   const [showConnectButton, setShowConnectButton] = useState(false);
 
-  // Show connect button 2 seconds after page load
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowConnectButton(true);
@@ -76,7 +85,6 @@ export const TeleglassIcons: React.FC<TeleglassIconsProps> = ({
     return () => clearTimeout(timer);
   }, []);
 
-  // Delay switching to static position until after animation completes
   useEffect(() => {
     if (isChatGlassOpen) {
       setUseStaticPosition(false);
@@ -89,7 +97,6 @@ export const TeleglassIcons: React.FC<TeleglassIconsProps> = ({
       if (scrollTop < viewportHeight) {
         delay = 350;
       }
-      // Stay fixed during animation, then switch to static
       const timer = setTimeout(() => {
         setUseStaticPosition(true);
       }, delay);
@@ -108,61 +115,62 @@ export const TeleglassIcons: React.FC<TeleglassIconsProps> = ({
         top: 'var(--teleglass-top)',
       } : undefined}
     >
-      {/* Speaker Icon - only show when connected */}
+      {/* Speaker Icon */}
       {isConnected && (
         <div
           onClick={onSoundToggle}
           className={`${getIconClasses(isSoundOn, !isSoundOn)} transition-opacity duration-300 ${shouldShowSpeaker ? 'opacity-100' : 'opacity-0'}`}
           style={{ pointerEvents: 'auto' }}
         >
-          {isSoundOn ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
+          {isSoundOn ? <Volume2 className="w-5 h-5 text-mist" /> : <VolumeX className="w-5 h-5 text-mist" />}
         </div>
       )}
 
-      {/* Chat Icon - only show when connected */}
+      {/* Chat Icon */}
       {isConnected && (
         <div onClick={onChatToggle} className={`${getIconClasses(isChatActive)}`} style={{ pointerEvents: 'auto' }}>
-          <MessageCircle className="w-5 h-5" />
+          <MessageCircle className="w-5 h-5 text-mist" />
         </div>
       )}
 
-      {/* Mic Icon - only show when connected */}
+      {/* Mic Icon */}
       {isConnected && (
         <div onClick={onMicToggle} className={`${getIconClasses(!isMicMuted, isMicMuted)}`} style={{ pointerEvents: 'auto' }}>
-          {isMicMuted ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+          {isMicMuted ? <MicOff className="w-5 h-5 text-mist" /> : <Mic className="w-5 h-5 text-mist" />}
         </div>
       )}
 
+      {/* Smiley Icon */}
       {isConnected && (
         <div onClick={onSmileyToggle} className={`${getIconClasses(isSmileyOn)}`} style={{ pointerEvents: 'auto' }}>
-          {isSmileyOn ? <Smile className="w-4 h-4 sm:w-5 sm:h-5" /> : <Frown className="w-4 h-4 sm:w-5 sm:h-5" />}
+          {isSmileyOn ? <Smile className="w-4 h-4 sm:w-5 sm:h-5 text-mist" /> : <Frown className="w-4 h-4 sm:w-5 sm:h-5 text-mist" />}
         </div>
       )}
 
-      {/* Connect Button - REMOVED (Moved to Welcome Screen) */}
+      {/* Connect Button - CLEAN, NO GLOW */}
       {avatarState === 'off' && showConnectButton && (
         <Button
           onClick={onAvatarClick}
-          className="bg-[#ff6600] text-white hover:bg-[#ff6600]/90 shadow-soft hover:shadow-card transition-all duration-300 font-bold uppercase text-base tracking-wide flex items-center gap-2"
+          className="rounded-full bg-flamingo/80 border border-flamingo/60 hover:bg-flamingo text-mist transition-all duration-300 font-bold uppercase text-sm tracking-wide flex items-center gap-2 px-6 py-2"
           size="default"
         >
-          Talk to Tele
-          <ArrowRight className="w-5 h-5" />
+          Talk to Catherine
+          <ArrowRight className="w-4 h-4 text-mist" />
         </Button>
       )}
 
-      {/* Avatar Icon - always show */}
+      {/* Avatar Icon */}
       <div
         onClick={onAvatarClick}
-        className={`${getAvatarClasses(avatarState)} shadow-soft ${avatarState === 'off' ? 'hover:shadow-glow hover:scale-[1.02]' : ''}`}
+        className={`${getAvatarClasses(avatarState)} ${avatarState === 'off' ? 'hover:scale-[1.02]' : ''}`}
         style={{ pointerEvents: 'auto' }}
         role="button"
-        aria-label={`Tele avatar — ${avatarState}`}
+        aria-label={`Catherine avatar — ${avatarState}`}
         title={avatarState === 'off' ? 'Connect' : avatarState === 'connecting' ? 'Connecting...' : 'Connected'}
       >
         <img
           src={avatarSrc}
-          alt="Tele Avatar headshot"
+          alt="Catherine Avatar"
           className={`w-full h-full object-cover rounded-full transition-all duration-300 ${avatarState === 'off' ? 'filter grayscale brightness-75 hover:grayscale-0 hover:brightness-100' :
             avatarState === 'connecting' ? '' :
               'filter-none brightness-110'

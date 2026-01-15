@@ -138,15 +138,15 @@ export const DynamicSectionLoader: React.FC<DynamicSectionLoaderProps> = ({
                 }}
               >
                 <Suspense fallback={
-                  <div className="relative h-64 overflow-hidden rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5 animate-pulse" />
+                  <div className="relative h-64 overflow-hidden rounded-2xl border border-mist/10 bg-onyx/40 backdrop-blur-md">
+                    <div className="absolute inset-0 bg-gradient-to-br from-flamingo/5 via-transparent to-wave/5 animate-pulse" />
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-8 h-8 border-2 border-blue-400/30 border-t-blue-400 rounded-full animate-spin" />
+                      <div className="w-8 h-8 border-2 border-flamingo/30 border-t-flamingo rounded-full animate-spin" />
                     </div>
                   </div>
                 }>
                   <ErrorBoundary
-                    fallback={<div className="p-4 border border-red-500/50 bg-red-500/10 rounded text-red-400">Error loading template {section.templateId}</div>}
+                    fallback={<div className="p-4 border border-flamingo/50 bg-flamingo/10 rounded text-flamingo">Error loading template {section.templateId}</div>}
                     onError={(error, errorInfo) => {
                       console.error(`[Template Error] ${section.templateId}:`, error.message);
                       console.error('[Template Props]:', section.props);

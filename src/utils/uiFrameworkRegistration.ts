@@ -7,7 +7,7 @@
  * Architecture:
  * - Glass (this code) = Built in Lovable, renders subsections
  * - Tele (separate) = Trained in Mobeus Teleglass Platform, operates Glass via this API
- * - glass-generator-prompt.md = Instructions for Tele to generate Glass JSON
+ * - glass-prompt.md = Instructions for Tele to generate Glass JSON
  * 
  * See /docs/ARCHITECTURE.md for complete system documentation.
  */

@@ -7,7 +7,6 @@ import { VolumeProvider } from "@/contexts/VolumeContext";
 import { CarColorProvider } from "@/contexts/CarColorContext";
 import Index from "./pages/Index";
 import DesignTokens from "./pages/DesignTokens";
-import ImageGenerator from "./pages/ImageGenerator";
 
 const App = () => (
   <TooltipProvider>
@@ -20,7 +19,6 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/design-tokens" element={<DesignTokens />} />
-              <Route path="/generate-images" element={<ImageGenerator />} />
             </Routes>
           </BrowserRouter>
         </LightboardProvider>

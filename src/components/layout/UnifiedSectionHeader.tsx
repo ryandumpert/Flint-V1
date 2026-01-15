@@ -33,7 +33,7 @@ export const UnifiedSectionHeader = ({
           {badge}
         </Badge>
       )}
-      <h2 className={`font-bold text-white tracking-tight drop-shadow-lg
+      <h2 className={`font-bold text-mist tracking-tight drop-shadow-lg
         ${isPrimary ? 'text-5xl md:text-6xl' : 'text-3xl md:text-4xl'}
         text-left ${animate ? 'animate-regenerate' : ''}
         ${animate ? 'animation-delay-100' : ''}`}
@@ -42,7 +42,7 @@ export const UnifiedSectionHeader = ({
         {title}
       </h2>
       {subtitle && (
-        <p className={`text-white/90 leading-relaxed font-light drop-shadow-md
+        <p className={`text-mist/90 leading-relaxed font-light drop-shadow-md
           ${isPrimary ? 'text-xl md:text-2xl' : 'text-lg md:text-xl'}
           text-left ${animate ? 'animate-regenerate' : ''}
           ${animate ? 'animation-delay-200' : ''}`}
