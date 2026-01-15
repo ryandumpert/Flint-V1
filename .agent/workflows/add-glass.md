@@ -10,6 +10,31 @@ When adding a new template (called an "experience"), follow these steps:
 - Template name should be PascalCase (e.g., `InterviewCoach`, `JobDetails`)
 - Understand what props the template needs
 - **⚠️ ALL STYLES MUST USE CENTRALIZED CSS CLASSES FROM `src/index.css`**
+- **🚨 EVERY CLICKABLE ELEMENT MUST CALL `notifyTele(actionPhrase)` — NO DEAD ENDS**
+
+## ⚠️ CRITICAL: VOLUMETRIC NAVIGATION (LAW #1)
+
+This is a **VOLUMETRIC CONVERSATIONAL PRODUCT**. Every click continues the conversation.
+
+**The Rule**: EVERY clickable element (card, button, list item, metric, icon, link, image) MUST:
+1. Have `cursor-pointer` styling
+2. Call `notifyTele(actionPhrase)` on click
+3. Play click sound via `useSound` hook
+4. Include `actionPhrase` in props for dynamic content
+
+**Example**:
+```tsx
+const handleAction = (actionPhrase: string) => {
+  playClick();
+  notifyTele(actionPhrase);
+};
+
+// In JSX
+<div 
+  className="glass-card-standard glass-card-clickable"
+  onClick={() => handleAction("Show me more about this topic")}
+>
+```
 
 ## Steps
 
@@ -18,7 +43,8 @@ When adding a new template (called an "experience"), follow these steps:
    - File: `src/components/templates/[Name].tsx`
    - Include TypeScript interface for props
    - **USE CENTRALIZED CSS CLASSES ONLY** (see below)
-   - Include any interactive elements that should call `window.showTele`
+   - **EVERY CLICKABLE ELEMENT CALLS `notifyTele(actionPhrase)`**
+   - Include `actionPhrase` in props for all clickable content
 
 // turbo
 2. Register the template in templateRegistry.ts:
@@ -28,6 +54,7 @@ When adding a new template (called an "experience"), follow these steps:
 3. Add template schema to glass-generator-prompt.md:
    - Find the "Template Schemas" section
    - Add the template name with its props interface
+   - **Include `actionPhrase` for all clickable content props**
    - Keep it compact (3-5 lines max)
 
 4. Add shot prompt to glass-generator-prompt.md:
@@ -44,6 +71,7 @@ When adding a new template (called an "experience"), follow these steps:
 6. Test in browser:
    - Send a prompt to Tele that should trigger the new template
    - Verify template renders correctly
+   - **Verify EVERY clickable element triggers Catherine response**
 
 ---
 
@@ -131,6 +159,7 @@ If existing classes don't cover your need:
  * [Brief description]
  * 
  * STYLING: Uses centralized CSS classes from index.css
+ * NAVIGATION: Every clickable element calls notifyTele()
  */
 
 import React from 'react';
@@ -139,12 +168,18 @@ import { notifyTele } from '@/utils/acknowledgmentHelpers';
 import { useSound } from '@/hooks/useSound';
 
 interface [TemplateName]Props {
-  // Define props here
+  // Include actionPhrase for all clickable content
+  items?: Array<{
+    title: string;
+    description?: string;
+    actionPhrase: string;  // REQUIRED for volumetric navigation
+  }>;
 }
 
-export const [TemplateName]: React.FC<[TemplateName]Props> = ({ ...props }) => {
+export const [TemplateName]: React.FC<[TemplateName]Props> = ({ items = [] }) => {
   const { playClick } = useSound();
 
+  // Standard handler for ALL clickable elements
   const handleAction = (actionPhrase: string) => {
     playClick();
     notifyTele(actionPhrase);
@@ -152,10 +187,18 @@ export const [TemplateName]: React.FC<[TemplateName]Props> = ({ ...props }) => {
 
   return (
     <div className="glass-template-container">
-      {/* Use centralized classes: */}
-      {/* - text-template-title, text-template-content */}
-      {/* - template-grid-2, template-list */}
-      {/* - btn-cta, glass-card-standard */}
+      <div className="template-grid-2">
+        {items.map((item, index) => (
+          <div
+            key={index}
+            className="glass-card-standard glass-card-clickable"
+            onClick={() => handleAction(item.actionPhrase)}
+          >
+            <h3 className="text-template-title">{item.title}</h3>
+            <p className="text-template-content">{item.description}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -164,9 +207,18 @@ export default [TemplateName];
 ```
 
 ## Don't Forget
-- ✅ Use CENTRALIZED CSS classes only (from index.css)
-- ✅ Make clickable cards call `notifyTele(actionPhrase)`
-- ✅ Keep props interface clean - all data in props
-- ✅ Add `smart-image` class to any `<img>` tags for hover effects
-- ❌ Don't add badge/title/subtitle to template - those are in the navigation header
-- ❌ Don't use inline Tailwind classes for styling
+
+### ✅ MUST DO:
+- Use CENTRALIZED CSS classes only (from index.css)
+- **EVERY clickable element calls `notifyTele(actionPhrase)` — NO DEAD ENDS**
+- Include `actionPhrase` prop for ALL clickable content
+- Play click sound via `useSound` before notifyTele
+- Add `smart-image` class to any `<img>` tags for hover effects
+- Keep props interface clean - all data in props
+
+### ❌ NEVER DO:
+- Don't create dead-end clickable elements (missing notifyTele)
+- Don't add badge/title/subtitle to template - those are in the navigation header
+- Don't use inline Tailwind classes for styling
+- Don't hardcode actionPhrases - pass them in as props
+

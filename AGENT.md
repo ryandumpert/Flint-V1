@@ -145,12 +145,33 @@ sendToTele("Show me more about this feature");  // ALWAYS starts with "Show"
 
 ---
 
-## 6. 4 IMMUTABLE LAWS
+## 6. 5 IMMUTABLE LAWS
 
-1. **Tool Signature Stability** — `navigateToSection` MUST NEVER change
-2. **No Hallucination** — If a feature isn't documented, acknowledge it
-3. **Mandatory Tool Call** — `navigateToSection` in EVERY Catherine response
-4. **Factual Accuracy** — Use EXACT figures from tele-knowledge.md
+1. **Volumetric Navigation** — EVERY clickable element MUST call `notifyTele(actionPhrase)` — NO DEAD ENDS
+2. **Tool Signature Stability** — `navigateToSection` MUST NEVER change
+3. **No Hallucination** — If a feature isn't documented, acknowledge it
+4. **Mandatory Tool Call** — `navigateToSection` in EVERY Catherine response
+5. **Factual Accuracy** — Use EXACT figures from tele-knowledge.md
+
+### ⚠️ LAW #1: VOLUMETRIC NAVIGATION
+
+This is a **VOLUMETRIC CONVERSATIONAL PRODUCT**. Users navigate through an **endless volume of experiences** by clicking and continuing conversations. There is NO END — only infinite exploration.
+
+**The Rule**: When a user clicks ANY interactive element:
+- Cards, buttons, list items, metrics, icons, links, images...
+- It MUST trigger `notifyTele(actionPhrase)` to continue the conversation
+- Catherine responds with new templates
+- User clicks again → conversation continues → ∞
+
+**Implementation**:
+```tsx
+onClick={() => {
+  playClick();
+  notifyTele("Show me more about the Super Spec");
+}}
+```
+
+**Every template prop for clickable content MUST include `actionPhrase`.**
 
 ---
 
