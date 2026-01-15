@@ -242,19 +242,162 @@ export const [TemplateName]: React.FC<[TemplateName]Props> = ({ items = [] }) =>
 export default [TemplateName];
 ```
 
-## Don't Forget
+---
 
-### ✅ MUST DO:
-- Use CENTRALIZED CSS classes only (from index.css)
-- **EVERY clickable element calls `notifyTele(actionPhrase)` — NO DEAD ENDS**
-- Include `actionPhrase` prop for ALL clickable content
-- Play click sound via `useSound` before notifyTele
-- Add `smart-image` class to any `<img>` tags for hover effects
-- Keep props interface clean - all data in props
+## 🔴 VERIFICATION CHECKLIST (MANDATORY)
 
-### ❌ NEVER DO:
-- Don't create dead-end clickable elements (missing notifyTele)
-- Don't add badge/title/subtitle to template - those are in the navigation header
-- Don't use inline Tailwind classes for styling
-- Don't hardcode actionPhrases - pass them in as props
+After creating EVERY template, verify ALL boxes:
+
+### Step 1: Code Quality
+```
+□ TypeScript compiles: npx tsc --noEmit
+□ No inline Tailwind classes (grep for "className=" and check)
+□ All CSS classes exist in index.css
+□ Proper null checks: items?.map, item?.title
+```
+
+### Step 2: Volumetric Navigation (CRITICAL)
+```
+□ EVERY clickable element has onClick={() => handleAction(actionPhrase)}
+□ handleAction calls playClick() then notifyTele()
+□ actionPhrase is in props (not hardcoded)
+□ glass-card-clickable class on clickable elements
+□ NO dead-end clicks (console.log, empty handlers)
+```
+
+### Step 3: Registration
+```
+□ Added to src/data/templateRegistry.ts
+□ Lazy import pattern correct
+□ Template name matches export
+```
+
+### Step 4: Documentation (glass-prompt.md)
+```
+□ Added USE WHEN trigger conditions
+□ JSON schema with types (required vs optional)
+□ Example valid JSON
+□ Common mistakes section if complex
+```
+
+### Step 5: Visual Testing
+```
+□ Renders in browser without errors
+□ Responsive: mobile + desktop
+□ Dark glass aesthetic maintained
+□ Hover effects working
+```
+
+### Step 6: Tele Testing
+```
+□ Tele selects template correctly for trigger phrases
+□ Tele sends valid props (no runtime errors)
+□ Clicks continue conversation (volumetric navigation works)
+```
+
+---
+
+## ⚠️ COMMON MISTAKES TO AVOID
+
+### 1. Dead-End Clicks (CRITICAL)
+```tsx
+// ❌ WRONG - Dead end!
+<div onClick={() => console.log('clicked')}>
+
+// ❌ WRONG - No actionPhrase
+<div onClick={() => notifyTele("hardcoded string")}>
+
+// ✅ CORRECT
+<div onClick={() => handleAction(item.actionPhrase)}>
+```
+
+### 2. Missing Null Safety
+```tsx
+// ❌ WRONG - Will crash if items undefined
+{items.map(item => <div>{item.title}</div>)}
+
+// ✅ CORRECT
+{items?.map((item, index) => (
+  <div key={index}>{item?.title || 'Untitled'}</div>
+))}
+```
+
+### 3. Inline Tailwind
+```tsx
+// ❌ WRONG - Breaks centralized styling
+<div className="bg-white/10 p-4 rounded-lg border">
+
+// ✅ CORRECT
+<div className="glass-card-standard">
+```
+
+### 4. Forgot to Register
+```tsx
+// ❌ Template exists but won't render!
+// MUST add to src/data/templateRegistry.ts:
+MetricsGrid: lazy(() => import("@/components/templates/MetricsGrid")
+  .then(m => ({ default: m.MetricsGrid }))),
+```
+
+### 5. Props Mismatch with Tele
+```tsx
+// ❌ Template expects array, Tele sends string
+interface Props { metrics: Metric[] }  // Component expects array
+// But glass-prompt.md shows: "metrics": "40-60%"  // Wrong!
+
+// ✅ glass-prompt.md must match exactly:
+// "metrics": [{ "value": "40-60%", "label": "Cost Reduction", "actionPhrase": "..." }]
+```
+
+### 6. Missing handleAction Pattern
+```tsx
+// ❌ WRONG - No sound, direct call
+onClick={() => notifyTele(actionPhrase)}
+
+// ✅ CORRECT - Sound + call
+const handleAction = (actionPhrase: string) => {
+  playClick();
+  notifyTele(actionPhrase);
+};
+onClick={() => handleAction(item.actionPhrase)}
+```
+
+---
+
+## 📋 Quick Reference
+
+### Required Imports
+```tsx
+import React from 'react';
+import { [Icons] } from 'lucide-react';
+import { notifyTele } from '@/utils/acknowledgmentHelpers';
+import { useSound } from '@/hooks/useSound';
+import { SmartImage } from '@/components/ui/SmartImage';  // If images
+```
+
+### Required Hook
+```tsx
+const { playClick } = useSound();
+```
+
+### Required Handler
+```tsx
+const handleAction = (actionPhrase: string) => {
+  playClick();
+  notifyTele(actionPhrase);
+};
+```
+
+### Required Props Pattern
+```tsx
+interface TemplateProps {
+  items?: Array<{
+    title: string;
+    description?: string;
+    actionPhrase: string;  // REQUIRED for clickable
+  }>;
+  imageUrl?: string;       // Pre-generated asset
+  imagePrompt?: string;    // AI-generated
+}
+```
 

@@ -127,6 +127,66 @@ Use these IDs for instant loading:
 
 ---
 
+## 🚨 COMMON MISTAKES (AVOID THESE)
+
+### ❌ Wrong: Sending string instead of array
+```json
+// WRONG - bulletPoints must be array
+{ "bulletPoints": "Point 1, Point 2" }
+
+// CORRECT
+{ "bulletPoints": ["Point 1", "Point 2"] }
+```
+
+### ❌ Wrong: Missing required props
+```json
+// WRONG - title and content are REQUIRED
+{ "imagePrompt": "Some image" }
+
+// CORRECT
+{ "title": "Title Here", "content": "Content here", "imagePrompt": "..." }
+```
+
+### ❌ Wrong: Using wrong prop names
+```json
+// WRONG - "image" is not a prop
+{ "image": "some-url.png" }
+
+// CORRECT - use imageUrl or imagePrompt
+{ "imageUrl": "adp-architecture" }
+// OR
+{ "imagePrompt": "Description for AI to generate" }
+```
+
+### ❌ Wrong: Empty arrays break rendering
+```json
+// WRONG - empty array may cause issues
+{ "bulletPoints": [] }
+
+// CORRECT - omit if no data, or provide items
+{ "bulletPoints": ["At least one item"] }
+// OR just omit the prop entirely
+{ "title": "...", "content": "..." }
+```
+
+### ✅ Complete Valid Example
+```json
+{
+  "title": "The Control Plane",
+  "subtitle": "Governance and Orchestration",
+  "content": "The Control Plane manages AI infrastructure and ensures quality, security and cost-effectiveness.",
+  "bulletPoints": [
+    "Role-based access control",
+    "Automated policy enforcement",
+    "Real-time monitoring"
+  ],
+  "imageUrl": "adp-architecture",
+  "imagePosition": "right"
+}
+```
+
+---
+
 ## 🎯 SHOT PROMPTS (3 ESSENTIAL)
 
 ### 1. Welcome — Platform Introduction

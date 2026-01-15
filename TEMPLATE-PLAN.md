@@ -931,15 +931,93 @@ onClick={() => {
 
 ---
 
-## Part 8: Next Steps
+## Part 8: Risk Mitigation
 
-1. **Review this plan** with stakeholders
-2. **Prioritize Wave 1** implementation (15 templates)
-3. **Create template components** following centralized CSS
-4. **Register in templateRegistry.ts**
-5. **Add shot prompts** to glass-prompt.md
-6. **Test with real questions** from each persona
+### 🔴 Critical Risks (Must Prevent)
+
+| Risk | Prevention |
+|------|------------|
+| **Dead-end clicks** | EVERY clickable → `handleAction(actionPhrase)` |
+| **Forgot to register** | Checklist Step 3 in add-glass.md |
+| **Template not documented** | Checklist Step 4 in add-glass.md |
+| **Tele sends wrong props** | JSON schema + common mistakes in glass-prompt.md |
+
+### 🟠 High Risks (Must Check)
+
+| Risk | Prevention |
+|------|------------|
+| **TypeScript errors** | Run `npx tsc --noEmit` after each template |
+| **CSS breaks aesthetic** | Only use centralized classes from index.css |
+| **Responsive issues** | Test mobile + desktop visually |
+| **Props mismatch** | Schema in glass-prompt.md must match interface |
+
+### 🟡 Medium Risks (Monitor)
+
+| Risk | Prevention |
+|------|------------|
+| **Image generation fails** | SmartImage has fallback to placeholder |
+| **Bundle size grows** | Lazy loading already implemented |
+| **Empty arrays crash** | Add null checks: `items?.map` |
+
+---
+
+## Part 9: Template Generation Checklist
+
+### Before Starting Any Template
+```
+□ Review the template plan (props, use cases)
+□ Check if similar template already exists
+□ Identify CSS classes needed
+□ Identify if images are needed (pre-gen vs AI)
+```
+
+### After Creating Each Template
+```
+□ TypeScript compiles: npx tsc --noEmit
+□ Registered in templateRegistry.ts
+□ Documented in glass-prompt.md with:
+   □ USE WHEN triggers
+   □ JSON schema with types
+   □ Example valid JSON
+□ All clickable elements have handleAction(actionPhrase)
+□ Tested visually in browser
+□ Tested via Tele conversation
+```
+
+### After Completing Each Wave
+```
+□ All templates in wave compile
+□ All templates render correctly
+□ Tele can use all templates
+□ Volumetric navigation works (clicks continue conversation)
+□ Commit and push with clear message
+```
+
+---
+
+## Part 10: Next Steps
+
+### Implementation Order
+1. **Wave 1 (15 templates)**: Core Foundation
+2. **Wave 2 (15 templates)**: Depth & Visualization
+3. **Wave 3 (20 templates)**: Complete Experience
+
+### Per-Template Process
+1. Create component in `src/components/templates/`
+2. Register in `templateRegistry.ts`
+3. Document in `glass-prompt.md`
+4. Run verification checklist
+5. Test in browser
+6. Test via Tele
+
+### Batch Approach
+- Generate 3-5 templates at a time
+- Verify TypeScript after each batch
+- Test visually after each batch
+- Commit after each verified batch
 
 ---
 
 *This comprehensive plan ensures the AI/Works internal enablement platform can handle any question from any persona, selling to any stakeholder, with reusable visual components that maintain brand consistency and design excellence.*
+
+*All risks have been documented with prevention strategies. The verification checklist ensures no template is shipped with issues.*
