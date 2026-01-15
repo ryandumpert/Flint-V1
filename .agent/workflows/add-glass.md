@@ -75,6 +75,42 @@ const handleAction = (actionPhrase: string) => {
 
 ---
 
+## 🖼️ IMAGE HANDLING
+
+### Hybrid Image System
+Templates use `SmartImage` which automatically:
+1. Checks if `assetId` matches pre-generated asset → loads instantly
+2. If NOT in registry → treats as prompt → AI generates (~3-5s)
+
+### Template Props for Images
+```typescript
+interface TemplateImageProps {
+  imageUrl?: string;      // Path to pre-generated asset
+  imagePrompt?: string;   // Prompt for AI generation
+}
+```
+
+### Usage Pattern in Templates
+```tsx
+import { SmartImage } from '@/components/ui/SmartImage';
+
+// In the template:
+<SmartImage 
+  assetId={imageUrl || imagePrompt}
+  alt={title}
+  className="smart-image"
+/>
+```
+
+### Guidelines
+| Scenario | Use |
+|----------|-----|
+| Logos, avatars, badges | `imageUrl` (pre-generated) |
+| Abstract concepts, diagrams | `imagePrompt` (AI-generated) |
+| Product screenshots | `imageUrl` (pre-generated) |
+
+---
+
 ## ⚠️ CRITICAL: CENTRALIZED STYLING
 
 ### DO NOT use inline Tailwind classes like this:

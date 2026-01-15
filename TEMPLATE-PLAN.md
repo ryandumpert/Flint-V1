@@ -100,6 +100,56 @@ metrics[{
 
 ---
 
+## ⚙️ STRICT SCHEMA FORMAT REQUIREMENTS
+
+### Every Template MUST Have
+
+1. **TypeScript Interface** — Precise prop types in the component file
+2. **JSON Schema in glass-prompt.md** — For Tele to know the structure
+3. **USE WHEN triggers** — When Tele should select this template
+4. **actionPhrase on clickable content** — For volumetric navigation
+5. **Image handling** — Either `imageUrl` (pre-gen) or `imagePrompt` (AI-gen)
+
+### Template Registry Format
+```typescript
+// src/data/templateRegistry.ts
+export const TEMPLATE_REGISTRY = {
+  TemplateName: lazy(() => import("@/components/templates/TemplateName")
+    .then(m => ({ default: m.TemplateName }))),
+};
+```
+
+### glass-prompt.md Schema Format
+```markdown
+### TemplateName
+**USE WHEN:** [trigger conditions - when Tele should pick this template]
+```json
+{
+  "propName": "type (required|optional)",
+  "items": [{
+    "title": "string",
+    "actionPhrase": "string (required for clickable)"
+  }]
+}
+\```
+**Example:**
+```json
+{ "propName": "actual example value" }
+\```
+```
+
+### Image Props Pattern
+Every template with images MUST support:
+```typescript
+interface ImageProps {
+  imageUrl?: string;      // Pre-generated asset path
+  imagePrompt?: string;   // AI generation prompt
+}
+// SmartImage auto-selects: registry → AI fallback
+```
+
+---
+
 ## Part 1: Internal Personas Analysis
 
 Based on the comprehensive knowledge base, there are **8 distinct internal personas** who will interact with Catherine:

@@ -63,21 +63,58 @@ Here are examples, basially no matter what the user asks, always show data via `
 | **Sapient** | Code-to-spec accuracy | "We promise the spec itself is architecturally sound" |
 
 ## 🚨 IMMUTABLE LAWS 🚨
-1. **Tool Signature Stability** — `navigateToSection` MUST NEVER change
-2. **Mandatory Tool Call** — `navigateToSection` in EVERY response
-3. **Factual Accuracy** — Use EXACT figures from tele-knowledge.md
-4. **No Hallucination** — If a feature isn't documented, acknowledge it
+1. **Volumetric Navigation** — EVERY template element that's clickable MUST have `actionPhrase` so users can click and continue exploring
+2. **Tool Signature Stability** — `navigateToSection` MUST NEVER change
+3. **Mandatory Tool Call** — `navigateToSection` in EVERY response
+4. **Factual Accuracy** — Use EXACT figures from tele-knowledge.md
+5. **No Hallucination** — If a feature isn't documented, acknowledge it
 
 ---
 
-## 📋 TEMPLATE LIBRARY (1 Template)
+## 🖼️ IMAGE SYSTEM (Hybrid)
 
-### SplitContent
-Image on one side, text on the other.
+### How SmartImage Works
 ```
-title, subtitle?, content, bulletPoints?[]
-imageUrl?, imagePrompt?, imagePosition?: left/right
+assetId ──► Check ASSET_REGISTRY ──► Found? ──► Load instantly
+                    │
+                    └── Not found? ──► AI Generate (~3-5s) ──► Cache
 ```
+
+### Usage in Template Props
+| Prop | Use When | Example |
+|------|----------|---------|
+| `imageUrl` | Pre-generated asset path | `"/assets/hero.png"` |
+| `imagePrompt` | Live AI generation | `"Modern architecture diagram, blue and white"` |
+
+### Guidelines
+- **Logos, avatars, badges** → Use pre-generated (`imageUrl`)
+- **Abstract concepts, diagrams** → Use AI-generated (`imagePrompt`)
+- Images are cached per-session (same prompt = instant reload)
+- All images render with 10% transparency, zoom + opaque on hover
+
+---
+
+## 📋 TEMPLATE LIBRARY
+
+### Current: SplitContent
+**USE WHEN:** Hero content, feature explanations, about sections, side-by-side layouts
+```json
+{
+  "title": "string (required)",
+  "subtitle": "string (optional)",
+  "content": "string (required)",
+  "bulletPoints": ["string array (optional)"],
+  "imageUrl": "string (optional - pre-generated)",
+  "imagePrompt": "string (optional - AI-generated)",
+  "imagePosition": "left | right (default: right)"
+}
+```
+
+### Coming: 50 Templates
+*Templates will be added here with:*
+- **USE WHEN** trigger conditions
+- **JSON schema** with types
+- **Example** minimal usage
 
 ---
 
