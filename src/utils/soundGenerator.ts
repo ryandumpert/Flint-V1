@@ -111,8 +111,8 @@ let thinkingSoundPlayCount = 0;
 const MAX_THINKING_SOUND_PLAYS = 3;
 
 /**
- * Starts a subtle pulsing ambient sound for the "thinking" state
- * Creates an ethereal, minimal pulse that won't compete with voice
+ * Starts a light, warm chime sound for the "thinking" state
+ * Creates a gentle, short bell-like tone that repeats softly
  * Limited to MAX 3 plays per thinking session
  */
 export const playThinkingSound = (): void => {
@@ -132,69 +132,20 @@ export const playThinkingSound = (): void => {
     thinkingSoundPlayCount++;
     isThinkingSoundPlaying = true;
 
-    const startGain = 0.0025; // Reduced by 50% from 0.005
-    const minGain = startGain * 0.5; // Never go below 50%
+    // Play the initial chime
+    playWarmChime(ctx);
 
-    // Create main oscillators - soft harmonic tones
-    const frequencies = [261.63, 392.00]; // C4 and G4 - perfect fifth
-
-    frequencies.forEach((freq, i) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, ctx.currentTime);
-
-      // Very quiet - almost subliminal
-      gain.gain.setValueAtTime(0, ctx.currentTime);
-      gain.gain.linearRampToValueAtTime(startGain, ctx.currentTime + 0.5); // Fade in
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-
-      osc.start(ctx.currentTime);
-
-      thinkingOscillators.push(osc);
-      thinkingGainNodes.push(gain);
-    });
-
-    // Create LFO for pulsing effect
-    thinkingLFO = ctx.createOscillator();
-    const lfoGain = ctx.createGain();
-
-    thinkingLFO.type = 'sine';
-    thinkingLFO.frequency.setValueAtTime(0.4, ctx.currentTime); // 0.4Hz = peak every 1.25 seconds
-    lfoGain.gain.setValueAtTime(0.0025, ctx.currentTime); // Subtle modulation depth (reduced by 50%)
-
-    thinkingLFO.connect(lfoGain);
-
-    // Connect LFO to modulate the gain of main oscillators
-    thinkingGainNodes.forEach(gain => {
-      lfoGain.connect(gain.gain);
-    });
-
-    thinkingLFO.start(ctx.currentTime);
-
-    // Gradually reduce volume over time, but never below 50%
-    let currentGain = startGain;
-    const fadeInterval = setInterval(() => {
+    // Repeat the chime every 2.5 seconds while thinking
+    const chimeInterval = setInterval(() => {
       if (!isThinkingSoundPlaying) {
-        clearInterval(fadeInterval);
+        clearInterval(chimeInterval);
         return;
       }
-
-      // Reduce by 10% every 2 seconds
-      currentGain = Math.max(minGain, currentGain * 0.9);
-
-      thinkingGainNodes.forEach(gain => {
-        try {
-          gain.gain.linearRampToValueAtTime(currentGain, ctx.currentTime + 0.3);
-        } catch (_) { }
-      });
-    }, 2000);
+      playWarmChime(ctx);
+    }, 2500);
 
     // Store interval reference for cleanup
-    (window as any).__thinkingFadeInterval = fadeInterval;
+    (window as any).__thinkingChimeInterval = chimeInterval;
 
   } catch (error) {
     console.warn("Thinking sound failed to start", error);
@@ -203,56 +154,65 @@ export const playThinkingSound = (): void => {
 };
 
 /**
- * Stops the thinking sound with a smooth fade out
+ * Plays a single warm, light chime - short and pleasant
+ */
+const playWarmChime = (ctx: AudioContext): void => {
+  // Warm major triad - E5, G#5, B5 (higher = lighter, major = warmer)
+  const frequencies = [659.25, 830.61, 987.77];
+  const duration = 0.6; // Short duration
+  const maxGain = 0.008; // Very quiet
+
+  frequencies.forEach((freq, i) => {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    // Triangle wave is softer/warmer than sine
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(freq, ctx.currentTime);
+
+    // Quick fade in, then decay (like a soft bell)
+    const attackTime = 0.02;
+    const decayTime = duration - attackTime;
+    const staggerDelay = i * 0.03; // Slight arpeggio effect
+
+    gain.gain.setValueAtTime(0, ctx.currentTime + staggerDelay);
+    gain.gain.linearRampToValueAtTime(maxGain * (1 - i * 0.2), ctx.currentTime + staggerDelay + attackTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + staggerDelay + duration);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(ctx.currentTime + staggerDelay);
+    osc.stop(ctx.currentTime + staggerDelay + duration + 0.1);
+  });
+};
+
+/**
+ * Stops the thinking sound
  * Resets the play counter for the next thinking session
  */
 export const stopThinkingSound = (): void => {
   if (!isThinkingSoundPlaying) return;
 
   try {
-    const ctx = getUIAudioContext();
-    if (!ctx) return;
-
-    // Clear the fade interval
-    if ((window as any).__thinkingFadeInterval) {
-      clearInterval((window as any).__thinkingFadeInterval);
-      delete (window as any).__thinkingFadeInterval;
+    // Clear the chime interval
+    if ((window as any).__thinkingChimeInterval) {
+      clearInterval((window as any).__thinkingChimeInterval);
+      delete (window as any).__thinkingChimeInterval;
     }
 
-    const fadeOutTime = 0.3;
-
-    // Fade out all gain nodes
-    thinkingGainNodes.forEach(gain => {
-      gain.gain.linearRampToValueAtTime(0, ctx.currentTime + fadeOutTime);
-    });
-
-    // Stop oscillators after fade
-    setTimeout(() => {
-      thinkingOscillators.forEach(osc => {
-        try { osc.stop(); } catch (_) { }
-      });
-      if (thinkingLFO) {
-        try { thinkingLFO.stop(); } catch (_) { }
-      }
-
-      thinkingOscillators = [];
-      thinkingGainNodes = [];
-      thinkingLFO = null;
-      isThinkingSoundPlaying = false;
-      thinkingSoundPlayCount = 0; // Reset counter for next session
-    }, fadeOutTime * 1000 + 50);
+    // Reset state immediately (chimes are self-stopping)
+    isThinkingSoundPlaying = false;
+    thinkingSoundPlayCount = 0; // Reset counter for next session
 
   } catch (error) {
     console.warn("Thinking sound failed to stop", error);
     // Force cleanup
-    if ((window as any).__thinkingFadeInterval) {
-      clearInterval((window as any).__thinkingFadeInterval);
-      delete (window as any).__thinkingFadeInterval;
+    if ((window as any).__thinkingChimeInterval) {
+      clearInterval((window as any).__thinkingChimeInterval);
+      delete (window as any).__thinkingChimeInterval;
     }
-    thinkingOscillators = [];
-    thinkingGainNodes = [];
-    thinkingLFO = null;
     isThinkingSoundPlaying = false;
-    thinkingSoundPlayCount = 0; // Reset counter for next session
+    thinkingSoundPlayCount = 0;
   }
 };

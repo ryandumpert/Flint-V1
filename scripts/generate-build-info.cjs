@@ -43,6 +43,10 @@ try {
 
     fs.writeFileSync(outputPath, JSON.stringify(buildInfo, null, 2));
 
+    // Also copy to public folder for production builds
+    const publicPath = path.join(__dirname, '../public/buildInfo.json');
+    fs.writeFileSync(publicPath, JSON.stringify(buildInfo, null, 2));
+
     console.log('✅ Build info generated:', buildInfo);
 } catch (error) {
     console.error('❌ Failed to generate build info:', error.message);
@@ -80,5 +84,10 @@ try {
     }
 
     fs.writeFileSync(outputPath, JSON.stringify(fallbackInfo, null, 2));
+
+    // Also copy to public folder for production builds
+    const publicPath = path.join(__dirname, '../public/buildInfo.json');
+    fs.writeFileSync(publicPath, JSON.stringify(fallbackInfo, null, 2));
+
     console.log('⚠️  Using fallback build info');
 }

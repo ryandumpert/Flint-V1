@@ -15,10 +15,21 @@ export const GitVersionIndicator: React.FC = () => {
     useEffect(() => {
         const loadBuildInfo = async () => {
             try {
-                // Try to load the generated build info
-                const response = await fetch('/src/generated/buildInfo.json');
-                if (response.ok) {
-                    const data = await response.json();
+                // Try multiple paths - /buildInfo.json for production, /src/generated for dev
+                const paths = ['/buildInfo.json', '/src/generated/buildInfo.json'];
+                let data: BuildInfo | null = null;
+
+                for (const path of paths) {
+                    try {
+                        const response = await fetch(path);
+                        if (response.ok) {
+                            data = await response.json();
+                            break;
+                        }
+                    } catch { /* try next path */ }
+                }
+
+                if (data) {
                     setBuildInfo(data);
                 } else {
                     throw new Error('Build info not found');
@@ -28,10 +39,10 @@ export const GitVersionIndicator: React.FC = () => {
                 // This prevents showing "current time" as build time
                 const fallback: BuildInfo = {
                     hash: 'dev',
-                    timestamp: 'Jan 15, 2026, 4:36 AM',
+                    timestamp: 'Jan 15, 2026, 6:05 PM',
                     author: 'Richie Etwaru',
                     branch: 'main',
-                    buildDate: '2026-01-15T09:36:52.000Z'
+                    buildDate: '2026-01-15T23:05:06.000Z'
                 };
                 setBuildInfo(fallback);
             }
