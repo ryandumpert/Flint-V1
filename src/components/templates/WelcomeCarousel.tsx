@@ -1,12 +1,14 @@
 /**
  * WelcomeCarousel
- * Continuously scrolling carousel of stakeholder question cards
+ * Continuous auto-scrolling carousel using Embla Carousel
  * 
  * USE WHEN: Welcome page to showcase key questions Tele can answer
- * FEATURES: Infinite smooth scroll, pauses on hover, dots for manual navigation
+ * FEATURES: Continuous smooth scroll, pauses on hover, functional dots
  */
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import AutoScroll from 'embla-carousel-auto-scroll';
 import { notifyTele } from '@/utils/acknowledgmentHelpers';
 import { useSound } from '@/hooks/useSound';
 
@@ -24,67 +26,77 @@ interface WelcomeCarouselProps {
 
 export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
     cards = [],
-    autoPlayInterval = 30000, // Full cycle duration in ms
+    autoPlayInterval = 30000, // Not used directly, speed controls scroll
 }) => {
     const { playClick } = useSound();
-    const [isPaused, setIsPaused] = useState(false);
-    const [activeIndex, setActiveIndex] = useState(0);
-    const scrollRef = useRef<HTMLDivElement>(null);
+    const [selectedIndex, setSelectedIndex] = useState(0);
+
+    // Initialize Embla with auto-scroll plugin (continuous scrolling)
+    const [emblaRef, emblaApi] = useEmblaCarousel(
+        {
+            loop: true,
+            align: 'start',
+            dragFree: true,
+        },
+        [
+            AutoScroll({
+                speed: 1, // Pixels per frame - slow and smooth
+                stopOnInteraction: false,
+                stopOnMouseEnter: true,
+                playOnInit: true,
+            }),
+        ]
+    );
 
     // Defensive: Don't render if no cards
     if (!cards || cards.length === 0) {
         return null;
     }
 
-    const handleCardClick = (actionPhrase: string, index: number) => {
+    // Track selected index (closest to start)
+    const onSelect = useCallback(() => {
+        if (!emblaApi) return;
+        setSelectedIndex(emblaApi.selectedScrollSnap());
+    }, [emblaApi]);
+
+    useEffect(() => {
+        if (!emblaApi) return;
+        onSelect();
+        emblaApi.on('select', onSelect);
+        emblaApi.on('reInit', onSelect);
+        return () => {
+            emblaApi.off('select', onSelect);
+            emblaApi.off('reInit', onSelect);
+        };
+    }, [emblaApi, onSelect]);
+
+    const scrollTo = useCallback(
+        (index: number) => {
+            if (!emblaApi) return;
+            playClick();
+            emblaApi.scrollTo(index);
+        },
+        [emblaApi, playClick]
+    );
+
+    const handleCardClick = (actionPhrase: string) => {
         playClick();
-        setActiveIndex(index % cards.length);
         notifyTele(actionPhrase);
     };
 
-    const goToSlide = (index: number) => {
-        playClick();
-        setActiveIndex(index);
-        // Scroll to the card
-        if (scrollRef.current) {
-            const cardWidth = scrollRef.current.scrollWidth / (cards.length * 2);
-            scrollRef.current.scrollTo({
-                left: cardWidth * index,
-                behavior: 'smooth'
-            });
-        }
-    };
-
-    // Duplicate cards for infinite scroll effect
-    const duplicatedCards = [...cards, ...cards];
-
     return (
-        <div
-            className="w-full overflow-x-clip overflow-y-visible py-4"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-        >
-            {/* Scrolling Container */}
-            <div
-                ref={scrollRef}
-                className="relative overflow-x-clip overflow-y-visible mb-8"
-            >
-                {/* Scrolling Track */}
-                <div
-                    className="flex gap-6 animate-carousel-scroll"
-                    style={{
-                        width: 'fit-content',
-                        animationDuration: `${autoPlayInterval}ms`,
-                        animationPlayState: isPaused ? 'paused' : 'running',
-                    }}
-                >
-                    {duplicatedCards.map((card, idx) => (
+        <div className="w-full py-4">
+            {/* Embla Viewport */}
+            <div className="overflow-hidden" ref={emblaRef}>
+                {/* Embla Container */}
+                <div className="flex gap-6">
+                    {cards.map((card, idx) => (
                         <div
-                            key={`card-${idx}`}
+                            key={idx}
                             className="flex-shrink-0 w-[340px] md:w-[380px] glass-card-standard overflow-hidden cursor-pointer
                                 transform transition-all duration-300 ease-out
-                                hover:scale-[1.03] hover:shadow-glow"
-                            onClick={() => handleCardClick(card.actionPhrase, idx)}
+                                hover:scale-[1.02] hover:shadow-glow"
+                            onClick={() => handleCardClick(card.actionPhrase)}
                         >
                             {/* Image - Flush to top */}
                             <div className="aspect-[4/3] w-full overflow-hidden">
@@ -112,19 +124,19 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
             </div>
 
             {/* Dots Navigation */}
-            <div className="flex justify-center gap-3">
+            <div className="flex justify-center gap-3 mt-8">
                 {cards.map((_, index) => (
                     <button
                         key={index}
                         className={`
-                            w-3 h-3 rounded-full transition-all duration-300
-                            ${index === activeIndex
+                            h-3 rounded-full transition-all duration-300
+                            ${index === selectedIndex
                                 ? 'bg-sapphire w-8'
-                                : 'bg-mist/30 hover:bg-mist/50'
+                                : 'bg-mist/30 hover:bg-mist/50 w-3'
                             }
                         `}
-                        onClick={() => goToSlide(index)}
-                        aria-label={`Go to card ${index + 1}`}
+                        onClick={() => scrollTo(index)}
+                        aria-label={`Go to slide ${index + 1}`}
                     />
                 ))}
             </div>

@@ -34,7 +34,7 @@ const WELCOME_VARIANTS = [
   {
     badge: "AGENTIC DELIVERY PLATFORM",
     title: "AI/Works by Thoughtworks",
-    subtitle: "30 years of architectural wisdom, encoded into intelligent delivery agents",
+    subtitle: "30 years of architectural wisdom, packaged commercially to eliminate technical debt",
     generativeSubsections: [
       // Stakeholder Questions Carousel
       {
