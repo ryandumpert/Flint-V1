@@ -109,7 +109,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
               </div>
 
               {/* Desktop Navigation - VISIBLE ON DARK BACKGROUND */}
-              <div className="hidden xl:flex items-end space-x-1.5">
+              <div className="hidden xl:flex items-end self-end mt-1 space-x-1.5">
                 {navItems.map((item) => (
                   <Button
                     key={item.id}
