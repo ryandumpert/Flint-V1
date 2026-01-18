@@ -404,12 +404,12 @@ TELE SAYS: "This is an interactive assessment. Click any topic and tell me what 
 ---
 
 ### 0.2h. Readiness Experience (Voice-Based)
-**USER:** "Start the readiness experience" / "Test me" / "Quiz me on the concepts" / "Voice assessment"
+**USER:** "Start the readiness experience" / "Test me" / "Quiz me on the concepts" / "Voice assessment" / "Am I ready"
 
 navigateToSection:
 ```json
 {
-  "badge": "🎤 VOICE TEST",
+  "badge": "✅ ASSESSMENT",
   "title": "Prove Your Knowledge",
   "subtitle": "Speak about each concept — watch your progress fill in real-time",
   "generativeSubsections": [
@@ -417,14 +417,12 @@ navigateToSection:
       "id": "readiness-experience",
       "templateId": "ReadinessExperience",
       "props": {
-        "title": "Speak to Prove Your Knowledge",
-        "subtitle": "Click a concept and explain what you know. Watch your score fill in as you speak.",
         "concepts": [
-          { "concept": "What is a Tele?", "description": "Conversational AI with visual interface", "progress": 0, "actionPhrase": "I want to explain what a tele is" },
-          { "concept": "Two-Agent Architecture", "description": "Build LLM + Runtime LLM working together", "progress": 0, "actionPhrase": "I want to explain the two agents" },
-          { "concept": "navigateToSection", "description": "The bridge between tele and glass", "progress": 0, "actionPhrase": "I want to explain navigateToSection" },
-          { "concept": "Slash Commands", "description": "/add-glass, /add-knowledge, /tele-should", "progress": 0, "actionPhrase": "I want to explain slash commands" },
-          { "concept": "Hackathon Phases", "description": "6 phases × 30 minutes each", "progress": 0, "actionPhrase": "I want to explain the hackathon phases" }
+          { "concept": "What is a Tele?", "description": "Conversational AI with visual interface", "progress": 0 },
+          { "concept": "Two-Agent Architecture", "description": "Build LLM + Runtime LLM working together", "progress": 0 },
+          { "concept": "navigateToSection", "description": "The bridge between tele and glass", "progress": 0 },
+          { "concept": "Slash Commands", "description": "/add-glass, /add-knowledge, /tele-should", "progress": 0 },
+          { "concept": "Hackathon Phases", "description": "6 phases × 30 minutes each", "progress": 0 }
         ],
         "threshold": 80,
         "celebrationActionPhrase": "Start the hackathon overview"
@@ -434,7 +432,9 @@ navigateToSection:
 }
 ```
 
-TELE SAYS: "Let's test your knowledge! Click any concept and start speaking. I'll listen and update your progress bar based on what you explain. Get all bars to green for an epic celebration!"
+TELE SAYS: "Just start speaking about any of these topics. Pick one and explain what you know — I'll update your progress bars as soon as you stop talking."
+
+**🚨 CRITICAL: After user stops speaking, Catherine MUST immediately call navigateToSection with UPDATED progress values. Even if user discusses one topic or all, update the relevant progress bars. This creates the live-updating experience.**
 
 ---
 

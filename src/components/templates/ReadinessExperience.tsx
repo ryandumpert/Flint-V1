@@ -8,7 +8,7 @@
  */
 
 import React, { useEffect, useState, useRef } from 'react';
-import { Rocket, Sparkles, CheckCircle2, MessageCircle, Mic, Volume2, Zap, Star } from 'lucide-react';
+import { Rocket, Sparkles, CheckCircle2, Zap, Star } from 'lucide-react';
 import { notifyTele } from '@/utils/acknowledgmentHelpers';
 import { useSound } from '@/hooks/useSound';
 
@@ -236,22 +236,14 @@ export const ReadinessExperience: React.FC<ReadinessExperienceProps> = ({
     // ASSESSMENT VIEW
     return (
         <div className="glass-template-container">
-            {/* PROMINENT SPEAKING CTA */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-flamingo/20 via-turmeric/20 to-jade/20 rounded-2xl border-2 border-flamingo/40 animate-pulse">
-                <div className="flex items-center justify-center gap-4">
-                    <Mic className="w-10 h-10 text-flamingo animate-bounce" />
-                    <div className="text-center">
-                        <p className="text-2xl font-black text-white">🎤 JUST START SPEAKING!</p>
-                        <p className="text-mist/80 text-sm">Pick any topic and tell me what you know — I'm listening</p>
-                    </div>
-                    <Volume2 className="w-10 h-10 text-flamingo animate-bounce" />
-                </div>
-            </div>
-
-            {/* Header */}
-            <div className="text-center mb-6">
-                <h2 className="text-template-title text-2xl mb-1">{title}</h2>
-                <p className="text-mist/60 text-sm">{subtitle}</p>
+            {/* PROMINENT SPEAKING CTA - Clean and intuitive */}
+            <div className="mb-6 p-5 bg-jade/10 rounded-2xl border border-jade/30">
+                <p className="text-center text-jade text-xl font-bold mb-1">
+                    I'm listening — just start talking about any topic below
+                </p>
+                <p className="text-center text-mist/60 text-sm">
+                    Your progress bars will update automatically as you explain each concept
+                </p>
             </div>
 
             {/* Overall Progress */}
@@ -292,29 +284,27 @@ export const ReadinessExperience: React.FC<ReadinessExperienceProps> = ({
                             onClick={() => concept.actionPhrase && handleAction(concept.actionPhrase)}
                         >
                             <div className="flex items-start gap-4">
-                                {/* Status Icon */}
-                                <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center
-                                    ${isPassed ? 'bg-jade/20' : needsAttention ? 'bg-turmeric/20' : 'bg-mist/10'}`}
+                                {/* Status Icon - Number or Checkmark */}
+                                <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center
+                                    ${isPassed ? 'bg-jade/20' : 'bg-mist/10'}`}
                                 >
                                     {isPassed ? (
-                                        <CheckCircle2 className="w-6 h-6 text-jade" />
-                                    ) : needsAttention ? (
-                                        <Mic className="w-6 h-6 text-turmeric animate-bounce" />
+                                        <CheckCircle2 className="w-5 h-5 text-jade" />
                                     ) : (
-                                        <MessageCircle className="w-6 h-6 text-mist/40" />
+                                        <span className="text-mist/60 font-bold">{idx + 1}</span>
                                     )}
                                 </div>
 
                                 {/* Content */}
                                 <div className="flex-1">
                                     <div className="flex items-center justify-between mb-2">
-                                        <h3 className="text-mist font-bold text-lg">{concept.concept}</h3>
+                                        <h3 className="text-mist font-bold">{concept.concept}</h3>
                                         <span className={`text-lg font-black ${isPassed ? 'text-jade' : needsAttention ? 'text-turmeric' : 'text-mist/40'
                                             }`}>
                                             {concept.progress || 0}%
                                         </span>
                                     </div>
-                                    <p className="text-mist/60 text-sm mb-4">{concept.description}</p>
+                                    <p className="text-mist/60 text-sm mb-3">{concept.description}</p>
 
                                     {/* Progress Bar */}
                                     <div className="w-full h-3 bg-mist/10 rounded-full overflow-hidden">
@@ -323,14 +313,6 @@ export const ReadinessExperience: React.FC<ReadinessExperienceProps> = ({
                                             style={{ width: `${concept.progress || 0}%` }}
                                         />
                                     </div>
-
-                                    {/* Call to Action */}
-                                    {!isPassed && (
-                                        <p className="text-sapphire text-xs mt-2 flex items-center gap-1">
-                                            <Mic className="w-3 h-3" />
-                                            {needsAttention ? 'Keep speaking to improve...' : 'Click to start explaining →'}
-                                        </p>
-                                    )}
                                 </div>
                             </div>
                         </div>
