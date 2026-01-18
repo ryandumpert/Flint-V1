@@ -11,12 +11,12 @@ interface SEOProps {
 }
 
 export const SEO = ({
-  title = 'AI/Works | Thoughtworks Agentic Delivery Platform',
-  description = 'Transform trapped technical debt into modern, AI-ready systems. 30 years of Thoughtworks architectural wisdom, now encoded into intelligent agents.',
+  title = 'Mobeus University | Learn to Build Conversational AI',
+  description = 'Learn to build conversational AI applications with Catherine. Master the 3-hour hackathon curriculum: voice coding, vibe coding, templates, knowledge, rules, and design.',
   image = '/og-image.png',
   url = '/',
   type = 'website',
-  keywords = ['AI/Works', 'Thoughtworks', 'Agentic AI', 'Super Spec', 'Legacy Modernization', 'Enterprise AI', '3-3-3 Delivery'],
+  keywords = ['Mobeus', 'Tele', 'Conversational AI', 'Teleglass', 'Voice Coding', 'Vibe Coding', 'AI Development', 'Catherine'],
   structuredData,
 }: SEOProps) => {
   useEffect(() => {
@@ -47,7 +47,7 @@ export const SEO = ({
     updateMetaTag('og:image', image, true);
     updateMetaTag('og:url', url, true);
     updateMetaTag('og:type', type, true);
-    updateMetaTag('og:site_name', 'AI/Works by Thoughtworks', true);
+    updateMetaTag('og:site_name', 'Mobeus University', true);
 
     // Twitter Card tags
     updateMetaTag('twitter:card', 'summary_large_image');
@@ -72,65 +72,42 @@ export const SEO = ({
   return null;
 };
 
-// Pre-configured SEO for sections - AI/Works Internal Enablement
+// Pre-configured SEO for sections - Mobeus University
 export const sectionSEO = {
   welcome: {
-    title: 'AI/Works | Thoughtworks Agentic Delivery Platform',
-    description: 'Transform trapped technical debt into modern, AI-ready systems. The Super Spec Engine—specification first, code follows, zero technical debt.',
-    keywords: ['AI/Works', 'Thoughtworks', 'Super Spec', 'agentic AI', 'enterprise transformation'],
+    title: 'Mobeus University | Learn to Build Conversational AI',
+    description: 'Learn to build teles—conversational AI with visual interfaces. Master the 3-hour hackathon curriculum with Catherine.',
+    keywords: ['Mobeus', 'Tele', 'Conversational AI', 'hackathon', 'voice coding'],
   },
 
-  value: {
-    title: 'Value Proposition | AI/Works',
-    description: 'Discover how AI/Works solves critical enterprise challenges—legacy modernization, zero technical debt, and 3-3-3 delivery model.',
-    keywords: ['value proposition', 'legacy modernization', 'zero technical debt', 'enterprise AI'],
+  concepts: {
+    title: 'Key Concepts | Mobeus University',
+    description: 'Understand the core concepts: what a tele is, two-agent architecture, navigateToSection, and the slash commands.',
+    keywords: ['tele', 'two-agent architecture', 'navigateToSection', 'slash commands'],
   },
 
-  platform: {
-    title: 'Platform Overview | AI/Works',
-    description: 'Explore the 10 components of AI/Works: from reverse engineering to AIOps, the complete Agentic Delivery Platform.',
-    keywords: ['platform overview', 'Super Spec', 'CodeConcise', 'Control Plane', 'AIOps'],
+  phases: {
+    title: 'Hackathon Phases | Mobeus University',
+    description: 'The 6-phase hackathon: voice coding, vibe coding, templates, knowledge, rules, and design. 3 hours to build your tele.',
+    keywords: ['hackathon', 'phases', 'voice coding', 'vibe coding', 'templates'],
   },
 
-  benefits: {
-    title: 'Key Benefits | AI/Works',
-    description: 'Key capabilities that drive enterprise success: 40-60% cost reduction, 3-4 developers delivering 20x output, 90-day production.',
-    keywords: ['benefits', 'ROI', 'cost reduction', 'developer productivity', 'enterprise efficiency'],
+  templates: {
+    title: 'Template Library | Mobeus University',
+    description: 'Explore the 14 templates available for your tele: CardGrid, HackathonTimeline, ConceptCard, ProcessSteps, and more.',
+    keywords: ['templates', 'glass', 'components', 'UI', 'React'],
   },
 
-  pricing: {
-    title: 'Pricing & Engagement | AI/Works',
-    description: 'Transparent 3-3-3 pricing model: $675K validation, $1.2M prototype, $2.35M production. Fixed-price confidence.',
-    keywords: ['pricing', '3-3-3 model', 'engagement', 'fixed price', 'enterprise investment'],
+  ready: {
+    title: 'Readiness Check | Mobeus University',
+    description: 'Test your hackathon readiness. Speak about what you know and prove you understand the key concepts.',
+    keywords: ['readiness', 'assessment', 'hackathon prep', 'knowledge check'],
   },
 
-  'next-steps': {
-    title: 'Next Steps | AI/Works',
-    description: 'Ready to transform your development? Schedule a deep dive with our architecture team or identify your pilot use case.',
-    keywords: ['next steps', 'contact', 'schedule demo', 'pilot program'],
-  },
-
-  competitive: {
-    title: 'Competitive Positioning | AI/Works',
-    description: 'How AI/Works beats the competition: legacy + greenfield, 30 years of wisdom, production-grade quality in 90 days.',
-    keywords: ['competitive', 'vs Globant', 'vs Ascendion', 'vs Deloitte', 'differentiation'],
-  },
-
-  technical: {
-    title: 'Technical Architecture | AI/Works',
-    description: 'Deep dive into the Super Spec Engine, Control Plane, Context Library, and the 10-component AI/Works architecture.',
-    keywords: ['technical', 'architecture', 'Super Spec', 'Control Plane', 'AIOps'],
-  },
-
-  security: {
-    title: 'Security & Compliance | AI/Works',
-    description: 'Enterprise-grade security shifted left: OWASP Top 10, HIPAA, GDPR, SOX, PCI-DSS compliance baked into generation.',
-    keywords: ['security', 'compliance', 'HIPAA', 'GDPR', 'enterprise security'],
-  },
-
-  casestudies: {
-    title: 'Case Studies | AI/Works',
-    description: 'Real enterprise transformations: healthcare claims modernization, retail omnichannel platforms, financial services.',
-    keywords: ['case studies', 'success stories', 'healthcare', 'retail', 'financial services'],
+  home: {
+    title: 'Mobeus University | Learn to Build Conversational AI',
+    description: 'Welcome to Mobeus University. Let Catherine prepare you for the hackathon where you will build your own tele.',
+    keywords: ['Mobeus', 'Catherine', 'hackathon', 'tele', 'conversational AI'],
   },
 };
+
