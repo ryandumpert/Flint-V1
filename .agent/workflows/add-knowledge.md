@@ -28,7 +28,7 @@ When adding new domain knowledge that Tele should know about, update `tele-knowl
    ```bash
    wc -l tele-knowledge.md
    ```
-   **Limit: 600 lines max**
+   **Limit: 750 lines max**
 
 4. Add knowledge in this format:
    ```markdown
@@ -42,10 +42,10 @@ When adding new domain knowledge that Tele should know about, update `tele-knowl
    - ✅ Bullet points, not paragraphs
    - ✅ Action-oriented ("I help users...")
    - ✅ Include what Tele should SAY about this topic
-   - ❌ No redundant information already in glass-generator-prompt.md
+   - ❌ No redundant information already in glass-prompt.md
 
 // turbo
-6. Verify the file is under 500 lines:
+6. Verify the file is under 750 lines:
    ```bash
    wc -l tele-knowledge.md
    ```
@@ -61,6 +61,6 @@ When adding new domain knowledge that Tele should know about, update `tele-knowl
 ```
 
 ## Don't Forget
-- ✅ Keep tele-knowledge.md ≤ 600 lines
-- ✅ Knowledge should be WHAT Tele knows, not HOW Tele shows it (that's glass-generator-prompt.md)
+- ✅ Keep tele-knowledge.md ≤ 750 lines
+- ✅ Knowledge should be WHAT Tele knows, not HOW Tele shows it (that's glass-prompt.md)
 - ✅ Include example phrases Tele might say

@@ -1,7 +1,7 @@
 import { useState, useLayoutEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { default as aiworksLogo } from "@/assets/aiworks-logo.png";
+import { default as mobeusLogo } from "@/assets/mobeus-logo.png";
 import { handleAcknowledgment } from "@/utils/acknowledgmentHelpers";
 import { sendToTele } from "@/utils/teleInteraction";
 import { useSound } from "@/hooks/useSound";
@@ -35,8 +35,8 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
   }, []);
 
   // ============================================
-  // AI/WORKS INTERNAL ENABLEMENT NAVIGATION
-  // 6 Menu items for complete enablement coverage
+  // MOBEUS UNIVERSITY - HACKATHON PREP NAVIGATION
+  // Menu items for preparing developers for hackathon
   // ============================================
   const navItems: Array<{
     id: string;
@@ -46,37 +46,32 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
       {
         id: 'home',
         label: 'HOME',
-        teleQuery: 'Show me AI/Works overview'
+        teleQuery: 'Go home'
       },
       {
-        id: '333-model',
-        label: '3-3-3 MODEL',
-        teleQuery: 'Show me the 3-3-3 delivery model'
+        id: 'concepts',
+        label: 'CONCEPTS',
+        teleQuery: 'Explain the two agent architecture'
       },
       {
-        id: 'competitive',
-        label: 'COMPETITIVE',
-        teleQuery: 'Show me competitive positioning'
+        id: 'slash-commands',
+        label: 'SLASH COMMANDS',
+        teleQuery: 'Explain the slash commands'
       },
       {
-        id: 'objections',
-        label: 'OBJECTIONS',
-        teleQuery: 'Show me how to handle objections'
+        id: 'phases',
+        label: 'PHASES',
+        teleQuery: 'Show me the hackathon phases'
       },
       {
-        id: 'case-studies',
-        label: 'CASE STUDIES',
-        teleQuery: 'Show me case studies and proof points'
+        id: 'templates',
+        label: 'TEMPLATES',
+        teleQuery: 'Show me all templates'
       },
       {
-        id: 'pricing',
-        label: 'PRICING',
-        teleQuery: 'Show me pricing and engagement'
-      },
-      {
-        id: 'practice',
-        label: 'PRACTICE',
-        teleQuery: 'Show me role-play training mode and start a practice session'
+        id: 'ready',
+        label: 'AM I READY?',
+        teleQuery: 'Start the readiness experience'
       }
     ];
 
@@ -106,8 +101,8 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
               {/* Logo */}
               <div className="no-lightboard flex items-center">
                 <img
-                  src={aiworksLogo}
-                  alt="AIworks"
+                  src={mobeusLogo}
+                  alt="Mobeus"
                   className="no-lightboard h-[27px] w-auto object-contain max-w-none"
                   style={{ aspectRatio: 'auto' }}
                 />

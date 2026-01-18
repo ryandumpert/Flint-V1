@@ -14,30 +14,38 @@ import { useSound } from '@/hooks/useSound';
 import { SmartImage } from '@/components/ui/SmartImage';
 
 interface ConceptCardProps {
-    title: string;
-    definition: string;
+    title?: string;
+    definition?: string;
     details?: string;
     imageUrl?: string;
     imagePrompt?: string;
     ctaLabel?: string;
     ctaActionPhrase?: string;
+    actionPhrase?: string; // Alternative prop name
 }
 
 export const ConceptCard: React.FC<ConceptCardProps> = ({
-    title,
-    definition,
+    title = 'Concept',
+    definition = '',
     details,
     imageUrl,
     imagePrompt,
     ctaLabel = 'Learn more',
     ctaActionPhrase,
+    actionPhrase,
 }) => {
     const { playClick } = useSound();
 
-    const handleAction = (actionPhrase: string) => {
+    // Debug log to see what props are passed
+    console.log('[ConceptCard] Props:', { title, definition, details, ctaActionPhrase, actionPhrase });
+
+    const handleAction = (phrase: string) => {
         playClick();
-        notifyTele(actionPhrase);
+        notifyTele(phrase);
     };
+
+    // Use actionPhrase as fallback for ctaActionPhrase
+    const finalActionPhrase = ctaActionPhrase || actionPhrase;
 
     const hasImage = imageUrl || imagePrompt;
 
@@ -56,15 +64,17 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({
                     </div>
                 )}
                 <div className="flex-1">
-                    <h3 className="text-template-title text-2xl mb-3">{title}</h3>
-                    <p className="text-template-subtitle text-lg mb-4">{definition}</p>
-                    {details && (
-                        <p className="text-template-content mb-4">{details}</p>
+                    <h3 className="text-template-title text-2xl mb-3" style={{ color: '#EDF1F3' }}>{title}</h3>
+                    {definition && (
+                        <p className="text-template-content text-lg mb-4" style={{ color: 'rgba(237, 241, 243, 0.85)' }}>{definition}</p>
                     )}
-                    {ctaActionPhrase && (
+                    {details && (
+                        <p className="text-template-content mb-4" style={{ color: 'rgba(237, 241, 243, 0.7)' }}>{details}</p>
+                    )}
+                    {finalActionPhrase && (
                         <button
                             className="btn-cta glass-card-clickable"
-                            onClick={() => handleAction(ctaActionPhrase)}
+                            onClick={() => handleAction(finalActionPhrase)}
                         >
                             {ctaLabel}
                             <ChevronRight className="w-4 h-4 ml-1" />

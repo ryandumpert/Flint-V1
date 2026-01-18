@@ -98,12 +98,12 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
                                 hover:scale-[1.02] hover:shadow-glow"
                             onClick={() => handleCardClick(card.actionPhrase)}
                         >
-                            {/* Image - Flush to top */}
-                            <div className="aspect-[4/3] w-full overflow-hidden">
+                            {/* Image - 1024:661 aspect ratio to match screenshots */}
+                            <div className="aspect-[1024/661] w-full overflow-hidden">
                                 <img
                                     src={card.imageUrl}
                                     alt=""
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-cover transition-transform duration-500 ease-out hover:scale-105"
                                 />
                             </div>
 

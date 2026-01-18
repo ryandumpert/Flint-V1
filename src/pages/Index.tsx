@@ -29,67 +29,56 @@ import { OnboardingTransition } from "@/components/OnboardingTransition";
 import { Logo } from "@/components/Logo";
 
 
-// Welcome section - Thoughtworks AI/Works Introduction
+// Welcome section - Catherine prepares developers for the hackathon
+// KEY CONCEPT: This tele teaches people so they're READY to build their own tele
 const WELCOME_VARIANTS = [
   {
-    badge: "AGENTIC DELIVERY PLATFORM",
-    title: "AI/Works by Thoughtworks",
-    subtitle: "30 years of architectural wisdom, packaged commercially to eliminate technical debt",
+    badge: "HACKATHON PREP",
+    title: "You're Going to Build a Tele",
+    subtitle: "Get ready for the 3-hour hackathon where you'll create your own conversational AI",
     generativeSubsections: [
-      // Stakeholder Questions Carousel
+      // Prep Journey Carousel
       {
-        id: "questions-carousel",
+        id: "prep-carousel",
         templateId: "WelcomeCarousel",
         props: {
           autoPlayInterval: 60000,
           cards: [
             {
-              question: "My CIO says 'we've been burned by AI before'—how do I respond?",
-              subtext: "Objection Handling",
-              imageUrl: "/assets/welcome-card.jpg",
-              actionPhrase: "Show me how to handle AI skepticism objections"
+              question: "What will I build at the hackathon?",
+              subtext: "Understand what a tele is before you build one",
+              imageUrl: "/assets/carousel-slide-01.png",
+              actionPhrase: "What is a tele and what will I build"
             },
             {
-              question: "What makes AI/Works different from every other AI platform?",
-              subtext: "Differentiation",
-              imageUrl: "/assets/welcome-card.jpg",
-              actionPhrase: "Show me what makes AI/Works unique"
+              question: "How does the two-agent architecture work?",
+              subtext: "Build LLM + Runtime LLM working together",
+              imageUrl: "/assets/carousel-slide-02.png",
+              actionPhrase: "Explain the two agent architecture"
             },
             {
-              question: "The client has a mainframe from 1985—can we actually help?",
-              subtext: "Legacy Modernization",
-              imageUrl: "/assets/welcome-card.jpg",
-              actionPhrase: "Show me how to pitch legacy modernization"
+              question: "What are the 6 phases of the hackathon?",
+              subtext: "Preview what you'll do in each 30-minute phase",
+              imageUrl: "/assets/carousel-slide-03.png",
+              actionPhrase: "Show me the hackathon phases"
             },
             {
-              question: "What's the fastest way to get a client from skeptic to signed?",
-              subtext: "The 3-3-3 Model",
-              imageUrl: "/assets/welcome-card.jpg",
-              actionPhrase: "Show me the 3-3-3 delivery model"
+              question: "What tools and files will I work with?",
+              subtext: "Get familiar with the key concepts before you code",
+              imageUrl: "/assets/carousel-slide-04.png",
+              actionPhrase: "Show me the tools I will use"
             },
             {
-              question: "The CFO wants hard ROI numbers before approving—what do I say?",
-              subtext: "ROI & Business Case",
-              imageUrl: "/assets/welcome-card.jpg",
-              actionPhrase: "Show me ROI numbers and value story"
+              question: "What's navigateToSection and why is it important?",
+              subtext: "The bridge between your tele and the UI",
+              imageUrl: "/assets/carousel-slide-05.png",
+              actionPhrase: "Explain navigateToSection"
             },
             {
-              question: "Give me a real success story I can share in my next pitch",
-              subtext: "Proof Points",
-              imageUrl: "/assets/welcome-card.jpg",
-              actionPhrase: "Show me case studies and proof"
-            },
-            {
-              question: "I need to quote a price range—what am I working with?",
-              subtext: "Pricing",
-              imageUrl: "/assets/welcome-card.jpg",
-              actionPhrase: "Show me pricing and quoting guidance"
-            },
-            {
-              question: "Grill me—pretend you're a skeptical buyer and test my pitch",
-              subtext: "Practice Mode",
-              imageUrl: "/assets/welcome-card.jpg",
-              actionPhrase: "Show me role-play training and start practice"
+              question: "I'm ready — give me the full hackathon overview",
+              subtext: "See the complete 3-hour journey",
+              imageUrl: "/assets/carousel-slide-06.png",
+              actionPhrase: "Start the hackathon overview"
             }
           ]
         }

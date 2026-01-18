@@ -33,27 +33,27 @@ export default {
     extend: {
       colors: {
         /* ============================================
-         * 8-COLOR BRAND PALETTE
+         * 8-COLOR BRAND PALETTE - MOBEUS.COM STYLE
          * ============================================
-         * Mist Gray:      #EDF1F3 - Light backgrounds, text, icons
-         * Onyx Black:     #000000 - Dark backgrounds
-         * Flamingo Pink:  #F2617A - Primary accent, CTAs (call to action)
+         * Mist Gray:      #F5F5F5 - Light backgrounds, text, icons
+         * Onyx Black:     #0D0D0D - Dark backgrounds (deeper black)
+         * Violet Purple:  #9B5DE5 - Primary accent, CTAs, headlines
          * Wave Blue:      #003D4F - Secondary accent, headers
          * Turmeric Yellow:#CC850A - Buttons, warnings
-         * Jade Green:     #6B9E78 - Success states, accents
+         * Jade Green:     #5EEAD4 - Success states, teal accents
          * Sapphire Blue:  #47A1AD - Buttons, links
-         * Amethyst Purple:#634F7D - Special accents
+         * Amethyst Purple:#7C3AED - Deep purple accents
          * ============================================ */
 
-        // The 8 Brand Colors
-        mist: '#EDF1F3',
-        onyx: '#000000',
-        flamingo: '#F2617A',
+        // The 8 Brand Colors - MOBEUS STYLE
+        mist: '#F5F5F5',
+        onyx: '#0D0D0D',
+        flamingo: '#9B5DE5',  // NOW PURPLE - Primary accent
         wave: '#003D4F',
         turmeric: '#CC850A',
-        jade: '#6B9E78',
+        jade: '#5EEAD4',      // Teal accent like mobeus.com
         sapphire: '#47A1AD',
-        amethyst: '#634F7D',
+        amethyst: '#7C3AED',  // Deeper purple
 
         // Semantic mappings
         border: "var(--border)",

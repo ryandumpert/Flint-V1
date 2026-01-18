@@ -99,29 +99,29 @@ button,
      * - Depth: Everything has Z-space positioning
      * 
      * ============================================
-     * 8-COLOR BRAND PALETTE
+     * 8-COLOR BRAND PALETTE - MOBEUS.COM STYLE
      * ============================================
-     * Mist Gray:      #EDF1F3 - Light backgrounds, text, icons (WHITE ON DARK)
-     * Onyx Black:     #000000 - Dark backgrounds
-     * Flamingo Pink:  #F2617A - Primary CTAs (call to action)
+     * Mist Gray:      #F5F5F5 - Light backgrounds, text, icons
+     * Onyx Black:     #0D0D0D - Dark backgrounds (deeper black)
+     * Violet Purple:  #9B5DE5 - Primary CTAs, headlines (THE MOBEUS PURPLE)
      * Wave Blue:      #003D4F - Secondary accent, headers
      * Turmeric Yellow:#CC850A - Buttons, warnings
-     * Jade Green:     #6B9E78 - Success states, accents
+     * Jade Teal:      #5EEAD4 - Success states, teal accents
      * Sapphire Blue:  #47A1AD - Buttons, links
-     * Amethyst Purple:#634F7D - Special accents
+     * Amethyst Purple:#7C3AED - Deep purple accents
      * ============================================ */
 
     /* ============================================
-     * THE 8 BRAND COLORS
+     * THE 8 BRAND COLORS - MOBEUS STYLE
      * ============================================ */
-    --color-mist: #EDF1F3;
-    --color-onyx: #000000;
-    --color-flamingo: #F2617A;
+    --color-mist: #F5F5F5;
+    --color-onyx: #0D0D0D;
+    --color-flamingo: #9B5DE5;  /* NOW PURPLE - Primary accent */
     --color-wave: #003D4F;
     --color-turmeric: #CC850A;
-    --color-jade: #6B9E78;
+    --color-jade: #5EEAD4;      /* Teal accent */
     --color-sapphire: #47A1AD;
-    --color-amethyst: #634F7D;
+    --color-amethyst: #7C3AED;  /* Deep purple */
 
     /* ============================================
      * SEMANTIC COLOR MAPPINGS
@@ -166,7 +166,7 @@ button,
     --shadow-float-near: 0 4px 24px rgba(0, 0, 0, 0.18), 0 12px 48px rgba(0, 0, 0, 0.1);
     --shadow-float-mid: 0 8px 32px rgba(0, 0, 0, 0.22), 0 20px 64px rgba(0, 0, 0, 0.14);
     --shadow-float-far: 0 16px 48px rgba(0, 0, 0, 0.28), 0 32px 96px rgba(0, 0, 0, 0.18);
-    --shadow-glow-accent: 0 0 48px rgba(242, 97, 122, 0.35), 0 0 96px rgba(242, 97, 122, 0.18);
+    --shadow-glow-accent: 0 0 48px rgba(155, 93, 229, 0.35), 0 0 96px rgba(155, 93, 229, 0.18);
     --shadow-glow-wave: 0 0 48px rgba(0, 61, 79, 0.35), 0 0 96px rgba(0, 61, 79, 0.18);
     --shadow-glow-ambient: 0 0 80px rgba(237, 241, 243, 0.06), 0 0 40px rgba(237, 241, 243, 0.03);
 
@@ -992,19 +992,19 @@ button,
    * Turmeric: Secondary buttons
    * ============================================ */
 
-  /* CTA Button - Flamingo Pink (#F2617A) */
+  /* CTA Button - Flamingo Pink (#9B5DE5) */
   .btn-cta {
     @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold transition-all duration-300;
-    background: rgba(242, 97, 122, 0.8);
+    background: rgba(155, 93, 229, 0.8);
     /* flamingo/80 */
-    border: 1px solid rgba(242, 97, 122, 0.6);
+    border: 1px solid rgba(155, 93, 229, 0.6);
     /* flamingo/60 */
-    color: #EDF1F3;
+    color: #F5F5F5;
     /* mist */
   }
 
   .btn-cta:hover {
-    background: #F2617A;
+    background: #9B5DE5;
     /* flamingo */
     transform: translateY(-1px);
   }
@@ -1020,7 +1020,7 @@ button,
     /* sapphire/70 */
     border: 1px solid rgba(71, 161, 173, 0.5);
     /* sapphire/50 */
-    color: #EDF1F3;
+    color: #F5F5F5;
     /* mist */
   }
 
@@ -1038,7 +1038,7 @@ button,
     /* turmeric/70 */
     border: 1px solid rgba(204, 133, 10, 0.5);
     /* turmeric/50 */
-    color: #EDF1F3;
+    color: #F5F5F5;
     /* mist */
   }
 
@@ -1055,7 +1055,7 @@ button,
     background: transparent;
     border: 1px solid rgba(237, 241, 243, 0.3);
     /* mist/30 */
-    color: #EDF1F3;
+    color: #F5F5F5;
     /* mist */
   }
 
@@ -1069,13 +1069,13 @@ button,
   /* Text styling for templates */
   .text-template-title {
     @apply text-xl font-semibold;
-    color: #EDF1F3;
+    color: #F5F5F5;
     /* mist */
   }
 
   .text-template-subtitle {
     @apply text-sm;
-    color: #F2617A;
+    color: #9B5DE5;
     /* flamingo */
   }
 
@@ -1098,7 +1098,7 @@ button,
 
   /* Text colors - explicit hex for reliability */
   .text-flamingo {
-    color: #F2617A !important;
+    color: #9B5DE5 !important;
   }
 
   .text-turmeric {
@@ -1106,7 +1106,7 @@ button,
   }
 
   .text-jade {
-    color: #6B9E78 !important;
+    color: #5EEAD4 !important;
   }
 
   .text-sapphire {
@@ -1114,11 +1114,11 @@ button,
   }
 
   .text-amethyst {
-    color: #634F7D !important;
+    color: #7C3AED !important;
   }
 
   .text-mist {
-    color: #EDF1F3 !important;
+    color: #F5F5F5 !important;
   }
 
   .text-wave {
@@ -1127,7 +1127,7 @@ button,
 
   /* Background colors */
   .bg-flamingo {
-    background-color: #F2617A !important;
+    background-color: #9B5DE5 !important;
   }
 
   .bg-turmeric {
@@ -1135,7 +1135,7 @@ button,
   }
 
   .bg-jade {
-    background-color: #6B9E78 !important;
+    background-color: #5EEAD4 !important;
   }
 
   .bg-sapphire {
@@ -1143,16 +1143,16 @@ button,
   }
 
   .bg-amethyst {
-    background-color: #634F7D !important;
+    background-color: #7C3AED !important;
   }
 
   /* Background colors with opacity */
   .bg-flamingo\/10 {
-    background-color: rgba(242, 97, 122, 0.1) !important;
+    background-color: rgba(155, 93, 229, 0.1) !important;
   }
 
   .bg-flamingo\/20 {
-    background-color: rgba(242, 97, 122, 0.2) !important;
+    background-color: rgba(155, 93, 229, 0.2) !important;
   }
 
   .bg-turmeric\/10 {
@@ -1164,11 +1164,11 @@ button,
   }
 
   .bg-jade\/10 {
-    background-color: rgba(107, 158, 120, 0.1) !important;
+    background-color: rgba(94, 234, 212, 0.1) !important;
   }
 
   .bg-jade\/20 {
-    background-color: rgba(107, 158, 120, 0.2) !important;
+    background-color: rgba(94, 234, 212, 0.2) !important;
   }
 
   .bg-sapphire\/10 {
@@ -1276,7 +1276,7 @@ button,
 
   .template-list-icon {
     @apply w-5 h-5 flex-shrink-0 mt-0.5;
-    color: #F2617A;
+    color: #9B5DE5;
     /* flamingo */
   }
 
@@ -1293,9 +1293,9 @@ button,
 
   .template-badge {
     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide;
-    background: rgba(242, 97, 122, 0.2);
-    color: #F2617A;
-    border: 1px solid rgba(242, 97, 122, 0.3);
+    background: rgba(155, 93, 229, 0.2);
+    color: #9B5DE5;
+    border: 1px solid rgba(155, 93, 229, 0.3);
   }
 
   .template-badge-sapphire {
@@ -1315,7 +1315,7 @@ button,
   .template-badge-mist {
     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide;
     background: rgba(237, 241, 243, 0.1);
-    color: #EDF1F3;
+    color: #F5F5F5;
     border: 1px solid rgba(237, 241, 243, 0.2);
   }
 
@@ -1330,7 +1330,7 @@ button,
 
   .template-metric-value {
     @apply text-3xl md:text-4xl font-bold;
-    color: #EDF1F3;
+    color: #F5F5F5;
   }
 
   .template-metric-label {
@@ -1339,7 +1339,7 @@ button,
   }
 
   .template-metric-highlight {
-    color: #F2617A;
+    color: #9B5DE5;
     /* flamingo */
   }
 
@@ -1366,18 +1366,18 @@ button,
 
   .template-icon-container {
     @apply w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0;
-    background: rgba(242, 97, 122, 0.15);
-    border: 1px solid rgba(242, 97, 122, 0.3);
+    background: rgba(155, 93, 229, 0.15);
+    border: 1px solid rgba(155, 93, 229, 0.3);
   }
 
   .template-icon-container-lg {
     @apply w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0;
-    background: rgba(242, 97, 122, 0.15);
-    border: 1px solid rgba(242, 97, 122, 0.3);
+    background: rgba(155, 93, 229, 0.15);
+    border: 1px solid rgba(155, 93, 229, 0.3);
   }
 
   .template-icon-container svg {
-    color: #F2617A;
+    color: #9B5DE5;
   }
 
   /* ============================================

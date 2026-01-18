@@ -758,14 +758,14 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
         isLoading={navigationIsLoading || isConnecting}
       />
 
-      {/* Chat Glass Panel - NEARLY INVISIBLE - Avatar fully visible */}
+      {/* Chat Glass Panel - FULLY TRANSPARENT - Avatar fully visible */}
       <div
         className={`fixed teleglass-panel top-0 h-dvh z-50
-          transform transition-all duration-500 ease-out backdrop-blur-lg ${isChatGlassOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+          transform transition-all duration-500 ease-out ${isChatGlassOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
           }
           ${isLightboardMode
-            ? 'bg-white/[0.06] border-l border-white/[0.12]'
-            : 'bg-white/[0.08] border-l border-white/[0.15]'
+            ? 'border-l border-white/[0.05]'
+            : 'border-l border-white/[0.08]'
           }
         flex flex-col
         xl:right-0

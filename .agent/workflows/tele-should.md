@@ -4,7 +4,15 @@ description: Tell Tele how to respond to specific user requests (shot prompts)
 
 # Tele-Should Workflow
 
-When you want Tele to respond a certain way to a user request, add a shot prompt to `glass-generator-prompt.md`.
+When you want Tele to respond a certain way to a user request, add a shot prompt to `glass-prompt.md`.
+
+## 🚨 CRITICAL: Always Call navigateToSection
+
+**Tele MUST call `navigateToSection` in EVERY response, even if the content is identical to what's currently displayed.**
+
+- The UI needs the tool call to confirm Tele is responding
+- Without the call, users see nothing and think Tele is broken
+- Even if same content is showing: **STILL CALL navigateToSection**
 
 ## When to Use
 - "Tele should show X when user asks Y"
@@ -17,14 +25,14 @@ When you want Tele to respond a certain way to a user request, add a shot prompt
 
 2. Identify what template(s) Tele should show
 
-3. Open `glass-generator-prompt.md` and find the **Shot Prompts** section
+3. Open `glass-prompt.md` and find the **Shot Prompts** section
 
 // turbo
 4. Check current line count:
    ```bash
-   wc -l glass-generator-prompt.md
+   wc -l glass-prompt.md
    ```
-   **Limit: 1200 lines max**
+   **Limit: 1500 lines max**
 
 5. Add shot prompt in this format:
    ```markdown
@@ -52,9 +60,9 @@ When you want Tele to respond a certain way to a user request, add a shot prompt
    - ❌ Never badge/title/subtitle inside props
 
 // turbo
-7. Verify the file is under 1000 lines:
+7. Verify the file is under 1500 lines:
    ```bash
-   wc -l glass-generator-prompt.md
+   wc -l glass-prompt.md
    ```
 
 ## Example Shot Prompt
@@ -86,7 +94,7 @@ TELE SAYS: "You've got some solid credentials here. Want to add more or see whic
 ```
 
 ## Don't Forget
-- ✅ Keep glass-generator-prompt.md ≤ 1200 lines
+- ✅ Keep glass-prompt.md ≤ 1500 lines
 - ✅ Tele speaks naturally, not "Here is your X"
 - ✅ Include the guide (next step suggestion) in TELE SAYS
 - ✅ Use realistic data in props examples

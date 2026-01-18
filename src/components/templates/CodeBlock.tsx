@@ -13,7 +13,7 @@ import { notifyTele } from '@/utils/acknowledgmentHelpers';
 import { useSound } from '@/hooks/useSound';
 
 interface CodeBlockProps {
-  code: string;
+  code?: string;
   language?: string;
   title?: string;
   showLineNumbers?: boolean;
@@ -22,6 +22,11 @@ interface CodeBlockProps {
 
 // Simple syntax highlighting for common tokens
 const highlightCode = (code: string, language: string): React.ReactNode[] => {
+  // Defensive check
+  if (!code || typeof code !== 'string') {
+    return [<span key={0}>// No code provided</span>];
+  }
+
   // Keywords by language
   const keywords: Record<string, string[]> = {
     typescript: ['import', 'export', 'const', 'let', 'var', 'function', 'return', 'if', 'else', 'for', 'while', 'class', 'interface', 'type', 'extends', 'implements', 'async', 'await', 'from', 'default', 'true', 'false', 'null', 'undefined', 'new', 'this', 'typeof', 'void'],
@@ -32,46 +37,46 @@ const highlightCode = (code: string, language: string): React.ReactNode[] => {
   };
 
   const langKeywords = keywords[language] || keywords['typescript'];
-  
+
   const lines = code.split('\n');
-  
+
   return lines.map((line, lineIndex) => {
     // Process line for highlighting
     let processed = line;
-    
+
     // Highlight strings (both single and double quotes)
     processed = processed.replace(/(["'`])(?:(?!\1)[^\\]|\\.)*\1/g, '<span class="text-turmeric">$&</span>');
-    
+
     // Highlight comments
     processed = processed.replace(/(\/\/.*$)/gm, '<span class="text-mist/50 italic">$1</span>');
-    
+
     // Highlight keywords (word boundaries)
     langKeywords.forEach(keyword => {
       const regex = new RegExp(`\\b(${keyword})\\b`, 'g');
       processed = processed.replace(regex, '<span class="text-sapphire font-medium">$1</span>');
     });
-    
+
     // Highlight types (PascalCase words)
     processed = processed.replace(/\b([A-Z][a-zA-Z0-9]*)\b/g, (match) => {
       // Don't re-highlight if already in a span
       if (langKeywords.includes(match.toLowerCase())) return match;
       return `<span class="text-flamingo">${match}</span>`;
     });
-    
+
     // Highlight numbers
     processed = processed.replace(/\b(\d+)\b/g, '<span class="text-turmeric">$1</span>');
-    
+
     return (
-      <span 
-        key={lineIndex} 
-        dangerouslySetInnerHTML={{ __html: processed || '&nbsp;' }} 
+      <span
+        key={lineIndex}
+        dangerouslySetInnerHTML={{ __html: processed || '&nbsp;' }}
       />
     );
   });
 };
 
 export const CodeBlock: React.FC<CodeBlockProps> = ({
-  code,
+  code = '// No code provided',
   language = 'typescript',
   title,
   showLineNumbers = false,
@@ -80,6 +85,8 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   const { playClick } = useSound();
   const [copied, setCopied] = useState(false);
 
+  // Defensive check for code
+  const safeCode = code && typeof code === 'string' ? code : '// No code provided';
   const handleAction = () => {
     if (actionPhrase) {
       playClick();
@@ -90,7 +97,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   const handleCopy = async (e: React.MouseEvent) => {
     e.stopPropagation();
     try {
-      await navigator.clipboard.writeText(code);
+      await navigator.clipboard.writeText(safeCode);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -98,11 +105,10 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
     }
   };
 
-  const lines = code.split('\n');
-  const highlightedLines = highlightCode(code, language);
+  const highlightedLines = highlightCode(safeCode, language);
 
   return (
-    <div 
+    <div
       className={`glass-template-container ${actionPhrase ? 'glass-card-clickable' : ''}`}
       onClick={actionPhrase ? handleAction : undefined}
     >

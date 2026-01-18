@@ -1,369 +1,286 @@
-# 🤖 AGENT.md - Thoughtworks AI/Works Development Reference
+# 🤖 AGENT.md - Mobeus University Development Reference
 
-> **Internal Enablement Platform**
-> Last updated: January 15, 2026
-
----
-
-## 1. PROJECT OVERVIEW
-
-This is the **Thoughtworks AI/Works** internal enablement platform—an AI-powered guide for Thoughtworks employees learning about and selling the AI/Works **Agentic Delivery Platform**.
-
-### What This Platform Does
-Catherine (the AI agent) helps **Thoughtworks employees** understand the AI/Works Platform by:
-1. Explaining the Super Spec and Architectural Synthesis approach
-2. Training on the 3 Environments (Developer Portal, IDE, AIOps)
-3. Providing competitive intelligence for sales conversations
-4. **Enabling internal teams** to sell, build, and operate the platform
-
-### Core Components
-| Component | File/Location | Purpose |
-|-----------|---------------|---------|
-| **Catherine** | External AI | Voice agent that SPEAKS and calls `navigateToSection` |
-| **Glass** | This codebase | React app that DISPLAYS templates based on Catherine commands |
-| **glass-prompt.md** | Root | Instructions for Catherine on HOW to generate Glass JSON |
-| **tele-knowledge.md** | Root | Domain knowledge for Catherine on WHAT to say |
-
-### Context Circle
-```
-┌─────────────────────────────┐
-│     tele-knowledge.md       │  ← WHAT Catherine knows and says
-└─────────────┬───────────────┘
-              │
-              ▼
-┌─────────────────────────────┐
-│     glass-prompt.md         │  ← HOW Catherine shows it (templates + JSON)
-└─────────────┬───────────────┘
-              │
-              ▼
-┌─────────────────────────────┐
-│   Template Components       │  ← WHAT the user sees (React)
-└─────────────────────────────┘
-```
+> **Two-Agent Architecture Documentation**
+> Last updated: January 18, 2026
 
 ---
 
-## 2. TEMPLATE LIBRARY
+## 1. TWO-AGENT ARCHITECTURE
 
-**51 templates available** — See `glass-prompt.md` for complete reference with:
-- `GOOD FOR` — What each template is suited for
-- `Props` — Required and optional props
-- `actionPhrase` — Required for volumetric navigation
+This platform uses a **Two-Agent Architecture** where two different AI agents collaborate:
 
-**Source of truth:** `src/data/templateRegistry.ts` (lazy-loaded)
+### Build Agent (You - Claude Opus 4.5)
+- **When:** Development time (writing code, editing files)
+- **Does:** Creates templates, writes knowledge, defines shot prompts
+- **Context:** Full codebase access via IDE
+- **MCP Servers:** None (uses file system directly)
+- **Key Files:**
+  - `AGENT.md` (this file) — Your reference document
+  - `tele-knowledge.md` — Domain knowledge you maintain
+  - `glass-prompt.md` — Shot prompts you define
+  - `src/components/templates/*.tsx` — Templates you create
+
+### Runtime Agent (Catherine - OpenAI GPT 5.0)
+- **When:** Live user sessions (speaking, responding)
+- **Does:** Talks to users, calls `navigateToSection` tool
+- **Context:** Limited context window (knowledge + prompt files)
+- **MCP Servers:** Gmail, Calendar, etc. (future)
+- **Key Files:**
+  - `tele-knowledge.md` — What she knows
+  - `glass-prompt.md` — How she responds (tool definition)
+
+### How They Collaborate
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                      BUILD TIME                                   │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │              BUILD AGENT (Claude)                         │   │
+│  │  • Creates templates in src/components/templates/         │   │
+│  │  • Writes knowledge in tele-knowledge.md                  │   │
+│  │  • Defines shot prompts in glass-prompt.md                │   │
+│  │  • Registers templates in templateRegistry.ts             │   │
+│  └──────────────────────────────────────────────────────────┘   │
+│                            │                                      │
+│                            ▼                                      │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │              SHARED FILES                                 │   │
+│  │  • tele-knowledge.md → WHAT tele knows                    │   │
+│  │  • glass-prompt.md → HOW tele responds (tool definition)  │   │
+│  │  • Template Components → WHAT user sees                   │   │
+│  └──────────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                       RUNTIME                                     │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │              RUNTIME AGENT (Catherine/GPT 5.0)            │   │
+│  │  • Reads tele-knowledge.md for domain facts               │   │
+│  │  • Reads glass-prompt.md for response patterns            │   │
+│  │  • Calls navigateToSection() tool every turn              │   │
+│  │  • Speaks naturally to users                              │   │
+│  └──────────────────────────────────────────────────────────┘   │
+│                            │                                      │
+│                            ▼                                      │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │              GLASS (React App)                            │   │
+│  │  • Receives navigateToSection calls                       │   │
+│  │  • Renders templates from templateRegistry                │   │
+│  │  • Handles volumetric navigation (clicks → notifyTele)    │   │
+│  └──────────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 2. PROJECT OVERVIEW
+
+This is **Mobeus University** — a teaching platform where Catherine (the Runtime Agent) teaches developers how to build teles (conversational AI applications).
+
+### Core Identity
+- **Tele:** Catherine — A programming teacher
+- **Audience:** Developers learning to build teles
+- **Mission:** Teach the Tele Builder Hackathon curriculum
+- **Platform:** Mobeus Teleglass Platform
+
+### The Hackathon Curriculum (3 hours, 6 phases)
+| Phase | Time | Focus | Deliverable |
+|-------|------|-------|-------------|
+| 1. Voice Coding | 0:00-0:30 | Train tele by speaking | 5+ facts, 3+ rules |
+| 2. Vibe Coding | 0:30-1:00 | Iterate with Build Agent | Working concept |
+| 3. Templates | 1:00-1:30 | Create visual components | 2-3 custom templates |
+| 4. Knowledge | 1:30-2:00 | Structure domain knowledge | Knowledge section |
+| 5. Rules | 2:00-2:30 | Define shot prompts | 10+ shot prompts |
+| 6. Design | 2:30-3:00 | Polish and ship | Production-ready tele |
 
 ---
 
 ## 3. KEY FILES
 
+### Shared Between Agents
+| File | Purpose | Line Limit |
+|------|---------|------------|
+| `tele-knowledge.md` | Domain knowledge — what Catherine knows | 750 lines |
+| `glass-prompt.md` | Tool definition — templates, shot prompts | 1500 lines |
+
+### Build Agent Reference
 | File | Purpose |
 |------|---------|
-| `glass-prompt.md` | Catherine's instructions — templates, JSON structure, shot prompts |
-| `tele-knowledge.md` | Domain knowledge — AI/Works facts, competitive intel |
-| `src/data/templateRegistry.ts` | Template registry (50 templates, lazy-loaded) |
-| `src/data/assetRegistry.ts` | Pre-generated image assets |
-| `src/components/DynamicSectionLoader.tsx` | Renders templates from registry |
+| `AGENT.md` | This file — Build Agent reference |
+| `src/data/templateRegistry.ts` | Template registry (32+ templates) |
+| `.agent/workflows/*.md` | Workflow definitions |
 
----
-
-## 4. SMARTIMAGE SYSTEM (Hybrid Image Generation)
-
-The platform uses a **hybrid image system** that automatically chooses between pre-generated and AI-generated images.
-
-### How It Works
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    SmartImage Component                      │
-│                                                             │
-│   assetId ──► Check ASSET_REGISTRY ──► Found? ──► Load file │
-│                       │                                     │
-│                       └── Not found? ──► AI Generate ──► Cache │
-└─────────────────────────────────────────────────────────────┘
-```
-
-### Usage in Templates
-```tsx
-// Option 1: Use imageUrl (pre-generated, instant)
-<SmartImage assetId="/assets/hero.png" />
-
-// Option 2: Use imagePrompt (AI-generated, ~3-5s)
-<SmartImage assetId="Modern enterprise architecture diagram, blue and white" />
-```
-
-### Key Files
+### Glass Application
 | File | Purpose |
 |------|---------|
-| `src/components/ui/SmartImage.tsx` | Main image component |
-| `src/data/assetRegistry.ts` | Pre-generated asset definitions |
-| `src/utils/mobeusGenAI.ts` | AI image generation API |
-
-### Asset Registry Pattern
-```typescript
-// To add a pre-generated asset:
-export const ASSET_REGISTRY = {
-  "my-asset-id": {
-    id: "my-asset-id",
-    path: "/assets/my-image.png",
-    alt: "Description",
-    description: "What this image shows",
-    generationPrompt: "Fallback prompt if file missing",
-    category: "platform"
-  }
-};
-```
-
-### Best Practices
-| Scenario | Use |
-|----------|-----|
-| **Logos, avatars, icons** | Pre-generated (`imageUrl`) |
-| **Hero images, illustrations** | AI-generated (`imagePrompt`) |
-| **Product screenshots** | Pre-generated |
-| **Abstract concepts** | AI-generated |
-
-**⚠️ Note:** AI-generated images are cached per-session. Same prompt = instant second load.
+| `src/pages/Index.tsx` | Main page, navigateToSection implementation |
+| `src/components/TeleglassSection.tsx` | Avatar, chat, controls |
+| `src/components/DynamicSectionLoader.tsx` | Template renderer |
 
 ---
 
-## 5. CATHERINE INTEGRATION
+## 4. WORKFLOWS
 
-### navigateToSection Tool
-```json
-{
-  "badge": "BADGE_TEXT",
-  "title": "Section Title",
-  "subtitle": "Optional subtitle",
-  "generativeSubsections": [
-    { "id": "unique-id", "templateId": "TemplateName", "props": { } }
-  ]
-}
-```
+### /add-glass — Add Template
+Create a new visual component:
+1. Create `src/components/templates/[Name].tsx`
+2. Use centralized CSS classes from `src/index.css`
+3. Every clickable → `notifyTele(actionPhrase)`
+4. Register in `src/data/templateRegistry.ts`
+5. Add schema to `glass-prompt.md`
+6. Verify: `npx tsc --noEmit`
 
-### sendToTele / notifyTele
-Every interactive element MUST trigger Catherine with "Show" prefix:
-```typescript
-import { sendToTele } from "@/utils/teleInteraction";
-sendToTele("Show me more about this feature");  // ALWAYS starts with "Show"
-```
+### /add-knowledge — Add Domain Knowledge
+Add to `tele-knowledge.md`:
+1. Use compact YAML-like notation
+2. Focus on WHAT tele knows
+3. Keep under 750 lines
 
----
-
-## 6. 5 IMMUTABLE LAWS
-
-1. **Volumetric Navigation** — EVERY clickable element MUST call `notifyTele(actionPhrase)` — NO DEAD ENDS
-2. **Tool Signature Stability** — `navigateToSection` MUST NEVER change
-3. **No Hallucination** — If a feature isn't documented, acknowledge it
-4. **Mandatory Tool Call** — `navigateToSection` in EVERY Catherine response
-5. **Factual Accuracy** — Use EXACT figures from tele-knowledge.md
-
-### ⚠️ LAW #1: VOLUMETRIC NAVIGATION
-
-This is a **VOLUMETRIC CONVERSATIONAL PRODUCT**. Users navigate through an **endless volume of experiences** by clicking and continuing conversations. There is NO END — only infinite exploration.
-
-**The Rule**: When a user clicks ANY interactive element:
-- Cards, buttons, list items, metrics, icons, links, images...
-- It MUST trigger `notifyTele(actionPhrase)` to continue the conversation
-- Catherine responds with new templates
-- User clicks again → conversation continues → ∞
-
-**Implementation**:
-```tsx
-onClick={() => {
-  playClick();
-  notifyTele("Show me more about the Super Spec");
-}}
-```
-
-**Every template prop for clickable content MUST include `actionPhrase`.**
+### /tele-should — Add Shot Prompt
+Add response mapping to `glass-prompt.md`:
+1. Format: `USER: "phrase"` → `navigateToSection: {json}` → `TELE SAYS: "response"`
+2. Always call navigateToSection
+3. Keep under 1500 lines
 
 ---
 
-## 7. CENTRALIZED STYLING SYSTEM ⚠️ CRITICAL
+## 5. THE 5 IMMUTABLE LAWS
 
-### The Rule
-**ALL STYLES MUST BE CENTRALIZED IN `src/index.css`**
+1. **VOLUMETRIC NAVIGATION** — Every clickable MUST call `notifyTele(actionPhrase)`. NO DEAD ENDS.
+2. **TOOL SIGNATURE STABILITY** — `navigateToSection` signature MUST NEVER change.
+3. **NO HALLUCINATION** — If a feature isn't documented, acknowledge it.
+4. **MANDATORY TOOL CALL** — Catherine calls `navigateToSection` in EVERY response.
+5. **FACTUAL ACCURACY** — Use EXACT figures from `tele-knowledge.md`.
 
-Templates and components should NEVER use inline Tailwind classes for styling. Instead, they must use semantic CSS classes defined in the centralized style library.
+---
 
-### 8-Color Brand Palette
+## 6. CENTRALIZED STYLING
+
+**ALL STYLES MUST BE IN `src/index.css`**
+
+### Brand Colors
 | Color | Hex | Use |
 |-------|-----|-----|
-| **Mist** | `#EDF1F3` | Text, icons (white on dark) |
-| **Onyx** | `#000000` | Backgrounds |
-| **Flamingo** | `#F2617A` | CTAs, primary actions |
-| **Wave** | `#003D4F` | Dark green background |
-| **Turmeric** | `#CC850A` | Secondary buttons |
-| **Jade** | `#1A4D2E` | Success states |
-| **Sapphire** | `#47A1AD` | Default buttons |
-| **Amethyst** | `#6B5B95` | Accents |
+| Mist | `#EDF1F3` | Text, icons |
+| Onyx | `#000000` | Backgrounds |
+| Flamingo | `#F2617A` | CTAs, primary |
+| Wave | `#003D4F` | Dark teal bg |
+| Turmeric | `#CC850A` | Secondary |
+| Jade | `#1A4D2E` | Success |
+| Sapphire | `#47A1AD` | Default buttons |
+| Amethyst | `#6B5B95` | Accents |
 
-### Available CSS Classes
+### CSS Classes
+- **Containers:** `glass-template-container`, `glass-image-container`
+- **Cards:** `glass-card-minimal`, `glass-card-standard`, `glass-card-featured`, `glass-card-clickable`
+- **Typography:** `text-template-title`, `text-template-subtitle`, `text-template-content`
+- **Buttons:** `btn-cta`, `btn-sapphire`, `btn-turmeric`, `btn-ghost`
+- **Grids:** `template-grid-2`, `template-grid-3`, `template-grid-4`
 
-**Containers:**
-- `.glass-template-container` — Main template panel
-- `.glass-image-container` — Image sections
-
-**Cards:**
-- `.glass-card-minimal` — Subtle cards
-- `.glass-card-standard` — Standard cards
-- `.glass-card-featured` — Prominent cards
-- `.glass-card-clickable` — Interactive cursor
-
-**Buttons:**
-- `.btn-cta` — Flamingo (primary CTA)
-- `.btn-sapphire` — Sapphire (default)
-- `.btn-turmeric` — Turmeric (secondary)
-- `.btn-ghost` — Minimal outline
-
-**Typography:**
-- `.text-template-title` — Headings
-- `.text-template-subtitle` — Subtitles (flamingo)
-- `.text-template-content` — Body text
-- `.text-template-bullet` — List items
-
-**Layouts:**
-- `.template-grid-2`, `.template-grid-3`, `.template-grid-4` — Grid layouts
-- `.template-flex-row`, `.template-flex-col` — Flex layouts
-
-**Lists:**
-- `.template-list` — Container
-- `.template-list-item` — Row
-- `.template-list-icon` — Icon (flamingo)
-
-**Badges:**
-- `.template-badge` — Flamingo
-- `.template-badge-sapphire`, `.template-badge-turmeric`, `.template-badge-mist`
-
-**Metrics:**
-- `.template-metric`, `.template-metric-value`, `.template-metric-label`
-
-**Icons:**
-- `.template-icon-container`, `.template-icon-container-lg`
-
-**Dividers:**
-- `.template-divider`, `.template-divider-vertical`
-
-### ❌ DON'T DO THIS
+### ❌ DON'T
 ```tsx
-// BAD - Inline Tailwind classes
-<div className="bg-mist/10 border border-mist/20 rounded-2xl p-6 backdrop-blur-sm">
+<div className="bg-mist/10 border border-mist/20 rounded-2xl p-6">
 ```
 
-### ✅ DO THIS
+### ✅ DO
 ```tsx
-// GOOD - Centralized CSS class
 <div className="glass-template-container">
 ```
 
-### Adding New Styles
-When you need a new style that doesn't exist:
-1. **Add it to `src/index.css`** in the appropriate section
-2. **Name it semantically** (e.g., `.glass-card-pricing` not `.bg-mist-10-rounded`)
-3. **Document it** in this AGENT.md file
-4. **Use it** in templates via the class name
-
 ---
 
-## 8. DEVELOPMENT COMMANDS
+## 7. SMARTIMAGE SYSTEM
 
-```bash
-npm run dev -- --port 1010    # Start dev server
-npx tsc --noEmit              # Type check
-npm run build                 # Build production
+Hybrid image system that auto-chooses between pre-generated and AI-generated:
+
+```
+assetId → Check ASSET_REGISTRY → Found? → Load file
+                    │
+                    └── Not found? → AI Generate → Cache
+```
+
+### Usage
+```tsx
+<SmartImage 
+  assetId={imageUrl || imagePrompt}
+  alt={title}
+  className="smart-image"
+/>
 ```
 
 ---
 
-## 9. THE ENABLEMENT FLOW
+## 8. DEVELOPMENT
 
-### Catherine's 3-Phase Journey
-1. **Introduction** — Explain the Super Spec and 3-3-3 Delivery Model
-2. **Training** — Walk through 3 Environments, CodeConcise, Component Libraries
-3. **Sales Support** — Competitive intelligence, objection handling, pricing
+```bash
+npm run dev -- --port 3131    # Start dev server
+npx tsc --noEmit              # Type check
+npm run build                 # Production build
+```
 
-### Key Talking Points
-| Audience | Focus |
-|----------|-------|
-| **CIOs/Execs** | 3-3-3 Delivery: 3 days validate, 3 weeks prototype, 3 months production |
-| **Developers** | Zero Technical Debt: Regenerate from spec, don't patch code |
-| **Sales/Principals** | Competitive: Legacy modernization sets us apart from Globant, Ascendion |
-| **Architects** | Context Library: Institutional memory for compliance, security, standards |
+### Debug Mode
+- **Shift+K** — Toggle TeleAcknowledge debug toasts
 
 ---
 
-## 10. COMPETITIVE POSITIONING
+## 9. TEMPLATE SKELETON
 
-| Competitor | Their Claim | Our Counter |
-|------------|-------------|-------------|
-| **Globant** | New development | "We do new dev *and* legacy modernization" |
-| **Ascendion** | "4,000 agents" | "30 years of architectural wisdom. Quality over quantity." |
-| **Deloitte** | Strategy consulting | "Production-grade code and engineering credibility" |
-| **Sapient** | Code-to-spec accuracy | "The spec itself is architecturally sound" |
+```tsx
+/**
+ * [TemplateName]
+ * STYLING: Uses centralized CSS classes from index.css
+ * NAVIGATION: Every clickable element calls notifyTele()
+ */
+import React from 'react';
+import { notifyTele } from '@/utils/acknowledgmentHelpers';
+import { useSound } from '@/hooks/useSound';
 
----
+interface Props {
+  items?: Array<{ title: string; actionPhrase: string }>;
+}
 
-## 11. PRICING & ENGAGEMENT
+export const TemplateName: React.FC<Props> = ({ items = [] }) => {
+  const { playClick } = useSound();
+  
+  const handleAction = (actionPhrase: string) => {
+    playClick();
+    notifyTele(actionPhrase);
+  };
 
-| Phase | Duration | Description |
-|-------|----------|-------------|
-| **Phase 1** | 3 Days | Concept validation |
-| **Phase 2** | 3 Weeks | Working prototype |
-| **Phase 3** | 3 Months | Production system |
-
-**Pricing Range:** $675K - $2.35M for fixed-price engagements (platform licensing is custom)
-
----
-
-## 12. WORKFLOWS (Slash Commands)
-
-Use these workflows to modify the platform:
-
-| Workflow | Command | Purpose |
-|----------|---------|---------|
-| **Add Experience** | `/add-glass` | Add a new template (experience) to the platform |
-| **Add Knowledge** | `/add-knowledge` | Add domain knowledge to Catherine (what she knows) |
-| **Tele Should** | `/tele-should` | Add shot prompts (how Catherine responds to specific requests) |
-
-### /add-glass
-Add a new template component:
-1. Create template in `src/components/templates/[Name].tsx`
-2. Register in `src/data/templateRegistry.ts`
-3. Add schema to `glass-prompt.md`
-4. Add shot prompt example
-5. Verify with `npx tsc --noEmit`
-
-### /add-knowledge
-Add domain knowledge to `tele-knowledge.md`:
-- Keep under 600 lines
-- Use bullet format with key points
-- Include example phrases Catherine might say
-
-### /tele-should
-Add shot prompts to `glass-prompt.md`:
-- Keep under 1200 lines
-- Format: USER trigger → JSON → CATHERINE SAYS
-- Follow JSON structure: `badge`, `title`, `subtitle`, `generativeSubsections`
+  return (
+    <div className="glass-template-container">
+      {items.map((item, i) => (
+        <div 
+          key={i} 
+          className="glass-card-standard glass-card-clickable"
+          onClick={() => handleAction(item.actionPhrase)}
+        >
+          {item.title}
+        </div>
+      ))}
+    </div>
+  );
+};
+```
 
 ---
 
-## 13. ROLE-PLAY TRAINING MODE
+## 10. QUICK REFERENCE
 
-Catherine can role-play as buyer personas to help salespeople practice their pitch.
+### Navigation Flow
+```
+User clicks → playClick() → notifyTele(actionPhrase) → sendToTele() 
+  → UIFramework.TellTele() → Catherine processes → navigateToSection() 
+  → DynamicSectionLoader renders → User sees new templates → ∞
+```
 
-### Trigger Phrases
-- "Practice with me" / "Role-play as a CIO"
-- "Pretend you're a skeptical CFO"
-- "Train me on objection handling"
-
-### How It Works
-1. Catherine adopts a persona (CIO, CFO, CTO, VP Engineering, CISO)
-2. Poses challenging questions based on that persona's priorities
-3. Scores the salesperson's response (1-10) on clarity, relevance, proof points, objection handling, next steps
-4. Provides specific feedback and better phrase suggestions
-5. After 3-5 exchanges, gives overall assessment with action items
-
-### Template Used
-- `RolePlayScore` — Displays score breakdown, what worked, improvements, and action items
+### Window Globals
+- `window.navigateToSection(data)` — Main tool for Catherine → Glass
+- `window.showEmotion(emotion)` — Trigger avatar emotion
+- `window.teleConnect` — Connect avatar
+- `window.teleNavigation` — Navigation API
 
 ---
 
-*This document is the authoritative technical reference for the Thoughtworks AI/Works platform.*
+*Mobeus University — Teaching the World to Build Teles*
+*Two-Agent Architecture: Build Agent (Claude) + Runtime Agent (Catherine/GPT)*
