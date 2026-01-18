@@ -820,14 +820,14 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
                   className={`chat-message-bubble max-w-[75%] sm:max-w-[70%] p-3 sm:p-4 rounded-2xl
                   transform transition-all duration-500
                   hover:scale-[1.01]
-                  border backdrop-blur-3xl text-sm sm:text-base text-mist`}
+                  border backdrop-blur-md text-sm sm:text-base text-mist`}
                   style={{
                     background: msg.role === 'user'
-                      ? 'rgba(17, 34, 51, 0.45)'
-                      : 'rgba(17, 34, 51, 0.20)',
+                      ? 'rgba(245, 245, 245, 0.12)'
+                      : 'rgba(245, 245, 245, 0.06)',
                     borderColor: msg.role === 'user'
-                      ? 'rgba(17, 34, 51, 0.55)'
-                      : 'rgba(17, 34, 51, 0.30)'
+                      ? 'rgba(245, 245, 245, 0.20)'
+                      : 'rgba(245, 245, 245, 0.10)'
                   }}>
                   {/* Tool Call and RAG Search Indicators (only shown in Smart Mode) */}
                   {isSmartMode && msg.role === 'assistant' && (msg as any).metadata && (
@@ -916,10 +916,10 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
                 <Bot className="chat-icon w-4 h-4 sm:w-5 sm:h-5 text-mist" />
               </div>
               <div
-                className="backdrop-blur-3xl p-3 sm:p-4 rounded-2xl border"
+                className="backdrop-blur-md p-3 sm:p-4 rounded-2xl border"
                 style={{
-                  background: 'rgba(17, 34, 51, 0.35)',
-                  borderColor: 'rgba(17, 34, 51, 0.45)'
+                  background: 'rgba(245, 245, 245, 0.06)',
+                  borderColor: 'rgba(245, 245, 245, 0.10)'
                 }}>
                 <div className="flex space-x-1.5">
                   <div className="w-2 h-2 bg-mist/60 rounded-full animate-typing-pulse"></div>

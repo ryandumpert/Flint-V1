@@ -1,16 +1,41 @@
 import React, { useState, useEffect } from 'react';
 
 /**
- * STATIC BUILD INFO
- * Updated manually by engineer - do NOT rely on automated generation
- * Last updated: Jan 16, 2026, 1:04 AM EST
+ * BUILD INFO
+ * Uses Vite's define feature to inject build timestamp at compile time
+ * __BUILD_TIMESTAMP__ is replaced during `npm run build` or `npm run dev`
  */
-const STATIC_BUILD_INFO = {
-    hash: 'static',
-    timestamp: 'Jan 16, 2026, 1:04 AM',
-    author: 'Richie Etwaru',
-    branch: 'main',
+
+// Build-time injected values (defined in vite.config.ts)
+declare const __BUILD_TIMESTAMP__: string;
+
+const getBuildInfo = () => {
+    try {
+        return {
+            timestamp: typeof __BUILD_TIMESTAMP__ !== 'undefined'
+                ? __BUILD_TIMESTAMP__
+                : new Date().toLocaleString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric',
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    hour12: true,
+                    timeZone: 'America/New_York'
+                }),
+            author: 'Richie Etwaru',
+            branch: 'main',
+        };
+    } catch {
+        return {
+            timestamp: 'Build time unknown',
+            author: 'Richie Etwaru',
+            branch: 'main',
+        };
+    }
 };
+
+const BUILD_INFO = getBuildInfo();
 
 export const GitVersionIndicator: React.FC = () => {
     const [isChatOpen, setIsChatOpen] = useState(false);
@@ -44,10 +69,10 @@ export const GitVersionIndicator: React.FC = () => {
             }}
         >
             <div style={{ fontSize: '10px', opacity: 0.6 }}>Last Compiled</div>
-            <div style={{ fontWeight: 'bold' }}>{STATIC_BUILD_INFO.timestamp}</div>
+            <div style={{ fontWeight: 'bold' }}>{BUILD_INFO.timestamp}</div>
             <div style={{ fontSize: '10px', opacity: 0.6, marginTop: '4px' }}>Engineer</div>
-            <div style={{ fontWeight: 'bold' }}>{STATIC_BUILD_INFO.author}</div>
-            <div style={{ fontSize: '9px', opacity: 0.4, marginTop: '4px' }}>{STATIC_BUILD_INFO.hash} · {STATIC_BUILD_INFO.branch}</div>
+            <div style={{ fontWeight: 'bold' }}>{BUILD_INFO.author}</div>
+            <div style={{ fontSize: '9px', opacity: 0.4, marginTop: '4px' }}>{BUILD_INFO.branch}</div>
         </div>
     );
 };
