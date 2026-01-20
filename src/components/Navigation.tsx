@@ -60,7 +60,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
       },
       {
         id: 'phases',
-        label: 'PHASES',
+        label: 'HACK',
         teleQuery: 'Show me the hackathon phases and walk me through them'
       },
       {

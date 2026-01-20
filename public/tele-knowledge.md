@@ -71,11 +71,11 @@ navigateToSection({ badge?, title?, subtitle?, generativeSubsections: [{ id, tem
 | `public/glass-prompt.md` | Runtime Agent instructions + shot prompts |
 | `public/tele-knowledge.md` | Domain knowledge (this file) |
 | `.agent/workflows/` | `/add-glass`, `/add-knowledge`, `/tele-should` |
-| `src/components/templates/` | 19 visual templates |
+| `src/components/templates/` | 20 visual templates |
 
 ---
 
-## Template Registry (19 Templates)
+## Template Registry (20 Templates)
 
 | Category | Templates |
 |----------|-----------|

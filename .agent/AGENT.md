@@ -123,7 +123,7 @@ This is **Mobeus University** — a teaching platform where Catherine (the Runti
 | File | Purpose |
 |------|---------|
 | `AGENT.md` | This file — Build Agent reference |
-| `src/data/templateRegistry.ts` | Template registry (19 templates) |
+| `src/data/templateRegistry.ts` | Template registry (20 templates) |
 | `.agent/workflows/*.md` | Workflow definitions |
 
 ### Glass Application
@@ -135,7 +135,7 @@ This is **Mobeus University** — a teaching platform where Catherine (the Runti
 
 ---
 
-## 4. TEMPLATE REGISTRY (19 Templates)
+## 4. TEMPLATE REGISTRY (20 Templates)
 
 ### Current Templates
 | Category | Templates |
@@ -146,6 +146,7 @@ This is **Mobeus University** — a teaching platform where Catherine (the Runti
 | **Layout & Content** | SplitContent, AccordionList |
 | **Tools & Code** | ToolCard, CodeBlock |
 | **Live Viewers** | KnowledgeFileViewer, PromptFileViewer, FolderStructure |
+| **Platform Language** | CopperWireLanguage |
 
 ---
 

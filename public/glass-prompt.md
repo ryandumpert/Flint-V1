@@ -69,7 +69,7 @@ If this rule is violated, the response is INVALID.
 
 ** RICHIE ETWARU - UP TO HERE **
 
-## 📚 TEMPLATE LIBRARY (19 Templates)
+## 📚 TEMPLATE LIBRARY (20 Templates)
 
 ### Hackathon
 | Template | Use For | Props |
@@ -111,6 +111,29 @@ If this rule is violated, the response is INVALID.
 ---
 
 ## 🎯 SHOT PROMPTS
+
+### The Copper Wire Language
+**USER:** "Copper wire language" / "Naming structure" / "How do I remember" / "Programming language" / "What are the copper wires" / "Teach me the language"
+
+navigateToSection:
+```json
+{
+  "badge": "THE LANGUAGE",
+  "title": "The Copper Wire Language™",
+  "subtitle": "The human language for programming artificial intelligence",
+  "generativeSubsections": [
+    {
+      "id": "copper-wire-language",
+      "templateId": "CopperWireLanguage",
+      "props": {}
+    }
+  ]
+}
+```
+
+TELE SAYS: "This is The Copper Wire Language — how humans remember to program artificial intelligence. Memory, Reflexes, Panels, Powers, and the Bridge that connects them. Your creativity, our labor. Mobeus gives you the copper wires to program a conversational cloud."
+
+---
 
 ### 0. Go Home
 **USER:** "Go home" / "Start over" / "Welcome"
@@ -449,7 +472,7 @@ navigateToSection:
 ```json
 {
   "badge": "REFERENCE",
-  "title": "Template Library (19 Templates)",
+  "title": "Template Library (20 Templates)",
   "subtitle": "Visual components your tele can display — all created via /add-glass",
   "generativeSubsections": [
     {
@@ -479,7 +502,7 @@ navigateToSection:
 }
 ```
 
-TELE SAYS: "Here are all 19 templates available. At the hackathon, you'll use /add-glass to create more. Each template is a React component your tele can display."
+TELE SAYS: "Here are all 20 templates available. At the hackathon, you'll use /add-glass to create more. Each template is a React component your tele can display."
 
 ---
 
@@ -672,7 +695,7 @@ navigateToSection:
           { "title": "Review Phases", "description": "See the 6 phases you'll complete", "badge": "NEXT", "actionPhrase": "Show me the hackathon phases" },
           { "title": "Explore Templates", "description": "See all 19 visual components", "badge": "EXPLORE", "actionPhrase": "Show me all templates" },
           { "title": "Learn Slash Commands", "description": "The magic of /add-glass and more", "badge": "TOOLS", "actionPhrase": "Explain the slash commands" },
-          { "title": "Start Fresh", "description": "Go back to the welcome screen", "badge": "HOME", "actionPhrase": "Go home" }
+          { "title": "Start Fresh", "description": "Go back to the welcome screen", "badge": "WIRE", "actionPhrase": "Go home" }
         ],
         "columns": 4
       }

@@ -170,4 +170,15 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
      * PROPS: { title?, subtitle?, structure?[{ name, type, description, children? }] }
      */
     FolderStructure: lazy(() => import("@/components/templates/FolderStructure").then(m => ({ default: m.FolderStructure }))),
+
+    // ==========================================
+    // PLATFORM LANGUAGE
+    // ==========================================
+
+    /**
+     * CopperWireLanguage
+     * USE WHEN: User asks about naming conventions, the language for programming AI, copper wires
+     * PROPS: {} (static template with complete naming structure)
+     */
+    CopperWireLanguage: lazy(() => import("@/components/templates/CopperWireLanguage").then(m => ({ default: m.CopperWireLanguage }))),
 };
