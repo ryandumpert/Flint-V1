@@ -1011,6 +1011,37 @@ const Index = () => {
         console.log(`[scrollPage] Scrolled ${normalizedDirection} by ${scrollAmount}px`);
         return `Scrolled ${normalizedDirection} by ${scrollAmount}px`;
       },
+      setPageContrast: (mode: string) => {
+        const normalizedMode = mode?.trim().toLowerCase();
+        if (!['high', 'normal', 'low'].includes(normalizedMode)) {
+           console.warn('[setPageContrast] Invalid mode:', mode);
+           return 'Invalid mode';
+        }
+
+        const rootHtml = document.documentElement;
+        
+        switch (normalizedMode) {
+          case 'high':
+            rootHtml.style.filter = 'contrast(150%)';
+            break;
+          case 'low': 
+             rootHtml.style.filter = 'contrast(80%)';
+             break;
+          case 'normal':
+          default:
+            rootHtml.style.filter = 'none';
+            break;
+        }
+
+        console.log(`[setPageContrast] Set contrast to ${normalizedMode}`);
+        return true;
+      },
+      getPageContrast: () => {
+         const rootHtml = document.documentElement;
+         if (rootHtml.style.filter.includes('150%')) return 'high';
+         if (rootHtml.style.filter.includes('80%')) return 'low';
+         return 'normal';
+      },
     };
 
     // Expose navigation API to window
@@ -1061,6 +1092,8 @@ const Index = () => {
       window.removeEventListener("closeCurrentSection", handleCloseCurrentSection);
       delete (window as any).teleNavigation;
       delete (window as any).navigateToSection;
+      delete (window as any).setPageContrast;
+      delete (window as any).getPageContrast;
       delete (window as any).navigationHistory;
     };
   }, [activeSection, activeSubSection, handleSectionChange, navigateBack, navigateForward, addToHistory, navigationHistory, historyIndex, navigationBackData]);

@@ -38,6 +38,8 @@ declare global {
       residualValue?: number;
     }) => void;
     scrollPage?: (direction: 'up' | 'down', amount?: 'little' | 'medium' | 'lot' | 'max' | number) => string;
+    setPageContrast?: (mode: 'high' | 'normal' | 'low') => boolean;
+    getPageContrast?: () => 'high' | 'normal' | 'low';
   }
 
 }

@@ -45,7 +45,9 @@ const myFunctionBridge = {
 };
 ```
 
-3. add tool call accepted type as a coment above the function. For example
+3. Add the **Tool Arguments Schema** as a comment immediately above the bridge object. This MUST start with `// Output Format Schema:` followed by the JSON schema defining the parameters your function accepts.
+
+> **Note:** This schema tells the AI exactly what arguments to pass when calling your function.
 
 ```javascript
 // Output Format Schema:

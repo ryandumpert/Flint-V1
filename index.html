@@ -417,6 +417,45 @@
 
 
 
+      // Output Format Schema:
+      // {
+      //   "type": "object",
+      //   "properties": {
+      //     "mode": { 
+      //       "type": "string",
+      //       "enum": ["high", "normal", "low"],
+      //       "description": "The contrast mode to set. 'high' increases contrast, 'low' decreases it, 'normal' resets it."
+      //     }
+      //   },
+      //   "required": ["mode"],
+      //   "additionalProperties": false
+      // }
+      const contrastBridge = {
+        setPageContrast(mode) {
+          // Validate mode
+          if (typeof mode !== "string") return undefined;
+          const normalizedMode = mode.trim().toLowerCase();
+          if (!["high", "normal", "low"].includes(normalizedMode)) return undefined;
+
+          if (
+            typeof window !== "undefined" &&
+            typeof window.setPageContrast === "function"
+          ) {
+            return window.setPageContrast(normalizedMode);
+          }
+          return callTeleMethod("setPageContrast", [normalizedMode]);
+        },
+        getPageContrast() {
+          if (
+            typeof window !== "undefined" &&
+            typeof window.getPageContrast === "function"
+          ) {
+            return window.getPageContrast();
+          }
+          return callTeleMethod("getPageContrast");
+        }
+      };
+
       const existingRegistry =
         typeof window !== "undefined" &&
           window.UIFrameworkSiteFunctions &&
@@ -435,6 +474,7 @@
         ...webcamBridge,
         ...zoomBridge,
         ...scrollPageBridge,
+        ...contrastBridge,
       };
 
 
@@ -472,6 +512,20 @@
         typeof window.flashTele !== "function"
       ) {
         window.flashTele = () => flashBridge.flashTele();
+      }
+
+      if (
+        typeof window !== "undefined" &&
+        typeof window.setPageContrast !== "function"
+      ) {
+        window.setPageContrast = (mode) => contrastBridge.setPageContrast(mode);
+      }
+      
+      if (
+        typeof window !== "undefined" &&
+        typeof window.getPageContrast !== "function"
+      ) {
+        window.getPageContrast = () => contrastBridge.getPageContrast();
       }
 
 
