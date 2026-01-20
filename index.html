@@ -164,92 +164,7 @@
         },
       };
 
-      const emotionBridge = {
-        showEmotion(emotion) {
-          if (typeof emotion !== "string") return undefined;
-          const normalized = emotion.trim().toLowerCase();
-          if (!["gratitude", "happy", "agree", "calm"].includes(normalized))
-            return undefined;
 
-          if (
-            typeof window !== "undefined" &&
-            typeof window.showEmotion === "function"
-          ) {
-            window.showEmotion(normalized);
-            return true;
-          }
-          return undefined;
-        },
-      };
-
-      const carColorBridge = {
-        setCarColor(color) {
-          if (typeof color !== "string") return undefined;
-          const normalized = color.trim().toLowerCase();
-          if (!["white", "red", "black", "silver"].includes(normalized))
-            return undefined;
-
-          if (
-            typeof window !== "undefined" &&
-            typeof window.setCarColor === "function"
-          ) {
-            return window.setCarColor(normalized);
-          }
-
-          const nav =
-            typeof window !== "undefined" ? window.teleNavigation : undefined;
-          if (nav && typeof nav.setCarColor === "function") {
-            return nav.setCarColor(normalized);
-          }
-          return undefined;
-        },
-      };
-
-      const checkCompleteBridge = {
-        checkComplete(identifier) {
-          const validIdentifiers = [
-            "verify-identity",
-            "access-reset-portal",
-            "complete-reset",
-            "confirm-change",
-            "test-new-password",
-          ];
-
-          // Handle array of identifiers
-          if (Array.isArray(identifier)) {
-            const normalized = identifier
-              .map((id) =>
-                typeof id === "string" ? id.trim().toLowerCase() : null
-              )
-              .filter((id) => id && validIdentifiers.includes(id));
-
-            if (normalized.length === 0) return undefined;
-
-            if (
-              typeof window !== "undefined" &&
-              typeof window.checkComplete === "function"
-            ) {
-              window.checkComplete(normalized);
-              return true;
-            }
-            return undefined;
-          }
-
-          // Handle single identifier
-          if (typeof identifier !== "string") return undefined;
-          const normalized = identifier.trim().toLowerCase();
-          if (!validIdentifiers.includes(normalized)) return undefined;
-
-          if (
-            typeof window !== "undefined" &&
-            typeof window.checkComplete === "function"
-          ) {
-            window.checkComplete(normalized);
-            return true;
-          }
-          return undefined;
-        },
-      };
 
       const evidenceBridge = {
         dynamicDataLoader(payload) {
@@ -298,22 +213,7 @@
         }
       };
 
-      const alertBridge = {
-        showAlert(message) {
-          if (typeof message !== "string" || !message.trim()) {
-            return undefined;
-          }
-          if (
-            typeof window !== "undefined" &&
-            typeof window.alert === "function"
-          ) {
-            const normalized = message.trim();
-            window.alert(normalized);
-            return true;
-          }
-          return undefined;
-        },
-      };
+
 
       const externalCallBridge = {
         async externalCall(question) {
@@ -455,30 +355,67 @@
         },
       };
 
-      const greyscaleBridge = {
-        toggleGreyscale(enable) {
-          let shouldEnable = enable;
-          const html = document.documentElement;
+      const scrollPageBridge = {
+        scrollPage(direction, amount) {
+          // Validate direction
+          if (typeof direction !== "string") return undefined;
+          const normalizedDirection = direction.trim().toLowerCase();
+          if (!["up", "down"].includes(normalizedDirection)) return undefined;
 
-          // If argument is string "true"/"false" (from agent sometimes) handle that
-          if (typeof enable === 'string') {
-            shouldEnable = enable.toLowerCase() === 'true';
+          // Parse amount - default to 'medium' if not specified
+          let scrollAmount = 400; // medium default (pixels)
+          if (typeof amount === "number") {
+            scrollAmount = Math.abs(amount);
+          } else if (typeof amount === "string") {
+            const normalizedAmount = amount.trim().toLowerCase();
+            switch (normalizedAmount) {
+              case "little":
+              case "small":
+              case "slight":
+                scrollAmount = 150;
+                break;
+              case "medium":
+              case "normal":
+                scrollAmount = 400;
+                break;
+              case "lot":
+              case "large":
+              case "much":
+              case "more":
+                scrollAmount = 800;
+                break;
+              case "max":
+              case "maximum":
+              case "all":
+              case "bottom":
+              case "top":
+                scrollAmount = normalizedDirection === "down"
+                  ? document.body.scrollHeight
+                  : window.scrollY;
+                break;
+              default:
+                // Try to parse as number
+                const parsed = parseInt(normalizedAmount, 10);
+                if (!isNaN(parsed)) scrollAmount = Math.abs(parsed);
+            }
           }
 
-          // If boolean/parsed is undefined, toggle
-          if (shouldEnable === undefined || shouldEnable === null) {
-            shouldEnable = html.style.filter !== "grayscale(100%)";
-          }
+          // Calculate scroll position
+          const scrollY = normalizedDirection === "down"
+            ? scrollAmount
+            : -scrollAmount;
 
-          if (shouldEnable) {
-            html.style.filter = "grayscale(100%)";
-            return "Greyscale ON";
-          } else {
-            html.style.filter = "";
-            return "Greyscale OFF";
-          }
-        }
+          // Smooth scroll
+          window.scrollBy({
+            top: scrollY,
+            behavior: "smooth"
+          });
+
+          return `Scrolled ${normalizedDirection} by ${scrollAmount}px`;
+        },
       };
+
+
 
       const existingRegistry =
         typeof window !== "undefined" &&
@@ -491,25 +428,16 @@
         ...existingRegistry,
         ...navigationBridge,
         ...flashBridge,
-        ...emotionBridge,
-        ...carColorBridge,
-        ...checkCompleteBridge,
         ...evidenceBridge,
-        ...alertBridge,
         ...authBridge,
         ...externalCallBridge,
         ...volumeBridge,
         ...webcamBridge,
         ...zoomBridge,
-        ...greyscaleBridge,
+        ...scrollPageBridge,
       };
 
-      if (
-        typeof window !== "undefined" &&
-        typeof window.showAlert !== "function"
-      ) {
-        window.showAlert = (message) => alertBridge.showAlert(message);
-      }
+
 
       if (
         typeof window !== "undefined" &&
@@ -546,12 +474,7 @@
         window.flashTele = () => flashBridge.flashTele();
       }
 
-      if (
-        typeof window !== "undefined" &&
-        typeof window.toggleGreyscale !== "function"
-      ) {
-        window.toggleGreyscale = (enable) => greyscaleBridge.toggleGreyscale(enable);
-      }
+
 
       try {
         window.dispatchEvent(

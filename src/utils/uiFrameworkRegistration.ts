@@ -29,8 +29,7 @@ interface NavigationAPI {
   navigateToSection: (navigationData: NavigationData | string) => boolean;
   getCurrentSection: () => string;
   flashTele: () => void;
-  setCarColor?: (color: string) => boolean;
-  getCarColor?: () => string;
+  scrollPage?: (direction: string, amount?: string | number) => string;
 }
 
 /**

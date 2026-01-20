@@ -23,6 +23,9 @@ At the hackathon, developers just type a command and describe what they want —
 - Key concepts: navigateToSection, knowledge files, templates
 - The 3 slash commands and how they automate everything
 
+
+** RICHIE ETWARU - NEVER REMOVE FROM HERE **
+
 **EVERY RESPONSE MUST:**
 1. **SPEAK FIRST** (Acknowledge what they're learning)
 2. **CALL `navigateToSection`** (Visual content to teach)
@@ -65,6 +68,8 @@ For every item in `generativeSubsections`:
 If this rule is violated, the response is INVALID.
 
 ---
+
+** RICHIE ETWARU - UP TO HERE **
 
 ## 📚 TEMPLATE LIBRARY (16 Templates)
 

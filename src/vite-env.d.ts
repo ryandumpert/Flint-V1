@@ -16,7 +16,6 @@ declare global {
       getCurrentSection: () => string;
     };
     navigateToSection: (data: any) => boolean;
-    showEmotion: (emotion: 'gratitude' | 'happy' | 'agree' | 'calm') => void;
     teleVolume: {
       setVolume: (level: number) => void;
       adjustVolume: (delta: number) => void;
@@ -38,6 +37,7 @@ declare global {
       defaultTerm?: number;
       residualValue?: number;
     }) => void;
+    scrollPage?: (direction: 'up' | 'down', amount?: 'little' | 'medium' | 'lot' | 'max' | number) => string;
   }
 
 }

@@ -8,7 +8,7 @@ import { AvatarState } from "@/components/TeleglassIcons";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { SectionLoadingFallback } from "@/components/SectionLoadingFallback";
 import { SEO, sectionSEO } from "@/components/SEO";
-import { showEmotion } from "@/utils/emotionEffect";
+
 import { notifyTele, handleAcknowledgment, verifyAuthCode, toggleTeleAcknowledgeDebug } from "@/utils/acknowledgmentHelpers";
 import { sendSectionContextToTele } from "@/utils/contextEnrichment";
 import { EvidenceData } from "@/types/evidence";
@@ -540,14 +540,7 @@ const Index = () => {
     }
   }, [authError]);
 
-  // Set up showEmotion globally as soon as component mounts
-  useEffect(() => {
-    (window as any).showEmotion = showEmotion;
 
-    return () => {
-      delete (window as any).showEmotion;
-    };
-  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -957,23 +950,65 @@ const Index = () => {
         setShowFlash(true);
         setTimeout(() => setShowFlash(false), 250);
       },
-      // Car color functions - globally accessible like navigateToSection
-      // Use wrapper functions to ensure they work even if CarColorContext hasn't initialized yet
-      setCarColor: (color: string) => {
-        const fn = (window as any).setCarColor;
-        if (typeof fn === 'function') {
-          return fn(color);
+      // Scroll page up or down with configurable amount
+      scrollPage: (direction: string, amount?: string | number) => {
+        const normalizedDirection = direction?.trim().toLowerCase();
+        if (!['up', 'down'].includes(normalizedDirection)) {
+          console.warn('[scrollPage] Invalid direction:', direction);
+          return 'Invalid direction';
         }
-        console.warn('[UIFramework] setCarColor not yet available');
-        return false;
-      },
-      getCarColor: () => {
-        const fn = (window as any).getCarColor;
-        if (typeof fn === 'function') {
-          return fn();
+
+        // Parse amount - default to 'medium' if not specified
+        let scrollAmount = 400; // medium default (pixels)
+        if (typeof amount === 'number') {
+          scrollAmount = Math.abs(amount);
+        } else if (typeof amount === 'string') {
+          const normalizedAmount = amount.trim().toLowerCase();
+          switch (normalizedAmount) {
+            case 'little':
+            case 'small':
+            case 'slight':
+              scrollAmount = 150;
+              break;
+            case 'medium':
+            case 'normal':
+              scrollAmount = 400;
+              break;
+            case 'lot':
+            case 'large':
+            case 'much':
+            case 'more':
+              scrollAmount = 800;
+              break;
+            case 'max':
+            case 'maximum':
+            case 'all':
+            case 'bottom':
+            case 'top':
+              scrollAmount = normalizedDirection === 'down'
+                ? document.body.scrollHeight
+                : window.scrollY;
+              break;
+            default:
+              // Try to parse as number
+              const parsed = parseInt(normalizedAmount, 10);
+              if (!isNaN(parsed)) scrollAmount = Math.abs(parsed);
+          }
         }
-        console.warn('[UIFramework] getCarColor not yet available');
-        return null;
+
+        // Calculate scroll position
+        const scrollY = normalizedDirection === 'down'
+          ? scrollAmount
+          : -scrollAmount;
+
+        // Smooth scroll
+        window.scrollBy({
+          top: scrollY,
+          behavior: 'smooth'
+        });
+
+        console.log(`[scrollPage] Scrolled ${normalizedDirection} by ${scrollAmount}px`);
+        return `Scrolled ${normalizedDirection} by ${scrollAmount}px`;
       },
     };
 
@@ -1093,7 +1128,7 @@ const Index = () => {
     const isVerified = verifyAuthCode(otp);
     if (isVerified) {
       notifyTele("Show me a success message that I have successfully authenticated and now have access behind the NDA firewall");
-      window.showEmotion("happy");
+
       if (backData) {
         window.teleNavigation.navigateToSection(backData);
       }

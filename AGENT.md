@@ -311,6 +311,68 @@ User clicks → playClick() → notifyTele(actionPhrase) → sendToTele()
 
 ---
 
+## 12. SITE FUNCTION REGISTRATION
+
+Site functions are how the **Runtime Agent (Catherine)** operates the **Glass (React app)**. When you create a new site function, follow this complete process:
+
+### Registration Steps
+
+| Step | File | Action |
+|------|------|--------|
+| **1** | `index.html` | Create bridge in `UIFrameworkSiteFunctions` registry |
+| **2** | `vite-env.d.ts` | Declare TypeScript types for `Window` interface |
+| **3** | `uiFrameworkRegistration.ts` | Add to `NavigationAPI` interface |
+| **4** | `Index.tsx` | Implement function in `teleNavigation` object |
+| **5** | `Index.tsx` | Clean up in useEffect return |
+| **6** | **CONNECT TO APP** | ⚠️ Backend discovers new functions on first connection |
+
+### ⚠️ CRITICAL: Backend Discovery
+
+**When the app loads for the first time and connects to the backend:**
+
+1. The UIFramework reads `window.UIFrameworkSiteFunctions` registry
+2. Backend compares against its current list of registered functions
+3. **New functions are automatically discovered and registered**
+4. Backend now has an updated list of available site functions
+5. Runtime Agent (Catherine) can now call the new function
+
+**This means:** After adding a new site function, you MUST load the app and establish a connection for the backend to discover and register it. The function won't be available to Catherine until this discovery happens.
+
+### Bridge Pattern (index.html)
+
+```javascript
+const myFunctionBridge = {
+  myNewFunction(param) {
+    if (typeof param !== "string") return undefined;
+    if (typeof window !== "undefined" && 
+        typeof window.myNewFunction === "function") {
+      return window.myNewFunction(param);
+    }
+    return undefined;
+  },
+};
+
+// Merge into registry
+window.UIFrameworkSiteFunctions = {
+  ...existingRegistry,
+  ...myFunctionBridge,
+};
+```
+
+### Existing Site Functions
+| Function | Purpose |
+|----------|---------|
+| `navigateToSection` | Main navigation tool — renders templates |
+| `flashTele` | Flash avatar ring effect |
+| `setVolume` / `adjustVolume` / `getVolume` | Avatar volume control |
+| `startWebcam` / `stopWebcam` | Webcam control |
+| `zoomLevel` | UI zoom control |
+| `externalCall` | External API integration |
+| `dynamicDataLoader` | Load dynamic JSON data |
+| `auther` / `checker` / `getCookieValue` | Authentication functions |
+
+---
+
 *Mobeus University — Teaching the World to Build Teles*
 *Two-Agent Architecture: Build Agent (Claude) + Runtime Agent (Catherine/GPT 5.0)*
 *Catherine v63.0 | Zero Friction Release | January 18, 2026*

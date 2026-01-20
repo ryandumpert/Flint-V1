@@ -10,6 +10,7 @@ import { useUIFrameworkChat } from "@/hooks/useUIFrameworkChat";
 import { ToolCallIndicator } from "@/components/chat/ToolCallIndicator";
 import { RAGSearchIndicator } from "@/components/chat/RAGSearchIndicator";
 import { MessageFeedback } from "@/components/chat/MessageFeedback";
+import { SmartModeToggle } from "@/components/chat/SmartModeToggle";
 import { extractURLsFromText, fetchOpenGraphData } from "@/utils/openGraphFetcher";
 import { URLPreview } from "@/components/chat/URLPreview";
 import { URLPreviewLoading } from "@/components/chat/URLPreviewLoading";
@@ -39,7 +40,7 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
   const [isChatGlassOpen, setIsChatGlassOpen] = useState(false);
   const [chatMessage, setChatMessage] = useState('');
   const [isVoiceConnected, setIsVoiceConnected] = useState(false);
-  const [isSmartMode, setIsSmartMode] = useState(true);
+  const [isSmartMode, setIsSmartMode] = useState(false); // Default off - toggle to see tool calls
   const [messageFeedback, setMessageFeedback] = useState<Record<string, "up" | "down">>({});
   const [urlPreviewCache, setUrlPreviewCache] = useState<Record<string, OpenGraphData>>({});
   const [showTeleAutocomplete, setShowTeleAutocomplete] = useState(false);
@@ -933,7 +934,14 @@ const TeleglassSection = ({ onChatGlassChange, avatarState, setAvatarState, show
 
         {/* Chat Input Area - CLEAN MINIMAL */}
         <div className="border-t border-white/[0.15] bg-white/[0.08] backdrop-blur-sm">
-          <div className="flex space-x-2 px-3 sm:px-4 pb-3 sm:pb-4 pt-3">
+          {/* Smart Mode Toggle - Shows tool calls when enabled */}
+          <div className="flex justify-end px-3 sm:px-4 pt-2">
+            <SmartModeToggle
+              isSmartMode={isSmartMode}
+              onToggle={handleSmartModeToggle}
+            />
+          </div>
+          <div className="flex space-x-2 px-3 sm:px-4 pb-3 sm:pb-4 pt-1">
             <input
               type="text"
               value={chatMessage}

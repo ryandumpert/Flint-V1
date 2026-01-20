@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react"
+import { ToolCallMetadata, ChatMessageMetadata } from "@/types/chat"
 
 export type FrameworkChatMessage = {
   id: string
   role: "user" | "assistant"
   text: string
   timestamp: Date
+  metadata?: ChatMessageMetadata
 }
 
 const createMessageId = () => `${Date.now()}-${Math.random().toString(16).slice(2)}`
@@ -20,12 +22,21 @@ type ExternalMessage = {
   timestamp?: Date
 }
 
+// Pending tool calls buffer - captured during response cycle
+type PendingToolCall = {
+  id: string
+  name: string
+  arguments: Record<string, any>
+  timestamp: Date
+}
+
 export function useUIFrameworkChat(isOpen: boolean) {
   const [messages, setMessages] = useState<FrameworkChatMessage[]>([])
   const [isTyping, setIsTyping] = useState(false)
   const [connecting, setConnecting] = useState(false)
   const [connected, setConnected] = useState(false)
   const externalMessagesRef = useRef<FrameworkChatMessage[]>([])
+  const pendingToolCallsRef = useRef<PendingToolCall[]>([])
 
   const [isThinking, setIsThinking] = useState(false)
 
@@ -218,11 +229,68 @@ export function useUIFrameworkChat(isOpen: boolean) {
       setIsThinking(true)
     }
 
+    // Capture function calls as they occur during the response cycle
+    const onOutputItemAdded = (event: any) => {
+      try {
+        if (event?.item?.type === "function_call" && event?.item?.name) {
+          const toolCall: PendingToolCall = {
+            id: event.item.call_id || createMessageId(),
+            name: event.item.name,
+            arguments: event.item.arguments ?
+              (typeof event.item.arguments === 'string'
+                ? JSON.parse(event.item.arguments)
+                : event.item.arguments)
+              : {},
+            timestamp: new Date(),
+          };
+          pendingToolCallsRef.current = [...pendingToolCallsRef.current, toolCall];
+          console.log("[useUIFrameworkChat] Tool call captured:", toolCall.name);
+        }
+      } catch (error) {
+        // Silent error handling - don't break chat for tool call capture failures
+      }
+    };
+
     const onResponseDone = (event: any) => {
       setIsTyping(false);
       setIsThinking(false);
 
-      // Extract response text directly from the event
+      // Collect pending tool calls and convert to ToolCallMetadata format
+      const capturedToolCalls: ToolCallMetadata[] = pendingToolCallsRef.current.map(tc => ({
+        id: tc.id,
+        toolName: tc.name,
+        parameters: tc.arguments,
+        timestamp: tc.timestamp,
+      }));
+
+      // Clear pending tool calls immediately to prevent double-attachment
+      pendingToolCallsRef.current = [];
+
+      // If we have captured tool calls, attach them to the most recent assistant message
+      if (capturedToolCalls.length > 0) {
+        setMessages((prev) => {
+          // Find the most recent assistant message (it should be the last one)
+          const lastIndex = prev.length - 1;
+          for (let i = lastIndex; i >= 0; i--) {
+            if (prev[i].role === 'assistant') {
+              // Clone and update the message with metadata
+              const updated = [...prev];
+              updated[i] = {
+                ...updated[i],
+                metadata: {
+                  ...updated[i].metadata,
+                  toolCalls: capturedToolCalls,
+                },
+              };
+              console.log("[useUIFrameworkChat] Attached", capturedToolCalls.length, "tool calls to message");
+              return updated;
+            }
+          }
+          return prev;
+        });
+      }
+
+      // Extract response text directly from the event (fallback if onAppended didn't fire)
       try {
         if (event?.response?.output) {
           const outputItems = event.response.output;
@@ -230,16 +298,30 @@ export function useUIFrameworkChat(isOpen: boolean) {
             if (item?.type === 'message' && item?.role === 'assistant' && item?.content) {
               for (const content of item.content) {
                 if (content?.type === 'output_audio' && content?.transcript) {
-                  const assistantMessage = {
-                    id: createMessageId(),
-                    role: "assistant" as const,
-                    text: content.transcript,
-                    timestamp: new Date(),
-                  };
+                  const transcript = content.transcript.trim();
+
+                  // Check if this message already exists (from onAppended)
                   setMessages((prev) => {
-                    const next = [...prev, assistantMessage]
-                    next.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime())
-                    return next
+                    const alreadyExists = prev.some(
+                      (msg) => msg.role === 'assistant' && msg.text === transcript
+                    );
+
+                    if (alreadyExists) {
+                      return prev; // Already added by onAppended
+                    }
+
+                    // Create new message with metadata if it doesn't exist
+                    const assistantMessage: FrameworkChatMessage = {
+                      id: createMessageId(),
+                      role: "assistant" as const,
+                      text: transcript,
+                      timestamp: new Date(),
+                      metadata: capturedToolCalls.length > 0 ? { toolCalls: capturedToolCalls } : undefined,
+                    };
+                    const next = [...prev, assistantMessage];
+                    next.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime());
+                    console.log("[useUIFrameworkChat] Created new message with", capturedToolCalls.length, "tool calls");
+                    return next;
                   });
                   return;
                 }
@@ -261,6 +343,7 @@ export function useUIFrameworkChat(isOpen: boolean) {
       model.addEventListener("assistantTranscriptDelta", onDelta)
       model.addEventListener("response.done", onResponseDone);
       model.addEventListener("conversation.item.input_audio_transcription.completed", () => { });
+      model.addEventListener("outputItemAdded", onOutputItemAdded);
 
       // Thinking start events
       model.addEventListener("input_audio_buffer.speech_stopped", onThinkingStart);
@@ -276,6 +359,7 @@ export function useUIFrameworkChat(isOpen: boolean) {
           model.removeEventListener("assistantTranscriptDelta", onDelta)
           model.removeEventListener("response.done", onResponseDone)
           model.removeEventListener("conversation.item.input_audio_transcription.completed", () => { })
+          model.removeEventListener("outputItemAdded", onOutputItemAdded);
 
           model.removeEventListener("input_audio_buffer.speech_stopped", onThinkingStart);
           model.removeEventListener("input_audio_buffer.committed", onThinkingStart);
