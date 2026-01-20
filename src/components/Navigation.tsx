@@ -45,12 +45,6 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
     isHighlighted?: boolean;
   }> = [
       {
-        id: 'wire',
-        label: 'WIRE 1.0',
-        teleQuery: 'Show me the Copper Wire Language and how to wire up my AI',
-        isHighlighted: true
-      },
-      {
         id: 'concepts',
         label: 'CONCEPTS',
         teleQuery: 'Show me all core concepts'
@@ -58,12 +52,12 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
       {
         id: 'slash-commands',
         label: 'SLASH COMMANDS',
-        teleQuery: 'Show me all about slash commands, and give me a sense of how powerful they are'
+        teleQuery: 'Show me the slash commands and how powerful they are'
       },
       {
         id: 'phases',
-        label: 'HACK',
-        teleQuery: 'Show me the hackathon phases and walk me through them'
+        label: 'HACKATHON',
+        teleQuery: 'Show me the hackathon phases'
       },
       {
         id: 'templates',
@@ -72,8 +66,14 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
       },
       {
         id: 'ready',
-        label: 'AM I READY?',
-        teleQuery: 'Show me where my readiness is right now, and help me pass'
+        label: 'READY?',
+        teleQuery: 'Show me my readiness assessment'
+      },
+      {
+        id: 'wire',
+        label: 'WIRE 1.0',
+        teleQuery: 'Show me the Copper Wire Language',
+        isHighlighted: true
       }
     ];
 
