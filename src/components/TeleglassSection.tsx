@@ -184,7 +184,7 @@ const TeleglassSection = ({
       };
     }
 
-    return () => { };
+    return () => {};
   }, [isChatGlassOpen]);
 
   // Handle horizontal positioning based on chat state
@@ -335,11 +335,11 @@ const TeleglassSection = ({
     if (newValue) {
       try {
         (window as any).UIFramework?.showBgLayer?.({});
-      } catch (_) { }
+      } catch (_) {}
     } else {
       try {
         (window as any).UIFramework?.hideBgLayer?.({});
-      } catch (_) { }
+      } catch (_) {}
     }
   }, [isSmileyOn]);
 
@@ -490,9 +490,9 @@ const TeleglassSection = ({
           setTimeout(() => {
             try {
               syncMicFromModel();
-            } catch (_) { }
+            } catch (_) {}
           }, 80);
-        } catch (_) { }
+        } catch (_) {}
       };
       const onMuteChange = ({ isMuted }: any) => {
         if (!cancelled) {
@@ -547,26 +547,26 @@ const TeleglassSection = ({
       model.addEventListener("sessionCreated", onSessionCreated as any);
       try {
         setIsMicMuted(!!model.isMuted);
-      } catch (_) { }
+      } catch (_) {}
       try {
         setIsVoiceConnected(!!model.isConnected);
-      } catch (_) { }
+      } catch (_) {}
       detach = () => {
         try {
           model.removeEventListener?.("muteStateChanged", onMuteChange);
-        } catch (_) { }
+        } catch (_) {}
         try {
           model.removeEventListener?.("connectionStateChange", onConnChange);
-        } catch (_) { }
+        } catch (_) {}
         try {
           model.removeEventListener?.("statusChange", onStatus);
-        } catch (_) { }
+        } catch (_) {}
         try {
           model.removeEventListener?.(
             "sessionCreated",
             onSessionCreated as any,
           );
-        } catch (_) { }
+        } catch (_) {}
       };
       return true;
     };
@@ -582,9 +582,24 @@ const TeleglassSection = ({
       cancelled = true;
       try {
         if (detach) detach();
-      } catch (_) { }
+      } catch (_) {}
     };
   }, [syncMicFromModel]);
+
+  // Turn off speaker when avatar connects
+  useEffect(() => {
+    if (avatarState === "connected") {
+      setIsSoundOn(false);
+      try {
+        const ui: any = (window as any).UIFramework;
+        if (ui?.setAvatarVideoMuted) {
+          ui.setAvatarVideoMuted(true);
+        }
+      } catch (error) {
+        // Silent error handling for production
+      }
+    }
+  }, [avatarState]);
 
   // Connect chat to avatar connection state
   useEffect(() => {
@@ -869,13 +884,15 @@ const TeleglassSection = ({
       {/* Chat Glass Panel - FULLY TRANSPARENT - Avatar fully visible */}
       <div
         className={`fixed teleglass-panel top-0 h-dvh z-50
-          transform transition-all duration-500 ease-out ${isChatGlassOpen
-            ? "translate-x-0 opacity-100"
-            : "translate-x-full opacity-0"
+          transform transition-all duration-500 ease-out ${
+            isChatGlassOpen
+              ? "translate-x-0 opacity-100"
+              : "translate-x-full opacity-0"
           }
-          ${isLightboardMode
-            ? "border-l border-white/[0.05]"
-            : "border-l border-white/[0.08]"
+          ${
+            isLightboardMode
+              ? "border-l border-white/[0.05]"
+              : "border-l border-white/[0.08]"
           }
         flex flex-col
         xl:right-0
@@ -898,10 +915,11 @@ const TeleglassSection = ({
 
         {isP2PActive && (
           <div
-            className={`mx-3 sm:mx-4 mt-3 px-3 py-2 rounded-full text-sm flex items-center gap-2 backdrop-blur-sm ${isLightboardMode
-              ? "bg-white/[0.08] border border-white/[0.15] text-mist"
-              : "bg-white/[0.10] border border-white/[0.18] text-mist"
-              }`}
+            className={`mx-3 sm:mx-4 mt-3 px-3 py-2 rounded-full text-sm flex items-center gap-2 backdrop-blur-sm ${
+              isLightboardMode
+                ? "bg-white/[0.08] border border-white/[0.15] text-mist"
+                : "bg-white/[0.10] border border-white/[0.18] text-mist"
+            }`}
           >
             <div
               className={`w-2 h-2 rounded-full animate-pulse bg-flamingo/80`}
@@ -935,10 +953,11 @@ const TeleglassSection = ({
                   <div
                     className={`chat-avatar w-7 h-7 sm:w-9 sm:h-9 rounded-full
                     backdrop-blur-sm flex items-center justify-center flex-shrink-0
-                    ${isLightboardMode
+                    ${
+                      isLightboardMode
                         ? "bg-white/[0.08] border border-white/[0.15]"
                         : "bg-white/[0.10] border border-white/[0.18]"
-                      }`}
+                    }`}
                   >
                     <Bot className="chat-icon w-4 h-4 sm:w-5 sm:h-5 text-mist" />
                   </div>
@@ -971,14 +990,15 @@ const TeleglassSection = ({
                           onClick={() =>
                             toggleFunctionPanel(fc.callId, "input")
                           }
-                          className={`text-xs px-2 py-1 rounded-md transition-all ${expandedFunctionPanels[fc.callId]?.input
-                            ? isLightboardMode
-                              ? "bg-white/30 text-mist"
-                              : "bg-primary/30 text-primary"
-                            : isLightboardMode
-                              ? "bg-white/10 text-mist/70 hover:bg-white/20"
-                              : "bg-white/5 text-mist/60 hover:bg-white/10"
-                            }`}
+                          className={`text-xs px-2 py-1 rounded-md transition-all ${
+                            expandedFunctionPanels[fc.callId]?.input
+                              ? isLightboardMode
+                                ? "bg-white/30 text-mist"
+                                : "bg-primary/30 text-primary"
+                              : isLightboardMode
+                                ? "bg-white/10 text-mist/70 hover:bg-white/20"
+                                : "bg-white/5 text-mist/60 hover:bg-white/10"
+                          }`}
                         >
                           Input{" "}
                           {expandedFunctionPanels[fc.callId]?.input ? "▲" : "▼"}
@@ -989,14 +1009,15 @@ const TeleglassSection = ({
                           onClick={() =>
                             toggleFunctionPanel(fc.callId, "result")
                           }
-                          className={`text-xs px-2 py-1 rounded-md transition-all ${expandedFunctionPanels[fc.callId]?.result
-                            ? isLightboardMode
-                              ? "bg-white/30 text-mist"
-                              : "bg-green-500/30 text-green-400"
-                            : isLightboardMode
-                              ? "bg-white/10 text-mist/70 hover:bg-white/20"
-                              : "bg-white/5 text-mist/60 hover:bg-white/10"
-                            }`}
+                          className={`text-xs px-2 py-1 rounded-md transition-all ${
+                            expandedFunctionPanels[fc.callId]?.result
+                              ? isLightboardMode
+                                ? "bg-white/30 text-mist"
+                                : "bg-green-500/30 text-green-400"
+                              : isLightboardMode
+                                ? "bg-white/10 text-mist/70 hover:bg-white/20"
+                                : "bg-white/5 text-mist/60 hover:bg-white/10"
+                          }`}
                         >
                           Result{" "}
                           {expandedFunctionPanels[fc.callId]?.result
@@ -1009,10 +1030,11 @@ const TeleglassSection = ({
                     {/* Expanded Input Panel */}
                     {expandedFunctionPanels[fc.callId]?.input && fc.input && (
                       <div
-                        className={`mt-2 p-2 rounded-lg text-xs font-mono overflow-x-auto max-h-40 overflow-y-auto ${isLightboardMode
-                          ? "bg-black/20 text-mist/90"
-                          : "bg-black/40 text-mist/80"
-                          }`}
+                        className={`mt-2 p-2 rounded-lg text-xs font-mono overflow-x-auto max-h-40 overflow-y-auto ${
+                          isLightboardMode
+                            ? "bg-black/20 text-mist/90"
+                            : "bg-black/40 text-mist/80"
+                        }`}
                       >
                         <pre className="whitespace-pre-wrap break-words">
                           {JSON.stringify(fc.input, null, 2)}
@@ -1024,10 +1046,11 @@ const TeleglassSection = ({
                     {expandedFunctionPanels[fc.callId]?.result &&
                       fc.result !== undefined && (
                         <div
-                          className={`mt-2 p-2 rounded-lg text-xs font-mono overflow-x-auto max-h-40 overflow-y-auto ${isLightboardMode
-                            ? "bg-black/20 text-mist/90"
-                            : "bg-black/40 text-mist/80"
-                            }`}
+                          className={`mt-2 p-2 rounded-lg text-xs font-mono overflow-x-auto max-h-40 overflow-y-auto ${
+                            isLightboardMode
+                              ? "bg-black/20 text-mist/90"
+                              : "bg-black/40 text-mist/80"
+                          }`}
                         >
                           <pre className="whitespace-pre-wrap break-words">
                             {typeof fc.result === "string"
@@ -1038,8 +1061,9 @@ const TeleglassSection = ({
                       )}
 
                     <p
-                      className={`text-xs mt-1 ${isLightboardMode ? "text-mist/90" : "text-mist/60"
-                        }`}
+                      className={`text-xs mt-1 ${
+                        isLightboardMode ? "text-mist/90" : "text-mist/60"
+                      }`}
                     >
                       {fc.timestamp.toLocaleTimeString([], {
                         hour: "2-digit",
@@ -1065,10 +1089,11 @@ const TeleglassSection = ({
                   <div
                     className={`chat-avatar w-7 h-7 sm:w-9 sm:h-9 rounded-full 
                     backdrop-blur-sm flex items-center justify-center flex-shrink-0
-                    ${isLightboardMode
+                    ${
+                      isLightboardMode
                         ? "bg-white/[0.08] border border-white/[0.15]"
                         : "bg-white/[0.10] border border-white/[0.18]"
-                      }`}
+                    }`}
                   >
                     <Bot className="chat-icon w-4 h-4 sm:w-5 sm:h-5 text-mist" />
                   </div>
@@ -1167,10 +1192,11 @@ const TeleglassSection = ({
                   <div
                     className={`chat-avatar w-7 h-7 sm:w-9 sm:h-9 rounded-full
                     backdrop-blur-sm flex items-center justify-center flex-shrink-0
-                    ${isLightboardMode
+                    ${
+                      isLightboardMode
                         ? "bg-white/[0.08] border border-white/[0.15]"
                         : "bg-white/[0.10] border border-white/[0.18]"
-                      }`}
+                    }`}
                   >
                     <User className="chat-icon w-4 h-4 sm:w-5 sm:h-5 text-mist" />
                   </div>
@@ -1184,10 +1210,11 @@ const TeleglassSection = ({
               <div
                 className={`chat-avatar w-7 h-7 sm:w-9 sm:h-9 rounded-full
                 backdrop-blur-sm flex items-center justify-center flex-shrink-0
-                ${isLightboardMode
+                ${
+                  isLightboardMode
                     ? "bg-white/[0.08] border border-white/[0.15]"
                     : "bg-white/[0.10] border border-white/[0.18]"
-                  }`}
+                }`}
               >
                 <Bot className="chat-icon w-4 h-4 sm:w-5 sm:h-5 text-mist" />
               </div>
@@ -1227,9 +1254,10 @@ const TeleglassSection = ({
                 backdrop-blur-sm rounded-full
                 text-mist placeholder:text-mist/40 text-sm sm:text-base
                 transition-all duration-300
-                ${isLightboardMode
-                  ? "bg-white/[0.06] border border-white/[0.12] focus:border-white/[0.20] focus:bg-white/[0.10]"
-                  : "bg-white/[0.08] border border-white/[0.15] focus:border-white/[0.25] focus:bg-white/[0.12]"
+                ${
+                  isLightboardMode
+                    ? "bg-white/[0.06] border border-white/[0.12] focus:border-white/[0.20] focus:bg-white/[0.10]"
+                    : "bg-white/[0.08] border border-white/[0.15] focus:border-white/[0.25] focus:bg-white/[0.12]"
                 }
                 focus:outline-none`}
               ref={chatInputRef}
@@ -1241,9 +1269,10 @@ const TeleglassSection = ({
                 backdrop-blur-sm text-mist transition-all duration-300
                 active:scale-95
                 disabled:opacity-50 disabled:cursor-not-allowed
-                ${isLightboardMode
-                  ? "bg-white/[0.08] border border-white/[0.15] hover:bg-white/[0.12]"
-                  : "bg-sapphire/70 border border-sapphire/50 hover:bg-sapphire/90"
+                ${
+                  isLightboardMode
+                    ? "bg-white/[0.08] border border-white/[0.15] hover:bg-white/[0.12]"
+                    : "bg-sapphire/70 border border-sapphire/50 hover:bg-sapphire/90"
                 }`}
               disabled={!chatMessage.trim()}
             >
