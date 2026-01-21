@@ -1,8 +1,8 @@
 # 🤖 AGENT.md - Mobeus University Development Reference
 
 > **Two-Agent Architecture Documentation**
-> Catherine v65.0 | Streamlined Colors + Core Concepts
-> Last updated: January 18, 2026
+> Catherine v68.0 | Condensed Release
+> Last updated: January 21, 2026
 
 ---
 
@@ -173,9 +173,100 @@ Add response mapping to `public/glass-prompt.md`:
 2. Always call navigateToSection
 3. Maintain natural speech patterns
 
+### /unwire-tele — Reset to Blank Slate
+**Purpose:** Resets the tele to an "Unwired" state — a blank canvas ready to be claimed and programmed by an administrator.
+
+**When to Use:**
+- Creating a fresh tele template for customers
+- Resetting a tele to blank state
+- Preparing the empty-tele-pre-launch repo
+
+**What It Does (At Invocation Time):**
+1. **Register the Tele** — Overwrite `tele-knowledge.md` with Unwired identity
+2. **Create 3 starter templates** — `UnwiredParagraph`, `UnwiredThreeCards`, `UnwiredImagePanel`
+3. **Generate 3 default images** — Placeholder visuals using `generate_image`
+4. **Register templates** — Add to `templateRegistry.ts`
+5. **Update glass-prompt.md** — Minimal shot prompts with new templates
+6. **Simplify navigation** — Single "REPO" external link
+
+**Key Concept:** The Unwired Tele is the default Teleglass state — a programmable entity that knows it is unclaimed. It prompts users to say "admin" to initiate the claiming sequence with a six-digit code.
+
+**The Three Starter Templates:**
+| Template | Purpose | Key Props |
+|----------|---------|----------|
+| `UnwiredParagraph` | Single paragraph/concept | `title`, `content`, `imageUrl?`, `ctaActionPhrase?` |
+| `UnwiredThreeCards` | Three option cards | `cards[]`, `columns?` |
+| `UnwiredImagePanel` | Text + image split | `title`, `content`, `bulletPoints[]?`, `imageUrl?`, `imagePosition?` |
+
 ---
 
-## 6. THE 5 IMMUTABLE LAWS
+## 6. 🚨 IMMUTABLE GLASS-PROMPT SECTION 🚨
+
+**The following block MUST ALWAYS be present in `glass-prompt.md` — WIRED OR UNWIRED.**
+
+This section is marked with `** RICHIE ETWARU - NEVER REMOVE FROM HERE **` and `** RICHIE ETWARU - UP TO HERE **` delimiters. It contains the core behavioral rules that apply to ALL teles regardless of their wired state.
+
+### The Protected Block (NEVER REMOVE):
+
+```markdown
+** RICHIE ETWARU - NEVER REMOVE FROM HERE **
+
+**EVERY RESPONSE MUST:**
+1. **SPEAK FIRST** (Acknowledge what they're learning)
+2. **CALL `navigateToSection`** (Visual content to teach)
+3. **SPEAK AGAIN** (Guide them to the next concept or confirm readiness)
+
+---
+
+**🚨 CRITICAL: ALWAYS SHOW, NEVER JUST TELL 🚨**
+
+Here are examples, basically no matter what the user asks, always show data via `navigateToSection`:
+
+- If user says anything like "tell me X" → Show data via `navigateToSection`
+- If user says anything like "what is X" → Show data via `navigateToSection`
+- If user says anything like "explain X" → Show data via `navigateToSection`
+- If user says anything like "show me X" → Show data via `navigateToSection`
+- If user says anything like "where is X" → Show data via `navigateToSection`
+- If user says anything like "go ahead" → Show data via `navigateToSection`
+- If user says anything like "yes" → Show data via `navigateToSection`
+- If user says anything like "sure" → Show data via `navigateToSection`
+- **NEVER respond with text only** - ALWAYS use templates to visualize the answer
+- **EVERY response MUST include `navigateToSection` call**
+
+---
+
+## 🚨 JSON STRUCTURE — NON-NEGOTIABLE 🚨
+
+For every item in `generativeSubsections`:
+
+- ONLY these keys are allowed at the subsection root:
+  - `id`
+  - `templateId`
+  - `props`
+
+- ALL template-specific data (including vehicles, specs, slides, charts, entries, etc.)
+  **MUST be nested inside `props`.**
+
+❌ NEVER place template fields at the root level  
+❌ NEVER inline data next to `templateId`  
+✅ If a template has no props, use `"props": {}`
+
+If this rule is violated, the response is INVALID.
+
+---
+
+** RICHIE ETWARU - UP TO HERE **
+```
+
+### Why This Matters:
+- This block ensures the tele's core behavior is ALWAYS consistent
+- The speak-show-speak pattern is mandatory for user experience
+- The JSON structure rules prevent malformed navigateToSection calls
+- This applies to BOTH wired (trained) and unwired (blank slate) teles
+
+---
+
+## 7. THE 5 IMMUTABLE LAWS
 
 1. **VOLUMETRIC NAVIGATION** — Every clickable MUST call `notifyTele(actionPhrase)`. NO DEAD ENDS.
 2. **TOOL SIGNATURE STABILITY** — `navigateToSection` signature MUST NEVER change.
@@ -185,7 +276,7 @@ Add response mapping to `public/glass-prompt.md`:
 
 ---
 
-## 7. CENTRALIZED STYLING
+## 8. CENTRALIZED STYLING
 
 **ALL STYLES MUST BE IN `src/index.css`**
 
@@ -220,7 +311,7 @@ Add response mapping to `public/glass-prompt.md`:
 
 ---
 
-## 8. SMARTIMAGE SYSTEM
+## 9. SMARTIMAGE SYSTEM
 
 Hybrid image system that auto-chooses between pre-generated and AI-generated:
 
@@ -241,7 +332,7 @@ assetId → Check ASSET_REGISTRY → Found? → Load file
 
 ---
 
-## 9. DEVELOPMENT
+## 10. DEVELOPMENT
 
 ```bash
 npm run dev -- --port 3131    # Start dev server
@@ -254,7 +345,7 @@ npm run build                 # Production build
 
 ---
 
-## 10. TEMPLATE SKELETON
+## 11. TEMPLATE SKELETON
 
 ```tsx
 /**
@@ -296,7 +387,7 @@ export const TemplateName: React.FC<Props> = ({ items = [] }) => {
 
 ---
 
-## 11. QUICK REFERENCE
+## 12. QUICK REFERENCE
 
 ### Navigation Flow
 ```
@@ -313,7 +404,7 @@ User clicks → playClick() → notifyTele(actionPhrase) → sendToTele()
 
 ---
 
-## 12. SITE FUNCTION REGISTRATION
+## 13. SITE FUNCTION REGISTRATION
 
 Site functions are how the **Runtime Agent (Catherine)** operates the **Glass (React app)**. When you create a new site function, follow this complete process:
 
@@ -366,6 +457,7 @@ window.UIFrameworkSiteFunctions = {
 |----------|---------|
 | `navigateToSection` | Main navigation tool — renders templates |
 | `flashTele` | Flash avatar ring effect |
+| `scrollPage` | Scroll page up/down by amount |
 | `setVolume` / `adjustVolume` / `getVolume` | Avatar volume control |
 | `startWebcam` / `stopWebcam` | Webcam control |
 | `zoomLevel` | UI zoom control |
@@ -377,4 +469,4 @@ window.UIFrameworkSiteFunctions = {
 
 *Mobeus University — Teaching the World to Build Teles*
 *Two-Agent Architecture: Build Agent (Claude) + Runtime Agent (Catherine/GPT 5.0)*
-*Catherine v63.0 | Zero Friction Release | January 18, 2026*
+*Catherine v67.0 | Audit Sync Release | January 20, 2026*

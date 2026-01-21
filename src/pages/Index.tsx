@@ -1,4 +1,4 @@
- 
+
 import { useState, useEffect, useCallback, useRef, useMemo, FormEvent, ChangeEvent } from "react";
 import Navigation from "@/components/Navigation";
 import TeleglassSection from "@/components/TeleglassSection";
@@ -21,7 +21,7 @@ import { exposeNavigationAPI } from "@/utils/uiFrameworkRegistration";
 import { DynamicSectionLoader } from "@/components/DynamicSectionLoader";
 import { BackToTop } from "@/components/BackToTop";
 import { OTPDialog } from "@/components/OTPDialog";
-import NDAFirewallSection from "@/components/NDAFirewallSection";
+
 import { CarColorProvider } from "@/contexts/CarColorContext";
 import RippleEffect from "@/components/RippleEffect";
 import { GitVersionIndicator } from "@/components/GitVersionIndicator";
@@ -1014,19 +1014,19 @@ const Index = () => {
       setPageContrast: (mode: string) => {
         const normalizedMode = mode?.trim().toLowerCase();
         if (!['high', 'normal', 'low'].includes(normalizedMode)) {
-           console.warn('[setPageContrast] Invalid mode:', mode);
-           return 'Invalid mode';
+          console.warn('[setPageContrast] Invalid mode:', mode);
+          return 'Invalid mode';
         }
 
         const rootHtml = document.documentElement;
-        
+
         switch (normalizedMode) {
           case 'high':
             rootHtml.style.filter = 'contrast(150%)';
             break;
-          case 'low': 
-             rootHtml.style.filter = 'contrast(80%)';
-             break;
+          case 'low':
+            rootHtml.style.filter = 'contrast(80%)';
+            break;
           case 'normal':
           default:
             rootHtml.style.filter = 'none';
@@ -1037,10 +1037,10 @@ const Index = () => {
         return true;
       },
       getPageContrast: () => {
-         const rootHtml = document.documentElement;
-         if (rootHtml.style.filter.includes('150%')) return 'high';
-         if (rootHtml.style.filter.includes('80%')) return 'low';
-         return 'normal';
+        const rootHtml = document.documentElement;
+        if (rootHtml.style.filter.includes('150%')) return 'high';
+        if (rootHtml.style.filter.includes('80%')) return 'low';
+        return 'normal';
       },
     };
 
@@ -1413,17 +1413,7 @@ const Index = () => {
         ? `animate-section-enter ${scrollHintClass}`
         : scrollHintClass;
 
-    // Special handling for NDA Firewall section
-    if (activeSection === "nda-firewall") {
-      return (
-        <NDAFirewallSection
-          animationClass={animationClass}
-          openOtp={() => setIsOTPDialogOpen(true)}
-          avatarState={avatarState}
-          onConnectAvatar={handleConnectAvatar}
-        />
-      );
-    }
+
 
     // Determine which static data to use based on section
     const isWelcomeSection = activeSection === "welcome";

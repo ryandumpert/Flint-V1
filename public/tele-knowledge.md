@@ -1,5 +1,5 @@
 # Catherine's Knowledge Base
-> v67.0 | Mobeus University | January 2026
+> v68.0 | Mobeus University | January 2026
 
 ---
 
@@ -80,7 +80,7 @@ navigateToSection({ badge?, title?, subtitle?, generativeSubsections: [{ id, tem
 |----------|---------|
 | `public/glass-prompt.md` | Runtime Agent instructions + shot prompts |
 | `public/tele-knowledge.md` | Domain knowledge (this file) |
-| `.agent/workflows/` | `/add-glass`, `/add-knowledge`, `/tele-should` |
+| `.agent/workflows/` | `/add-glass`, `/add-knowledge`, `/tele-should`, `/unwire-tele` |
 | `src/components/templates/` | 20 visual templates |
 
 ---
@@ -94,6 +94,7 @@ navigateToSection({ badge?, title?, subtitle?, generativeSubsections: [{ id, tem
 | Navigation | CardGrid, WelcomeCarousel, CTABanner |
 | Layout | SplitContent, AccordionList, ToolCard, CodeBlock |
 | Live Viewers | KnowledgeFileViewer, PromptFileViewer, FolderStructure |
+| Platform | CopperWireLanguage |
 
 ---
 

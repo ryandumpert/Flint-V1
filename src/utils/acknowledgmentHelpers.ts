@@ -75,21 +75,7 @@ interface AcknowledgmentConfig {
 }
 
 type AcknowledgmentId =
-  // Proposal sections
-  | "proposal-overview"
-  | "proposal-value"
-  | "proposal-leverage"
-  | "proposal-alignment"
-  // Technology sections
-  | "any-model"
-  | "any-cloud"
-  | "any-experience"
-  // Solution sections
-  | "solution-overview"
-  | "solution-speed"
-  | "solution-economics"
-  | "solution-risk"
-  // Navigation & UI actions
+  // Navigation & UI actions (KEEP - generic)
   | "nav-back"
   | "nav-scroll-top"
   | "nav-menu-open"
@@ -97,109 +83,23 @@ type AcknowledgmentId =
   | "copy-deeplink"
   | "error-reset"
   | "error-reload"
+  // Chat actions (KEEP - generic)
   | "chat-accept"
   | "chat-decline"
-  // Starter section actions
-  | "starter-copy-code"
-  | "starter-contact"
-  | "starter-learn-more"
-  // Evidence section
-  | "evidence-copy"
-  | "evidence-followup"
-  // Things I Can Do
-  | "capture-followup"
-  | "speak-language"
-  | "schedule-meeting"
-  // Menu actions
-  | "menu-followup"
-  | "menu-scheduling"
-  | "menu-suggest"
-  | "menu-responses"
-  // Take Message section
-  | "message-request-info"
-  | "message-clarify"
-  | "message-other"
-  // Scheduling section
-  | "schedule-workshop"
-  | "schedule-checkin"
-  | "schedule-qa"
-  // Carousel navigation
+  // Carousel navigation (KEEP - used by WelcomeCarousel)
   | "carousel-nav"
-  // NDA Firewall users
-  | "nda-brijesh"
-  | "nda-maurice"
-  | "nda-lee"
-  | "nda-miles"
-  | "nda-kieron"
-  | "nda-tuhin"
-  | "nda-dan"
-  | "nda-james"
-  | "nda-simon"
-  | "nda-sujay"
-  | "nda-venkata"
-  | "nda-vinay"
-  | "nda-yann"
-  | "nda-ahmet"
-  | "nda-nima"
-  | "nda-joe"
-  | "nda-richie"
-  | "nda-gene"
-  | "nda-request-access";
+  // Language switching (KEEP - documented feature)
+  | "speak-language"
+  // Welcome/learning (KEEP - relevant to university)
+  | "starter-learn-more";
 
 /**
- * Configuration mapping for all acknowledgment messages
+ * Configuration mapping for acknowledgment messages
+ * 
+ * CLEANED UP: Removed legacy RFP/Accenture-specific configs (Jan 2026)
+ * Kept: Generic navigation, error handling, chat, and university-relevant actions
  */
 const ACKNOWLEDGMENT_CONFIG: Record<AcknowledgmentId, AcknowledgmentConfig> = {
-  // Proposal sections
-  "proposal-overview": {
-    key: "proposalOverviewAcknowledged",
-    message: "Show me about the comprehensive national development information being reviewed",
-  },
-  "proposal-value": {
-    key: "proposalValueAcknowledged",
-    message: "Show me about the measurable business value and ROI for warranty operations",
-  },
-  "proposal-leverage": {
-    key: "proposalLeverageAcknowledged",
-    message: "Show me about the technology leverage and integration capabilities",
-  },
-  "proposal-alignment": {
-    key: "proposalAlignmentAcknowledged",
-    message: "Show me about the strategic alignment with Guyana's development goals",
-  },
-
-  // Technology sections
-  "any-model": {
-    key: "anyModelAcknowledged",
-    message: "Show me about AI model flexibility and multi-provider support",
-  },
-  "any-cloud": {
-    key: "anyCloudAcknowledged",
-    message: "Show me about cloud-native architecture and deployment options",
-  },
-  "any-experience": {
-    key: "anyExperienceAcknowledged",
-    message: "Show me about omnichannel user experience capabilities",
-  },
-
-  // Solution sections
-  "solution-overview": {
-    key: "solutionOverviewAcknowledged",
-    message: "Show me about the comprehensive solution architecture and capabilities",
-  },
-  "solution-speed": {
-    key: "solutionSpeedAcknowledged",
-    message: "Show me about rapid deployment and time-to-value strategies",
-  },
-  "solution-economics": {
-    key: "solutionEconomicsAcknowledged",
-    message: "Show me about cost optimization and measurable ROI",
-  },
-  "solution-risk": {
-    key: "solutionRiskAcknowledged",
-    message: "Show me about compliance, security, and governance frameworks",
-  },
-
   // Navigation & UI actions
   "nav-back": {
     key: "navBackAcknowledged",
@@ -229,6 +129,8 @@ const ACKNOWLEDGMENT_CONFIG: Record<AcknowledgmentId, AcknowledgmentConfig> = {
     key: "errorReloadAcknowledged",
     message: "Show me that the application is reloading",
   },
+
+  // Chat actions
   "chat-accept": {
     key: "chatAcceptAcknowledged",
     message: "Show me that the chat invitation has been accepted",
@@ -238,175 +140,25 @@ const ACKNOWLEDGMENT_CONFIG: Record<AcknowledgmentId, AcknowledgmentConfig> = {
     message: "Show me that the chat invitation has been declined",
   },
 
-  // Starter section actions
-  "starter-copy-code": {
-    key: "starterCopyCodeAcknowledged",
-    message: "Show me that the code snippet is being copied for implementation",
-  },
-  "starter-contact": {
-    key: "starterContactAcknowledged",
-    message: "Show me that the contact form is opening for inquiries",
-  },
-  "starter-learn-more": {
-    key: "starterLearnMoreAcknowledged",
-    message: "Show me more about tele capabilities",
-  },
-
-  // Evidence section
-  "evidence-copy": {
-    key: "evidenceCopyAcknowledged",
-    message: "Show me that the compliance evidence data is being copied",
-  },
-  "evidence-followup": {
-    key: "evidenceFollowupAcknowledged",
-    message: "Show me that you are taking a message about evidence for RFP responders",
-  },
-
-  // Things I Can Do
-  "capture-followup": {
-    key: "captureFollowupAcknowledged",
-    message: "Show me that if I have questions I don't see answers to, you can take that message and send it back to the RFP responders",
-  },
-  "speak-language": {
-    key: "speakAnyLanguageAcknowledged",
-    message: "Show me that I can just start speaking a different language and you will automatically change to speak in that language",
-  },
-  "schedule-meeting": {
-    key: "scheduleMeetingsAcknowledged",
-    message: "Show me that you can schedule meetings with the RFP responders for me",
-  },
-
-  // Menu actions
-  "menu-followup": {
-    key: "menuFollowupAcknowledged",
-    message: "Show me that you are ready to take a message for the RFP responders",
-  },
-  "menu-scheduling": {
-    key: "menuSchedulingAcknowledged",
-    message: "Show me that you are ready to help coordinate a meeting to discuss the RFP response",
-  },
-  "menu-suggest": {
-    key: "menuSuggestAcknowledged",
-    message: "Show me that you are ready to provide helpful questions about the proposal",
-  },
-  "menu-responses": {
-    key: "menuResponsesAcknowledged",
-    message: "Show me that you are ready to show available responses and Q&A",
-  },
-
-  // Take Message section
-  "message-request-info": {
-    key: "messageRequestInfoAcknowledged",
-    message: "Show me that you are ready to capture an information request",
-  },
-  "message-clarify": {
-    key: "messageClarifyAcknowledged",
-    message: "Show me that you are ready to answer questions to clarify information",
-  },
-  "message-other": {
-    key: "messageOtherAcknowledged",
-    message: "Show me that you are ready to capture another type of message",
-  },
-
-  // Scheduling section
-  "schedule-workshop": {
-    key: "scheduleWorkshopAcknowledged",
-    message: "Show me that you are ready to coordinate a 2-hour collaborative workshop",
-  },
-  "schedule-checkin": {
-    key: "scheduleCheckinAcknowledged",
-    message: "Show me that you are ready to find a time for a 30-minute engagement check-in",
-  },
-  "schedule-qa": {
-    key: "scheduleQAAcknowledged",
-    message: "Show me that you are ready to book a 1-hour Q&A clarification session",
-  },
-
   // Carousel navigation
   "carousel-nav": {
     key: "carouselNavAcknowledged",
     message: "Show me that we are navigating through carousel slides",
   },
 
-  // NDA Firewall users
-  "nda-brijesh": {
-    key: "ndaBrijeshAcknowledged",
-    message: "Show me that you've sent the security code to Brijesh's email and ask him to tell you the code when he receives it",
-  },
-  "nda-maurice": {
-    key: "ndaMauriceAcknowledged",
-    message: "Show me that you've sent the security code to Maurice's email and ask him to tell you the code when he receives it",
-  },
-  "nda-lee": {
-    key: "ndaLeeAcknowledged",
-    message: "Show me that you've sent the security code to Lee's email and ask him to tell you the code when he receives it",
-  },
-  "nda-miles": {
-    key: "ndaMilesAcknowledged",
-    message: "Show me that you've sent the security code to Miles's email and ask him to tell you the code when he receives it",
-  },
-  "nda-kieron": {
-    key: "ndaKieronAcknowledged",
-    message: "Show me that you've sent the security code to Kieron's email and ask him to tell you the code when he receives it",
-  },
-  "nda-tuhin": {
-    key: "ndaTuhinAcknowledged",
-    message: "Show me that you've sent the security code to Tuhin's email and ask him to tell you the code when he receives it",
-  },
-  "nda-dan": {
-    key: "ndaDanAcknowledged",
-    message: "Show me that you've sent the security code to Dan's email and ask him to tell you the code when he receives it",
-  },
-  "nda-james": {
-    key: "ndaJamesAcknowledged",
-    message: "Show me that you've sent the security code to James's email and ask him to tell you the code when he receives it",
-  },
-  "nda-simon": {
-    key: "ndaSimonAcknowledged",
-    message: "Show me that you've sent the security code to Simon's email and ask him to tell you the code when he receives it",
-  },
-  "nda-sujay": {
-    key: "ndaSujayAcknowledged",
-    message: "Show me that you've sent the security code to Sujay's email and ask him to tell you the code when he receives it",
-  },
-  "nda-venkata": {
-    key: "ndaVenkataAcknowledged",
-    message: "Show me that you've sent the security code to Venkata's email and ask him to tell you the code when he receives it",
-  },
-  "nda-vinay": {
-    key: "ndaVinayAcknowledged",
-    message: "Show me that you've sent the security code to Vinay's email and ask him to tell you the code when he receives it",
-  },
-  "nda-yann": {
-    key: "ndaYannAcknowledged",
-    message: "Show me that you've sent the security code to Yann's email and ask him to tell you the code when he receives it",
-  },
-  "nda-ahmet": {
-    key: "ndaAhmetAcknowledged",
-    message: "Show me that you've sent the security code to Ahmet's email and ask him to tell you the code when he receives it",
-  },
-  "nda-nima": {
-    key: "ndaNimaAcknowledged",
-    message: "Show me that Nima has access behind the NDA firewall now",
-  },
-  "nda-joe": {
-    key: "ndaJoeAcknowledged",
-    message: "Show me that you've sent the security code to Joe's email and ask him to tell you the code when he receives it",
-  },
-  "nda-richie": {
-    key: "ndaRichieAcknowledged",
-    message: "Show me that Richie has access behind the NDA firewall now",
-  },
-  "nda-gene": {
-    key: "ndaGeneAcknowledged",
-    message: "Show me that Gene has access behind the NDA firewall now",
+  // Language switching
+  "speak-language": {
+    key: "speakAnyLanguageAcknowledged",
+    message: "Show me that I can just start speaking a different language and you will automatically change to speak in that language",
   },
 
-  "nda-request-access": {
-    key: "ndaRequestAccessAcknowledged",
-    message: "Show me that you are collecting information to forward to the authorization team for NDA firewall access",
+  // Learning actions
+  "starter-learn-more": {
+    key: "starterLearnMoreAcknowledged",
+    message: "Show me more about tele capabilities",
   },
 };
+
 
 /**
  * Handle acknowledgment for a specific pill/card

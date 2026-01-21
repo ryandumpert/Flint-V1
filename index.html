@@ -138,7 +138,39 @@
         }
         return undefined;
       };
+      /*
 
+      RICHIE - IMPORTANT. 
+      COPY THIS SIGNATURE TO THE SITE FUNCTION
+      
+      {
+        "type": "object",
+        "properties": {
+          "badge": { "type": "string" },
+          "title": { "type": "string" },
+          "subtitle": { "type": "string" },
+          "generativeSubsections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "templateId": { "type": "string" },
+                "title": { "type": "string" },
+                "props": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              },
+              "required": ["id", "templateId", "props"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["badge", "title", "subtitle", "generativeSubsections"],
+        "additionalProperties": false
+      }
+    */
       const navigationBridge = {
         navigateToSection(...args) {
           if (
@@ -520,7 +552,7 @@
       ) {
         window.setPageContrast = (mode) => contrastBridge.setPageContrast(mode);
       }
-      
+
       if (
         typeof window !== "undefined" &&
         typeof window.getPageContrast !== "function"
