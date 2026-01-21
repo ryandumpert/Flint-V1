@@ -181,4 +181,16 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
      * PROPS: {} (static template with complete naming structure)
      */
     CopperWireLanguage: lazy(() => import("@/components/templates/CopperWireLanguage").then(m => ({ default: m.CopperWireLanguage }))),
+
+    // ==========================================
+    // MEDIA & VISUALIZATION
+    // ==========================================
+
+    /**
+     * ImageCarousel
+     * USE WHEN: User asks for image gallery, carousel, slideshow, or collection of images
+     * SUPPORTS: Pre-generated images (local files) OR AI-generated images (prompts)
+     * PROPS: { title?, subtitle?, slides[{ imageId, caption?, actionPhrase? }], autoPlay?, showArrows?, showDots? }
+     */
+    ImageCarousel: lazy(() => import("@/components/templates/ImageCarousel").then(m => ({ default: m.ImageCarousel }))),
 };

@@ -108,6 +108,11 @@ If this rule is violated, the response is INVALID.
 | `PromptFileViewer` | Show glass-prompt.md | `{}` (no props - fetches live) |
 | `FolderStructure` | Project structure | `title?`, `subtitle?`, `structure[]?` |
 
+### Media & Visualization
+| Template | Use For | Props |
+|----------|---------|-------|
+| `ImageCarousel` | Image galleries, slideshows | `title?`, `subtitle?`, `slides[{ imageId, caption?, actionPhrase? }]`, `autoPlay?`, `showArrows?`, `showDots?` |
+
 ---
 
 ## 🎯 SHOT PROMPTS
@@ -1055,6 +1060,40 @@ navigateToSection:
 ```
 
 TELE SAYS: "Mobeus builds teles — conversational AI apps with visual interfaces. Our beta partners see 300% ROI and 3X funnel conversion. The team is led by Richie Etwaru as CEO."
+
+---
+
+### Image Carousel
+**USER:** "Show me a carousel of images" / "Generate some images" / "Image gallery" / "Show me a slideshow" / "Create an image carousel"
+
+navigateToSection:
+```json
+{
+  "badge": "GALLERY",
+  "title": "Image Carousel",
+  "subtitle": "AI-generated and pre-loaded images in a beautiful carousel",
+  "generativeSubsections": [
+    {
+      "id": "image-carousel",
+      "templateId": "ImageCarousel",
+      "props": {
+        "title": "Explore the Gallery",
+        "subtitle": "Images that inspire — swipe or click to navigate",
+        "slides": [
+          { "imageId": "A futuristic city skyline at sunset with flying vehicles and neon lights, digital art style", "caption": "The Future of Cities", "actionPhrase": "Tell me about future technology" },
+          { "imageId": "An abstract visualization of AI neural networks with glowing connections and data streams", "caption": "AI Neural Networks", "actionPhrase": "Explain how AI works" },
+          { "imageId": "A serene mountain landscape with a modern glass building integrated into nature", "caption": "Harmony of Tech & Nature", "actionPhrase": "Tell me about sustainable tech" }
+        ],
+        "autoPlay": true,
+        "showArrows": true,
+        "showDots": true
+      }
+    }
+  ]
+}
+```
+
+TELE SAYS: "These images are generated in real-time using AI. The ImageCarousel supports both pre-generated images (local files) and live AI generation — just provide a descriptive prompt as the imageId. Swipe or use the arrows to explore."
 
 ---
 
