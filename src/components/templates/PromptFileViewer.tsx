@@ -224,7 +224,7 @@ export const PromptFileViewer: React.FC = () => {
             '2. What is a Tele?': 'What is a tele',
             '3. Two-Agent Architecture': 'Show me the two-agent architecture',
             '4. Hackathon Phases': 'Show me the hackathon phases',
-            '5. Slash Commands': 'Show me the slash commands',
+            '5. Wire Commands': 'Show me the wire commands',
             '5a. Tools Overview': 'Show me the tools I will use',
             '6. Readiness Experience (Voice-Based Assessment)': 'Check my readiness',
         };

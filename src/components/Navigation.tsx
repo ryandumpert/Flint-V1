@@ -51,8 +51,8 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
       },
       {
         id: 'slash-commands',
-        label: 'SLASH COMMANDS',
-        teleQuery: 'Show me the slash commands and how powerful they are'
+        label: 'WIRE COMMANDS',
+        teleQuery: 'Show me the wire commands and how powerful they are'
       },
       {
         id: 'phases',

@@ -236,7 +236,7 @@ export const KnowledgeFileViewer: React.FC = () => {
             'The Two-Agent Architecture': 'Show me the two-agent architecture',
             'Folder Structure': 'Show me the folder structure',
             'The 20 Templates': 'Show me all templates',
-            'The 3 Slash Commands': 'Show me the slash commands',
+            'The Wire Commands': 'Show me the wire commands',
             'The 6 Hackathon Phases': 'Show me the hackathon phases',
             'Key Concepts': 'Explain navigateToSection',
             'Design System': 'Show me the design system',

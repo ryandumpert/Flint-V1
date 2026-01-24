@@ -1058,7 +1058,26 @@ const Index = () => {
 
     // Keyboard navigation - Back/Forward button support
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Skip navigation if user is typing in an input field (chat, search, etc.)
+      const activeElement = document.activeElement as HTMLElement | null;
+      const isTypingInInput = activeElement && (
+        activeElement instanceof HTMLInputElement ||
+        activeElement instanceof HTMLTextAreaElement ||
+        activeElement.getAttribute("contenteditable") === "true" ||
+        activeElement.closest("[data-chat-input]") ||
+        activeElement.closest("#chat-panel")
+      );
+
+      // For arrow keys, skip if typing (allow cursor movement)
+      if ((e.key === "ArrowLeft" || e.key === "ArrowRight") && isTypingInInput) {
+        return; // Let the input handle arrow keys normally
+      }
+
       if (e.key === "ArrowLeft" || e.key === "Backspace") {
+        // For Backspace, also skip if typing
+        if (e.key === "Backspace" && isTypingInInput) {
+          return;
+        }
         e.preventDefault();
 
         // Priority 1: If in show-only mode, exit to full section

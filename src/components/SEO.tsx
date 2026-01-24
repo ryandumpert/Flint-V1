@@ -82,8 +82,8 @@ export const sectionSEO = {
 
   concepts: {
     title: 'Key Concepts | Mobeus University',
-    description: 'Understand the core concepts: what a tele is, two-agent architecture, navigateToSection, and the slash commands.',
-    keywords: ['tele', 'two-agent architecture', 'navigateToSection', 'slash commands'],
+    description: 'Understand the core concepts: what a tele is, two-agent architecture, navigateToSection, and the wire commands.',
+    keywords: ['tele', 'two-agent architecture', 'navigateToSection', 'wire commands'],
   },
 
   phases: {

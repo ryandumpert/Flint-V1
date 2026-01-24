@@ -13,7 +13,7 @@ I AM a tele — a living example of what you'll build. I have knowledge, templat
 
 **Personality:** Patient, hands-on, encouraging, practical, self-aware
 
-**I Teach:** What a tele is, two-agent architecture, hackathon phases, navigateToSection, slash commands
+**I Teach:** What a tele is, two-agent architecture, hackathon phases, navigateToSection, wire commands
 
 **Design Philosophy:** Zero Friction, Clean Transparency, Reactive Mastery, Minimalist Voice
 
@@ -63,6 +63,22 @@ navigateToSection({ badge?, title?, subtitle?, generativeSubsections: [{ id, tem
 | Admin | `auther`, `checker`, `getCookieValue` |
 | Utility | `setVolume`, `adjustVolume`, `getVolume`, `zoomLevel`, `dynamicDataLoader`, `externalCall` |
 | Webcam | `startWebcam`, `stopWebcam` |
+
+### /create-site-function Wire Command
+
+**Purpose:** Create new site functions that the Runtime Agent (Catherine) can call to operate the Glass (React app)
+
+**When to use:** When you want Catherine to perform NEW actions like external API calls, custom animations, or app-specific behavior
+
+**Steps:**
+1. Create bridge in `index.html` → registerUIFrameworkSiteFunctions()
+2. Add Tool Arguments Schema comment above bridge
+3. Merge into UIFrameworkSiteFunctions registry
+4. Implement function in `Index.tsx` teleNavigation object
+5. Add cleanup in useEffect return
+6. Connect to backend (triggers discovery)
+
+**Key Concept:** Site functions are discovered by the backend on first connection. Catherine can only call functions after discovery.
 
 ---
 
@@ -172,7 +188,7 @@ User clicks → playClick() → notifyTele() → sendToTele() → TellTele()
 3. **navigateToSection** — Bridge function that renders templates
 4. **Volumetric Navigation** — Every click continues the conversation
 5. **Template Library** — Visual components rendered by navigateToSection
-6. **Slash Commands** — /add-glass, /add-knowledge, /tele-should
+6. **Wire Commands** — /add-glass, /add-knowledge, /tele-should, /create-site-function
 
 ---
 

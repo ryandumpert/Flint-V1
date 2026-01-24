@@ -33,7 +33,7 @@ export const ReadinessAssessment: React.FC<ReadinessAssessmentProps> = ({
         { topic: 'What is a Tele?', description: 'Conversational AI app with visual interface', progress: 0, actionPhrase: 'Assess my understanding of teles' },
         { topic: 'Two-Agent Architecture', description: 'Build LLM + Runtime LLM working together', progress: 0, actionPhrase: 'Assess my understanding of two agents' },
         { topic: 'navigateToSection', description: 'The bridge between tele and glass', progress: 0, actionPhrase: 'Assess my understanding of navigateToSection' },
-        { topic: 'Slash Commands', description: '/add-glass, /add-knowledge, /tele-should', progress: 0, actionPhrase: 'Assess my understanding of slash commands' },
+        { topic: 'Wire Commands', description: '/add-glass, /add-knowledge, /tele-should, /create-site-function', progress: 0, actionPhrase: 'Assess my understanding of wire commands' },
         { topic: 'Hackathon Phases', description: '6 phases x 30 minutes each', progress: 0, actionPhrase: 'Assess my understanding of hackathon phases' },
     ],
     threshold = 80,

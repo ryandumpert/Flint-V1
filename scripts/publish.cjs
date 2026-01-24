@@ -4,7 +4,7 @@ const path = require('path');
 async function publish() {
   try {
     // Hardcoded tenant ID for this project
-    const tenantId = '3897';
+    const tenantId = '3883';
     console.log('📋 Using tenant ID: ' + tenantId);
 
     // Read whitelisted files from public/

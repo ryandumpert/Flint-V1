@@ -34,7 +34,7 @@ export const ReadinessExperience: React.FC<ReadinessExperienceProps> = ({
         { concept: 'What is a Tele?', description: 'Conversational AI with visual interface', progress: 0, actionPhrase: 'I want to explain what a tele is' },
         { concept: 'Two-Agent Architecture', description: 'Build LLM + Runtime LLM working together', progress: 0, actionPhrase: 'I want to explain the two agents' },
         { concept: 'navigateToSection', description: 'The bridge between tele and glass', progress: 0, actionPhrase: 'I want to explain navigateToSection' },
-        { concept: 'Slash Commands', description: '/add-glass, /add-knowledge, /tele-should', progress: 0, actionPhrase: 'I want to explain slash commands' },
+        { concept: 'Wire Commands', description: '/add-glass, /add-knowledge, /tele-should, /create-site-function', progress: 0, actionPhrase: 'I want to explain wire commands' },
         { concept: 'Hackathon Phases', description: '6 phases × 30 minutes each', progress: 0, actionPhrase: 'I want to explain the hackathon phases' },
     ],
     threshold = 80,

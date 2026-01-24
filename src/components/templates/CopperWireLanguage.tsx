@@ -138,7 +138,7 @@ const NAMING_STRUCTURE = {
         }
     },
 
-    // THE COMMANDS (Slash Commands → Wire Commands)
+    // THE COMMANDS (Wire Commands)
     commands: [
         { old: "/add-glass", new: "/panel", description: "Create visual panels" },
         { old: "/add-knowledge", new: "/teach", description: "Teach tele facts" },

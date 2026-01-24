@@ -37,7 +37,7 @@ const DEFAULT_STRUCTURE: FolderItem[] = [
             {
                 name: 'workflows/',
                 type: 'folder',
-                description: 'Slash command workflows',
+                description: 'Wire command workflows',
                 children: [
                     { name: 'add-glass.md', type: 'file', description: 'Create visual templates' },
                     { name: 'add-knowledge.md', type: 'file', description: 'Add domain knowledge' },
