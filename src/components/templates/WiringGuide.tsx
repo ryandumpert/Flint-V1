@@ -2,8 +2,6 @@
  * WiringGuide - PURPOSE-SPECIFIC (Step 5: Wiring)
  * Shows voice wiring, vibe wiring, and wire commands
  * 
- * ⚠️ NO DEFAULTS - ALL PROPS MUST BE PROVIDED BY RUNTIME AGENT
- * 
  * USE WHEN: Explaining how to wire a tele
  */
 
@@ -24,14 +22,17 @@ interface WiringMode {
 interface WireCommand {
     cmd: string;
     desc: string;
+    icon?: string;
+    example?: string;
+    category?: string;
 }
 
 interface WiringGuideProps {
-    wiringModes: WiringMode[];
-    commandsLabel: string;
-    coreCommands: WireCommand[];
-    ctaLabel: string;
-    ctaActionPhrase: string;
+    wiringModes?: WiringMode[];
+    commandsLabel?: string;
+    coreCommands?: WireCommand[];
+    ctaLabel?: string;
+    ctaActionPhrase?: string;
 }
 
 const getIcon = (iconName: string): LucideIcon => {
@@ -40,11 +41,33 @@ const getIcon = (iconName: string): LucideIcon => {
 };
 
 export const WiringGuide: React.FC<WiringGuideProps> = ({
-    wiringModes,
-    commandsLabel,
-    coreCommands,
-    ctaLabel,
-    ctaActionPhrase,
+    wiringModes = [
+        {
+            icon: "Mic",
+            title: "Voice Wiring",
+            description: "Speak in natural language—Claude learns instantly.",
+            color: "sapphire",
+            examples: ["Add a pricing table with 3 tiers", "Teach about our products"]
+        },
+        {
+            icon: "Terminal",
+            title: "Vibe Wiring",
+            description: "Type slash commands—Claude generates production code.",
+            color: "flamingo",
+            examples: ["/add-glass pricing-chart", "/add-knowledge product-catalog"]
+        }
+    ],
+    commandsLabel = "Wire Commands",
+    coreCommands = [
+        { cmd: "/add-glass", desc: "Create templates" },
+        { cmd: "/add-knowledge", desc: "Teach domain facts" },
+        { cmd: "/tele-should", desc: "Define behaviors" },
+        { cmd: "/set-goal", desc: "Set outcome" },
+        { cmd: "/set-journey", desc: "Order steps" },
+        { cmd: "/publish", desc: "Go live" }
+    ],
+    ctaLabel = "See analytics",
+    ctaActionPhrase = "Show me analytics",
 }) => {
     const { playClick } = useSound();
 
@@ -52,15 +75,6 @@ export const WiringGuide: React.FC<WiringGuideProps> = ({
         playClick();
         notifyTele(actionPhrase);
     };
-
-    // Guard against missing props
-    if (!wiringModes || !coreCommands) {
-        return (
-            <div className="glass-template-container p-8 text-center">
-                <p className="text-flamingo">⚠️ Template props missing. Runtime Agent must provide all props.</p>
-            </div>
-        );
-    }
 
     return (
         <div className="glass-template-container space-y-8">

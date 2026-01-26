@@ -1,8 +1,6 @@
 /**
  * AnalyticsView - PURPOSE-SPECIFIC (Step 6: Analytics)
  * Shows the 3 analytics capabilities
- * 
- * ⚠️ NO DEFAULTS - ALL PROPS MUST BE PROVIDED BY RUNTIME AGENT
  */
 
 import React from 'react';
@@ -18,9 +16,9 @@ interface AnalyticItem {
 }
 
 interface AnalyticsViewProps {
-    analytics: AnalyticItem[];
-    ctaLabel: string;
-    ctaActionPhrase: string;
+    analytics?: AnalyticItem[];
+    ctaLabel?: string;
+    ctaActionPhrase?: string;
 }
 
 const getIcon = (iconName: string): LucideIcon => {
@@ -29,9 +27,13 @@ const getIcon = (iconName: string): LucideIcon => {
 };
 
 export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
-    analytics,
-    ctaLabel,
-    ctaActionPhrase,
+    analytics = [
+        { icon: "Eye", title: "Agent Observability", description: "See what AI is doing and why. Full transparency into every decision." },
+        { icon: "Brain", title: "Probabilistic CRM", description: "Track intent with confidence levels, not binary leads." },
+        { icon: "Activity", title: "Conversational Telemetry", description: "Combine clicks + words + outcomes for complete picture." }
+    ],
+    ctaLabel = "Schedule hackathon",
+    ctaActionPhrase = "Show me hackathon",
 }) => {
     const { playClick } = useSound();
 
@@ -39,15 +41,6 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
         playClick();
         notifyTele(actionPhrase);
     };
-
-    // Guard against missing props
-    if (!analytics) {
-        return (
-            <div className="glass-template-container p-8 text-center">
-                <p className="text-flamingo">⚠️ Template props missing. Runtime Agent must provide all props.</p>
-            </div>
-        );
-    }
 
     return (
         <div className="glass-template-container space-y-6">

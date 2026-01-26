@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { Cpu, Cloud, Share2, ArrowRight, LucideIcon } from 'lucide-react';
+import { Cpu, ArrowRight, LucideIcon } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
 import { notifyTele } from '@/utils/acknowledgmentHelpers';
 import { useSound } from '@/hooks/useSound';
@@ -20,13 +20,13 @@ interface Thing {
 }
 
 interface ThreeThingsProps {
-    things: Thing[];
+    things?: Thing[];
     ctaLabel?: string;
     ctaActionPhrase?: string;
 }
 
 export const ThreeThings: React.FC<ThreeThingsProps> = ({
-    things = [],
+    things: thingsProp,
     ctaLabel,
     ctaActionPhrase,
 }) => {
@@ -42,6 +42,15 @@ export const ThreeThings: React.FC<ThreeThingsProps> = ({
         const icon = (LucideIcons as any)[iconName];
         return icon || Cpu;
     };
+
+    // Default things if none provided
+    const defaultThings: Thing[] = [
+        { icon: "AlertTriangle", title: "Problem We Solve", description: "AI projects fail because there's no UI for AI." },
+        { icon: "Zap", title: "What We Build", description: "Teles — conversational interfaces with visual feedback." },
+        { icon: "TrendingUp", title: "Our Equation", description: "UI + AI = ROI (+87% conversion improvement)" }
+    ];
+
+    const things = (thingsProp && thingsProp.length > 0) ? thingsProp : defaultThings;
 
     // Only show first 3 things
     const displayThings = things.slice(0, 3);
