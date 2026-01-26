@@ -2,13 +2,11 @@
  * PlatformOverview - PURPOSE-SPECIFIC (Step 3: Platform)
  * Shows the teleglass platform: triple agnostic + SaaS pricing
  * 
- * ⚠️ NO DEFAULTS - ALL PROPS MUST BE PROVIDED BY RUNTIME AGENT
- * 
  * USE WHEN: Explaining the teleglass platform
  */
 
 import React from 'react';
-import { Cpu, Cloud, Share2, CreditCard, Activity, Calculator, ArrowRight, LucideIcon } from 'lucide-react';
+import { Cpu, ArrowRight, LucideIcon } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
 import { notifyTele } from '@/utils/acknowledgmentHelpers';
 import { useSound } from '@/hooks/useSound';
@@ -20,12 +18,12 @@ interface PillarItem {
 }
 
 interface PlatformOverviewProps {
-    agnosticLabel: string;
-    agnosticPillars: PillarItem[];
-    pricingLabel: string;
-    pricingPillars: PillarItem[];
-    ctaLabel: string;
-    ctaActionPhrase: string;
+    agnosticLabel?: string;
+    agnosticPillars?: PillarItem[];
+    pricingLabel?: string;
+    pricingPillars?: PillarItem[];
+    ctaLabel?: string;
+    ctaActionPhrase?: string;
 }
 
 const getIcon = (iconName: string): LucideIcon => {
@@ -34,12 +32,20 @@ const getIcon = (iconName: string): LucideIcon => {
 };
 
 export const PlatformOverview: React.FC<PlatformOverviewProps> = ({
-    agnosticLabel,
-    agnosticPillars,
-    pricingLabel,
-    pricingPillars,
-    ctaLabel,
-    ctaActionPhrase,
+    agnosticLabel = "Triple Agnostic Architecture",
+    agnosticPillars = [
+        { icon: "Cpu", title: "Model Agnostic", description: "OpenAI/Claude/Gemini/Llama" },
+        { icon: "Cloud", title: "Cloud Agnostic", description: "AWS/GCP/Azure/on-prem" },
+        { icon: "Share2", title: "Channel Agnostic", description: "Text/phone/chat/voice/avatar" }
+    ],
+    pricingLabel = "SaaS Licensing & Pricing",
+    pricingPillars = [
+        { icon: "CreditCard", title: "SaaS Licensed", description: "Enterprise-ready SaaS" },
+        { icon: "Activity", title: "Utilization-Based", description: "Pay per use" },
+        { icon: "Calculator", title: "Per Interaction", description: "Transparent pricing" }
+    ],
+    ctaLabel = "See Innovations",
+    ctaActionPhrase = "Show me innovations",
 }) => {
     const { playClick } = useSound();
 
@@ -47,15 +53,6 @@ export const PlatformOverview: React.FC<PlatformOverviewProps> = ({
         playClick();
         notifyTele(actionPhrase);
     };
-
-    // Guard against missing props
-    if (!agnosticPillars || !pricingPillars) {
-        return (
-            <div className="glass-template-container p-8 text-center">
-                <p className="text-flamingo">⚠️ Template props missing. Runtime Agent must provide all props.</p>
-            </div>
-        );
-    }
 
     return (
         <div className="glass-template-container space-y-8">

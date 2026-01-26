@@ -1,8 +1,6 @@
 /**
  * DualAgentDetail - Step 4, Thing 1
  * Full-width layout with detailed agent comparison
- * 
- * ⚠️ NO DEFAULTS - ALL PROPS MUST BE PROVIDED BY RUNTIME AGENT
  */
 import React from 'react';
 import { Users, ArrowRight, LucideIcon } from 'lucide-react';
@@ -18,14 +16,14 @@ interface AgentInfo {
 }
 
 interface DualAgentDetailProps {
-    headline: string;
-    subheadline: string;
-    buildAgent: AgentInfo;
-    runtimeAgent: AgentInfo;
-    footerTitle: string;
-    footerDesc: string;
-    ctaLabel: string;
-    ctaActionPhrase: string;
+    headline?: string;
+    subheadline?: string;
+    buildAgent?: AgentInfo;
+    runtimeAgent?: AgentInfo;
+    footerTitle?: string;
+    footerDesc?: string;
+    ctaLabel?: string;
+    ctaActionPhrase?: string;
 }
 
 const getIcon = (iconName: string): LucideIcon => {
@@ -34,26 +32,27 @@ const getIcon = (iconName: string): LucideIcon => {
 };
 
 export const DualAgentDetail: React.FC<DualAgentDetailProps> = ({
-    headline,
-    subheadline,
-    buildAgent,
-    runtimeAgent,
-    footerTitle,
-    footerDesc,
-    ctaLabel,
-    ctaActionPhrase,
+    headline = "Dual Agent Architecture",
+    subheadline = "Build Agent + Runtime Agent",
+    buildAgent = {
+        title: "Build Agent (Claude)",
+        description: "Creates during development",
+        icon: "Hammer",
+        capabilities: ["Wires knowledge", "Generates templates", "Configures behaviors", "Admin mode"]
+    },
+    runtimeAgent = {
+        title: "Runtime Agent (OpenAI)",
+        description: "Serves live users",
+        icon: "Zap",
+        capabilities: ["Sub-second responses", "Live conversations", "navigateToSection", "24/7"]
+    },
+    footerTitle = "Never simultaneous",
+    footerDesc = "Separation = precision + speed",
+    ctaLabel = "DOM Bridge",
+    ctaActionPhrase = "Show me DOM bridge",
 }) => {
     const { playClick } = useSound();
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
-
-    // Guard against missing props
-    if (!buildAgent || !runtimeAgent) {
-        return (
-            <div className="glass-template-container p-8 text-center">
-                <p className="text-flamingo">⚠️ Template props missing. Runtime Agent must provide all props.</p>
-            </div>
-        );
-    }
 
     const BuildIcon = getIcon(buildAgent.icon);
     const RuntimeIcon = getIcon(runtimeAgent.icon);

@@ -33,9 +33,9 @@ import { CursorThinkingIndicator } from "@/components/CursorThinkingIndicator";
 // Welcome section - Problem-focused carousel leading to hackathon scheduling
 const WELCOME_VARIANTS = [
   {
-    badge: "THE MISSING UI FOR AI",
-    title: "A tele solves the adoption problem",
-    subtitle: "AI projects fail because there's no user interface. A tele is the UI that bridges AI and humans — conversation meets visuals, on any device, through any channel. Schedule a hackathon to wire yours.",
+    badge: "THE UI FOR AI",
+    title: "A tele solves the adoption crisis",
+    subtitle: "AI projects fail because there's no user interface. A tele is the missing layer — conversation + visuals, on any device, through any channel. 14.6 trillion micro-frustrations a year. We're Friction Fighters.",
     generativeSubsections: [
       {
         id: "journey-carousel",
@@ -44,34 +44,46 @@ const WELCOME_VARIANTS = [
           autoPlayInterval: 45000,
           cards: [
             {
-              question: "Why are 70% of AI projects failing?",
-              subtext: "It's not the technology — the AI is brilliant. It's the absence of a user interface. Billions invested, nothing deployed. Users don't know how to interact with AI.",
+              question: "Why do 70% of AI projects fail?",
+              subtext: "It's not the technology — AI works brilliantly. It's the absence of a user interface. Billions invested, nothing deployed. No UI for AI. That's the real problem.",
               imageUrl: "/assets/carousel-slide-01.png",
-              actionPhrase: "Show me why AI projects are failing"
+              actionPhrase: "Show me the real problem"
             },
             {
-              question: "What's the Teleglass Platform?",
-              subtext: "Model agnostic: works with any LLM. Cloud agnostic: deploy anywhere. Channel agnostic: Text, phone, chat, voice, avatar. One platform, unlimited reach.",
+              question: "What exactly is a tele?",
+              subtext: "The missing interface. A tele meets people globally, on any device, through any channel. Conversation + visuals working together. The UI that finally makes AI accessible.",
               imageUrl: "/assets/carousel-slide-02.png",
+              actionPhrase: "Show me what a tele is"
+            },
+            {
+              question: "What powers the platform?",
+              subtext: "Triple agnostic: any model, any cloud, any channel. SaaS licensed, utilization-based pricing. Text at $0.002, chat free, voice at $0.03/min, avatar at $0.10/min.",
+              imageUrl: "/assets/carousel-slide-03.png",
               actionPhrase: "Show me the platform"
             },
             {
-              question: "What makes it innovative?",
-              subtext: "Dual agent coordination, DOM-to-LLM bridge, and volumetric navigation. Three innovations that make conversation + visuals possible.",
-              imageUrl: "/assets/carousel-slide-03.png",
+              question: "What makes it different?",
+              subtext: "Dual agent architecture. DOM-to-LLM bridge. Generative web. Three innovations that make AI interfaces finally work. Marshmallow with copper wire running through it.",
+              imageUrl: "/assets/carousel-slide-06.png",
               actionPhrase: "Show me the innovations"
             },
             {
               question: "How do I wire a tele?",
-              subtext: "Voice wiring: speak and your tele learns. Vibe wiring: describe what you want and Claude wires it. Wire commands are your power tools.",
-              imageUrl: "/assets/carousel-slide-06.png",
-              actionPhrase: "Show me how to wire a tele"
+              subtext: "Voice wiring: speak and it learns. Vibe wiring: describe and Claude builds. Six wire commands. Productionizing probabilism — the craft of threading copper through marshmallow.",
+              imageUrl: "/assets/carousel-slide-07.png",
+              actionPhrase: "Show me wiring"
             },
             {
-              question: "Ready to schedule a hackathon?",
-              subtext: "Wire your first tele with hands-on guidance from the Mobeus team. We'll schedule your hackathon within 48 hours.",
+              question: "What can I measure?",
+              subtext: "Agent observability: see AI decisions. Probabilistic CRM: intent scores, not binary. Conversational telemetry: clicks + words + outcomes. Analytics that understand conversation.",
+              imageUrl: "/assets/carousel-slide-02.png",
+              actionPhrase: "Show me analytics"
+            },
+            {
+              question: "Ready to wire your tele?",
+              subtext: "3-hour hackathon. Hands-on wiring with Mobeus experts. Traditional AI: 18 months. Hackathon: 3 hours. Same result. $500 in credits. Live deployment included.",
               imageUrl: "/assets/hackathon-calendar.png",
-              actionPhrase: "Show me how to schedule a hackathon"
+              actionPhrase: "Show me hackathon"
             }
           ]
         }

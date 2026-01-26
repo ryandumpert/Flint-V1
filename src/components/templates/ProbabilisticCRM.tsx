@@ -43,12 +43,12 @@ const getIcon = (iconName?: string): LucideIcon => {
 export const ProbabilisticCRM: React.FC<ProbabilisticCRMProps> = ({
     headline = "Probabilistic CRM",
     subheadline = "Track intent, not just events",
-    description = "Understand likelihood, not just events. Each user gets an intent score with confidence levels. Make decisions based on probability.",
+    description = "Likelihood, not binary. Intent scores + confidence.",
     features = [
-        { icon: "Target", title: "Intent Scoring", description: "Probability of conversion" },
-        { icon: "TrendingUp", title: "Confidence Levels", description: "Each prediction scored" },
-        { icon: "BarChart3", title: "Intent History", description: "Track changes over time" },
-        { icon: "Users", title: "Segment Discovery", description: "Auto-cluster by intent" },
+        { icon: "Target", title: "Intent Scoring", description: "Assigns a probability to each user's intent, showing how likely they are to convert. Focus on high-value opportunities." },
+        { icon: "TrendingUp", title: "Confidence", description: "Each intent score is paired with a confidence level. Know how reliable the prediction is before acting." },
+        { icon: "BarChart3", title: "History", description: "Track changes in intent scores over time. See trends, spot shifts, and understand how engagement evolves." },
+        { icon: "Users", title: "Segments", description: "Users automatically cluster into segments based on their intent patterns. Target groups with personalized approaches." }
     ],
     leadsLabel = "Sample Intent Scores",
     sampleLeads = [

@@ -48,32 +48,32 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
       {
         id: 'platform',
         label: 'PLATFORM',
-        teleQuery: 'Tell me about the Teleglass platform'
+        teleQuery: 'Show me the platform'
       },
       {
         id: 'innovations',
         label: 'INNOVATIONS',
-        teleQuery: 'What are the key innovations'
+        teleQuery: 'Show me the innovations'
       },
       {
         id: 'wiring',
         label: 'WIRING',
-        teleQuery: 'How do I wire a tele'
+        teleQuery: 'Show me wiring'
       },
       {
         id: 'analytics',
         label: 'ANALYTICS',
-        teleQuery: 'Tell me about analytics'
+        teleQuery: 'Show me analytics'
       },
       {
         id: 'about',
         label: 'ABOUT',
-        teleQuery: 'Tell me about Mobeus'
+        teleQuery: 'Show me about Mobeus'
       },
       {
         id: 'hackathon',
         label: 'SCHEDULE HACKATHON',
-        teleQuery: 'I want to schedule a hackathon',
+        teleQuery: 'Show me hackathon',
         isHighlighted: true
       }
     ];

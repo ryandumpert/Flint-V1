@@ -2,8 +2,6 @@
  * InnovationStack - PURPOSE-SPECIFIC (Step 4: Innovations)
  * Shows the 3 key innovations that power teleglass
  * 
- * ⚠️ NO DEFAULTS - ALL PROPS MUST BE PROVIDED BY RUNTIME AGENT
- * 
  * USE WHEN: Explaining dual agent, DOM bridge, generative web
  */
 
@@ -23,9 +21,9 @@ interface InnovationItem {
 }
 
 interface InnovationStackProps {
-    innovations: InnovationItem[];
-    ctaLabel: string;
-    ctaActionPhrase: string;
+    innovations?: InnovationItem[];
+    ctaLabel?: string;
+    ctaActionPhrase?: string;
 }
 
 const getIcon = (iconName: string): LucideIcon => {
@@ -34,9 +32,34 @@ const getIcon = (iconName: string): LucideIcon => {
 };
 
 export const InnovationStack: React.FC<InnovationStackProps> = ({
-    innovations,
-    ctaLabel,
-    ctaActionPhrase,
+    innovations = [
+        {
+            icon: "Users",
+            number: 1,
+            title: "Dual Agent Architecture",
+            subtitle: "Build Agent + Runtime Agent",
+            description: "Claude builds (dev). OpenAI runs (live). Never simultaneous.",
+            details: ["Claude: wiring/templates/knowledge", "OpenAI: live conversations", "Separation = precision + speed"]
+        },
+        {
+            icon: "Link",
+            number: 2,
+            title: "DOM-to-LLM Bridge",
+            subtitle: "navigateToSection()—One Function",
+            description: "AI calls function→React renders instantly.",
+            details: ["One function controls visuals", "JSON payloads", "<50ms rendering"]
+        },
+        {
+            icon: "Layout",
+            number: 3,
+            title: "Generative Web",
+            subtitle: "AI-Rendered Interfaces",
+            description: "Not static—assembled real-time per conversation.",
+            details: ["Templates as blocks", "AI composes dynamically", "Context-aware"]
+        }
+    ],
+    ctaLabel = "Learn How to Wire",
+    ctaActionPhrase = "Show me wiring",
 }) => {
     const { playClick } = useSound();
     const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
@@ -50,15 +73,6 @@ export const InnovationStack: React.FC<InnovationStackProps> = ({
         playClick();
         setExpandedIndex(expandedIndex === index ? null : index);
     };
-
-    // Guard against missing props
-    if (!innovations) {
-        return (
-            <div className="glass-template-container p-8 text-center">
-                <p className="text-flamingo">⚠️ Template props missing. Runtime Agent must provide all props.</p>
-            </div>
-        );
-    }
 
     return (
         <div className="glass-template-container space-y-4">

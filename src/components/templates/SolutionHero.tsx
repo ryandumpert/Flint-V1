@@ -2,8 +2,6 @@
  * SolutionHero - PURPOSE-SPECIFIC (Step 2: The Solution)
  * Hero section explaining what a tele is
  * 
- * ⚠️ NO DEFAULTS - ALL PROPS MUST BE PROVIDED BY RUNTIME AGENT
- * 
  * USE WHEN: Introducing the tele solution
  */
 
@@ -19,12 +17,12 @@ interface BenefitItem {
 }
 
 interface SolutionHeroProps {
-    headline: string;
-    subheadline: string;
-    tagline: string;
-    benefits: BenefitItem[];
-    ctaLabel: string;
-    ctaActionPhrase: string;
+    headline?: string;
+    subheadline?: string;
+    tagline?: string;
+    benefits?: BenefitItem[];
+    ctaLabel?: string;
+    ctaActionPhrase?: string;
 }
 
 const getIcon = (iconName: string): LucideIcon => {
@@ -33,12 +31,16 @@ const getIcon = (iconName: string): LucideIcon => {
 };
 
 export const SolutionHero: React.FC<SolutionHeroProps> = ({
-    headline,
-    subheadline,
-    tagline,
-    benefits,
-    ctaLabel,
-    ctaActionPhrase,
+    headline = "A Tele is the UI for AI",
+    subheadline = "The missing interface making AI accessible to everyone",
+    tagline = "A tele serves as an agentic user interface",
+    benefits = [
+        { icon: "Globe", text: "Meets consumers globally" },
+        { icon: "Smartphone", text: "Any device" },
+        { icon: "Radio", text: "Any channel" }
+    ],
+    ctaLabel = "See the Platform",
+    ctaActionPhrase = "Show me the platform",
 }) => {
     const { playClick } = useSound();
 
@@ -46,15 +48,6 @@ export const SolutionHero: React.FC<SolutionHeroProps> = ({
         playClick();
         notifyTele(actionPhrase);
     };
-
-    // Guard against missing props
-    if (!benefits) {
-        return (
-            <div className="glass-template-container p-8 text-center">
-                <p className="text-flamingo">⚠️ Template props missing. Runtime Agent must provide all props.</p>
-            </div>
-        );
-    }
 
     return (
         <div className="glass-template-container space-y-8">

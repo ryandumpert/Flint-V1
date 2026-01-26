@@ -88,4 +88,9 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
     FastTurnaround: lazy(() => import("@/components/templates/FastTurnaround").then(m => ({ default: m.FastTurnaround }))),
     FullSupport: lazy(() => import("@/components/templates/FullSupport").then(m => ({ default: m.FullSupport }))),
 
+    // ==========================================
+    // USE CASES (Imagined Stories)
+    // ==========================================
+    UseCaseStory: lazy(() => import("@/components/templates/UseCaseStory").then(m => ({ default: m.UseCaseStory }))),
+
 };
