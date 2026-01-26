@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Wrench, ChevronDown, ChevronUp } from "lucide-react";
+import { Wrench, ChevronDown, ChevronUp, Copy, Check } from "lucide-react";
 
 interface ToolCallIndicatorProps {
   toolName: string;
@@ -15,6 +15,7 @@ export function ToolCallIndicator({
   defaultExpanded = false,
 }: ToolCallIndicatorProps) {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
+  const [copied, setCopied] = useState(false);
 
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString("en-US", {
@@ -22,6 +23,18 @@ export function ToolCallIndicator({
       minute: "2-digit",
       hour12: true,
     });
+  };
+
+  const handleCopy = async (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent expanding/collapsing
+    const content = JSON.stringify({ toolName, parameters }, null, 2);
+    try {
+      await navigator.clipboard.writeText(content);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
   };
 
   return (
@@ -34,11 +47,25 @@ export function ToolCallIndicator({
           <Wrench className="w-4 h-4 text-primary" />
           <span className="text-sm text-primary font-medium">Tool Called</span>
         </div>
-        {isExpanded ? (
-          <ChevronUp className="w-4 h-4 text-primary" />
-        ) : (
-          <ChevronDown className="w-4 h-4 text-primary" />
-        )}
+        <div className="flex items-center gap-2">
+          {/* Copy Button */}
+          <div
+            onClick={handleCopy}
+            className="p-1 rounded hover:bg-primary/20 transition-colors cursor-pointer"
+            title="Copy to clipboard"
+          >
+            {copied ? (
+              <Check className="w-3.5 h-3.5 text-green-400" />
+            ) : (
+              <Copy className="w-3.5 h-3.5 text-primary/70 hover:text-primary" />
+            )}
+          </div>
+          {isExpanded ? (
+            <ChevronUp className="w-4 h-4 text-primary" />
+          ) : (
+            <ChevronDown className="w-4 h-4 text-primary" />
+          )}
+        </div>
       </button>
 
       {isExpanded && (
@@ -47,7 +74,7 @@ export function ToolCallIndicator({
             <span className="text-white/60">Function:</span>{" "}
             <span className="text-white font-mono">{toolName}</span>
           </div>
-          
+
           {Object.keys(parameters).length > 0 && (
             <div>
               <span className="text-white/60">Parameters:</span>
@@ -64,7 +91,7 @@ export function ToolCallIndicator({
               </ul>
             </div>
           )}
-          
+
           <div className="text-white/50 text-xs">
             Executed: {formatTime(timestamp)}
           </div>

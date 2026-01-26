@@ -27,11 +27,32 @@ interface WelcomeCarouselProps {
 }
 
 export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
-    cards = [],
+    cards: cardsProp,
     autoPlayInterval = 30000, // Not used directly, speed controls scroll
 }) => {
     const { playClick } = useSound();
     const [selectedIndex, setSelectedIndex] = useState(0);
+
+    // Default cards - used when cards prop is empty or undefined
+    const defaultCards: QuestionCard[] = [
+        // Journey Step 1: The Problem
+        { question: "Why are 70% of AI projects failing?", subtext: "It's not the technology — the AI is brilliant. It's the absence of a user interface.", imageUrl: "/assets/carousel-slide-01.png", actionPhrase: "Show me why AI projects are failing" },
+        // Journey Step 2: The Solution
+        { question: "What is a tele?", subtext: "The missing UI for AI. Meets every consumer globally — any device, any channel.", imageUrl: "/assets/carousel-slide-02.png", actionPhrase: "Show me what a tele is" },
+        // Journey Step 3: Platform
+        { question: "What's the teleglass platform?", subtext: "Model agnostic, cloud agnostic, channel agnostic. SaaS licensed, utilization-based pricing.", imageUrl: "/assets/carousel-slide-03.png", actionPhrase: "Show me the platform" },
+        // Journey Step 4: Innovations
+        { question: "What makes it innovative?", subtext: "Dual agent architecture, DOM-to-LLM bridge, and generative web.", imageUrl: "/assets/carousel-slide-04.png", actionPhrase: "Show me the innovations" },
+        // Journey Step 5: Wiring
+        { question: "How do I wire a tele?", subtext: "Voice wiring, vibe wiring, and wire commands. Build by speaking or typing.", imageUrl: "/assets/carousel-slide-05.png", actionPhrase: "Show me how to wire a tele" },
+        // Journey Step 6: Analytics
+        { question: "What analytics do I get?", subtext: "Agent observability, probabilistic CRM, and conversational telemetry.", imageUrl: "/assets/carousel-slide-06.png", actionPhrase: "Show me analytics" },
+        // Journey Step 7: Schedule Hackathon (GOAL)
+        { question: "Ready to schedule a hackathon?", subtext: "Wire your first tele with hands-on guidance from Mobeus.", imageUrl: "/assets/hackathon-calendar.png", actionPhrase: "Show me how to schedule a hackathon" },
+    ];
+
+    // Use passed cards if valid, otherwise use defaults
+    const cards = (cardsProp && cardsProp.length > 0) ? cardsProp : defaultCards;
 
     // Initialize Embla with auto-scroll plugin (continuous scrolling)
     const [emblaRef, emblaApi] = useEmblaCarousel(
@@ -45,7 +66,7 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
         [
             AutoScroll({
                 speed: 1, // Pixels per frame - slow and smooth
-                stopOnInteraction: false,
+                stopOnInteraction: true, // Stop when user clicks dots
                 stopOnMouseEnter: true,
                 playOnInit: true,
             }),
@@ -99,7 +120,8 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
                             key={idx}
                             className="flex-shrink-0 w-[340px] md:w-[380px] mr-6 glass-card-standard overflow-hidden cursor-pointer
                                 transform transition-all duration-300 ease-out
-                                hover:scale-[1.02] hover:shadow-glow"
+                                hover:scale-[1.02] hover:shadow-glow
+                                group"
                             onClick={() => handleCardClick(card.actionPhrase)}
                         >
                             {/* Image - Uses SmartImage for live generation fallback */}
@@ -107,7 +129,7 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
                                 <SmartImage
                                     assetId={card.imageUrl || card.imagePrompt || card.question}
                                     alt={card.question}
-                                    className="w-full h-full object-cover opacity-50 grayscale hover:grayscale-0 hover:opacity-70 transition-all duration-500 ease-out hover:scale-105"
+                                    className="w-full h-full object-cover opacity-60 grayscale transition-all duration-500 ease-out group-hover:grayscale-0 group-hover:opacity-80 group-hover:scale-105"
                                 />
                             </div>
 

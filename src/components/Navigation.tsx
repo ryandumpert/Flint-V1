@@ -35,8 +35,8 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
   }, []);
 
   // ============================================
-  // MOBEUS UNIVERSITY - HACKATHON PREP NAVIGATION
-  // Menu items for preparing developers for hackathon
+  // MOBEUS UNIVERSITY - PLATFORM NAVIGATION
+  // Menu items organized by platform capabilities
   // ============================================
   const navItems: Array<{
     id: string;
@@ -46,24 +46,24 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
     isHighlighted?: boolean;
   }> = [
       {
-        id: 'promise',
-        label: 'START',
-        teleQuery: 'What can I build'
+        id: 'platform',
+        label: 'PLATFORM',
+        teleQuery: 'Tell me about the Teleglass platform'
       },
       {
-        id: 'concepts',
-        label: 'CONCEPTS',
-        teleQuery: 'Show me the core concepts'
+        id: 'innovations',
+        label: 'INNOVATIONS',
+        teleQuery: 'What are the key innovations'
       },
       {
-        id: 'wire',
-        label: 'WIRE',
-        teleQuery: 'What are wire commands'
+        id: 'wiring',
+        label: 'WIRING',
+        teleQuery: 'How do I wire a tele'
       },
       {
-        id: 'anatomy',
-        label: 'ANATOMY',
-        teleQuery: 'Show me the anatomy of a tele'
+        id: 'analytics',
+        label: 'ANALYTICS',
+        teleQuery: 'Tell me about analytics'
       },
       {
         id: 'about',
@@ -71,9 +71,9 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
         teleQuery: 'Tell me about Mobeus'
       },
       {
-        id: 'repo',
-        label: 'GET REPO',
-        externalUrl: 'https://github.com/mobeus/mobeus-university',
+        id: 'hackathon',
+        label: 'SCHEDULE HACKATHON',
+        teleQuery: 'I want to schedule a hackathon',
         isHighlighted: true
       }
     ];

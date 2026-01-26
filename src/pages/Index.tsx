@@ -23,19 +23,19 @@ import { BackToTop } from "@/components/BackToTop";
 import { OTPDialog } from "@/components/OTPDialog";
 
 import { CarColorProvider } from "@/contexts/CarColorContext";
-import RippleEffect from "@/components/RippleEffect";
+
 import { GitVersionIndicator } from "@/components/GitVersionIndicator";
 import { OnboardingTransition } from "@/components/OnboardingTransition";
 import { Logo } from "@/components/Logo";
 import { CursorThinkingIndicator } from "@/components/CursorThinkingIndicator";
 
 
-// Welcome section - Journey-aligned carousel (7 steps to goal)
+// Welcome section - Problem-focused carousel leading to hackathon scheduling
 const WELCOME_VARIANTS = [
   {
-    badge: "TELE BUILDER JOURNEY",
-    title: "Build a Conversational Product in 3 Hours",
-    subtitle: "7 steps from curious to ready — anyone can do it",
+    badge: "THE MISSING UI FOR AI",
+    title: "A tele solves the adoption problem",
+    subtitle: "AI projects fail because there's no user interface. A tele is the UI that bridges AI and humans — conversation meets visuals, on any device, through any channel. Schedule a hackathon to wire yours.",
     generativeSubsections: [
       {
         id: "journey-carousel",
@@ -44,46 +44,34 @@ const WELCOME_VARIANTS = [
           autoPlayInterval: 45000,
           cards: [
             {
-              question: "What can I build in 3 hours?",
-              subtext: "A conversational product with a beginning, journey, and goal",
+              question: "Why are 70% of AI projects failing?",
+              subtext: "It's not the technology — the AI is brilliant. It's the absence of a user interface. Billions invested, nothing deployed. Users don't know how to interact with AI.",
               imageUrl: "/assets/carousel-slide-01.png",
-              actionPhrase: "What can I build"
+              actionPhrase: "Show me why AI projects are failing"
             },
             {
-              question: "How do I build it?",
-              subtext: "Voice coding (speak) + Vibe coding (type)",
+              question: "What's the Teleglass Platform?",
+              subtext: "Model agnostic: works with any LLM. Cloud agnostic: deploy anywhere. Channel agnostic: Text, phone, chat, voice, avatar. One platform, unlimited reach.",
               imageUrl: "/assets/carousel-slide-02.png",
-              actionPhrase: "How do I build it"
+              actionPhrase: "Show me the platform"
             },
             {
-              question: "What are the 4 core concepts?",
-              subtext: "Dual agent, DOM bridge, templates, volumetric nav",
+              question: "What makes it innovative?",
+              subtext: "Dual agent coordination, DOM-to-LLM bridge, and volumetric navigation. Three innovations that make conversation + visuals possible.",
               imageUrl: "/assets/carousel-slide-03.png",
-              actionPhrase: "Show me the core concepts"
+              actionPhrase: "Show me the innovations"
             },
             {
-              question: "What are Wire Commands?",
-              subtext: "/add-glass, /add-knowledge, /tele-should, /publish",
-              imageUrl: "/assets/carousel-slide-04.png",
-              actionPhrase: "What are wire commands"
-            },
-            {
-              question: "What's inside a Tele?",
-              subtext: "Knowledge, skills, rules, connections, analytics",
-              imageUrl: "/assets/carousel-slide-05.png",
-              actionPhrase: "Show me the anatomy of a tele"
-            },
-            {
-              question: "What can I use Teles for?",
-              subtext: "Sales, training, service across any industry",
+              question: "How do I wire a tele?",
+              subtext: "Voice wiring: speak and your tele learns. Vibe wiring: describe what you want and Claude wires it. Wire commands are your power tools.",
               imageUrl: "/assets/carousel-slide-06.png",
-              actionPhrase: "Show me use cases"
+              actionPhrase: "Show me how to wire a tele"
             },
             {
-              question: "Ready to start?",
-              subtext: "Get the repo, get 3 free hours, deploy across 5 channels",
-              imageUrl: "/assets/carousel-slide-07.png",
-              actionPhrase: "How do I start"
+              question: "Ready to schedule a hackathon?",
+              subtext: "Wire your first tele with hands-on guidance from the Mobeus team. We'll schedule your hackathon within 48 hours.",
+              imageUrl: "/assets/hackathon-calendar.png",
+              actionPhrase: "Show me how to schedule a hackathon"
             }
           ]
         }
@@ -1341,8 +1329,10 @@ const Index = () => {
       // Stabilization delay for OpenAI session readiness
       // await new Promise(r => setTimeout(r, 1000));
 
-      // Send greeting prompt once connection is stable
-      // notifyTele("System prompt: Speak english. Improvise a greeting using english only that is less than 10 words - Teleglass connected successfully, ready to assist you");
+      // Send greeting prompt 500ms after connection is stable
+      setTimeout(() => {
+        notifyTele("hello");
+      }, 500);
 
       // Trigger gentle dark pulse effect
       setShowFlash(true);
@@ -1483,7 +1473,6 @@ const Index = () => {
 
   return (
     <CarColorProvider>
-      <RippleEffect />
       <GitVersionIndicator />
       {/* Dynamic SEO based on active section - TeleGlass Platform */}
       <SEO {...(sectionSEO[activeSection as keyof typeof sectionSEO] || sectionSEO.welcome)} />

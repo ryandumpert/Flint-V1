@@ -1,83 +1,91 @@
 import React, { lazy } from "react";
 
 /**
- * TEMPLATE REGISTRY - MOBEUS UNIVERSITY
+ * TEMPLATE REGISTRY - MOBEUS UNIVERSITY v76.0
  * 
- * 28 Templates organized by category:
- * - Journey (7): One for each journey node (no step counts shown)
- * - Concept (4): Deep dives on core concepts
- * - System (3): Wire command, file viewer, use cases
- * - Utility (14): Reusable components
+ * 36 Templates organized by journey step:
+ * - 1 Welcome (entry point)
+ * - 7 Purpose-Specific (one per step)
+ * - 7 Reusable (one per step)
+ * - 21 Thing Templates (3 per step × 7 steps)
  * 
- * DESIGN PRINCIPLES:
- * - 3-Level Hierarchy: Glance → Look → Read
- * - Volumetric Navigation: All clicks call notifyTele(actionPhrase)
- * - No journey step counts visible to user
+ * CONSTRAINT: Max 50 templates
  */
 export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
 
     // ==========================================
-    // JOURNEY TEMPLATES (7) - One per journey node
-    // User does NOT see step numbers
+    // WELCOME (1)
     // ==========================================
-
-    JourneyPromise: lazy(() => import("@/components/templates/JourneyPromise").then(m => ({ default: m.JourneyPromise }))),
-    JourneyBuildModes: lazy(() => import("@/components/templates/JourneyBuildModes").then(m => ({ default: m.JourneyBuildModes }))),
-    JourneyConcepts: lazy(() => import("@/components/templates/JourneyConcepts").then(m => ({ default: m.JourneyConcepts }))),
-    JourneyWireCommands: lazy(() => import("@/components/templates/JourneyWireCommands").then(m => ({ default: m.JourneyWireCommands }))),
-    JourneyAnatomy: lazy(() => import("@/components/templates/JourneyAnatomy").then(m => ({ default: m.JourneyAnatomy }))),
-    JourneyUseCases: lazy(() => import("@/components/templates/JourneyUseCases").then(m => ({ default: m.JourneyUseCases }))),
-    JourneyGetStarted: lazy(() => import("@/components/templates/JourneyGetStarted").then(m => ({ default: m.JourneyGetStarted }))),
-
-    // ==========================================
-    // CONCEPT TEMPLATES (4) - Core concept deep dives
-    // ==========================================
-
-    ConceptDualAgent: lazy(() => import("@/components/templates/ConceptDualAgent").then(m => ({ default: m.ConceptDualAgent }))),
-    ConceptDOMBridge: lazy(() => import("@/components/templates/ConceptDOMBridge").then(m => ({ default: m.ConceptDOMBridge }))),
-    ConceptTemplates: lazy(() => import("@/components/templates/ConceptTemplates").then(m => ({ default: m.ConceptTemplates }))),
-    ConceptVolumetric: lazy(() => import("@/components/templates/ConceptVolumetric").then(m => ({ default: m.ConceptVolumetric }))),
-
-    // ==========================================
-    // SYSTEM TEMPLATES (3) - Wire commands, files, use cases
-    // ==========================================
-
-    /**
-     * WireCommandDetail - Shows ANY wire command
-     * PROPS: { command: '/add-glass'|'/add-knowledge'|..., headline?, tagline?, whatItCreates?[], exampleCommand?, exampleResult? }
-     */
-    WireCommandDetail: lazy(() => import("@/components/templates/WireCommandDetail").then(m => ({ default: m.WireCommandDetail }))),
-
-    /**
-     * SystemFileViewer - Shows knowledge or prompt file
-     * PROPS: { fileType: 'knowledge'|'prompt' }
-     */
-    SystemFileViewer: lazy(() => import("@/components/templates/SystemFileViewer").then(m => ({ default: m.SystemFileViewer }))),
-
-    /**
-     * UseCaseDetail - Shows detailed use case
-     * PROPS: { icon, title, tagline, description, benefits?[], exampleScenarios?[], metrics?[] }
-     */
-    UseCaseDetail: lazy(() => import("@/components/templates/UseCaseDetail").then(m => ({ default: m.UseCaseDetail }))),
-
-    // ==========================================
-    // UTILITY TEMPLATES (14) - Reusable components
-    // ==========================================
-
     WelcomeCarousel: lazy(() => import("@/components/templates/WelcomeCarousel").then(m => ({ default: m.WelcomeCarousel }))),
-    FeatureGrid: lazy(() => import("@/components/templates/FeatureGrid").then(m => ({ default: m.FeatureGrid }))),
-    HeroSection: lazy(() => import("@/components/templates/HeroSection").then(m => ({ default: m.HeroSection }))),
-    StepByStep: lazy(() => import("@/components/templates/StepByStep").then(m => ({ default: m.StepByStep }))),
-    ComparisonTable: lazy(() => import("@/components/templates/ComparisonTable").then(m => ({ default: m.ComparisonTable }))),
-    StatGrid: lazy(() => import("@/components/templates/StatGrid").then(m => ({ default: m.StatGrid }))),
-    AccordionSection: lazy(() => import("@/components/templates/AccordionSection").then(m => ({ default: m.AccordionSection }))),
-    MediaShowcase: lazy(() => import("@/components/templates/MediaShowcase").then(m => ({ default: m.MediaShowcase }))),
+
+    // ==========================================
+    // STEP 1: THE PROBLEM
+    // ==========================================
+    ProblemStatement: lazy(() => import("@/components/templates/ProblemStatement").then(m => ({ default: m.ProblemStatement }))),
+    StatHighlight: lazy(() => import("@/components/templates/StatHighlight").then(m => ({ default: m.StatHighlight }))),
+    // Things
+    TechNotProblem: lazy(() => import("@/components/templates/TechNotProblem").then(m => ({ default: m.TechNotProblem }))),
+    InvestmentNotProblem: lazy(() => import("@/components/templates/InvestmentNotProblem").then(m => ({ default: m.InvestmentNotProblem }))),
+    AdoptionIsProblem: lazy(() => import("@/components/templates/AdoptionIsProblem").then(m => ({ default: m.AdoptionIsProblem }))),
+
+    // ==========================================
+    // STEP 2: THE SOLUTION
+    // ==========================================
+    SolutionHero: lazy(() => import("@/components/templates/SolutionHero").then(m => ({ default: m.SolutionHero }))),
+    ChannelGrid: lazy(() => import("@/components/templates/ChannelGrid").then(m => ({ default: m.ChannelGrid }))),
+    // Things
+    MeetsGlobally: lazy(() => import("@/components/templates/MeetsGlobally").then(m => ({ default: m.MeetsGlobally }))),
+    AnyDevice: lazy(() => import("@/components/templates/AnyDevice").then(m => ({ default: m.AnyDevice }))),
+    AnyChannel: lazy(() => import("@/components/templates/AnyChannel").then(m => ({ default: m.AnyChannel }))),
+
+    // ==========================================
+    // STEP 3: PLATFORM
+    // ==========================================
+    PlatformOverview: lazy(() => import("@/components/templates/PlatformOverview").then(m => ({ default: m.PlatformOverview }))),
+    ThreeThings: lazy(() => import("@/components/templates/ThreeThings").then(m => ({ default: m.ThreeThings }))),
+    // Things
+    TripleAgnostic: lazy(() => import("@/components/templates/TripleAgnostic").then(m => ({ default: m.TripleAgnostic }))),
+    SaaSLicensed: lazy(() => import("@/components/templates/SaaSLicensed").then(m => ({ default: m.SaaSLicensed }))),
+    UtilizationPricing: lazy(() => import("@/components/templates/UtilizationPricing").then(m => ({ default: m.UtilizationPricing }))),
+
+    // ==========================================
+    // STEP 4: INNOVATIONS
+    // ==========================================
+    InnovationStack: lazy(() => import("@/components/templates/InnovationStack").then(m => ({ default: m.InnovationStack }))),
+    ConceptCard: lazy(() => import("@/components/templates/ConceptCard").then(m => ({ default: m.ConceptCard }))),
+    // Things
+    DualAgentDetail: lazy(() => import("@/components/templates/DualAgentDetail").then(m => ({ default: m.DualAgentDetail }))),
+    DOMBridgeDetail: lazy(() => import("@/components/templates/DOMBridgeDetail").then(m => ({ default: m.DOMBridgeDetail }))),
+    GenerativeWebDetail: lazy(() => import("@/components/templates/GenerativeWebDetail").then(m => ({ default: m.GenerativeWebDetail }))),
+
+    // ==========================================
+    // STEP 5: WIRING
+    // ==========================================
+    WiringGuide: lazy(() => import("@/components/templates/WiringGuide").then(m => ({ default: m.WiringGuide }))),
+    CommandList: lazy(() => import("@/components/templates/CommandList").then(m => ({ default: m.CommandList }))),
+    // Things
+    VoiceWiringDetail: lazy(() => import("@/components/templates/VoiceWiringDetail").then(m => ({ default: m.VoiceWiringDetail }))),
+    VibeWiringDetail: lazy(() => import("@/components/templates/VibeWiringDetail").then(m => ({ default: m.VibeWiringDetail }))),
+    WireCommandsDetail: lazy(() => import("@/components/templates/WireCommandsDetail").then(m => ({ default: m.WireCommandsDetail }))),
+
+    // ==========================================
+    // STEP 6: ANALYTICS
+    // ==========================================
+    AnalyticsView: lazy(() => import("@/components/templates/AnalyticsView").then(m => ({ default: m.AnalyticsView }))),
+    MetricDisplay: lazy(() => import("@/components/templates/MetricDisplay").then(m => ({ default: m.MetricDisplay }))),
+    // Things
+    AgentObservability: lazy(() => import("@/components/templates/AgentObservability").then(m => ({ default: m.AgentObservability }))),
+    ProbabilisticCRM: lazy(() => import("@/components/templates/ProbabilisticCRM").then(m => ({ default: m.ProbabilisticCRM }))),
+    ConversationalTelemetry: lazy(() => import("@/components/templates/ConversationalTelemetry").then(m => ({ default: m.ConversationalTelemetry }))),
+
+    // ==========================================
+    // STEP 7: HACKATHON (GOAL)
+    // ==========================================
+    HackathonForm: lazy(() => import("@/components/templates/HackathonForm").then(m => ({ default: m.HackathonForm }))),
     ActionBanner: lazy(() => import("@/components/templates/ActionBanner").then(m => ({ default: m.ActionBanner }))),
-    IconList: lazy(() => import("@/components/templates/IconList").then(m => ({ default: m.IconList }))),
-    CodeExample: lazy(() => import("@/components/templates/CodeExample").then(m => ({ default: m.CodeExample }))),
-    LiveFileViewer: lazy(() => import("@/components/templates/LiveFileViewer").then(m => ({ default: m.LiveFileViewer }))),
-    NavigationCards: lazy(() => import("@/components/templates/NavigationCards").then(m => ({ default: m.NavigationCards }))),
-    QuoteBlock: lazy(() => import("@/components/templates/QuoteBlock").then(m => ({ default: m.QuoteBlock }))),
-    AboutCompany: lazy(() => import("@/components/templates/AboutCompany").then(m => ({ default: m.AboutCompany }))),
+    // Things
+    HandsOnWiring: lazy(() => import("@/components/templates/HandsOnWiring").then(m => ({ default: m.HandsOnWiring }))),
+    FastTurnaround: lazy(() => import("@/components/templates/FastTurnaround").then(m => ({ default: m.FastTurnaround }))),
+    FullSupport: lazy(() => import("@/components/templates/FullSupport").then(m => ({ default: m.FullSupport }))),
 
 };

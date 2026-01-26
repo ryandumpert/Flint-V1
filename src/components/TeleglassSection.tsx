@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { debounce } from "@/utils/debounce";
-import { Send, X, User, Bot, Loader2, CheckCircle2 } from "lucide-react";
+import { Send, X, User, Bot, Loader2, CheckCircle2, Copy, Check } from "lucide-react";
 import { teleAvatar } from "@/assets";
 import { useSound } from "@/hooks/useSound";
 import { Button } from "@/components/ui/button";
@@ -78,6 +78,9 @@ const TeleglassSection = ({
     Record<string, { input?: boolean; result?: boolean }>
   >({});
 
+  // Track copied state for function call panels
+  const [copiedPanels, setCopiedPanels] = useState<Record<string, boolean>>({});
+
   const toggleFunctionPanel = useCallback(
     (callId: string, panel: "input" | "result") => {
       setExpandedFunctionPanels((prev) => ({
@@ -90,6 +93,19 @@ const TeleglassSection = ({
     },
     [],
   );
+
+  const copyToClipboard = useCallback(async (content: any, panelKey: string) => {
+    try {
+      const text = typeof content === "string" ? content : JSON.stringify(content, null, 2);
+      await navigator.clipboard.writeText(text);
+      setCopiedPanels((prev) => ({ ...prev, [panelKey]: true }));
+      setTimeout(() => {
+        setCopiedPanels((prev) => ({ ...prev, [panelKey]: false }));
+      }, 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+  }, []);
 
   // Control thinking sound based on navigation loading state or connecting
   useEffect(() => {
@@ -498,29 +514,7 @@ const TeleglassSection = ({
       //   } catch (_) {}
       // };
 
-      // Track if we've already attempted unmute to prevent multiple toggles
-      let hasAttemptedUnmute = false;
-
-      const ensureUnmutedAfterConnect = () => {
-        // Guard: Only attempt unmute once per connection
-        if (hasAttemptedUnmute) return;
-        hasAttemptedUnmute = true;
-
-        // MODIFIED: Now unmutes the mic after connection
-        try {
-          setTimeout(() => {
-            try {
-              const ui: any = (window as any).UIFramework;
-              const model: any = ui?.getVoiceComponents?.()?.model;
-              if (model && model.isMuted) {
-                // If model is muted, toggle to unmute
-                ui?.toggleMute?.();
-              }
-              syncMicFromModel();
-            } catch (_) { }
-          }, 100);
-        } catch (_) { }
-      };
+      // REMOVED: Auto-unmute after connect - now mic state is controlled purely by user
       const onMuteChange = ({ isMuted }: any) => {
         if (!cancelled) {
           setIsMicMuted(!!isMuted);
@@ -530,7 +524,7 @@ const TeleglassSection = ({
         if (!cancelled) {
           const connected = state === "connected" || !!model.isConnected;
           setIsVoiceConnected(connected);
-          if (connected) ensureUnmutedAfterConnect();
+          // REMOVED: No longer auto-unmuting on connect
         }
       };
       const onStatus = ({ status }: any) => {
@@ -538,7 +532,7 @@ const TeleglassSection = ({
           if (status === "connected") setIsVoiceConnected(true);
           if (status === "disconnected" || status === "error")
             setIsVoiceConnected(false);
-          if (status === "connected") ensureUnmutedAfterConnect();
+          // REMOVED: No longer auto-unmuting on connect
         }
       };
       const onOutputItemAdded = (event: any) => {
@@ -611,9 +605,7 @@ const TeleglassSection = ({
       model.addEventListener("muteStateChanged", onMuteChange);
       model.addEventListener("connectionStateChange", onConnChange);
       model.addEventListener("statusChange", onStatus);
-      // Also enforce after session creation
-      const onSessionCreated = () => ensureUnmutedAfterConnect();
-      model.addEventListener("sessionCreated", onSessionCreated as any);
+      // REMOVED: No longer auto-unmuting on session creation
       // COMMENTED OUT: Don't sync initial muted state, we want unmuted
       // try {
       //   setIsMicMuted(!!model.isMuted);
@@ -631,12 +623,7 @@ const TeleglassSection = ({
         try {
           model.removeEventListener?.("statusChange", onStatus);
         } catch (_) { }
-        try {
-          model.removeEventListener?.(
-            "sessionCreated",
-            onSessionCreated as any,
-          );
-        } catch (_) { }
+        // REMOVED: onSessionCreated cleanup (no longer registering)
       };
       return true;
     };
@@ -1028,7 +1015,7 @@ const TeleglassSection = ({
                     <Bot className="chat-icon w-4 h-4 sm:w-5 sm:h-5 text-mist" />
                   </div>
                   <div
-                    className={`backdrop-blur-md p-3 sm:p-4 rounded-2xl border text-mist`}
+                    className={`backdrop-blur-sm p-3 sm:p-4 rounded-2xl border text-mist`}
                     style={{
                       background: "rgba(20, 25, 35, 0.75)",
                       borderColor: "rgba(255, 255, 255, 0.15)",
@@ -1094,12 +1081,23 @@ const TeleglassSection = ({
                     {/* Expanded Input Panel */}
                     {expandedFunctionPanels[fc.callId]?.input && fc.input && (
                       <div
-                        className={`mt-2 p-2 rounded-lg text-xs font-mono overflow-x-auto max-h-40 overflow-y-auto ${isLightboardMode
+                        className={`mt-2 p-2 rounded-lg text-xs font-mono overflow-x-auto max-h-40 overflow-y-auto relative ${isLightboardMode
                           ? "bg-black/20 text-mist/90"
                           : "bg-black/40 text-mist/80"
                           }`}
                       >
-                        <pre className="whitespace-pre-wrap break-words">
+                        <button
+                          onClick={() => copyToClipboard(fc.input, `${fc.callId}-input`)}
+                          className="absolute top-1 right-1 p-1.5 rounded-md bg-white/10 hover:bg-white/20 transition-colors z-10"
+                          title="Copy to clipboard"
+                        >
+                          {copiedPanels[`${fc.callId}-input`] ? (
+                            <Check className="w-4 h-4 text-green-400" />
+                          ) : (
+                            <Copy className="w-4 h-4 text-mist" />
+                          )}
+                        </button>
+                        <pre className="whitespace-pre-wrap break-words pr-8">
                           {JSON.stringify(fc.input, null, 2)}
                         </pre>
                       </div>
@@ -1109,12 +1107,23 @@ const TeleglassSection = ({
                     {expandedFunctionPanels[fc.callId]?.result &&
                       fc.result !== undefined && (
                         <div
-                          className={`mt-2 p-2 rounded-lg text-xs font-mono overflow-x-auto max-h-40 overflow-y-auto ${isLightboardMode
+                          className={`mt-2 p-2 rounded-lg text-xs font-mono overflow-x-auto max-h-40 overflow-y-auto relative ${isLightboardMode
                             ? "bg-black/20 text-mist/90"
                             : "bg-black/40 text-mist/80"
                             }`}
                         >
-                          <pre className="whitespace-pre-wrap break-words">
+                          <button
+                            onClick={() => copyToClipboard(fc.result, `${fc.callId}-result`)}
+                            className="absolute top-1 right-1 p-1.5 rounded-md bg-white/10 hover:bg-white/20 transition-colors z-10"
+                            title="Copy to clipboard"
+                          >
+                            {copiedPanels[`${fc.callId}-result`] ? (
+                              <Check className="w-4 h-4 text-green-400" />
+                            ) : (
+                              <Copy className="w-4 h-4 text-mist" />
+                            )}
+                          </button>
+                          <pre className="whitespace-pre-wrap break-words pr-8">
                             {typeof fc.result === "string"
                               ? fc.result
                               : JSON.stringify(fc.result, null, 2)}
@@ -1162,7 +1171,7 @@ const TeleglassSection = ({
                   className={`chat-message-bubble max-w-[75%] sm:max-w-[70%] p-3 sm:p-4 rounded-2xl
                   transform transition-all duration-500
                   hover:scale-[1.01]
-                  border backdrop-blur-md text-sm sm:text-base text-mist`}
+                  border backdrop-blur-sm text-sm sm:text-base text-mist`}
                   style={{
                     background:
                       msg.role === "user"
@@ -1277,7 +1286,7 @@ const TeleglassSection = ({
                 <Bot className="chat-icon w-4 h-4 sm:w-5 sm:h-5 text-mist" />
               </div>
               <div
-                className="backdrop-blur-md p-3 sm:p-4 rounded-2xl border"
+                className="backdrop-blur-sm p-3 sm:p-4 rounded-2xl border"
                 style={{
                   background: "rgba(20, 25, 35, 0.75)",
                   borderColor: "rgba(255, 255, 255, 0.12)",
@@ -1301,14 +1310,12 @@ const TeleglassSection = ({
 
         {/* Chat Input Area - CLEAN MINIMAL */}
         <div className="border-t border-white/[0.15] bg-white/[0.08] backdrop-blur-sm">
-          {/* Smart Mode Toggle - Shows tool calls when enabled */}
-          <div className="flex justify-end px-3 sm:px-4 pt-2">
+          <div className="flex items-center space-x-2 px-3 sm:px-4 py-3 sm:py-4">
+            {/* Smart Mode Toggle - inside input area */}
             <SmartModeToggle
               isSmartMode={isSmartMode}
               onToggle={handleSmartModeToggle}
             />
-          </div>
-          <div className="flex space-x-2 px-3 sm:px-4 pb-3 sm:pb-4 pt-1">
             <input
               type="text"
               value={chatMessage}
@@ -1329,7 +1336,7 @@ const TeleglassSection = ({
             <Button
               onClick={handleSendMessage}
               size="sm"
-              className={`rounded-full w-11 h-11 sm:w-12 sm:h-12 p-0
+              className={`rounded-full w-11 h-11 sm:w-12 sm:h-12 p-0 flex-shrink-0 aspect-square
                 backdrop-blur-sm text-mist transition-all duration-300
                 active:scale-95
                 disabled:opacity-50 disabled:cursor-not-allowed

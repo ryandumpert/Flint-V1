@@ -116,12 +116,15 @@ button,
      * ============================================ */
     --color-mist: #F5F5F5;
     --color-onyx: #0D0D0D;
-    --color-flamingo: #9B5DE5;  /* NOW PURPLE - Primary accent */
+    --color-flamingo: #9B5DE5;
+    /* NOW PURPLE - Primary accent */
     --color-wave: #003D4F;
     --color-turmeric: #CC850A;
-    --color-jade: #5EEAD4;      /* Teal accent */
+    --color-jade: #5EEAD4;
+    /* Teal accent */
     --color-sapphire: #47A1AD;
-    --color-amethyst: #7C3AED;  /* Deep purple */
+    --color-amethyst: #7C3AED;
+    /* Deep purple */
 
     /* ============================================
      * SEMANTIC COLOR MAPPINGS
@@ -188,8 +191,8 @@ button,
     --shadow-depth-5: 0 20px 44px rgba(0, 0, 0, 0.3), 0 10px 22px rgba(0, 0, 0, 0.22);
 
     /* Chat Glass - Responsive Widths */
-    --chat-glass-width: 20.16rem;
-    --chat-glass-width-tablet: 19.8rem;
+    --chat-glass-width: 24.2rem;
+    --chat-glass-width-tablet: 23.76rem;
     --chat-glass-width-mobile: 85vw;
     --teleglass-top: 2rem;
     --teleglass-right: 1rem;
@@ -1593,9 +1596,12 @@ button,
 
   /* Subtle pulse animation for highlighted buttons */
   @keyframes pulse-subtle {
-    0%, 100% {
+
+    0%,
+    100% {
       box-shadow: 0 0 16px rgba(155, 93, 229, 0.5);
     }
+
     50% {
       box-shadow: 0 0 24px rgba(155, 93, 229, 0.7), 0 0 40px rgba(155, 93, 229, 0.3);
     }
@@ -2399,5 +2405,26 @@ button,
   /* Background variable for gradient fade edges */
   .from-background {
     --tw-gradient-from: hsl(var(--background));
+  }
+
+  /* Confetti celebration animation */
+  @keyframes confetti {
+    0% {
+      transform: translateY(-10px) rotate(0deg) scale(1);
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 1;
+    }
+
+    100% {
+      transform: translateY(400px) rotate(720deg) scale(0.5);
+      opacity: 0;
+    }
+  }
+
+  .animate-confetti {
+    animation: confetti 3s ease-out forwards;
   }
 }

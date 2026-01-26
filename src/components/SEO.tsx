@@ -12,11 +12,11 @@ interface SEOProps {
 
 export const SEO = ({
   title = 'Mobeus University | Learn to Build Conversational AI',
-  description = 'Learn to build conversational AI applications with Catherine. Master the 3-hour hackathon curriculum: voice coding, vibe coding, templates, knowledge, rules, and design.',
+  description = 'Learn to wire conversational AI applications with Catherine. Master voice wiring, vibe wiring, templates, knowledge, rules, and design.',
   image = '/og-image.png',
   url = '/',
   type = 'website',
-  keywords = ['Mobeus', 'Tele', 'Conversational AI', 'Teleglass', 'Voice Coding', 'Vibe Coding', 'AI Development', 'Catherine'],
+  keywords = ['Mobeus', 'Tele', 'Conversational AI', 'Teleglass', 'Voice Wiring', 'Vibe Wiring', 'AI Development', 'Catherine'],
   structuredData,
 }: SEOProps) => {
   useEffect(() => {
@@ -76,8 +76,8 @@ export const SEO = ({
 export const sectionSEO = {
   welcome: {
     title: 'Mobeus University | Learn to Build Conversational AI',
-    description: 'Learn to build teles—conversational AI with visual interfaces. Master the 3-hour hackathon curriculum with Catherine.',
-    keywords: ['Mobeus', 'Tele', 'Conversational AI', 'hackathon', 'voice coding'],
+    description: 'Learn to build teles—conversational AI with visual interfaces. Master the curriculum with Catherine.',
+    keywords: ['Mobeus', 'Tele', 'Conversational AI', 'hackathon', 'voice wiring'],
   },
 
   concepts: {
@@ -88,8 +88,8 @@ export const sectionSEO = {
 
   phases: {
     title: 'Hackathon Phases | Mobeus University',
-    description: 'The 6-phase hackathon: voice coding, vibe coding, templates, knowledge, rules, and design. 3 hours to build your tele.',
-    keywords: ['hackathon', 'phases', 'voice coding', 'vibe coding', 'templates'],
+    description: 'The 6-phase hackathon: voice wiring, vibe wiring, templates, knowledge, rules, and design. Wire your tele.',
+    keywords: ['hackathon', 'phases', 'voice wiring', 'vibe wiring', 'templates'],
   },
 
   templates: {
