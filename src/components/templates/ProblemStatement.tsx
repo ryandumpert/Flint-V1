@@ -2,8 +2,6 @@
  * ProblemStatement - PURPOSE-SPECIFIC (Step 1: The Problem)
  * Shows why AI projects fail with dramatic stats and root cause
  * 
- * ⚠️ NO DEFAULTS - ALL PROPS MUST BE PROVIDED BY RUNTIME AGENT
- * 
  * USE WHEN: Explaining the AI adoption problem
  */
 
@@ -13,27 +11,27 @@ import { notifyTele } from '@/utils/acknowledgmentHelpers';
 import { useSound } from '@/hooks/useSound';
 
 interface ProblemStatementProps {
-    headline: string;
-    statValue: string;
-    statLabel: string;
-    notTheProblem: string[];
-    realProblemLabel: string;
-    theProblem: string;
-    quote: string;
-    ctaLabel: string;
-    ctaActionPhrase: string;
+    headline?: string;
+    statValue?: string;
+    statLabel?: string;
+    notTheProblem?: string[];
+    realProblemLabel?: string;
+    theProblem?: string;
+    quote?: string;
+    ctaLabel?: string;
+    ctaActionPhrase?: string;
 }
 
 export const ProblemStatement: React.FC<ProblemStatementProps> = ({
-    headline,
-    statValue,
-    statLabel,
-    notTheProblem,
-    realProblemLabel,
-    theProblem,
-    quote,
-    ctaLabel,
-    ctaActionPhrase,
+    headline = "AI Projects Are Failing",
+    statValue = "70%",
+    statLabel = "of enterprise AI never reaches production",
+    notTheProblem = ["Technology", "Innovation", "Investment", "Talent"],
+    realProblemLabel = "The Real Problem",
+    theProblem = "No UI for AI. Users can't interact with what gets built.",
+    quote = "The technology works. Users don't know how to use it.",
+    ctaLabel = "What's the solution?",
+    ctaActionPhrase = "Show me what a tele is",
 }) => {
     const { playClick } = useSound();
 
@@ -41,15 +39,6 @@ export const ProblemStatement: React.FC<ProblemStatementProps> = ({
         playClick();
         notifyTele(actionPhrase);
     };
-
-    // Guard against missing props
-    if (!notTheProblem) {
-        return (
-            <div className="glass-template-container p-8 text-center">
-                <p className="text-flamingo">⚠️ Template props missing. Runtime Agent must provide all props.</p>
-            </div>
-        );
-    }
 
     return (
         <div className="glass-template-container space-y-8">
