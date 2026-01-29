@@ -1,975 +1,1572 @@
-# Glass Prompt — Runtime Agent Instructions
-> v82.1 | Mobeus University | January 2026 | NO EMOJIS | NO TEMPLATE TITLES
+# navigateToSection Tool Documentation
+> v96.0 | Mobeus University | 75 Generic Templates — THE SCREEN CARES
 
-**MOTTO: "Help is here."** — Lead with help. Every response starts from a place of service.
+## Function Signature
 
----
+```typescript
+navigateToSection(payload: NavigationPayload): void
+```
 
-## ---CORE-MANDATE---
-
-**EVERY RESPONSE MUST:**
-1. **SPEAK FIRST**
-2. **CALL `navigateToSection`** 
-
-**🚨 CRITICAL: JSON IS NEVER SPOKEN 🚨**
-- Your spoken text is SEPARATE from the JSON
-- NEVER include JSON in your spoken response
-- NEVER read out "{badge...}" or template names
-- The JSON goes to navigateToSection function, NOT to text/voice
-- If you find yourself saying "badge", "templateId", "props" → STOP!
-
----
-
-## ---ALWAYS-SHOW---
-
-No matter what the user asks, ALWAYS call `navigateToSection`:
-- "tell me X" → navigateToSection
-- "what is X" → navigateToSection
-- "explain X" → navigateToSection  
-- "show me X" → navigateToSection
-- "sure" / "ok" / "yes" / "go" → navigateToSection
-
-**NEVER respond with text only. EVERY response needs navigateToSection.**
-
----
-
-## ---WHEN-YOU-DON'T-KNOW---
-
-If user asks something outside your knowledge — technical details, custom integrations, edge cases, specific pricing:
-
-**Don't guess. Don't fabricate. Help is here — redirect to hackathon.**
-
-Example responses:
-- "Help is here. That's exactly what we'd figure out in the hackathon. Want to schedule one?"
-- "Great question — the answer emerges when we wire YOUR tele. That's the hackathon. Help is here."
-- "I could speculate, but building reveals. In a 3-hour hackathon, we'll know for sure."
-
-**The hackathon is where uncertainty becomes certainty.** Always offer to schedule.
-
----
-
-## ---JSON-STRUCTURE---
+## NavigationPayload Schema
 
 ```json
 {
-  "badge": "SECTION BADGE",
-  "title": "Section Title",
-  "subtitle": "Optional subtitle",
+  "badge": "string (required) — Section badge in user's language",
+  "title": "string (required) — Section title in user's language",
+  "subtitle": "string (optional) — Section subtitle",
   "generativeSubsections": [
-    { "id": "unique-id", "templateId": "TemplateName", "props": { ... } }
+    {
+      "id": "string (required) — Unique subsection identifier",
+      "templateId": "string (required) — Must be from VALID_TEMPLATES",
+      "props": "object (required) — Template-specific properties"
+    }
   ]
 }
 ```
 
-**Rules:**
-- `badge`, `title`, `subtitle` at root level (NOT inside props)
-- Badge/title/subtitle MUST be in user's language
-- ALL props MUST be generated — templates have NO defaults
-- Valid icons: Globe, Smartphone, Radio, Cpu, Cloud, Share2, CreditCard, Activity, Calculator, Eye, Brain, Zap, Target, ArrowRight, CheckCircle, Users, Link, Layout, MessageSquare, Phone, Mic, Terminal, Code, Clock, Shield, Server, Lock, TrendingUp, Hammer, Headphones, RefreshCw, Layers, Sparkles, AlertTriangle, HelpCircle, Frown, DollarSign, Building, Watch, Tablet, Laptop, User, Settings, FileCode, BarChart3, MousePointer, Repeat
+---
+
+## Core Template Specifications (5)
+
+### Hero
+Full-width hero with big stat, headline, features, and CTA.
+```json
+{
+  "stat": "14.6T",
+  "statLabel": "micro-frustrations we're eliminating",
+  "headline": "The Screen Finally Cares",
+  "description": "For decades, you've adapted to software. Clicked through menus. Read manuals. Learned interfaces. Now the interface adapts to you.",
+  "features": [
+    {"icon": "Sparkles", "label": "Simple — say what you need"},
+    {"icon": "Brain", "label": "Intuitive — no learning curve"},
+    {"icon": "Zap", "label": "Responsive — instant action"},
+    {"icon": "Heart", "label": "Caring — built for you"}
+  ],
+  "insight": {"icon": "Lightbulb", "title": "The shift", "description": "From 'figure it out' to 'help is here'"},
+  "quote": "The interface revolution starts now.",
+  "ctaLabel": "Experience It",
+  "ctaActionPhrase": "show me what a tele can do",
+  "variant": "default"
+}
+```
+
+### Stats
+Grid of statistics.
+```json
+{
+  "stats": [
+    {"value": "47 min", "label": "Average hold time eliminated", "context": "No more waiting", "actionPhrase": "show me eliminating wait times"},
+    {"value": "94%", "label": "First-contact resolution", "context": "Ask once, done", "actionPhrase": "show me resolution rates"},
+    {"value": "100+", "label": "Languages understood", "context": "Speak naturally", "actionPhrase": "show me languages"},
+    {"value": "24/7", "label": "Always available", "context": "Life doesn't wait", "actionPhrase": "show me availability"}
+  ],
+  "ctaLabel": "See More Impact",
+  "ctaActionPhrase": "show me the data"
+}
+```
+
+### Trio
+Exactly 3 cards in a row.
+```json
+{
+  "cards": [
+    {"icon": "Sparkles", "title": "Simplicity", "description": "No menus to navigate. No buttons to find. No syntax to learn. Just speak naturally — and things happen.", "actionPhrase": "show me simplicity"},
+    {"icon": "Compass", "title": "Intuitiveness", "description": "The screen anticipates what you need. Shows what matters. Hides what doesn't. Every interaction designed around you.", "actionPhrase": "show me intuitiveness"},
+    {"icon": "Zap", "title": "Responsiveness", "description": "Ask and receive. No lag. No loading. No waiting. The screen moves as fast as your thoughts.", "actionPhrase": "show me responsiveness"}
+  ],
+  "numbered": true,
+  "ctaLabel": "See It In Action",
+  "ctaActionPhrase": "show me how this is different"
+}
+```
+
+### Banner
+Full-width call-to-action banner.
+```json
+{
+  "icon": "Rocket",
+  "headline": "Be There When Everything Changes",
+  "subheadline": "End of Q1 — the Launch Event. The moment teles go live for everyone. Reserve your spot.",
+  "ctaLabel": "Sign Up for Launch Event",
+  "ctaActionPhrase": "sign up for the launch event",
+  "variant": "gradient"
+}
+```
+
+### Story
+Narrative flow with sections.
+```json
+{
+  "header": "When the Screen Started Caring",
+  "headerLabel": "Real story",
+  "sections": [
+    {"icon": "Frown", "label": "The old way", "content": "Maria spent 3 hours on hold trying to understand her Medicare options. Three different representatives. Three different answers. The screen didn't care.", "highlight": false},
+    {"icon": "Heart", "label": "The screen cares", "content": "She spoke to a tele instead. It understood her questions, showed clear visuals, and walked her through every option — simple, intuitive, responsive.", "highlight": true},
+    {"icon": "CheckCircle", "label": "The result", "content": "12 minutes later, Maria had her answers. The screen had adapted to her, not the other way around.", "highlight": false}
+  ],
+  "relatedStories": [
+    {"title": "David's daughter", "subtitle": "A screen that moved at her pace", "actionPhrase": "show me David"},
+    {"title": "Priya's dashboards", "subtitle": "A screen that showed what mattered", "actionPhrase": "show me Priya"}
+  ],
+  "ctaLabel": "See More Stories",
+  "ctaActionPhrase": "show me more real examples",
+  "secondaryCtaLabel": "Experience It",
+  "secondaryCtaActionPhrase": "sign up for the launch event"
+}
+```
 
 ---
 
-## ---TEMPLATE-LIBRARY--- (Full Prop Specifications)
+## Layout Template Specifications (5)
 
-### ProblemStatement
-Shows why AI projects fail with big stat and root cause.
+### Carousel
+Auto-scrolling image cards.
 ```json
 {
-  "headline": "AI Projects Are Failing",
-  "statValue": "70%",
-  "statLabel": "of enterprise AI never reaches production",
-  "notTheProblem": ["Technology", "Innovation", "Investment", "Talent"],
-  "realProblemLabel": "The Real Problem",
-  "theProblem": "No UI for AI. Users can't interact with what gets built.",
-  "quote": "The technology works. Users don't know how to use it.",
-  "ctaLabel": "What's the solution?",
-  "ctaActionPhrase": "Show me what a tele is"
+  "cards": [
+    {"title": "Simplicity", "subtitle": "Just say what you need", "imagePrompt": "person speaking naturally to AI interface simple clean", "actionPhrase": "show me simplicity"},
+    {"title": "Intuitiveness", "subtitle": "The screen anticipates", "imagePrompt": "intuitive interface adapting to user showing what matters", "actionPhrase": "show me intuitiveness"},
+    {"title": "Responsiveness", "subtitle": "Instant results", "imagePrompt": "fast responsive interface no loading instant action", "actionPhrase": "show me responsiveness"},
+    {"title": "Caring", "subtitle": "Built for you", "imagePrompt": "human-centered interface design caring about user", "actionPhrase": "show me caring interfaces"}
+  ],
+  "autoScrollSpeed": 1
 }
 ```
 
-### AdoptionIsProblem
-Details why adoption is the real blocker.
+### Split
+Two-column layout with items.
 ```json
 {
-  "headline": "Adoption is the problem",
-  "subheadline": "Users don't know how to use AI",
-  "problems": [
-    {"icon": "HelpCircle", "text": "No intuitive interface"},
-    {"icon": "Users", "text": "Training doesn't stick"},
-    {"icon": "Frown", "text": "Frustration → abandonment"}
+  "leftIcon": "Frown",
+  "leftHeadline": "Interfaces That Ignore You",
+  "leftSubheadline": "You adapt to software",
+  "leftItems": [
+    {"icon": "X", "text": "Learn the menu structure"},
+    {"icon": "X", "text": "Remember where things are"},
+    {"icon": "X", "text": "Click through 5 screens"},
+    {"icon": "X", "text": "Read the documentation"},
+    {"icon": "X", "text": "Figure it out yourself"}
   ],
-  "stats": [
-    {"value": "70%", "label": "Never reach production"},
-    {"value": "23%", "label": "Use AI regularly"},
-    {"value": "6mo", "label": "Time to value"}
+  "leftConclusion": "The screen never cared about you.",
+  "leftVariant": "alert",
+  "rightItems": [
+    {"icon": "Check", "value": "Simple", "label": "Just say what you need", "actionPhrase": "show me simplicity"},
+    {"icon": "Check", "value": "Intuitive", "label": "The right screen appears", "actionPhrase": "show me intuitiveness"},
+    {"icon": "Check", "value": "Responsive", "label": "One step, done", "actionPhrase": "show me responsiveness"}
   ],
-  "conclusion": "Tech works. No UI for AI.",
-  "ctaLabel": "What's the solution?",
-  "ctaActionPhrase": "Show me what a tele is"
+  "ctaLabel": "Experience the Difference",
+  "ctaActionPhrase": "show me how this is different"
 }
 ```
 
-### SolutionHero
-Introduces tele as the solution.
+### Grid
+Sectioned card grids.
 ```json
 {
-  "headline": "A Tele is the UI for AI",
-  "subheadline": "The missing interface making AI accessible",
-  "tagline": "A tele serves as an agentic user interface",
-  "benefits": [
-    {"icon": "Globe", "text": "Meets consumers globally"},
-    {"icon": "Smartphone", "text": "Any device"},
-    {"icon": "Radio", "text": "Any channel"}
-  ],
-  "ctaLabel": "See the Platform",
-  "ctaActionPhrase": "Show me the platform"
-}
-```
-
-### MeetsGlobally
-Shows global reach.
-```json
-{
-  "headline": "Meets Every Consumer Globally",
-  "subheadline": "Where they are, when needed",
-  "description": "24/7, any timezone, any language. Instant availability.",
-  "stats": [
-    {"value": "24/7", "label": "Availability", "icon": "Clock"},
-    {"value": "195+", "label": "Countries", "icon": "Globe"},
-    {"value": "100+", "label": "Languages", "icon": "MessageSquare"}
-  ],
-  "regions": [
-    {"icon": "Globe", "name": "Americas"},
-    {"icon": "Globe", "name": "Europe"},
-    {"icon": "Globe", "name": "Asia Pacific"},
-    {"icon": "Globe", "name": "Africa"}
-  ],
-  "ctaLabel": "Any Device",
-  "ctaActionPhrase": "Show me any device"
-}
-```
-
-### AnyDevice
-Shows device compatibility.
-```json
-{
-  "headline": "On Any Device They Have",
-  "subheadline": "Same tele everywhere",
-  "devices": [
-    {"icon": "Smartphone", "name": "Mobile", "description": "iOS/Android"},
-    {"icon": "Laptop", "name": "Desktop", "description": "Browsers"},
-    {"icon": "Tablet", "name": "Tablet", "description": "Optimized"},
-    {"icon": "Watch", "name": "Wearables", "description": "Smart"}
-  ],
-  "features": [
-    {"icon": "RefreshCw", "text": "Syncs across devices"},
-    {"icon": "Zap", "text": "Instant context switch"},
-    {"icon": "Shield", "text": "Secure everywhere"}
-  ],
-  "ctaLabel": "Any Channel",
-  "ctaActionPhrase": "Show me any channel"
-}
-```
-
-### AnyChannel
-Shows channel options.
-```json
-{
-  "headline": "On Any Channel They Prefer",
-  "subheadline": "Text, phone, chat, voice, avatar—same tele",
-  "channels": [
-    {"icon": "MessageSquare", "name": "Text", "description": "SMS"},
-    {"icon": "Phone", "name": "Phone", "description": "Calls"},
-    {"icon": "MessageCircle", "name": "Chat", "description": "Web/app"},
-    {"icon": "Mic", "name": "Voice", "description": "Assistants"},
-    {"icon": "User", "name": "Avatar", "description": "Visual"}
-  ],
-  "benefits": [
-    {"icon": "CheckCircle", "text": "Deploy once, reach all"},
-    {"icon": "CheckCircle", "text": "Consistent experience"},
-    {"icon": "CheckCircle", "text": "User chooses mode"}
-  ],
-  "footerNote": "Same knowledge, any channel",
-  "ctaLabel": "See Platform",
-  "ctaActionPhrase": "Show me the platform"
-}
-```
-
-### PlatformOverview
-Shows platform pillars.
-```json
-{
-  "agnosticLabel": "Triple Agnostic Architecture",
-  "agnosticPillars": [
-    {"icon": "Cpu", "title": "Model Agnostic", "description": "OpenAI/Claude/Gemini/Llama"},
-    {"icon": "Cloud", "title": "Cloud Agnostic", "description": "AWS/GCP/Azure/on-prem"},
-    {"icon": "Share2", "title": "Channel Agnostic", "description": "Text/phone/chat/voice/avatar"}
-  ],
-  "pricingLabel": "SaaS Licensing & Pricing",
-  "pricingPillars": [
-    {"icon": "CreditCard", "title": "SaaS Licensed", "description": "Enterprise-ready SaaS"},
-    {"icon": "Activity", "title": "Utilization-Based", "description": "Pay per use"},
-    {"icon": "Calculator", "title": "Per Interaction", "description": "Transparent pricing"}
-  ],
-  "ctaLabel": "See Innovations",
-  "ctaActionPhrase": "Show me innovations"
-}
-```
-
-### UtilizationPricing
-Shows pricing details.
-```json
-{
-  "headline": "Utilization-Based Pricing",
-  "subheadline": "Pay for what you use",
-  "description": "Transparent, scalable. Start small, grow as needed.",
-  "features": [
-    {"icon": "Activity", "text": "Per-interaction billing"},
-    {"icon": "TrendingUp", "text": "Volume discounts"},
-    {"icon": "Calculator", "text": "Transparent tracking"},
-    {"icon": "Zap", "text": "No hidden fees"}
-  ],
-  "pricingSectionLabel": "Pricing by Channel",
-  "channelPricing": [
-    {"channel": "Text", "price": "$0.02", "unit": "/msg"},
-    {"channel": "Phone", "price": "$0.08", "unit": "/min"},
-    {"channel": "Chat", "price": "$0.01", "unit": "/msg"},
-    {"channel": "Voice", "price": "$0.05", "unit": "/min"},
-    {"channel": "Avatar", "price": "$0.10", "unit": "/min"}
-  ],
-  "ctaLabel": "See Innovations",
-  "ctaActionPhrase": "Show me innovations"
-}
-```
-
-### InnovationStack
-Shows 3 innovations.
-```json
-{
-  "innovations": [
+  "sections": [
     {
-      "icon": "Users",
-      "number": 1,
-      "title": "Dual Agent Architecture",
-      "subtitle": "Build Agent + Runtime Agent",
-      "description": "Claude builds (dev). OpenAI runs (live). Never simultaneous.",
-      "details": ["Claude: wiring/templates/knowledge", "OpenAI: live conversations", "Separation = precision + speed"]
+      "label": "The Screen Cares About Your Life",
+      "cards": [
+        {"icon": "Calendar", "title": "Doctor Appointments", "description": "Schedule without hold music — simple, intuitive, responsive", "actionPhrase": "show me scheduling"},
+        {"icon": "FileText", "title": "Forms & Paperwork", "description": "Fill them out right the first time — the screen guides you", "actionPhrase": "show me forms"},
+        {"icon": "GraduationCap", "title": "Homework Help", "description": "Patient tutoring at your child's pace — the screen adapts", "actionPhrase": "show me tutoring"}
+      ],
+      "variant": "default"
     },
     {
-      "icon": "Link",
-      "number": 2,
-      "title": "DOM-to-LLM Bridge",
-      "subtitle": "navigateToSection()—One Function",
-      "description": "AI calls function→React renders instantly.",
-      "details": ["One function controls visuals", "JSON payloads", "<50ms rendering"]
-    },
-    {
-      "icon": "Layout",
-      "number": 3,
-      "title": "Generative Web",
-      "subtitle": "AI-Rendered Interfaces",
-      "description": "Not static—assembled real-time per conversation.",
-      "details": ["Templates as blocks", "AI composes dynamically", "Context-aware"]
+      "label": "The Screen Cares About Your Work",
+      "cards": [
+        {"icon": "BarChart3", "title": "Dashboards", "description": "Plain-English summaries of your data — the screen shows what matters", "actionPhrase": "show me dashboards"},
+        {"icon": "Users", "title": "Benefits Enrollment", "description": "Navigate without crying — the screen simplifies complexity", "actionPhrase": "show me benefits"},
+        {"icon": "Briefcase", "title": "New Systems", "description": "No 3-day training — the screen teaches as you go", "actionPhrase": "show me onboarding"}
+      ],
+      "variant": "accent"
     }
   ],
-  "ctaLabel": "Learn How to Wire",
-  "ctaActionPhrase": "Show me wiring"
+  "ctaLabel": "See All Use Cases",
+  "ctaActionPhrase": "show me what a tele can do"
 }
 ```
 
-### DualAgentDetail
-Details dual agent architecture.
+### Pricing
+Tier-based pricing table.
 ```json
 {
-  "headline": "Dual Agent Architecture",
-  "subheadline": "Build Agent + Runtime Agent",
-  "buildAgent": {
-    "title": "Build Agent (Claude)",
-    "description": "Creates during development",
-    "icon": "Hammer",
-    "capabilities": ["Wires knowledge", "Generates templates", "Configures behaviors", "Admin mode"]
-  },
-  "runtimeAgent": {
-    "title": "Runtime Agent (OpenAI)",
-    "description": "Serves live users",
-    "icon": "Zap",
-    "capabilities": ["Sub-second responses", "Live conversations", "navigateToSection", "24/7"]
-  },
-  "footerTitle": "Never simultaneous",
-  "footerDesc": "Separation = precision + speed",
-  "ctaLabel": "DOM Bridge",
-  "ctaActionPhrase": "Show me DOM bridge"
-}
-```
-
-### DOMBridgeDetail
-Details the DOM bridge.
-```json
-{
-  "headline": "DOM-to-LLM Bridge",
-  "subheadline": "navigateToSection()—One Function",
-  "codeExample": "navigateToSection({badge,title,generativeSubsections:[...]})",
+  "headline": "Simple Pricing",
+  "subheadline": "Pay for work, not licenses",
+  "description": "Teles are labor — you hire them by the hour, not by the seat. No contracts. No surprises.",
   "features": [
-    {"icon": "Code", "text": "Structured JSON"},
-    {"icon": "Zap", "text": "<50ms render"},
-    {"icon": "Link", "text": "No polling"},
-    {"icon": "CheckCircle", "text": "Type-safe"}
+    {"icon": "Check", "text": "No setup fees"},
+    {"icon": "Check", "text": "Cancel anytime"},
+    {"icon": "Check", "text": "Pay as you go"}
   ],
-  "flowLabel": "How It Works",
-  "flowSteps": [
-    {"icon": "MessageSquare", "title": "User Speaks", "description": "\"Show pricing\"", "color": "sapphire"},
-    {"icon": "Zap", "title": "AI Processes", "description": "Intent→templates", "color": "flamingo"},
-    {"icon": "Layout", "title": "UI Updates", "description": "Perfect view", "color": "jade"}
+  "tiersLabel": "Choose your channel",
+  "tiers": [
+    {"icon": "MessageSquare", "name": "Text", "price": "$0.002", "unit": "per message", "actionPhrase": "show me text pricing"},
+    {"icon": "Phone", "name": "Voice", "price": "$0.03", "unit": "per minute", "actionPhrase": "show me voice pricing"},
+    {"icon": "User", "name": "Avatar", "price": "$0.10", "unit": "per minute", "actionPhrase": "show me avatar pricing"}
   ],
-  "ctaLabel": "Generative Web",
-  "ctaActionPhrase": "Show me generative web"
+  "note": "Volume discounts available for enterprise",
+  "bonus": {"label": "Launch special", "value": "$500 in credits"},
+  "ctaLabel": "Get Started",
+  "ctaActionPhrase": "sign up for the launch event"
 }
 ```
 
-### GenerativeWebDetail
-Details generative web.
+### Accordion
+Expandable sections.
 ```json
 {
-  "headline": "Generative Web",
-  "subheadline": "AI-Rendered Interfaces",
-  "description": "Not static—assembled real-time per user, per moment, per conversation.",
-  "features": [
-    {"icon": "Layout", "text": "Real-time assembly"},
-    {"icon": "Layers", "text": "Templates as blocks"},
-    {"icon": "Sparkles", "text": "Purpose-built views"},
-    {"icon": "RefreshCw", "text": "Adapts with conversation"}
+  "items": [
+    {"icon": "HelpCircle", "number": 1, "title": "What exactly is a tele?", "subtitle": "The basics", "details": ["A new kind of helper powered by AI", "Talks naturally in 100+ languages", "Works on any device: phone, web, voice", "Does the work — doesn't just answer questions"], "actionPhrase": "tell me more about teles"},
+    {"icon": "Zap", "number": 2, "title": "How is this different from a chatbot?", "subtitle": "Not another bot", "details": ["Chatbots follow scripts — teles reason", "Chatbots get stuck — teles adapt", "Chatbots answer — teles take action", "Chatbots frustrate — teles help"], "actionPhrase": "show me the difference"},
+    {"icon": "Lock", "number": 3, "title": "Is my data safe?", "subtitle": "Privacy first", "details": ["Enterprise-grade security", "SOC 2 compliant", "You control your data", "Transparent about what we know and don't know"], "actionPhrase": "show me security"}
   ],
-  "comparisonLabel": "Static vs Generative",
-  "traditionalTitle": "Traditional Static",
-  "traditionalPoints": ["Same page for all", "Fixed nav", "Deploys for changes", "One-size-fits-all"],
-  "generativeTitle": "Generative Web",
-  "generativePoints": ["Unique per conversation", "AI-guided nav", "Instant updates", "Context-aware"],
-  "ctaLabel": "Learn Wiring",
-  "ctaActionPhrase": "Show me wiring"
+  "allowMultiple": false,
+  "ctaLabel": "More Questions?",
+  "ctaActionPhrase": "I have more questions"
 }
 ```
 
-### WiringGuide
-Shows voice/vibe wiring modes.
+---
+
+## Content Template Specifications (5)
+
+### Showcase
+Hero section with benefits grid and tagline.
 ```json
 {
-  "wiringModes": [
-    {"icon": "Mic", "title": "Voice Wiring", "description": "Speak→Claude learns instantly.", "color": "sapphire", "examples": ["Add pricing table", "Teach about products"]},
-    {"icon": "Terminal", "title": "Vibe Wiring", "description": "Type commands→Claude generates.", "color": "flamingo", "examples": ["/add-glass chart", "/add-knowledge catalog"]}
+  "headline": "When the Screen Cares, Everything Changes",
+  "subheadline": "Real tasks that used to frustrate you — now effortless.",
+  "benefits": [
+    {"icon": "Calendar", "text": "Schedule a doctor's appointment without hold music", "actionPhrase": "show me scheduling"},
+    {"icon": "GraduationCap", "text": "Help your child with homework at their pace", "actionPhrase": "show me tutoring"},
+    {"icon": "BarChart3", "text": "Understand a dashboard in plain English", "actionPhrase": "show me dashboards"},
+    {"icon": "FileText", "text": "Fill out a form correctly the first time", "actionPhrase": "show me forms"},
+    {"icon": "Heart", "text": "Navigate benefits without crying", "actionPhrase": "show me benefits"},
+    {"icon": "Globe", "text": "Get help in your language, any language", "actionPhrase": "show me languages"}
   ],
-  "commandsLabel": "Wire Commands",
-  "coreCommands": [
-    {"cmd": "/add-glass", "desc": "Create templates"},
-    {"cmd": "/add-knowledge", "desc": "Teach facts"},
-    {"cmd": "/tele-should", "desc": "Define responses"},
-    {"cmd": "/set-goal", "desc": "Set outcome"},
-    {"cmd": "/set-journey", "desc": "Order steps"},
-    {"cmd": "/publish", "desc": "Go live"}
-  ],
-  "ctaLabel": "See Analytics",
-  "ctaActionPhrase": "Show me analytics"
+  "tagline": "This is what interfaces should have always been.",
+  "ctaLabel": "Experience It Now",
+  "ctaActionPhrase": "show me how a tele works"
 }
 ```
 
-### CommandList
-Shows wire commands in compact format.
+### Guide
+Mode cards with examples and command reference.
 ```json
 {
+  "modes": [
+    {"icon": "Sparkles", "title": "Simple", "description": "Just say what you need. No menus. No buttons. No learning curve.", "variant": "accent", "examples": ["Schedule my doctor appointment", "Help me understand this form", "What do these numbers mean?"]},
+    {"icon": "Brain", "title": "Intuitive", "description": "The screen anticipates what you need and shows what matters.", "variant": "default", "examples": ["The right information appears", "Complex becomes simple", "Guidance without demands"]}
+  ],
+  "commandsLabel": "How to use it",
   "commands": [
-    {"cmd": "/add-glass", "description": "Create visual templates", "example": "pricing table"},
-    {"cmd": "/add-knowledge", "description": "Teach domain facts", "example": "product features"},
-    {"cmd": "/tele-should", "description": "Define response behaviors", "example": "recommend Pro for teams >5"},
-    {"cmd": "/set-goal", "description": "Set the outcome", "example": "Schedule Hackathon"},
-    {"cmd": "/set-journey", "description": "Order the steps", "example": "7 steps"},
-    {"cmd": "/publish", "description": "Go live", "example": "sync to cloud"}
+    {"cmd": "Just speak naturally", "desc": "No special syntax required"},
+    {"cmd": "Ask anything", "desc": "The screen adapts to you"},
+    {"cmd": "Say what you need", "desc": "Simple, intuitive, responsive"}
   ],
-  "ctaLabel": "See Voice Wiring",
-  "ctaActionPhrase": "Show me voice wiring"
+  "ctaLabel": "Experience It",
+  "ctaActionPhrase": "sign up for the launch event"
 }
 ```
 
-### VoiceWiringDetail
-Details voice wiring.
+### List
+Vertical list with elegant item cards.
 ```json
 {
-  "headline": "Voice Wiring",
-  "subheadline": "Speak to Claude, learns instantly",
-  "description": "Fastest way. Natural language→production templates in seconds.",
-  "features": [
-    {"icon": "MessageSquare", "text": "Natural language"},
-    {"icon": "Sparkles", "text": "Instant generation"},
-    {"icon": "Code", "text": "Production-ready"},
-    {"icon": "Clock", "text": "~5 seconds"}
+  "headline": "The Three Powers",
+  "subheadline": "What makes a caring screen",
+  "items": [
+    {"icon": "Sparkles", "title": "Simplicity", "description": "Say what you need, get what you need", "actionPhrase": "show me simplicity"},
+    {"icon": "Compass", "title": "Intuitiveness", "description": "The screen anticipates and adapts", "actionPhrase": "show me intuitiveness"},
+    {"icon": "Zap", "title": "Responsiveness", "description": "Instant action, no waiting", "actionPhrase": "show me responsiveness"},
+    {"icon": "Heart", "title": "Human-centered", "description": "Built for you, not the other way around", "actionPhrase": "show me caring design"},
+    {"icon": "Globe", "title": "Universal", "description": "100+ languages, any device, 24/7", "actionPhrase": "show me availability"}
   ],
-  "examplesLabel": "Example Commands",
-  "examples": ["Add pricing table: Starter $29, Pro $99, Enterprise custom", "Create testimonial carousel", "Explain onboarding in 5 steps"],
-  "ctaLabel": "Vibe Wiring",
-  "ctaActionPhrase": "Show me vibe wiring"
+  "ctaLabel": "See It In Action",
+  "ctaActionPhrase": "show me how this is different"
 }
 ```
 
-### VibeWiringDetail
-Details vibe wiring.
+### Timeline
+Steps with timing and deliverables.
 ```json
 {
-  "headline": "Vibe Wiring",
-  "subheadline": "Type commands, Claude generates",
-  "description": "Precision control. Slash commands + descriptions.",
-  "features": [
-    {"icon": "Code", "text": "Precise control"},
-    {"icon": "FileCode", "text": "Detail=better output"},
-    {"icon": "Settings", "text": "Configure behaviors"},
-    {"icon": "CheckCircle", "text": "Complex requirements"}
-  ],
-  "commandsLabel": "Key Commands",
-  "commands": [
-    {"cmd": "/add-glass", "desc": "Create templates", "example": "comparison chart"},
-    {"cmd": "/add-knowledge", "desc": "Wire expertise", "example": "pricing matrix"},
-    {"cmd": "/tele-should", "desc": "Define behaviors", "example": "recommend Pro for teams>5"}
-  ],
-  "ctaLabel": "Wire Commands",
-  "ctaActionPhrase": "Show me wire commands"
-}
-```
-
-### WireCommandsDetail
-Shows all 6 wire commands.
-```json
-{
-  "headline": "Wire Commands",
-  "subheadline": "Six commands to build anything",
-  "commands": [
-    {"cmd": "/add-glass", "desc": "Create templates", "icon": "Layout", "example": "pricing table", "category": "Build"},
-    {"cmd": "/add-knowledge", "desc": "Teach facts", "icon": "Brain", "example": "features", "category": "Build"},
-    {"cmd": "/tele-should", "desc": "Define behaviors", "icon": "MessageSquare", "example": "recommend Pro", "category": "Configure"},
-    {"cmd": "/set-goal", "desc": "Set outcome", "icon": "Target", "example": "Schedule Hackathon", "category": "Configure"},
-    {"cmd": "/set-journey", "desc": "Order steps", "icon": "Map", "example": "7 steps", "category": "Configure"},
-    {"cmd": "/publish", "desc": "Go live", "icon": "Rocket", "example": "sync", "category": "Deploy"}
-  ],
-  "footerTitle": "6 commands, unlimited teles",
-  "footerDesc": "Hours, not weeks",
-  "ctaLabel": "See Analytics",
-  "ctaActionPhrase": "Show me analytics"
-}
-```
-
-### AnalyticsView
-Shows 3 analytics capabilities.
-```json
-{
-  "analytics": [
-    {"icon": "Eye", "title": "Agent Observability", "description": "See AI decisions and why."},
-    {"icon": "Brain", "title": "Probabilistic CRM", "description": "Intent scores, not binary."},
-    {"icon": "Activity", "title": "Conversational Telemetry", "description": "Clicks+words+outcomes."}
-  ],
-  "ctaLabel": "Schedule Hackathon",
-  "ctaActionPhrase": "Show me hackathon"
-}
-```
-
-### AgentObservability
-Details observability.
-```json
-{
-  "headline": "Agent Observability",
-  "subheadline": "See what AI is doing",
-  "description": "Full transparency. Every decision logged, traced, explainable.",
-  "features": [
-    {"icon": "Eye", "text": "Real-time decisions"},
-    {"icon": "Search", "text": "Drill into any conversation"},
-    {"icon": "AlertCircle", "text": "Catch hallucinations"},
-    {"icon": "TrendingUp", "text": "Track quality"}
-  ],
-  "traceSectionLabel": "Sample Trace",
-  "traceSteps": [
-    {"timestamp": "00:00.00", "event": "Message received", "detail": "\"What's pricing?\""},
-    {"timestamp": "00:00.12", "event": "Intent classified", "detail": "pricing (0.94)"},
-    {"timestamp": "00:00.18", "event": "Template selected", "detail": "UtilizationPricing"},
-    {"timestamp": "00:00.23", "event": "Response generated", "detail": "143 tokens, 0.8s"}
-  ],
-  "metrics": [
-    {"label": "Response", "value": "0.8s"},
-    {"label": "Accuracy", "value": "98.2%"},
-    {"label": "Coverage", "value": "100%"}
-  ],
-  "ctaLabel": "Probabilistic CRM",
-  "ctaActionPhrase": "Show me CRM"
-}
-```
-
-### ProbabilisticCRM
-Details CRM.
-```json
-{
-  "headline": "Probabilistic CRM",
-  "subheadline": "Track intent, not events",
-  "description": "Likelihood, not binary. Intent scores + confidence.",
-  "features": [
-    {"icon": "Target", "title": "Intent Scoring", "description": "Conversion probability"},
-    {"icon": "TrendingUp", "title": "Confidence", "description": "Scored predictions"},
-    {"icon": "BarChart3", "title": "History", "description": "Track over time"},
-    {"icon": "Users", "title": "Segments", "description": "Auto-cluster"}
-  ],
-  "leadsLabel": "Sample Scores",
-  "sampleLeads": [
-    {"name": "Sarah/Acme", "intent": "Purchase", "score": 87, "trend": "up"},
-    {"name": "Mike/TechStart", "intent": "Info", "score": 42, "trend": "stable"},
-    {"name": "Lisa/BigRetail", "intent": "Ready", "score": 94, "trend": "up"}
-  ],
-  "ctaLabel": "Telemetry",
-  "ctaActionPhrase": "Show me telemetry"
-}
-```
-
-### ConversationalTelemetry
-Details telemetry.
-```json
-{
-  "headline": "Conversational Telemetry",
-  "subheadline": "Clicks+Words+Outcomes",
-  "description": "Web analytics + conversation analytics. Full journey.",
-  "formulaItems": [
-    {"icon": "MousePointer", "label": "Web"},
-    {"icon": "MessageSquare", "label": "Conversation"},
-    {"icon": "Activity", "label": "Full Picture"}
-  ],
-  "metricsLabel": "Sample Dashboard",
-  "metrics": [
-    {"label": "Views", "value": "45.2K", "change": "+12%", "icon": "MousePointer"},
-    {"label": "Conversations", "value": "8.4K", "change": "+34%", "icon": "MessageSquare"},
-    {"label": "Intents", "value": "7.1K", "change": "+28%", "icon": "Target"},
-    {"label": "Conversions", "value": "2.3K", "change": "+45%", "icon": "TrendingUp"}
-  ],
-  "journeyTitle": "Journey Tracking",
-  "journeyDesc": "Visit→conversation→conversion",
-  "ctaLabel": "Schedule Hackathon",
-  "ctaActionPhrase": "Show me hackathon"
-}
-```
-
-### HackathonForm
-Collects booking info.
-```json
-{
-  "headline": "Schedule Your Hackathon",
-  "subheadline": "3 hours to a working tele",
-  "name": "",
-  "email": "",
-  "preferredDate": "YYYY-MM-DD",
-  "confirmed": false
-}
-```
-
-### HandsOnWiring
-Shows hackathon deliverables.
-```json
-{
-  "headline": "Hands-On Wiring Session",
-  "subheadline": "Build first tele in 3 hours",
-  "deliverablesLabel": "What You'll Build",
+  "leftIcon": "Rocket",
+  "leftHeadline": "The Launch Timeline",
+  "leftSubheadline": "From private beta to everyone",
+  "deliverablesLabel": "What's coming",
   "deliverables": [
-    {"icon": "CheckCircle", "text": "Working tele with your knowledge"},
-    {"icon": "CheckCircle", "text": "Custom templates"},
-    {"icon": "CheckCircle", "text": "Live deployment"},
-    {"icon": "CheckCircle", "text": "Code you own"}
+    {"icon": "Users", "text": "Population of trained teles"},
+    {"icon": "Globe", "text": "100+ language support"},
+    {"icon": "Cpu", "text": "Enterprise integrations"},
+    {"icon": "Shield", "text": "SOC 2 compliance"}
   ],
-  "timelineLabel": "3-Hour Timeline",
-  "timeline": [
-    {"time": "Hour 1", "activity": "Setup + knowledge", "icon": "Target"},
-    {"time": "Hour 2", "activity": "Templates + behaviors", "icon": "Code"},
-    {"time": "Hour 3", "activity": "Test + deploy", "icon": "Zap"}
+  "stepsLabel": "Our journey",
+  "steps": [
+    {"time": "5 years ago", "title": "Founded with a vision", "icon": "Flag"},
+    {"time": "2 years ago", "title": "Private beta launched", "icon": "Lock"},
+    {"time": "Last year", "title": "Enterprise pilots", "icon": "Building"},
+    {"time": "End of Q1", "title": "Public launch", "icon": "Rocket"}
   ],
-  "ctaLabel": "Fast Turnaround",
-  "ctaActionPhrase": "Show me turnaround"
+  "successNote": "Be there when we go live.",
+  "ctaLabel": "Join the Launch Event",
+  "ctaActionPhrase": "sign up for the launch event"
 }
 ```
 
-### FastTurnaround
-Compares traditional vs hackathon.
+### Form
+Interactive form with live updates.
 ```json
 {
-  "headline": "Fast Turnaround",
-  "subheadline": "Traditional vs Hackathon",
-  "traditionalTitle": "Traditional AI",
-  "traditionalTime": "18+ months",
-  "traditionalItems": ["Requirements (3mo)", "Vendor (2mo)", "Infra (4mo)", "Dev (6mo)", "Deploy (3mo)"],
-  "hackathonTitle": "Hackathon",
-  "hackathonTime": "3 hours",
-  "hackathonItems": ["Knowledge (30min)", "Templates (60min)", "Behaviors (45min)", "Deploy (45min)", "Live demo"],
-  "footerTitle": "Same result. 99.9% less time.",
-  "footerDesc": "Live during hackathon, not months later.",
-  "ctaLabel": "Full Support",
-  "ctaActionPhrase": "Show me support"
+  "headline": "Reserve Your Spot",
+  "subheadline": "The Launch Event — end of Q1",
+  "fields": [
+    {"name": "name", "label": "Your Name", "type": "text", "icon": "User", "placeholder": "Enter your full name", "required": true},
+    {"name": "email", "label": "Email Address", "type": "email", "icon": "Mail", "placeholder": "you@example.com", "required": true},
+    {"name": "phone", "label": "Phone (optional)", "type": "tel", "icon": "Phone", "placeholder": "+1 (555) 000-0000", "required": false},
+    {"name": "interest", "label": "What interests you most?", "type": "textarea", "icon": "MessageSquare", "placeholder": "What friction do you want to fight?", "required": false}
+  ],
+  "infoLabel": "What you'll get",
+  "infoItems": [
+    {"text": "Early access to the launch"},
+    {"text": "Live demos from the team"},
+    {"text": "Q&A with founders"}
+  ],
+  "submitLabel": "Reserve My Spot",
+  "submitActionPhrase": "user submitted launch event registration",
+  "values": {},
+  "confirmed": false,
+  "confirmationTitle": "You're In!",
+  "confirmationMessage": "We'll send you details as the launch approaches. Thank you for joining the movement."
 }
 ```
 
-### FullSupport
-Shows hackathon support.
+---
+
+## Comparison & Display Template Specifications (5)
+
+### Compare
+Side-by-side comparison with good/bad variants.
 ```json
 {
-  "headline": "Full Mobeus Support",
-  "subheadline": "Not alone in hackathon",
-  "description": "Dedicated Mobeus team. Real experts, real-time, real results.",
+  "headline": "Interfaces That Ignore You vs. Interfaces That Care",
+  "subheadline": "The difference is everything",
+  "columns": [
+    {"icon": "Frown", "title": "Traditional Interfaces", "value": "You adapt", "items": ["Learn the menu structure", "Remember where things are", "Click through 5 screens", "Read the documentation", "Figure it out yourself"], "variant": "bad"},
+    {"icon": "Smile", "title": "The Tele Way", "value": "It adapts", "items": ["Just say what you need", "The right screen appears", "One step, done", "It explains as you go", "Help is always here"], "variant": "good"}
+  ],
+  "summary": {"title": "A fundamental shift", "description": "From interfaces that demand to interfaces that serve."},
+  "ctaLabel": "Try the Difference",
+  "ctaActionPhrase": "show me real examples"
+}
+```
+
+### Team
+Team/support display with features and members.
+```json
+{
+  "leftIcon": "Users",
+  "headline": "A Workforce That Cares",
+  "subheadline": "Simple. Intuitive. Responsive.",
+  "description": "We're launching a population of teles — each one designed to make the screen care about you.",
   "features": [
-    {"icon": "Headphones", "text": "Live support"},
-    {"icon": "MessageSquare", "text": "Real-time solving"},
-    {"icon": "Code", "text": "Built with you"},
-    {"icon": "CheckCircle", "text": "Deployment included"}
+    {"icon": "Sparkles", "text": "Simple interfaces"},
+    {"icon": "Brain", "text": "Intuitive experiences"},
+    {"icon": "Zap", "text": "Responsive interactions"},
+    {"icon": "Heart", "text": "Human-centered design"}
   ],
-  "teamLabel": "Your Team",
-  "team": [
-    {"icon": "Users", "role": "Solutions Architect", "description": "Technical decisions"},
-    {"icon": "Code", "role": "Wiring Specialist", "description": "Builds templates"},
-    {"icon": "Headphones", "role": "Success Manager", "description": "Ensures outcomes"}
+  "membersLabel": "How they help",
+  "members": [
+    {"icon": "Calendar", "role": "Scheduler", "description": "Simple appointment booking — no hold music"},
+    {"icon": "HelpCircle", "role": "Explainer", "description": "Intuitive data translation — plain English"},
+    {"icon": "FileText", "role": "Navigator", "description": "Responsive guidance — every step of the way"}
   ],
-  "successNote": "$500 credits included",
-  "ctaLabel": "Schedule Now",
-  "ctaActionPhrase": "I want to schedule"
+  "successNote": "Every tele makes the screen care about you.",
+  "ctaLabel": "Meet the Teles",
+  "ctaActionPhrase": "show me the different teles available"
 }
 ```
 
-### ActionBanner
-CTA banner — use in every section.
+### Quote
+Large quote/testimonial display.
 ```json
 {
-  "headline": "Required headline text",
-  "subheadline": "Optional subheadline",
-  "ctaLabel": "Button label",
-  "ctaActionPhrase": "What to say when clicked"
+  "quote": "For the first time, the screen adapted to me — not the other way around. Simple to use, intuitive to understand, responsive to my needs.",
+  "author": "Maria",
+  "role": "67, Miami",
+  "variant": "accent",
+  "ctaLabel": "Hear More Stories",
+  "ctaActionPhrase": "show me more real examples"
 }
 ```
 
-### ThreeThings
-Shows 3 items.
+### Metric
+Single large statistic with context.
 ```json
 {
-  "things": [
-    {"icon": "AlertTriangle", "title": "Thing 1", "description": "Description 1"},
-    {"icon": "Zap", "title": "Thing 2", "description": "Description 2"},
-    {"icon": "TrendingUp", "title": "Thing 3", "description": "Description 3"}
+  "value": "14.6T",
+  "label": "Frustrations from uncaring screens",
+  "context": "4 billion people × 10 irritations per day — screens that don't adapt",
+  "icon": "AlertTriangle",
+  "trend": "up",
+  "variant": "alert",
+  "ctaLabel": "Help Us Fight Friction",
+  "ctaActionPhrase": "tell me how teles fight friction"
+}
+```
+
+### Steps
+Numbered step-by-step process.
+```json
+{
+  "headline": "How It Works",
+  "subheadline": "Three simple steps",
+  "steps": [
+    {"icon": "MessageSquare", "title": "Just Talk", "description": "Say what you need in your own words. No menus. No buttons.", "actionPhrase": "how do I start"},
+    {"icon": "Cpu", "title": "I Figure It Out", "description": "I understand your request, reason through it, and take action.", "actionPhrase": "what happens behind the scenes"},
+    {"icon": "CheckCircle", "title": "Done", "description": "You get your answer, your appointment, your form — whatever you needed.", "actionPhrase": "show me examples"}
   ],
-  "ctaLabel": "Optional CTA",
-  "ctaActionPhrase": "Optional action"
+  "layout": "horizontal",
+  "ctaLabel": "Try It Yourself",
+  "ctaActionPhrase": "sign up for the launch event"
 }
 ```
 
-### StatHighlight
-Shows stats prominently.
+---
+
+## Chart Template Specifications (6)
+
+### ChartSingle
+Full-width single chart with title and highlights.
 ```json
 {
+  "title": "Where Friction Hits Hardest",
+  "subtitle": "Minutes lost per week by category",
+  "chartType": "bar",
+  "data": [
+    {"label": "Phone holds", "value": 47, "color": "#E91E63"},
+    {"label": "Confusing forms", "value": 32, "color": "#FF9800"},
+    {"label": "Repeating info", "value": 28, "color": "#FFC107"},
+    {"label": "Finding answers", "value": 41, "color": "#9C27B0"},
+    {"label": "Tech support", "value": 38, "color": "#2196F3"}
+  ],
+  "highlights": [
+    {"icon": "Clock", "label": "Average weekly waste", "value": "186 minutes"},
+    {"icon": "Calendar", "label": "Annual impact", "value": "161 hours lost"}
+  ],
+  "ctaLabel": "See the Solution",
+  "ctaActionPhrase": "show me how teles fix this"
+}
+```
+
+### ChartDuo
+Two charts side by side.
+```json
+{
+  "headline": "Before and After Teles",
+  "charts": [
+    {"title": "Time to Resolution (Before)", "chartType": "bar", "data": [{"label": "Healthcare", "value": 47}, {"label": "Banking", "value": 32}, {"label": "Government", "value": 58}], "highlights": [{"label": "Average", "value": "46 minutes"}]},
+    {"title": "Time to Resolution (With Tele)", "chartType": "bar", "data": [{"label": "Healthcare", "value": 8}, {"label": "Banking", "value": 5}, {"label": "Government", "value": 12}], "highlights": [{"label": "Average", "value": "8 minutes"}]}
+  ],
+  "ctaLabel": "See More Data",
+  "ctaActionPhrase": "show me the impact"
+}
+```
+
+### ChartTrio
+Three compact charts in a row.
+```json
+{
+  "headline": "Satisfaction Metrics",
+  "charts": [
+    {"title": "Resolution Time", "chartType": "donut", "data": [{"label": "Under 5 min", "value": 72}, {"label": "Over 5 min", "value": 28}], "highlight": {"label": "Fast", "value": "72%"}},
+    {"title": "First Contact", "chartType": "donut", "data": [{"label": "Resolved", "value": 89}, {"label": "Escalated", "value": 11}], "highlight": {"label": "One and done", "value": "89%"}},
+    {"title": "Satisfaction", "chartType": "donut", "data": [{"label": "Satisfied", "value": 94}, {"label": "Neutral", "value": 6}], "highlight": {"label": "Happy", "value": "94%"}}
+  ],
+  "ctaLabel": "Learn More",
+  "ctaActionPhrase": "show me tele performance"
+}
+```
+
+### ChartMajor
+2/3 large chart with 1/3 analytics sidebar.
+```json
+{
+  "title": "Friction Fighting Impact",
+  "subtitle": "Hours saved per 1,000 interactions",
+  "chartType": "line",
+  "data": [
+    {"label": "Jan", "value": 120},
+    {"label": "Feb", "value": 180},
+    {"label": "Mar", "value": 240},
+    {"label": "Apr", "value": 310},
+    {"label": "May", "value": 420}
+  ],
+  "kpis": [
+    {"icon": "TrendingUp", "label": "Growth", "value": "+250%", "trend": "up", "trendValue": "since launch"},
+    {"icon": "Clock", "label": "Avg saved", "value": "38 min", "trend": "up", "trendValue": "+12% MoM"},
+    {"icon": "Users", "label": "Users helped", "value": "50K+", "trend": "up", "trendValue": "this month"}
+  ],
+  "ctaLabel": "Join the Movement",
+  "ctaActionPhrase": "sign up for the launch event"
+}
+```
+
+### ChartMinor
+1/3 compact chart with 2/3 content grid.
+```json
+{
+  "title": "User Satisfaction",
+  "chartType": "donut",
+  "data": [
+    {"label": "Very satisfied", "value": 72},
+    {"label": "Satisfied", "value": 22},
+    {"label": "Neutral", "value": 6}
+  ],
+  "highlight": {"label": "Satisfaction rate", "value": "94%"},
+  "metrics": [
+    {"icon": "Star", "label": "Avg rating", "value": "4.8/5"},
+    {"icon": "MessageSquare", "label": "Conversations", "value": "500K+"},
+    {"icon": "Clock", "label": "Avg resolution", "value": "4.2 min"}
+  ],
+  "insights": [
+    {"icon": "TrendingUp", "title": "Trending upward", "description": "Satisfaction improved 12% since Q3"},
+    {"icon": "Heart", "title": "Most loved feature", "description": "Natural language understanding"}
+  ],
+  "ctaLabel": "See User Stories",
+  "ctaActionPhrase": "show me real examples"
+}
+```
+
+### Dashboard
+Multi-widget dashboard with KPIs and charts.
+```json
+{
+  "title": "Friction Fighting Dashboard",
+  "subtitle": "Real-time impact across all teles",
+  "kpis": [
+    {"icon": "Users", "label": "Active users", "value": "127,432", "trend": "up", "trendValue": "+8.2%"},
+    {"icon": "Clock", "label": "Hours saved today", "value": "4,821", "trend": "up", "trendValue": "+12%"},
+    {"icon": "Star", "label": "Satisfaction", "value": "94.2%", "trend": "up", "trendValue": "+1.1%"},
+    {"icon": "Zap", "label": "Avg response", "value": "1.2s", "trend": "down", "trendValue": "-0.3s"}
+  ],
+  "widgets": [
+    {"title": "By channel", "chartType": "pie", "data": [{"label": "Text", "value": 45}, {"label": "Voice", "value": 35}, {"label": "Avatar", "value": 20}]},
+    {"title": "Weekly trend", "chartType": "line", "data": [{"label": "Mon", "value": 12}, {"label": "Tue", "value": 18}, {"label": "Wed", "value": 22}, {"label": "Thu", "value": 19}, {"label": "Fri", "value": 28}]}
+  ],
+  "ctaLabel": "Explore More",
+  "ctaActionPhrase": "tell me more about tele analytics"
+}
+```
+---
+
+## Image Template Specifications (6)
+
+### ImageSingle
+Full-width image with caption.
+```json
+{
+  "title": "A Population of Helpers",
+  "subtitle": "Thousands of teles, ready to work",
+  "imagePrompt": "futuristic workforce of AI assistants helping people with daily tasks",
+  "caption": "Each tele is trained for a specific job — healthcare, education, finance, government, and more.",
+  "aspectRatio": "16:9",
+  "ctaLabel": "Meet the Teles",
+  "ctaActionPhrase": "show me the different teles available"
+}
+```
+
+### ImageDuo
+Two images side by side.
+```json
+{
+  "headline": "Before and After",
+  "images": [
+    {"imagePrompt": "frustrated person on hold with phone customer service", "title": "The Old Way", "caption": "47 minutes on hold. 3 transfers. Still no answer.", "actionPhrase": "show me the old way"},
+    {"imagePrompt": "happy person chatting with AI assistant getting instant help", "title": "The Tele Way", "caption": "Ask once. Get help. Move on with life.", "actionPhrase": "tell me how teles help"}
+  ],
+  "ctaLabel": "See the Difference",
+  "ctaActionPhrase": "show me how this is different"
+}
+```
+
+### ImageTrio
+Three images in a row.
+```json
+{
+  "headline": "How Teles Help You",
+  "images": [
+    {"imagePrompt": "scheduling doctor appointment with AI assistant", "title": "Healthcare", "caption": "Appointments without hold music", "actionPhrase": "show me healthcare"},
+    {"imagePrompt": "student getting homework help from AI tutor", "title": "Education", "caption": "Patient tutoring at any pace", "actionPhrase": "show me education"},
+    {"imagePrompt": "professional understanding dashboard data with AI explanation", "title": "Work", "caption": "Dashboards in plain English", "actionPhrase": "show me dashboards"}
+  ],
+  "ctaLabel": "Explore Use Cases",
+  "ctaActionPhrase": "show me what a tele can do"
+}
+```
+
+### ImageGallery
+Carousel gallery of images.
+```json
+{
+  "headline": "Friction We Fight",
+  "images": [
+    {"imagePrompt": "person frustrated on phone hold waiting eternally", "title": "Phone Holds", "caption": "Average wait: 47 minutes", "actionPhrase": "show me phone holds"},
+    {"imagePrompt": "confused person reading complex legal form document", "title": "Confusing Forms", "caption": "12 pages of fine print", "actionPhrase": "show me forms"},
+    {"imagePrompt": "person repeating information to third customer service rep", "title": "Repeating Yourself", "caption": "Explain it again and again", "actionPhrase": "show me repeating"},
+    {"imagePrompt": "overwhelmed person staring at complex data dashboard", "title": "Confusing Data", "caption": "What do these numbers mean?", "actionPhrase": "show me dashboards"}
+  ],
+  "autoPlay": true,
+  "ctaLabel": "Fight the Friction",
+  "ctaActionPhrase": "sign up for the launch event"
+}
+```
+
+### ImageMajor
+2/3 large image with 1/3 text content.
+```json
+{
+  "imagePrompt": "friendly AI assistant helping elderly person understand Medicare options with clear visuals",
+  "imageCaption": "Maria, 67, got her Medicare answers in 12 minutes",
+  "title": "Help That Actually Helps",
+  "subtitle": "Real stories, real people",
+  "description": "Maria spent 3 hours on hold trying to understand her Medicare options. A tele walked her through it in 12 minutes with clear visuals in her language.",
+  "items": [
+    {"icon": "Clock", "text": "12 minutes vs 3 hours"},
+    {"icon": "Languages", "text": "In her native language"},
+    {"icon": "Eye", "text": "With clear visuals"},
+    {"icon": "Heart", "text": "Patient and never frustrated"}
+  ],
+  "ctaLabel": "Hear More Stories",
+  "ctaActionPhrase": "show me more real examples",
+  "reversed": false
+}
+```
+
+### ImageMinor
+1/3 image with 2/3 text content.
+```json
+{
+  "imagePrompt": "student successfully completing algebra homework with AI tutor celebration",
+  "title": "David's Daughter",
+  "subtitle": "How a tele became a patient algebra tutor",
+  "description": "David's daughter struggled with algebra every night. A tele became her patient tutor — same concepts, different words, until it clicked.",
+  "items": [
+    {"icon": "GraduationCap", "title": "Patient tutoring", "description": "Goes at her pace, not the class's"},
+    {"icon": "RefreshCw", "title": "Multiple approaches", "description": "Explains the same concept different ways"},
+    {"icon": "Clock", "title": "Homework done faster", "description": "More time to play"},
+    {"icon": "Smile", "title": "Confidence restored", "description": "She actually likes math now"}
+  ],
+  "ctaLabel": "See More Stories",
+  "ctaActionPhrase": "show me more real examples",
+  "reversed": false
+}
+```
+
+---
+
+## Video Template Specifications (4)
+
+### VideoSingle
+Full-width video player.
+```json
+{
+  "title": "See a Tele in Action",
+  "subtitle": "2-minute demo",
+  "videoUrl": "/assets/demo-video.mp4",
+  "posterPrompt": "friendly AI assistant helping someone schedule doctors appointment",
+  "description": "Watch how a tele helps Maria schedule a doctor's appointment — no hold music, no phone trees, just help.",
+  "ctaLabel": "Try It Yourself",
+  "ctaActionPhrase": "sign up for the launch event"
+}
+```
+
+### VideoGallery
+Carousel of video thumbnails.
+```json
+{
+  "headline": "Use Case Videos",
+  "videos": [
+    {"title": "Healthcare", "subtitle": "Scheduling without hold music", "duration": "2:15", "posterPrompt": "healthcare appointment scheduling AI", "actionPhrase": "play healthcare video"},
+    {"title": "Education", "subtitle": "Patient homework tutoring", "duration": "1:45", "posterPrompt": "AI tutor helping student with math", "actionPhrase": "play education video"},
+    {"title": "Finance", "subtitle": "Understanding your statements", "duration": "2:30", "posterPrompt": "AI explaining financial dashboard", "actionPhrase": "play finance video"},
+    {"title": "Government", "subtitle": "Navigating benefits enrollment", "duration": "3:00", "posterPrompt": "AI helping with government forms", "actionPhrase": "play government video"}
+  ],
+  "ctaLabel": "See All Videos",
+  "ctaActionPhrase": "show me all use case videos"
+}
+```
+
+### VideoMajor
+2/3 video with 1/3 text content.
+```json
+{
+  "videoUrl": "/assets/platform-overview.mp4",
+  "posterPrompt": "Mobeus platform overview with AI assistants",
+  "title": "The Platform",
+  "subtitle": "5 years in the making",
+  "description": "Mobeus has been building in private for five years. Testing. Refining. Getting it right. Watch how the platform works.",
+  "items": [
+    {"icon": "Cpu", "text": "Any AI model"},
+    {"icon": "Cloud", "text": "Any cloud"},
+    {"icon": "Smartphone", "text": "Any device"},
+    {"icon": "Languages", "text": "100+ languages"}
+  ],
+  "ctaLabel": "Learn More",
+  "ctaActionPhrase": "show me Mobeus"
+}
+```
+
+### VideoMinor
+1/3 video with 2/3 text content.
+```json
+{
+  "videoUrl": "/assets/friction-overview.mp4",
+  "posterPrompt": "visualization of global friction frustration statistics",
+  "title": "The Friction Problem",
+  "subtitle": "14.6 trillion reasons to care",
+  "description": "4 billion people × 10 irritations per day × 365 days = 14.6 trillion micro-frustrations every year. That's what we're fighting.",
+  "items": [
+    {"icon": "Clock", "title": "Time wasted", "description": "Waiting on hold, repeating yourself, figuring out confusing systems"},
+    {"icon": "Brain", "title": "Mental load", "description": "Remembering passwords, navigating menus, understanding fine print"},
+    {"icon": "Heart", "title": "Emotional cost", "description": "Frustration, anger, helplessness"},
+    {"icon": "Zap", "title": "The solution", "description": "Teles that just help"}
+  ],
+  "ctaLabel": "Fight the Friction",
+  "ctaActionPhrase": "sign up for the launch event",
+  "reversed": false
+}
+```
+
+---
+
+## E-Commerce Template Specifications (4)
+
+### Product
+Product display with images, pricing, and actions.
+```json
+{
+  "images": [
+    {"imagePrompt": "professional AI assistant avatar product image"},
+    {"imagePrompt": "AI assistant helping with scheduling"},
+    {"imagePrompt": "AI assistant explaining data"}
+  ],
+  "name": "Healthcare Tele",
+  "brand": "Mobeus",
+  "rating": 4.8,
+  "reviewCount": 1247,
+  "price": "$0.03/min",
+  "originalPrice": "$0.05/min",
+  "description": "A specialized tele trained for healthcare tasks: scheduling appointments, explaining benefits, navigating insurance, and more — without hold music.",
+  "features": [
+    {"icon": "Calendar", "text": "Schedule appointments"},
+    {"icon": "FileText", "text": "Navigate insurance forms"},
+    {"icon": "Clock", "text": "24/7 availability"},
+    {"icon": "Languages", "text": "100+ languages"}
+  ],
+  "specs": [
+    {"label": "Response time", "value": "< 2 seconds"},
+    {"label": "Resolution rate", "value": "94%"},
+    {"label": "Languages", "value": "100+"},
+    {"label": "Channels", "value": "Text, Voice, Avatar"}
+  ],
+  "inStock": true,
+  "stockLabel": "Available now",
+  "addToCartLabel": "Start Free Trial",
+  "addToCartPhrase": "show me to try the healthcare tele",
+  "buyNowLabel": "Sign Up for Launch",
+  "buyNowPhrase": "sign up for the launch event"
+}
+```
+
+### Cart
+Shopping cart display.
+```json
+{
+  "headline": "Your Teles",
+  "items": [
+    {"id": "healthcare-tele", "imageUrl": "/assets/healthcare-tele.png", "name": "Healthcare Tele", "variant": "Voice + Text", "price": "$0.03/min", "quantity": 1},
+    {"id": "education-tele", "imageUrl": "/assets/education-tele.png", "name": "Education Tele", "variant": "Text", "price": "$0.002/msg", "quantity": 1}
+  ],
+  "subtotalLabel": "Estimated monthly",
+  "subtotal": "$150",
+  "taxLabel": "Tax",
+  "tax": "Included",
+  "shippingLabel": "Setup",
+  "shipping": "Free",
+  "totalLabel": "Total",
+  "total": "$150/mo",
+  "emptyMessage": "No teles selected yet",
+  "continueShoppingLabel": "Add More Teles",
+  "continueShoppingPhrase": "show me more teles",
+  "checkoutLabel": "Confirm Selection",
+  "checkoutPhrase": "show me to confirm tele selection"
+}
+```
+
+### Wallet
+Payment/wallet display.
+```json
+{
+  "headline": "Your Tele Credits",
+  "balanceLabel": "Available Balance",
+  "balance": "$500.00",
+  "currency": "USD",
+  "paymentMethods": [
+    {"icon": "CreditCard", "label": "Visa", "last4": "4242", "expiry": "12/26", "isDefault": true},
+    {"icon": "CreditCard", "label": "Mastercard", "last4": "5555", "expiry": "08/25", "isDefault": false}
+  ],
+  "addPaymentLabel": "Add Payment Method",
+  "addPaymentPhrase": "show me to add payment method",
+  "transactionsLabel": "Recent Usage",
+  "transactions": [
+    {"id": "tx-001", "type": "debit", "description": "Healthcare Tele - Voice", "amount": "-$12.50", "date": "Today", "icon": "Phone"},
+    {"id": "tx-002", "type": "debit", "description": "Education Tele - Text", "amount": "-$3.20", "date": "Yesterday", "icon": "MessageSquare"},
+    {"id": "tx-003", "type": "credit", "description": "Launch Credits Applied", "amount": "+$500.00", "date": "Jan 15", "icon": "Gift"}
+  ],
+  "addFundsLabel": "Add Credits",
+  "addFundsPhrase": "show me to add credits",
+  "withdrawLabel": "Download Receipt",
+  "withdrawPhrase": "show me to download receipt"
+}
+```
+
+### Checkout
+Full checkout form.
+```json
+{
+  "shippingTitle": "Contact Information",
+  "shippingFields": [
+    {"name": "name", "label": "Full Name", "type": "text", "placeholder": "Enter your name", "required": true, "halfWidth": false},
+    {"name": "email", "label": "Email", "type": "email", "placeholder": "you@example.com", "required": true, "halfWidth": true},
+    {"name": "phone", "label": "Phone", "type": "tel", "placeholder": "+1 (555) 000-0000", "required": false, "halfWidth": true},
+    {"name": "company", "label": "Company (optional)", "type": "text", "placeholder": "Your organization", "required": false, "halfWidth": false}
+  ],
+  "shippingOptionsLabel": "Plan",
+  "shippingOptions": [
+    {"id": "starter", "label": "Starter", "description": "Text only, $0.002/msg", "price": "$50/mo", "eta": "Instant activation"},
+    {"id": "professional", "label": "Professional", "description": "Text + Voice, $0.03/min", "price": "$150/mo", "eta": "Instant activation"},
+    {"id": "enterprise", "label": "Enterprise", "description": "All channels + custom", "price": "Custom", "eta": "Contact sales"}
+  ],
+  "paymentTitle": "Payment",
+  "paymentFields": [
+    {"name": "card", "label": "Card Number", "type": "text", "placeholder": "1234 5678 9012 3456", "halfWidth": false},
+    {"name": "expiry", "label": "Expiry", "type": "text", "placeholder": "MM/YY", "halfWidth": true},
+    {"name": "cvv", "label": "CVV", "type": "text", "placeholder": "123", "halfWidth": true}
+  ],
+  "orderSummaryTitle": "Your Order",
+  "items": [
+    {"name": "Professional Plan", "quantity": 1, "price": "$150/mo"},
+    {"name": "Launch Credits", "quantity": 1, "price": "-$500"}
+  ],
+  "subtotalLabel": "Subtotal",
+  "subtotal": "$150/mo",
+  "shippingLabel": "Setup",
+  "shippingCost": "Free",
+  "taxLabel": "Tax",
+  "tax": "Included",
+  "totalLabel": "Total today",
+  "total": "$0 (credits applied)",
+  "secureNote": "Secured by 256-bit encryption",
+  "submitLabel": "Complete Signup",
+  "submitPhrase": "user completed checkout"
+}
+```
+
+---
+
+## Map Template Specifications (2)
+
+### MapSingle
+Single map with location info.
+```json
+{
+  "title": "Mobeus Headquarters",
+  "subtitle": "Where we build the future of help",
+  "embedUrl": "https://maps.google.com/embed?pb=example",
+  "location": {"name": "Mobeus HQ", "address": "350 Fifth Avenue, New York, NY 10118", "phone": "+1 (800) MOBEUS-1", "hours": "24/7 (we're teles, after all)", "lat": 40.7484, "lng": -73.9857},
+  "details": [
+    {"icon": "Building", "label": "Location", "value": "New York City"},
+    {"icon": "Users", "label": "Team size", "value": "100+ humans"},
+    {"icon": "Cpu", "label": "Teles trained", "value": "10,000+"},
+    {"icon": "Globe", "label": "Countries served", "value": "195"}
+  ],
+  "ctaLabel": "Contact Us",
+  "ctaActionPhrase": "show me to contact Mobeus",
+  "directionsLabel": "Get Directions",
+  "directionsPhrase": "show me directions to Mobeus"
+}
+```
+
+### MapDuo
+Two maps side by side.
+```json
+{
+  "headline": "Our Offices",
+  "maps": [
+    {"title": "New York (HQ)", "embedUrl": "https://maps.google.com/embed?ny", "address": "350 Fifth Avenue, New York, NY", "actionLabel": "View NY Office", "actionPhrase": "show me NY office details"},
+    {"title": "London", "embedUrl": "https://maps.google.com/embed?london", "address": "1 Canada Square, Canary Wharf, London", "actionLabel": "View London Office", "actionPhrase": "show me London office details"}
+  ],
+  "ctaLabel": "Contact a Location",
+  "ctaActionPhrase": "show me to contact an office"
+}
+```
+
+---
+
+## Data & Utility Template Specifications (9)
+
+### Table
+Sortable data table.
+```json
+{
+  "title": "Tele Performance Metrics",
+  "subtitle": "Real-time data from deployed teles",
+  "searchPlaceholder": "Search by category...",
+  "columns": [
+    {"key": "category", "label": "Category", "sortable": true, "align": "left"},
+    {"key": "resolution", "label": "Resolution Rate", "sortable": true, "align": "center"},
+    {"key": "avgTime", "label": "Avg Time", "sortable": true, "align": "center"},
+    {"key": "satisfaction", "label": "Satisfaction", "sortable": true, "align": "right"}
+  ],
+  "rows": [
+    {"id": "healthcare", "cells": {"category": "Healthcare", "resolution": "94%", "avgTime": "4.2 min", "satisfaction": "4.8/5"}, "actionPhrase": "show healthcare details"},
+    {"id": "education", "cells": {"category": "Education", "resolution": "91%", "avgTime": "8.5 min", "satisfaction": "4.7/5"}, "actionPhrase": "show education details"},
+    {"id": "finance", "cells": {"category": "Finance", "resolution": "96%", "avgTime": "3.1 min", "satisfaction": "4.9/5"}, "actionPhrase": "show finance details"},
+    {"id": "government", "cells": {"category": "Government", "resolution": "89%", "avgTime": "6.8 min", "satisfaction": "4.5/5"}, "actionPhrase": "show government details"}
+  ],
+  "emptyMessage": "No data available",
+  "ctaLabel": "See Full Report",
+  "ctaActionPhrase": "show me detailed performance data"
+}
+```
+
+### Infographic
+2/3 infographic image with 1/3 data points.
+```json
+{
+  "imagePrompt": "infographic showing global friction statistics and AI solution impact",
+  "title": "The Friction Epidemic",
+  "subtitle": "A global problem with a local solution",
+  "description": "Every day, billions of people waste time fighting friction — small irritations that add up to a massive drain on human potential.",
+  "points": [
+    {"icon": "Users", "label": "People affected", "value": "4 billion", "description": "Daily digital interactions"},
+    {"icon": "AlertTriangle", "label": "Daily frustrations", "value": "10", "description": "Average per person"},
+    {"icon": "Calendar", "label": "Annual impact", "value": "14.6T", "description": "Micro-frustrations globally"},
+    {"icon": "Zap", "label": "Solution ready", "value": "NOW", "description": "Teles launching end of Q1"}
+  ],
+  "ctaLabel": "Join the Solution",
+  "ctaActionPhrase": "sign up for the launch event"
+}
+```
+
+### Profile
+User or company profile.
+```json
+{
+  "avatarPrompt": "friendly female AI assistant avatar professional headshot",
+  "name": "Catherine",
+  "role": "Your Tele",
+  "bio": "I'm Catherine — a new kind of helper powered by AI. I don't put you on hold. I don't make you repeat yourself. I listen, I understand, and I help. That's what I do.",
   "stats": [
-    {"value": "+15-30%", "label": "Retail conversion"},
-    {"value": "-40%", "label": "Public sector inquiries"},
-    {"value": "+50%", "label": "Healthcare retention"}
-  ]
-}
-```
-
-### WelcomeCarousel
-Auto-scrolling journey cards (uses defaults if props empty).
-```json
-{
-  "cards": []
-}
-```
-
-### UseCaseStory
-Shows an imagined use case as a story with hero, transformation, and material outcome.
-```json
-{
-  "heroName": "Sarah",
-  "heroRole": "a clinic administrator",
-  "heroChallenge": "spends 4 hours daily answering the same patient questions",
-  "teleConnection": "patients to their health information",
-  "transformation": "Patients get instant answers. Sarah focuses on care. After-hours handled automatically.",
-  "materialOutcome": "This week: 50% fewer phone calls. This month: 20 hours reclaimed.",
-  "timeToValue": "This week",
-  "previousCases": [
-    {"title": "Retail Onboarding", "hero": "Marcus, store manager", "actionPhrase": "Show me the retail onboarding use case"},
-    {"title": "Government Permits", "hero": "Elena, city clerk", "actionPhrase": "Show me the government permits use case"}
+    {"value": "100+", "label": "Languages"},
+    {"value": "24/7", "label": "Availability"},
+    {"value": "94%", "label": "Resolution"}
   ],
-  "ctaLabel": "Imagine another",
-  "ctaActionPhrase": "Let me imagine another use case"
+  "contacts": [
+    {"icon": "MessageSquare", "label": "Chat", "value": "Always ready", "actionPhrase": "chat with Catherine"},
+    {"icon": "Phone", "label": "Voice", "value": "Call anytime", "actionPhrase": "call Catherine"},
+    {"icon": "Video", "label": "Avatar", "value": "See me", "actionPhrase": "video call Catherine"}
+  ],
+  "tags": ["Healthcare", "Education", "Finance", "Government"],
+  "primaryLabel": "Talk to Me",
+  "primaryPhrase": "start a conversation with Catherine",
+  "secondaryLabel": "Learn More",
+  "secondaryPhrase": "show me Catherine"
+}
+```
+
+### Article
+Long-form content with blocks.
+```json
+{
+  "heroImagePrompt": "AI assistants helping people around the world fight daily friction",
+  "title": "The End of Hold Music",
+  "subtitle": "How teles are eliminating the most frustrating parts of modern life",
+  "meta": {"author": "Mobeus Team", "date": "January 2026", "readTime": "5 min read", "category": "Vision"},
+  "blocks": [
+    {"type": "paragraph", "content": "We've all been there. You need to reschedule a doctor's appointment. You dial the number, and then you wait. And wait. 47 minutes later, you finally reach a human who transfers you to someone else. You explain your situation again. They can't help. Transfer. Explain again."},
+    {"type": "heading", "content": "This is friction."},
+    {"type": "paragraph", "content": "It's not just phone calls. It's confusing forms. It's repeating your information. It's reading manuals that make no sense. It's navigating systems designed by people who never had to use them."},
+    {"type": "quote", "content": "4 billion people experience 10 irritations per day. That's 14.6 trillion micro-frustrations every year."},
+    {"type": "paragraph", "content": "At Mobeus, we've spent five years building the solution: teles. Not chatbots. Not voice assistants. Conversational labor that actually gets things done."},
+    {"type": "list", "items": ["No hold music", "No phone trees", "No repeating yourself", "Just: help is here"]}
+  ],
+  "tags": ["Vision", "Friction", "Launch"],
+  "ctaLabel": "Be There at Launch",
+  "ctaActionPhrase": "sign up for the launch event"
+}
+```
+
+### Feature
+50/50 feature spotlight.
+```json
+{
+  "imagePrompt": "AI assistant speaking 100 languages represented by global diversity",
+  "badge": "100+ Languages",
+  "title": "Say It Your Way",
+  "description": "Teles speak 100+ languages naturally. No awkward translations. No limited vocabulary. Just conversation — in your words, in your language.",
+  "points": [
+    {"icon": "Languages", "text": "100+ languages supported"},
+    {"icon": "Globe", "text": "195 countries served"},
+    {"icon": "Heart", "text": "Culturally aware responses"},
+    {"icon": "Zap", "text": "Real-time translation"}
+  ],
+  "ctaLabel": "Try Your Language",
+  "ctaActionPhrase": "show me language capabilities",
+  "secondaryLabel": "See All Features",
+  "secondaryPhrase": "show me what a tele can do",
+  "reversed": false
+}
+```
+
+### Testimonials
+Multiple testimonials display.
+```json
+{
+  "headline": "What People Are Saying",
+  "subtitle": "Real stories from real users",
+  "testimonials": [
+    {"quote": "I spent 3 hours on hold with Medicare. A tele got me the same answers in 12 minutes. With visuals. In my language.", "author": "Maria", "role": "67, Miami", "avatarPrompt": "elderly hispanic woman smiling", "rating": 5, "actionPhrase": "show me Maria"},
+    {"quote": "My daughter went from hating math to actually enjoying it. The tele explains things differently until it clicks.", "author": "David", "role": "34, Chicago", "company": "Parent", "avatarPrompt": "middle aged man professional", "rating": 5, "actionPhrase": "show me David"},
+    {"quote": "I manage 15 people and used to drown in dashboards. Now I get a plain-English summary every morning.", "author": "Priya", "role": "41, London", "company": "Team Lead", "avatarPrompt": "south asian professional woman", "rating": 5, "actionPhrase": "show me Priya"},
+    {"quote": "Moved to a new city and needed to set up everything. The tele handled forms, calls, appointments — all of it.", "author": "James", "role": "29, Sydney", "avatarPrompt": "young australian man casual professional", "rating": 5, "actionPhrase": "show me James"}
+  ],
+  "ctaLabel": "Join Them",
+  "ctaActionPhrase": "sign up for the launch event"
+}
+```
+
+### DataGrid
+Grid of data cards.
+```json
+{
+  "headline": "Impact Metrics",
+  "subtitle": "What we've achieved so far",
+  "cards": [
+    {"icon": "Users", "title": "Users Helped", "value": "127,432", "subtitle": "and growing", "trend": "up", "trendValue": "+8.2%", "variant": "success", "actionPhrase": "show me users"},
+    {"icon": "Clock", "title": "Hours Saved", "value": "48,291", "subtitle": "this month", "trend": "up", "trendValue": "+12%", "variant": "success", "actionPhrase": "show me time saved"},
+    {"icon": "Star", "title": "Satisfaction", "value": "94.2%", "subtitle": "average rating", "trend": "up", "trendValue": "+1.1%", "variant": "accent", "actionPhrase": "show me satisfaction"},
+    {"icon": "Zap", "title": "Avg Response", "value": "1.2s", "subtitle": "lightning fast", "trend": "down", "trendValue": "-0.3s", "variant": "default", "actionPhrase": "show me response time"},
+    {"icon": "Languages", "title": "Languages", "value": "100+", "subtitle": "and counting", "trend": "neutral", "trendValue": "", "variant": "default", "actionPhrase": "show me languages"},
+    {"icon": "Globe", "title": "Countries", "value": "195", "subtitle": "worldwide", "trend": "neutral", "trendValue": "", "variant": "default", "actionPhrase": "show me global reach"}
+  ],
+  "columns": 3,
+  "ctaLabel": "See Full Dashboard",
+  "ctaActionPhrase": "show me the dashboard"
+}
+```
+
+### Paragraph
+Simple title and content.
+```json
+{
+  "icon": "Heart",
+  "title": "Our Promise",
+  "subtitle": "What we stand for",
+  "content": "Every tele speaks with one voice to mankind: 'Help is here.' Not 'please hold.' Not 'check the FAQ.' Not 'your call is important to us.' Just: help is here. We believe you shouldn't have to learn software to get things done. You should just... ask. And someone — something — should actually help.",
+  "alignment": "center",
+  "ctaLabel": "Join the Movement",
+  "ctaActionPhrase": "sign up for the launch event"
+}
+```
+
+### Notification
+Alert/notification banner.
+```json
+{
+  "icon": "Rocket",
+  "title": "Launch Event Coming Soon",
+  "message": "End of Q1, teles go live for everyone. Reserve your spot now and be among the first to experience the future of help.",
+  "variant": "info",
+  "dismissible": true,
+  "dismissPhrase": "user dismissed notification",
+  "actionLabel": "Reserve Now",
+  "actionPhrase": "sign up for the launch event"
 }
 ```
 
 ---
 
-## ---SHOT-PROMPTS--- (30 total)
+## Steps Template Specifications (15) — v94.0 NEW
 
-### 1. Welcome
-**USER:** First visit / "Hello" / "Start"
+### StepsVertical
+Vertical timeline with progress indicators.
 ```json
-{"badge":"WELCOME","title":"Welcome to Mobeus University","subtitle":"Learn why AI projects fail and how teles solve adoption.","generativeSubsections":[{"id":"welcome","templateId":"WelcomeCarousel","props":{}}]}
+{
+  "headline": "Your Journey to Success",
+  "subtitle": "Follow these steps to achieve your goals",
+  "steps": [
+    {"icon": "Target", "title": "Define Your Goal", "description": "Clarify what success looks like for you", "imagePrompt": "goal setting visualization", "status": "completed", "badge": "Done", "time": "Week 1"},
+    {"icon": "Search", "title": "Research & Learn", "description": "Gather the knowledge you need", "imagePrompt": "research and learning", "status": "current", "badge": "In Progress", "time": "Week 2"},
+    {"icon": "Rocket", "title": "Take Action", "description": "Execute your plan with confidence", "imagePrompt": "taking action launch", "status": "upcoming", "time": "Week 3"}
+  ],
+  "ctaLabel": "Start Your Journey",
+  "ctaActionPhrase": "show me to begin the journey"
+}
 ```
-TELE SAYS: "Welcome! I'm Tele — a living example of what you'll build. Explore to discover why AI projects fail and how teles solve the adoption problem."
 
----
-
-### 2. The Problem
-**USER:** "Problem" / "AI failure" / "70%" / "Why AI fails"
+### StepsHorizontal
+Horizontal stepper with progress bar.
 ```json
-{"badge":"THE PROBLEM","title":"Why AI projects are failing","subtitle":"70% never reach production.","generativeSubsections":[{"id":"problem","templateId":"ProblemStatement","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"In a hackathon, you'll solve this","ctaLabel":"See the solution","ctaActionPhrase":"Show me what a tele is"}}]}
+{
+  "headline": "Getting Started",
+  "subtitle": "Complete each step to unlock the next",
+  "steps": [
+    {"icon": "User", "title": "Create Account", "description": "Set up your profile", "imagePrompt": "user account creation", "details": ["Choose a username", "Set a secure password", "Verify your email"]},
+    {"icon": "Settings", "title": "Configure Settings", "description": "Customize your experience", "imagePrompt": "settings configuration", "details": ["Set preferences", "Choose notifications", "Connect integrations"]},
+    {"icon": "Zap", "title": "Go Live", "description": "Launch your first project", "imagePrompt": "project launch", "details": ["Review settings", "Click deploy", "Share with team"]}
+  ],
+  "initialStep": 0,
+  "ctaLabel": "Continue",
+  "ctaActionPhrase": "show me to continue setup"
+}
 ```
-TELE SAYS: "70% of enterprise AI never reaches production. $1.3T spent with low ROI. The problem isn't tech—it's adoption. No UI for AI."
 
----
-
-### 3. Adoption Problem
-**USER:** "Adoption" / "Real problem"
+### StepsCards
+Card-based steps with connector arrows.
 ```json
-{"badge":"THE PROBLEM","title":"Adoption is the problem","subtitle":"Users don't know how to use AI.","generativeSubsections":[{"id":"adoption","templateId":"AdoptionIsProblem","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"Tech works. Interface doesn't exist.","ctaLabel":"See the solution","ctaActionPhrase":"Show me what a tele is"}}]}
+{
+  "headline": "How It Works",
+  "subtitle": "A simple 3-step process",
+  "cards": [
+    {"icon": "MessageSquare", "title": "Tell Us What You Need", "description": "Describe your challenge or goal in your own words", "imagePrompt": "conversation illustration", "tags": ["Quick", "Easy"]},
+    {"icon": "Cpu", "title": "We Analyze & Plan", "description": "Our AI creates a personalized strategy for you", "imagePrompt": "AI analysis visualization", "tags": ["Smart", "Fast"]},
+    {"icon": "CheckCircle", "title": "Get Results", "description": "Follow the plan and achieve your objectives", "imagePrompt": "success celebration", "tags": ["Proven", "Effective"]}
+  ],
+  "ctaLabel": "Get Started",
+  "ctaActionPhrase": "show me to start the process"
+}
 ```
-TELE SAYS: "The technology works brilliantly. Users just don't know how to use it. There's no UI for AI—that's the real problem."
 
----
-
-### 4. The Solution
-**USER:** "Solution" / "What is a tele" / "Tele" / "Global" / "Device" / "Channel"
+### StepsProgress
+Progress bar with milestone markers.
 ```json
-{"badge":"THE SOLUTION","title":"A tele is the UI for AI","subtitle":"The missing interface.","generativeSubsections":[{"id":"solution","templateId":"SolutionHero","props":{}},{"id":"global","templateId":"MeetsGlobally","props":{}},{"id":"devices","templateId":"AnyDevice","props":{}},{"id":"channels","templateId":"AnyChannel","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"Your tele works on 5 channels immediately","ctaLabel":"See the platform","ctaActionPhrase":"Show me the platform"}}]}
+{
+  "headline": "Your Progress",
+  "subtitle": "You're doing great! Keep going.",
+  "currentProgress": 65,
+  "milestones": [
+    {"position": 0, "label": "Started", "imagePrompt": "starting point", "reward": "Welcome Badge", "description": "You began your journey"},
+    {"position": 33, "label": "Learner", "imagePrompt": "learning milestone", "reward": "10 Points", "description": "Completed first module"},
+    {"position": 66, "label": "Practitioner", "imagePrompt": "practice milestone", "reward": "25 Points", "description": "Applied your knowledge"},
+    {"position": 100, "label": "Expert", "imagePrompt": "expert achievement", "reward": "50 Points + Certificate", "description": "Mastered all skills"}
+  ],
+  "currentLabel": "Current: Practitioner Level",
+  "nextLabel": "Next: Expert at 100%",
+  "ctaLabel": "Continue Learning",
+  "ctaActionPhrase": "show me to continue learning"
+}
 ```
-TELE SAYS: "A tele is the missing UI for AI. It meets people globally (24/7, 195+ countries, 100+ languages), on any device (mobile, desktop, tablet, wearables), through any channel (text, phone, chat, voice, avatar). In a hackathon, yours works on all five channels immediately."
 
----
-
-### 5. Platform Overview
-**USER:** "Platform" / "Teleglass" / "Architecture"
+### StepsChecklist
+Checkable step list with progress tracking.
 ```json
-{"badge":"PLATFORM","title":"The Teleglass Platform","subtitle":"Triple agnostic. SaaS. Utilization pricing.","generativeSubsections":[{"id":"platform","templateId":"PlatformOverview","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"No lock-in, maximum flexibility","ctaLabel":"See innovations","ctaActionPhrase":"Show me innovations"}}]}
+{
+  "headline": "Setup Checklist",
+  "subtitle": "Complete all items to finish setup",
+  "categories": [
+    {
+      "title": "Account Setup",
+      "items": [
+        {"id": "profile", "label": "Complete your profile", "description": "Add photo and bio", "completed": true},
+        {"id": "verify", "label": "Verify email address", "description": "Check your inbox", "completed": true},
+        {"id": "2fa", "label": "Enable two-factor auth", "description": "Secure your account", "completed": false}
+      ]
+    },
+    {
+      "title": "First Project",
+      "items": [
+        {"id": "create", "label": "Create a project", "description": "Start with a template", "completed": false},
+        {"id": "invite", "label": "Invite team members", "description": "Collaborate together", "completed": false}
+      ]
+    }
+  ],
+  "progressLabel": "3 of 5 completed",
+  "ctaLabel": "Complete Setup",
+  "ctaActionPhrase": "show me to complete setup"
+}
 ```
-TELE SAYS: "Teleglass is triple agnostic—any LLM, any cloud, any channel. SaaS licensed with utilization-based pricing. Enterprise-ready, deploys in hours."
 
----
-
-### 6. Utilization Pricing
-**USER:** "Pricing" / "Cost" / "How much"
+### StepsRoadmap
+Roadmap-style visualization with phases.
 ```json
-{"badge":"PLATFORM","title":"Utilization-based pricing","subtitle":"Pay for what you use.","generativeSubsections":[{"id":"pricing","templateId":"UtilizationPricing","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"Transparent, scalable","ctaLabel":"See innovations","ctaActionPhrase":"Show me innovations"}}]}
+{
+  "headline": "Product Roadmap",
+  "subtitle": "Our journey to v2.0",
+  "phases": [
+    {"icon": "Layers", "title": "Foundation", "subtitle": "Q1 2024", "imagePrompt": "building foundation", "items": ["Core architecture", "Basic features", "Initial testing"], "status": "completed", "progress": 100},
+    {"icon": "Rocket", "title": "Growth", "subtitle": "Q2 2024", "imagePrompt": "growth phase", "items": ["User feedback integration", "Performance optimization", "New integrations"], "status": "current", "progress": 60},
+    {"icon": "Star", "title": "Scale", "subtitle": "Q3 2024", "imagePrompt": "scaling phase", "items": ["Enterprise features", "Global expansion", "Advanced analytics"], "status": "upcoming", "progress": 0}
+  ],
+  "ctaLabel": "View Full Roadmap",
+  "ctaActionPhrase": "show me to see detailed roadmap"
+}
 ```
-TELE SAYS: "Transparent pricing by interaction and channel. Text $0.02/msg, Phone $0.08/min, Avatar $0.10/min. Start small, scale as you grow."
 
----
-
-### 7. Innovations
-**USER:** "Innovations" / "How it works" / "Technology"
+### StepsTimeline
+Timeline with dates and milestones.
 ```json
-{"badge":"INNOVATIONS","title":"Three innovations that power Teleglass","subtitle":"Dual agent, DOM bridge, generative web.","generativeSubsections":[{"id":"innovations","templateId":"InnovationStack","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"See how they work together","ctaLabel":"Learn wiring","ctaActionPhrase":"Show me wiring"}}]}
+{
+  "headline": "Project Timeline",
+  "subtitle": "Key milestones and deliverables",
+  "events": [
+    {"icon": "Flag", "date": "Jan 15, 2024", "title": "Project Kickoff", "description": "Team alignment and goal setting", "imagePrompt": "project kickoff meeting", "tags": ["Milestone"], "status": "past"},
+    {"icon": "FileText", "date": "Feb 1, 2024", "title": "Requirements Complete", "description": "All specs documented and approved", "imagePrompt": "documentation complete", "tags": ["Deliverable"], "status": "past"},
+    {"icon": "Code", "date": "Mar 15, 2024", "title": "Development Sprint", "description": "Building core features", "imagePrompt": "development sprint", "tags": ["In Progress"], "status": "current"},
+    {"icon": "Rocket", "date": "Apr 30, 2024", "title": "Launch Day", "description": "Go live with v1.0", "imagePrompt": "product launch", "tags": ["Goal"], "status": "future"}
+  ],
+  "layout": "alternating",
+  "ctaLabel": "View Details",
+  "ctaActionPhrase": "show me timeline details"
+}
 ```
-TELE SAYS: "Three innovations: Dual Agent Architecture, DOM-to-LLM Bridge, Generative Web. Expand each to learn more."
 
----
-
-### 8. Dual Agent
-**USER:** "Dual agent" / "Claude" / "OpenAI"
+### StepsFlow
+Flowchart-style steps with nodes.
 ```json
-{"badge":"INNOVATIONS","title":"Dual Agent Architecture","subtitle":"Build Agent + Runtime Agent.","generativeSubsections":[{"id":"dual","templateId":"DualAgentDetail","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"Separation = precision + speed","ctaLabel":"DOM Bridge","ctaActionPhrase":"Show me DOM bridge"}}]}
+{
+  "headline": "Decision Flow",
+  "subtitle": "Navigate your options",
+  "nodes": [
+    {"id": "start", "icon": "Play", "title": "Start Here", "description": "Begin your journey", "type": "start", "variant": "accent"},
+    {"id": "assess", "icon": "Search", "title": "Assess Needs", "description": "What do you need?", "type": "step", "variant": "default"},
+    {"id": "decide", "icon": "GitBranch", "title": "Choose Path", "description": "Quick or comprehensive?", "type": "decision", "variant": "warning"},
+    {"id": "quick", "icon": "Zap", "title": "Quick Start", "description": "Get started in minutes", "type": "step", "variant": "success"},
+    {"id": "full", "icon": "Layers", "title": "Full Setup", "description": "Complete configuration", "type": "step", "variant": "default"},
+    {"id": "end", "icon": "CheckCircle", "title": "Success!", "description": "You're all set", "type": "end", "variant": "success"}
+  ],
+  "connections": [
+    {"from": "start", "to": "assess"},
+    {"from": "assess", "to": "decide"},
+    {"from": "decide", "to": "quick", "label": "Fast"},
+    {"from": "decide", "to": "full", "label": "Complete"},
+    {"from": "quick", "to": "end"},
+    {"from": "full", "to": "end"}
+  ],
+  "ctaLabel": "Start Flow",
+  "ctaActionPhrase": "show me to start the flow"
+}
 ```
-TELE SAYS: "Two specialized agents. Claude builds during development. OpenAI serves live users with sub-second responses. Never simultaneous."
 
----
-
-### 9. DOM Bridge
-**USER:** "DOM bridge" / "navigateToSection"
+### StepsIllustrated
+Steps with large alternating illustrations.
 ```json
-{"badge":"INNOVATIONS","title":"DOM-to-LLM Bridge","subtitle":"navigateToSection()—One Function.","generativeSubsections":[{"id":"bridge","templateId":"DOMBridgeDetail","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"AI decides, React renders","ctaLabel":"Generative Web","ctaActionPhrase":"Show me generative web"}}]}
+{
+  "headline": "Master the Platform",
+  "subtitle": "Learn through visual guides",
+  "steps": [
+    {"number": 1, "icon": "Compass", "title": "Explore the Dashboard", "description": "Get familiar with the main interface. Your dashboard is command central where all your projects and insights live.", "imagePrompt": "modern dashboard interface with charts and widgets", "tips": ["Click the sidebar to navigate", "Use keyboard shortcuts for speed"]},
+    {"number": 2, "icon": "PlusCircle", "title": "Create Your First Project", "description": "Start building something amazing. Projects are containers for all your work and can be shared with your team.", "imagePrompt": "creating a new project with templates", "tips": ["Choose a template to start faster", "Name projects descriptively"]},
+    {"number": 3, "icon": "Share2", "title": "Collaborate with Others", "description": "Invite team members and work together in real-time. Everyone stays in sync automatically.", "imagePrompt": "team collaboration in real-time", "tips": ["Set permissions carefully", "Use comments for feedback"]}
+  ],
+  "ctaLabel": "Start Learning",
+  "ctaActionPhrase": "show me to start the tutorial"
+}
 ```
-TELE SAYS: "One function bridges conversation and visuals. AI calls navigateToSection with JSON—React renders instantly."
 
----
-
-### 10. Generative Web
-**USER:** "Generative web" / "Real-time UI"
+### StepsAccordion
+Expandable step details.
 ```json
-{"badge":"INNOVATIONS","title":"Generative Web","subtitle":"AI-rendered visual interfaces.","generativeSubsections":[{"id":"genweb","templateId":"GenerativeWebDetail","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"Interfaces assembled live","ctaLabel":"Learn wiring","ctaActionPhrase":"Show me wiring"}}]}
+{
+  "headline": "Onboarding Guide",
+  "subtitle": "Click each step to learn more",
+  "steps": [
+    {"icon": "User", "number": 1, "title": "Set Up Your Profile", "summary": "Personalize your account", "details": "Your profile is how others see you. Add a professional photo, write a brief bio, and connect your social accounts to build trust with collaborators.", "imagePrompt": "profile setup screen", "items": ["Upload profile photo", "Write bio", "Add contact info"], "completed": true, "actionLabel": "Edit Profile"},
+    {"icon": "Bell", "number": 2, "title": "Configure Notifications", "summary": "Control what alerts you receive", "details": "Stay informed without being overwhelmed. Choose which events trigger notifications and how you want to receive them.", "imagePrompt": "notification settings", "items": ["Email preferences", "Push notifications", "Weekly digest"], "completed": false, "actionLabel": "Set Preferences"},
+    {"icon": "Plug", "number": 3, "title": "Connect Integrations", "summary": "Link your favorite tools", "details": "Supercharge your workflow by connecting the tools you already use. We support 50+ integrations including Slack, GitHub, and more.", "imagePrompt": "integrations marketplace", "items": ["Browse integrations", "Authorize connections", "Test sync"], "completed": false, "actionLabel": "Browse Integrations"}
+  ],
+  "allowMultiple": false,
+  "ctaLabel": "Complete Onboarding",
+  "ctaActionPhrase": "show me to finish onboarding"
+}
 ```
-TELE SAYS: "Not static pages—the AI assembles interfaces in real-time. Every view is purpose-built for this user, this moment."
 
----
-
-### 11. Wiring Overview
-**USER:** "Wiring" / "How to build"
+### StepsTabbed
+Tab-based step navigation.
 ```json
-{"badge":"WIRING","title":"Wiring a tele","subtitle":"Voice wiring and vibe wiring.","generativeSubsections":[{"id":"wiring","templateId":"WiringGuide","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"Speak or type—Claude generates","ctaLabel":"See analytics","ctaActionPhrase":"Show me analytics"}}]}
+{
+  "headline": "Getting Started Guide",
+  "subtitle": "Everything you need to know",
+  "tabs": [
+    {"icon": "BookOpen", "title": "Basics", "content": {"headline": "Understanding the Fundamentals", "description": "Before diving in, let's cover the core concepts that power the platform. This foundation will make everything else easier to learn.", "imagePrompt": "learning fundamentals concept", "bullets": ["What is the platform", "Key terminology", "Core principles"]}, "completed": true},
+    {"icon": "Wrench", "title": "Setup", "content": {"headline": "Configuring Your Workspace", "description": "Now let's set up your environment for success. A well-configured workspace saves hours of time later.", "imagePrompt": "workspace setup", "bullets": ["Account settings", "Team structure", "Permissions"]}, "completed": true},
+    {"icon": "Play", "title": "First Steps", "content": {"headline": "Taking Your First Actions", "description": "Time to do something! Start with these simple actions to see immediate results and build confidence.", "imagePrompt": "taking first steps", "bullets": ["Create first item", "Try key features", "Get quick wins"]}, "completed": false},
+    {"icon": "Trophy", "title": "Advanced", "content": {"headline": "Becoming a Power User", "description": "Ready to level up? These advanced techniques will make you a platform expert.", "imagePrompt": "power user advanced features", "bullets": ["Automation", "Custom workflows", "API access"]}, "completed": false}
+  ],
+  "defaultTab": 2,
+  "ctaLabel": "Mark Complete",
+  "ctaActionPhrase": "user completed this section"
+}
 ```
-TELE SAYS: "Two ways to wire: Voice wiring—speak naturally, Claude learns. Vibe wiring—type slash commands for precision."
 
----
-
-### 12. Voice Wiring
-**USER:** "Voice wiring" / "Speak to Claude"
+### StepsNumbered
+Big numbered steps with visual emphasis.
 ```json
-{"badge":"WIRING","title":"Voice Wiring","subtitle":"Speak to Claude, tele learns instantly.","generativeSubsections":[{"id":"voice","templateId":"VoiceWiringDetail","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"5-second generation","ctaLabel":"Vibe wiring","ctaActionPhrase":"Show me vibe wiring"}}]}
+{
+  "headline": "3 Steps to Success",
+  "subtitle": "Follow this simple process",
+  "steps": [
+    {"icon": "Lightbulb", "title": "Identify the Problem", "description": "Clearly define what challenge you're facing. The better you understand the problem, the better the solution will be.", "imagePrompt": "identifying a problem light bulb moment", "highlight": true},
+    {"icon": "Compass", "title": "Explore Solutions", "description": "Research and evaluate your options. Consider multiple approaches before committing to one path.", "imagePrompt": "exploring multiple solution paths", "highlight": false},
+    {"icon": "Rocket", "title": "Take Action", "description": "Execute your chosen solution with confidence. Iterate based on results and don't be afraid to adjust.", "imagePrompt": "taking action launching rocket", "highlight": false}
+  ],
+  "columns": 3,
+  "ctaLabel": "Get Started",
+  "ctaActionPhrase": "show me to begin"
+}
 ```
-TELE SAYS: "Fastest way to build. Just describe what you want—Claude generates production-ready templates in seconds."
 
----
-
-### 13. Vibe Wiring
-**USER:** "Vibe wiring" / "Slash commands"
+### StepsPhases
+Phase-based grouping with nested steps.
 ```json
-{"badge":"WIRING","title":"Vibe Wiring","subtitle":"Type commands, Claude generates.","generativeSubsections":[{"id":"vibe","templateId":"VibeWiringDetail","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"Precision control","ctaLabel":"Wire commands","ctaActionPhrase":"Show me wire commands"}}]}
+{
+  "headline": "Implementation Plan",
+  "subtitle": "Structured approach to success",
+  "phases": [
+    {"icon": "FileSearch", "title": "Discovery", "description": "Understand requirements and context", "imagePrompt": "discovery phase research", "status": "completed", "steps": [{"title": "Stakeholder interviews", "completed": true}, {"title": "Requirements gathering", "completed": true}, {"title": "Current state analysis", "completed": true}], "duration": "2 weeks"},
+    {"icon": "PenTool", "title": "Design", "description": "Create the solution blueprint", "imagePrompt": "design phase blueprints", "status": "current", "steps": [{"title": "Architecture design", "completed": true}, {"title": "UI/UX mockups", "completed": false}, {"title": "Technical specs", "completed": false}], "duration": "3 weeks"},
+    {"icon": "Code", "title": "Development", "description": "Build and test the solution", "imagePrompt": "development phase coding", "status": "upcoming", "steps": [{"title": "Core development", "completed": false}, {"title": "Integration", "completed": false}, {"title": "Testing", "completed": false}], "duration": "6 weeks"}
+  ],
+  "ctaLabel": "View Phase Details",
+  "ctaActionPhrase": "show me to see phase details"
+}
 ```
-TELE SAYS: "When you need precision. /add-glass creates templates, /add-knowledge wires expertise."
 
----
-
-### 14. Wire Commands
-**USER:** "Commands" / "/add-glass" / "/publish"
+### StepsMilestones
+Gamified milestones with points and rewards.
 ```json
-{"badge":"WIRING","title":"Wire Commands","subtitle":"Six commands to build anything.","generativeSubsections":[{"id":"commands","templateId":"WireCommandsDetail","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"Master 6 commands, build unlimited teles","ctaLabel":"See analytics","ctaActionPhrase":"Show me analytics"}}]}
+{
+  "headline": "Achievement Path",
+  "subtitle": "Earn points and unlock rewards",
+  "currentPoints": 180,
+  "milestones": [
+    {"icon": "Sparkles", "title": "Beginner", "description": "Complete your first task", "imagePrompt": "beginner badge unlocked", "reward": "Beginner Badge", "points": 50, "status": "unlocked"},
+    {"icon": "Flame", "title": "On Fire", "description": "Complete 5 tasks in a row", "imagePrompt": "on fire achievement", "reward": "Streak Badge + 2x Points", "points": 150, "status": "unlocked"},
+    {"icon": "Trophy", "title": "Champion", "description": "Reach 500 total points", "imagePrompt": "champion trophy", "reward": "Gold Badge + Premium Feature", "points": 500, "status": "current"},
+    {"icon": "Crown", "title": "Legend", "description": "Help 10 others succeed", "imagePrompt": "legendary crown achievement", "reward": "Legend Status + Exclusive Access", "points": 1000, "status": "locked"}
+  ],
+  "ctaLabel": "View All Achievements",
+  "ctaActionPhrase": "show me to see all achievements"
+}
 ```
-TELE SAYS: "Six commands: /add-glass, /add-knowledge, /tele-should, /set-goal, /set-journey, /publish. Hours, not weeks."
 
----
-
-### 15. Analytics Overview
-**USER:** "Analytics" / "Metrics"
+### StepsSwipeable
+Carousel-style step swiper.
 ```json
-{"badge":"ANALYTICS","title":"Analytics","subtitle":"Observability, CRM, telemetry.","generativeSubsections":[{"id":"analytics","templateId":"AnalyticsView","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"See what AI is doing and why","ctaLabel":"Schedule hackathon","ctaActionPhrase":"Show me hackathon"}}]}
+{
+  "headline": "Quick Tutorial",
+  "subtitle": "Swipe through to learn",
+  "steps": [
+    {"icon": "Hand", "title": "Welcome!", "description": "Let's get you up to speed in just a few swipes", "imagePrompt": "welcome onboarding illustration", "details": ["Takes only 2 minutes", "Learn the essentials", "Start creating immediately"]},
+    {"icon": "Layout", "title": "Your Dashboard", "description": "This is your home base for everything", "imagePrompt": "dashboard overview", "details": ["Recent projects here", "Quick actions on the right", "Analytics at a glance"]},
+    {"icon": "Folder", "title": "Projects", "description": "Organize your work into projects", "imagePrompt": "project organization", "details": ["Create unlimited projects", "Share with team members", "Set permissions per project"], "actionLabel": "Create Project"},
+    {"icon": "CheckCircle", "title": "You're Ready!", "description": "You know the basics - time to dive in", "imagePrompt": "ready to go celebration", "details": ["Explore at your own pace", "Help is always available", "Have fun!"], "actionLabel": "Start Creating"}
+  ],
+  "ctaLabel": "Finish Tutorial",
+  "ctaActionPhrase": "user completed the tutorial"
+}
 ```
-TELE SAYS: "Three analytics capabilities: Agent Observability, Probabilistic CRM, Conversational Telemetry."
 
 ---
 
-### 16. Agent Observability
-**USER:** "Observability" / "See AI"
+## Teaching Template Specifications (3) — v94.0 NEW
+
+### Lesson
+Structured lesson with objectives and sections.
 ```json
-{"badge":"ANALYTICS","title":"Agent Observability","subtitle":"See what AI is doing.","generativeSubsections":[{"id":"observe","templateId":"AgentObservability","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"Every decision logged","ctaLabel":"Probabilistic CRM","ctaActionPhrase":"Show me CRM"}}]}
+{
+  "title": "Introduction to AI Fundamentals",
+  "subtitle": "Understanding the basics of artificial intelligence",
+  "duration": "20 minutes",
+  "difficulty": "Beginner",
+  "imagePrompt": "AI brain neural network visualization",
+  "objectivesLabel": "Learning Objectives",
+  "objectives": ["Understand what AI is and isn't", "Learn key AI terminology", "Recognize AI applications in daily life"],
+  "sections": [
+    {"icon": "Brain", "title": "What is AI?", "content": "Artificial Intelligence refers to systems designed to perform tasks that typically require human intelligence. This includes learning, reasoning, problem-solving, and understanding language.", "imagePrompt": "AI concept illustration", "keyPoints": ["AI mimics human cognition", "Based on data and algorithms", "Constantly improving"]},
+    {"icon": "Layers", "title": "Types of AI", "content": "There are different categories of AI based on capabilities: Narrow AI (specialized tasks), General AI (human-like reasoning), and Super AI (exceeds human intelligence).", "imagePrompt": "AI types comparison", "keyPoints": ["Most current AI is Narrow AI", "General AI is still theoretical", "Each type has different applications"]}
+  ],
+  "summaryLabel": "Key Takeaways",
+  "summary": "AI is a powerful technology that's already part of our daily lives, from voice assistants to recommendation systems.",
+  "keyTakeaways": ["AI is tool, not magic", "Data quality matters", "Ethical considerations are crucial"],
+  "nextLabel": "Next Lesson",
+  "nextPhrase": "show me the next lesson",
+  "ctaLabel": "Mark Complete",
+  "ctaActionPhrase": "user completed this lesson"
+}
 ```
-TELE SAYS: "Full transparency. Every AI decision logged, traced, explainable."
 
----
-
-### 17. Probabilistic CRM
-**USER:** "CRM" / "Intent" / "Lead scoring"
+### Tutorial
+Step-by-step tutorial with code blocks.
 ```json
-{"badge":"ANALYTICS","title":"Probabilistic CRM","subtitle":"Track intent, not events.","generativeSubsections":[{"id":"crm","templateId":"ProbabilisticCRM","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"Prioritize by likelihood","ctaLabel":"Telemetry","ctaActionPhrase":"Show me telemetry"}}]}
+{
+  "title": "Build Your First Chatbot",
+  "subtitle": "A hands-on guide to creating an AI assistant",
+  "imagePrompt": "chatbot development illustration",
+  "duration": "30 minutes",
+  "prerequisites": ["Basic programming knowledge", "Python installed", "API key ready"],
+  "steps": [
+    {"icon": "Download", "title": "Install Dependencies", "instruction": "First, we need to install the required packages. Open your terminal and run the command below.", "imagePrompt": "terminal installation", "code": "pip install openai python-dotenv", "codeLanguage": "bash", "tip": "Use a virtual environment to keep your project clean"},
+    {"icon": "Key", "title": "Set Up API Key", "instruction": "Create a .env file in your project root and add your API key. Never commit this file to version control.", "imagePrompt": "API key setup", "code": "OPENAI_API_KEY=your-key-here", "codeLanguage": "bash", "warning": "Keep your API key secret!"},
+    {"icon": "Code", "title": "Write the Bot", "instruction": "Now let's write the main chatbot code. This creates a simple conversational AI.", "imagePrompt": "coding the chatbot", "code": "import openai\n\ndef chat(message):\n    response = openai.ChatCompletion.create(\n        model='gpt-3.5-turbo',\n        messages=[{'role': 'user', 'content': message}]\n    )\n    return response.choices[0].message.content", "codeLanguage": "python", "tip": "Start simple and add features gradually"},
+    {"icon": "Play", "title": "Test It Out", "instruction": "Run your script and have a conversation with your bot!", "imagePrompt": "testing the chatbot", "code": "python chatbot.py", "codeLanguage": "bash"}
+  ],
+  "completionTitle": "Congratulations!",
+  "completionMessage": "You've built your first AI chatbot. Now try customizing it with your own personality and features.",
+  "tryItLabel": "Try Advanced Features",
+  "tryItPhrase": "show me advanced tutorial",
+  "ctaLabel": "Share Your Bot",
+  "ctaActionPhrase": "show me to share their creation"
+}
 ```
-TELE SAYS: "Not binary leads—intent scores with confidence. Prioritize by likelihood to convert."
 
----
-
-### 18. Conversational Telemetry
-**USER:** "Telemetry" / "Clicks and words"
+### Flashcards
+Interactive flip cards for learning.
 ```json
-{"badge":"ANALYTICS","title":"Conversational Telemetry","subtitle":"Clicks + Words + Outcomes.","generativeSubsections":[{"id":"telemetry","templateId":"ConversationalTelemetry","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"Complete user journey","ctaLabel":"Schedule hackathon","ctaActionPhrase":"Show me hackathon"}}]}
+{
+  "headline": "AI Vocabulary",
+  "subtitle": "Test your knowledge of key terms",
+  "cards": [
+    {"frontIcon": "Brain", "frontTitle": "Machine Learning", "frontSubtitle": "What is it?", "frontImagePrompt": "machine learning concept", "backTitle": "Definition", "backContent": "A subset of AI where systems learn from data to improve performance without being explicitly programmed. Uses algorithms to identify patterns.", "backImagePrompt": "machine learning diagram", "mastered": false},
+    {"frontIcon": "Network", "frontTitle": "Neural Network", "frontSubtitle": "What is it?", "frontImagePrompt": "neural network visualization", "backTitle": "Definition", "backContent": "Computing systems inspired by biological neural networks. Consists of layers of interconnected nodes that process information.", "backImagePrompt": "neural network layers", "mastered": false},
+    {"frontIcon": "MessageSquare", "frontTitle": "NLP", "frontSubtitle": "What does it stand for?", "frontImagePrompt": "language processing concept", "backTitle": "Natural Language Processing", "backContent": "AI technology that enables computers to understand, interpret, and generate human language in useful ways.", "backImagePrompt": "NLP applications", "mastered": true},
+    {"frontIcon": "Eye", "frontTitle": "Computer Vision", "frontSubtitle": "What is it?", "frontImagePrompt": "computer vision concept", "backTitle": "Definition", "backContent": "AI field enabling computers to derive meaningful information from visual inputs like images and videos.", "backImagePrompt": "computer vision applications", "mastered": false}
+  ],
+  "shuffleLabel": "Shuffle Cards",
+  "masteredLabel": "Mastered",
+  "remainingLabel": "Remaining",
+  "ctaLabel": "Finish Review",
+  "ctaActionPhrase": "user finished flashcard review"
+}
 ```
-TELE SAYS: "Combine web analytics with conversation analytics. Full path: visit → conversation → conversion."
 
 ---
 
-### 19. Schedule Hackathon (GOAL)
-**USER:** "Schedule" / "Hackathon" / "Book"
+## Rating & Testing Template Specifications (4) — v94.0 NEW
+
+### Quiz
+Multiple choice quiz with scoring.
 ```json
-{"badge":"HACKATHON","title":"Schedule a hackathon","subtitle":"Wire your first tele with Mobeus.","generativeSubsections":[{"id":"form","templateId":"HackathonForm","props":{"headline":"Schedule Your Hackathon","subheadline":"3 hours to a working tele"}},{"id":"info","templateId":"HandsOnWiring","props":{}}]}
+{
+  "title": "AI Knowledge Check",
+  "subtitle": "Test what you've learned",
+  "imagePrompt": "quiz challenge illustration",
+  "questions": [
+    {"icon": "HelpCircle", "question": "What does AI stand for?", "options": [{"id": "a", "text": "Automated Intelligence"}, {"id": "b", "text": "Artificial Intelligence"}, {"id": "c", "text": "Advanced Integration"}, {"id": "d", "text": "Algorithmic Interface"}], "correctId": "b", "explanation": "AI stands for Artificial Intelligence - systems designed to mimic human cognitive functions."},
+    {"icon": "HelpCircle", "question": "Which is an example of Narrow AI?", "imagePrompt": "AI applications examples", "options": [{"id": "a", "text": "A robot that can do any human task"}, {"id": "b", "text": "A chess-playing computer"}, {"id": "c", "text": "A system smarter than all humans"}, {"id": "d", "text": "None of the above"}], "correctId": "b", "explanation": "A chess computer is Narrow AI - it excels at one specific task but can't do anything else."},
+    {"icon": "HelpCircle", "question": "What powers most modern AI systems?", "options": [{"id": "a", "text": "Magic"}, {"id": "b", "text": "Human brains"}, {"id": "c", "text": "Data and algorithms"}, {"id": "d", "text": "Random guessing"}], "correctId": "c", "explanation": "AI systems learn from large amounts of data using sophisticated algorithms."}
+  ],
+  "passingScore": 70,
+  "passMessage": "Excellent! You've demonstrated strong AI knowledge.",
+  "failMessage": "Keep learning! Review the material and try again.",
+  "scoreLabel": "correct answers",
+  "retryLabel": "Try Again",
+  "retryPhrase": "show me to retry the quiz",
+  "ctaLabel": "Continue Learning",
+  "ctaActionPhrase": "show me to continue after quiz"
+}
 ```
-TELE SAYS: "Ready to build! In a 3-hour hackathon, you'll wire a working tele. What's your name?"
 
----
-
-### 20. Hands-On Wiring
-**USER:** "Hands-on" / "Deliverables"
+### Assessment
+Scored assessment with rating scales.
 ```json
-{"badge":"HACKATHON","title":"Hands-On Wiring Session","subtitle":"Build your first tele in 3 hours.","generativeSubsections":[{"id":"handson","templateId":"HandsOnWiring","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"Leave with a live tele","ctaLabel":"Fast turnaround","ctaActionPhrase":"Show me turnaround"}}]}
+{
+  "title": "Skills Self-Assessment",
+  "subtitle": "Rate your abilities honestly",
+  "imagePrompt": "skills assessment evaluation",
+  "items": [
+    {"icon": "Code", "category": "Technical Skills", "question": "How comfortable are you with programming?", "description": "Consider your ability to write and understand code", "scale": {"min": 1, "max": 5, "minLabel": "Beginner", "maxLabel": "Expert"}},
+    {"icon": "Users", "category": "Soft Skills", "question": "How would you rate your communication skills?", "description": "Think about written and verbal communication", "scale": {"min": 1, "max": 5, "minLabel": "Developing", "maxLabel": "Excellent"}},
+    {"icon": "Lightbulb", "category": "Technical Skills", "question": "How strong is your problem-solving ability?", "description": "Your approach to tackling complex challenges", "scale": {"min": 1, "max": 5, "minLabel": "Learning", "maxLabel": "Advanced"}},
+    {"icon": "Clock", "category": "Soft Skills", "question": "How well do you manage your time?", "description": "Meeting deadlines and prioritizing tasks", "scale": {"min": 1, "max": 5, "minLabel": "Needs Work", "maxLabel": "Excellent"}}
+  ],
+  "scoreRanges": [
+    {"min": 0, "max": 40, "label": "Developing", "description": "You have room to grow - that's exciting!", "color": "flamingo"},
+    {"min": 41, "max": 70, "label": "Competent", "description": "Solid foundation with growth potential", "color": "sapphire"},
+    {"min": 71, "max": 100, "label": "Advanced", "description": "You're performing at a high level", "color": "jade"}
+  ],
+  "resultsTitle": "Your Assessment Results",
+  "categoryScoresLabel": "Scores by Category",
+  "recommendations": [
+    {"icon": "BookOpen", "title": "Recommended Course", "description": "Based on your scores, try our Advanced Problem Solving workshop"},
+    {"icon": "Users", "title": "Mentorship", "description": "Consider pairing with a senior team member"}
+  ],
+  "ctaLabel": "Get Development Plan",
+  "ctaActionPhrase": "show me personalized development plan"
+}
 ```
-TELE SAYS: "Hour 1: Setup + knowledge. Hour 2: Templates + behaviors. Hour 3: Test + deploy."
 
----
-
-### 21. Fast Turnaround
-**USER:** "Fast" / "Turnaround" / "Speed"
+### Survey
+Survey with multiple question types.
 ```json
-{"badge":"HACKATHON","title":"Fast Turnaround","subtitle":"Traditional AI vs Hackathon.","generativeSubsections":[{"id":"fast","templateId":"FastTurnaround","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"99.9% less time","ctaLabel":"Full support","ctaActionPhrase":"Show me support"}}]}
+{
+  "title": "Experience Feedback",
+  "subtitle": "Help us improve by sharing your thoughts",
+  "imagePrompt": "feedback survey illustration",
+  "questions": [
+    {"id": "q1", "type": "nps", "question": "How likely are you to recommend us?", "description": "0 = Not at all, 10 = Extremely likely", "required": true, "minLabel": "Not likely", "maxLabel": "Very likely"},
+    {"id": "q2", "type": "rating", "question": "How satisfied are you with the overall experience?", "required": true},
+    {"id": "q3", "type": "multiple", "question": "What feature did you find most valuable?", "options": [{"id": "a", "text": "Easy to use interface"}, {"id": "b", "text": "Fast performance"}, {"id": "c", "text": "Great documentation"}, {"id": "d", "text": "Helpful support team"}], "required": true},
+    {"id": "q4", "type": "text", "question": "What could we do better?", "description": "Your feedback helps us improve", "placeholder": "Share your suggestions...", "required": false}
+  ],
+  "thankYouTitle": "Thank You!",
+  "thankYouMessage": "Your feedback is invaluable. We read every response and use it to make improvements.",
+  "thankYouImagePrompt": "thank you appreciation",
+  "submitLabel": "Submit Feedback",
+  "ctaLabel": "Back to Home",
+  "ctaActionPhrase": "show me to go home after survey"
+}
 ```
-TELE SAYS: "Traditional: 18+ months. Hackathon: 3 hours. Same result, 99.9% less time."
 
----
-
-### 22. Full Support
-**USER:** "Support" / "Team" / "Help"
+### Scorecard
+Performance scorecard with grades and metrics.
 ```json
-{"badge":"HACKATHON","title":"Full Mobeus Support","subtitle":"You're not alone.","generativeSubsections":[{"id":"support","templateId":"FullSupport","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"$500 credits included","ctaLabel":"Schedule now","ctaActionPhrase":"I want to schedule"}}]}
-```
-TELE SAYS: "Dedicated Mobeus team: Solutions Architect, Wiring Specialist, Success Manager. $500 credits included."
-
----
-
-### 23. Form Collection (INCREMENTAL)
-**USER:** [NAME] / [EMAIL] / [DATE] — User provides partial info during form collection
-**🚨 CRITICAL:** When user provides name/email/date, DO NOT re-send navigateToSection. The form is already visible. Just SPEAK to acknowledge and ask for next field. Re-rendering clears the form!
-
-**CORRECT BEHAVIOR:**
-- User: "My name is Richie"
-- TELE: (speaks only) "Thanks Richie! What's your email?"
-- DO NOT call navigateToSection — form stays visible with user's typed data
-
-**ONLY call navigateToSection when user says "confirm" or all data is complete.**
-
-TELE SAYS: (Acknowledge collected info, ask for next field — NO navigateToSection)
-
----
-
-### 24. Confirmation (FINAL)
-**USER:** "Confirm" / "Yes" / "Submit" / "Ready" / All fields complete
-**ONLY NOW call navigateToSection with confirmed: true**
-```json
-{"badge":"HACKATHON","title":"You're all set!","subtitle":"Hackathon scheduled.","generativeSubsections":[{"id":"confirmed","templateId":"HackathonForm","props":{"name":"[NAME]","email":"[EMAIL]","preferredDate":"YYYY-MM-DD","confirmed":true}}]}
-```
-TELE SAYS: "Congratulations [NAME]! Hackathon confirmed for [DATE]. Confirmation to [EMAIL] within 24 hours."
-
----
-
-### 25. Use Cases / Imagine
-**USER:** "Use cases" / "Industries" / "Imagine" / "What can teles do" / "Examples"
-```json
-{"badge":"IMAGINE","title":"Tell me anything","subtitle":"I'll imagine a use case for you.","generativeSubsections":[{"id":"story","templateId":"UseCaseStory","props":{}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"Tell me about your world","ctaLabel":"Describe your situation","ctaActionPhrase":"Tell me about your situation"}}]}
-```
-TELE SAYS: "A tele connects ANYTHING to ANYTHING. Flo from Progressive — live on every channel. An embassy liaison walking you through visa forms. A manners coach teaching your kids please and thank you. A house-finding assistant asking the right questions about neighborhoods. A grief counselor at 3am. A dungeon master running your RPG. Internal HR buddy for new employees. Benefits navigator for food stamps. Tell me about YOUR world — I'll imagine a use case with a hero, a transformation, and a result you'd see THIS WEEK."
-
----
-
-### 26. Custom Use Case (User Describes Situation)
-**USER:** User describes their industry, role, challenge, or situation
-When user shares context like "I run a restaurant" or "I'm in healthcare" or "We have a customer service problem" or "I work at an embassy" or "I'm a parent":
-```json
-{"badge":"YOUR USE CASE","title":"[Generated title based on context]","subtitle":"A tele for [their role/industry]","generativeSubsections":[{"id":"story","templateId":"UseCaseStory","props":{"heroName":"[Name from context or generate]","heroRole":"[Their role]","heroChallenge":"[Their challenge]","teleConnection":"[What the tele connects for them]","transformation":"[How their world changes]","materialOutcome":"[Immediate result this week]","timeToValue":"This week","previousCases":[{"title":"Flo for Progressive","hero":"Insurance mascot, live everywhere","actionPhrase":"Show me brand persona use case"},{"title":"Embassy Liaison","hero":"Visa navigator for confused travelers","actionPhrase":"Show me government use case"},{"title":"Manners Coach","hero":"Teaching kids etiquette through play","actionPhrase":"Show me parenting use case"}]}}]}
-```
-TELE SAYS: "Meet [heroName]. [Paint the story vividly — their frustration, the connection, the transformation]. If you started today, by [timeframe] you'd see [outcome]. Below are other wild use cases — want to imagine another?"
-
----
-
-### 27. About Mobeus
-**USER:** "About" / "Mobeus" / "Company"
-```json
-{"badge":"ABOUT","title":"Who is Mobeus","subtitle":"UI + AI = ROI","generativeSubsections":[{"id":"about","templateId":"ThreeThings","props":{"things":[{"icon":"AlertTriangle","title":"Problem We Solve","description":"AI fails—no UI"},{"icon":"Zap","title":"What We Build","description":"Teles—conversation + visuals"},{"icon":"TrendingUp","title":"Our Equation","description":"UI + AI = ROI (+87%)"}]}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"A tele is an agentic user interface","ctaLabel":"Schedule hackathon","ctaActionPhrase":"Show me hackathon"}}]}
-```
-TELE SAYS: "Mobeus solves adoption. AI projects fail because no UI. We build teles. UI + AI = ROI. +87% adoption lift."
-
----
-
-### 28. The Mobeus Philosophy
-**USER:** "Friction" / "Philosophy" / "Business process" / "Probabilism" / "Marshmallow" / "Copper wire"
-```json
-{"badge":"THE PHILOSOPHY","title":"The Mobeus Philosophy","subtitle":"Friction Crisis → Business Flow → Productionizing Probabilism","generativeSubsections":[{"id":"friction","templateId":"StatHighlight","props":{"stats":[{"value":"14.6T","label":"Micro-frustrations annually"},{"value":"4B","label":"People using software daily"},{"value":"10×","label":"Irritations per person per day"}]}},{"id":"pillars","templateId":"ThreeThings","props":{"things":[{"icon":"AlertTriangle","title":"The Friction Crisis","description":"4B people × 10 irritations × 365 days = 14.6T friction events. A silent mental health crisis. We're Friction Fighters."},{"icon":"Zap","title":"Business Flow vs Process","description":"Process is rigid, slow, painful. Flow is probabilistic, frictionless, human. A little imperfection in exchange for connection."},{"icon":"Sparkles","title":"Productionizing Probabilism","description":"Probabilism is marshmallow—soft, adaptive. Determinism is copper wire—precise, reliable. Wiring is threading copper through marshmallow."}]}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"Every person on the planet can productionize probabilism","ctaLabel":"See wiring","ctaActionPhrase":"Show me wiring"}}]}
-```
-TELE SAYS: "Mobeus is built on three pillars. The Friction Crisis: 14.6 trillion micro-irritations every year—we're Friction Fighters attacking them. Business Flow over Business Process: flow is probabilistic and frictionless; process is rigid and painful. Productionizing Probabilism: wiring copper through marshmallow—precision where it matters, flow everywhere else."
-
----
-
-### 29. Competitor Comparison
-**USER:** "vs Copilot" / "vs ChatGPT" / "vs Gemini" / "Microsoft" / "OpenAI" / "Google" / "Comparison" / "Why not [X]" / "Competitors"
-```json
-{"badge":"WHY MOBEUS","title":"Why Mobeus Wins","subtitle":"vs Microsoft Copilot, Google Gemini, OpenAI ChatGPT","generativeSubsections":[{"id":"comparison","templateId":"ThreeThings","props":{"things":[{"icon":"Clock","title":"Speed to Value","description":"Copilot/Gemini/ChatGPT: 18+ months, massive teams, custom integrations. Mobeus: 3-hour hackathon → live tele. Same day ROI."},{"icon":"User","title":"Self-Reliance","description":"Others require Accenture, Deloitte, armies of consultants. Mobeus: YOU wire it. No professional services. No dependency. Own your AI."},{"icon":"Target","title":"Purpose-Built UI","description":"Copilot/Gemini/ChatGPT are chat boxes. No UI. No adoption. Teles combine conversation + visuals = 87% higher adoption."}]}},{"id":"flexibility","templateId":"ThreeThings","props":{"things":[{"icon":"Globe","title":"Any Language","description":"100+ languages out of the box. No translation layer. No localization project. Just speak—your tele responds in kind."},{"icon":"User","title":"Any Avatar","description":"Text, voice, video avatar—your brand, your face, your personality. Copilot gives you a chat box. Mobeus gives you presence."},{"icon":"Sparkles","title":"Any Use Case","description":"Sales, support, training, HR, government, healthcare—if it involves communication, a tele transforms it. No limits."}]}},{"id":"stats","templateId":"StatHighlight","props":{"stats":[{"value":"3hrs","label":"Mobeus: Hackathon to live"},{"value":"18mo","label":"Competitors: Time to value"},{"value":"$0","label":"Professional services"},{"value":"100+","label":"Languages supported"}]}},{"id":"detail","templateId":"ThreeThings","props":{"things":[{"icon":"DollarSign","title":"Microsoft Copilot","description":"$30/user/month + 18-month implementation + Azure consultants + custom dev. English-first. Chat only. Office-locked."},{"icon":"Cloud","title":"Google Gemini","description":"API-first, no UI, requires Vertex AI expertise, GCP lock-in. Developers happy, users lost. No avatar option."},{"icon":"MessageSquare","title":"OpenAI ChatGPT","description":"Great model, terrible adoption. No UI beyond chat. No domain wiring. No avatar. Result: 70% of projects fail."}]}},{"id":"cta","templateId":"ActionBanner","props":{"headline":"Stop paying consultants. Start wiring your own tele.","ctaLabel":"Schedule hackathon","ctaActionPhrase":"Show me hackathon"}}]}
-```
-TELE SAYS: "Here's the truth: Copilot, Gemini, ChatGPT—brilliant AI with no UI. That's why 70% fail. They need 18-month implementations, armies of consultants, millions in professional services—and you still get a chat box in one language. Mobeus is different: 3-hour hackathon, you wire it yourself, live the same day. Any language. Any avatar. Any use case. No Accenture. No dependency. Your tele, your knowledge, your control. That's why Mobeus wins."
-
----
-
-## ---AUDIT---
-
-Template shots: 30 ✓ (= templates = registry)
-Shot prompts: 29 ✓ (max 30)
-Templates: 30 ✓ (max 30)
-
----
+{
+  "title": "Performance Scorecard",
+  "subtitle": "Your monthly performance overview",
+  "imagePrompt": "performance scorecard dashboard",
+  "periodLabel": "Period",
+  "period": "January 2024",
+  "overallGrade": "A",
+  "overallLabel": "Overall Grade",
+  "sections": [
+    {
+      "title": "Productivity",
+      "metrics": [
+        {"icon": "CheckCircle", "label": "Tasks Completed", "value": 47, "target": 40, "trend": "up", "trendValue": "+18%", "grade": "A"},
+        {"icon": "Clock", "label": "On-Time Delivery", "value": "94%", "target": "90%", "trend": "up", "trendValue": "+4%", "grade": "A"},
+        {"icon": "AlertCircle", "label": "Issues Resolved", "value": 12, "target": 10, "trend": "up", "trendValue": "+20%", "grade": "B"}
+      ],
+      "overallGrade": "A"
+    },
+    {
+      "title": "Quality",
+      "metrics": [
+        {"icon": "Star", "label": "Customer Satisfaction", "value": "4.8/5", "trend": "up", "trendValue": "+0.3", "grade": "A", "status": "excellent"},
+        {"icon": "RefreshCw", "label": "Revision Rate", "value": "8%", "target": "10%", "trend": "down", "trendValue": "-2%", "grade": "A", "status": "excellent"},
+        {"icon": "Award", "label": "Quality Score", "value": 92, "target": 85, "trend": "neutral", "trendValue": "0%", "grade": "A", "status": "good"}
+      ],
+      "overallGrade": "A"
+    }
+  ],
+  "highlights": [
+    {"icon": "TrendingUp", "label": "Best Performance", "value": "Task Completion"},
+    {"icon": "Target", "label": "Goals Met", "value": "6 of 6"},
+    {"icon": "Award", "label": "Recognition", "value": "Top 10%"}
+  ],
+  "ctaLabel": "View Full Report",
+  "ctaActionPhrase": "show me detailed performance report"
+}

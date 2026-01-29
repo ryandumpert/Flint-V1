@@ -46,34 +46,29 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
     isHighlighted?: boolean;
   }> = [
       {
-        id: 'platform',
-        label: 'PLATFORM',
-        teleQuery: 'Show me the platform'
+        id: 'what-tele-does',
+        label: 'WHAT I CAN DO',
+        teleQuery: 'Show me what a tele can do'
       },
       {
-        id: 'innovations',
-        label: 'INNOVATIONS',
-        teleQuery: 'Show me the innovations'
+        id: 'how-different',
+        label: 'HOW IT WORKS',
+        teleQuery: 'Show me how this is different'
       },
       {
-        id: 'wiring',
-        label: 'WIRING',
-        teleQuery: 'Show me wiring'
+        id: 'real-examples',
+        label: 'REAL EXAMPLES',
+        teleQuery: 'Show me real examples of friction killed'
       },
       {
-        id: 'analytics',
-        label: 'ANALYTICS',
-        teleQuery: 'Show me analytics'
-      },
-      {
-        id: 'about',
+        id: 'about-mobeus',
         label: 'ABOUT',
-        teleQuery: 'Show me about Mobeus'
+        teleQuery: 'Tell me about Mobeus'
       },
       {
-        id: 'hackathon',
-        label: 'SCHEDULE HACKATHON',
-        teleQuery: 'Show me hackathon',
+        id: 'launch-event',
+        label: '🚀 LAUNCH EVENT',
+        teleQuery: 'Sign up for the launch event',
         isHighlighted: true
       }
     ];

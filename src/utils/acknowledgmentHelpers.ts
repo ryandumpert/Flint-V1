@@ -43,8 +43,8 @@ export function notifyTele(message: string): void {
   }
 
   try {
-    // Dispatch event to signal thinking started (for cursor indicator)
-    window.dispatchEvent(new CustomEvent('teleThinkingStart', { detail: { message } }));
+    // Create instant flash effect for visual feedback
+    createFlashEffect();
 
     // Subtle flash on avatar for visual feedback (no sound)
     const teleNav = (window as any).teleNavigation;
@@ -67,6 +67,38 @@ export function notifyTele(message: string): void {
   } catch (error) {
     console.error("[notifyTele] Error sending message:", error);
   }
+}
+
+/**
+ * Creates a brief flash effect on the screen when tele interaction occurs
+ * Provides instant visual feedback that something was clicked
+ */
+function createFlashEffect(): void {
+  // Create flash overlay
+  const flash = document.createElement('div');
+  flash.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(155, 93, 229, 0.15) 0%, rgba(155, 93, 229, 0.05) 50%, transparent 70%);
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 1;
+    transition: opacity 300ms ease-out;
+  `;
+
+  document.body.appendChild(flash);
+
+  // Fade out and remove
+  requestAnimationFrame(() => {
+    flash.style.opacity = '0';
+  });
+
+  setTimeout(() => {
+    flash.remove();
+  }, 350);
 }
 
 interface AcknowledgmentConfig {
@@ -212,274 +244,3 @@ export function clearAllAcknowledgments(): void {
   keysToRemove.forEach((key) => sessionStorage.removeItem(key));
 }
 
-const AUTHORIZED_USERS: Record<string, string> = {
-  nima: "nima@accenture.com",
-};
-
-async function sendEmailViaMcp({ to, subject, body, env = "production", cc = [], bcc = [] }) {
-  const CONFIG = {
-    local: {
-      url: "http://localhost:3006",
-      tenantDomain: "localhost:8080",
-      gmailMcpId: 1,
-    },
-    production: {
-      url: "https://mcp-api.mobeus.com",
-      tenantDomain: "rfp.mobeus.com",
-      gmailMcpId: 7,
-    },
-  };
-
-  const config = CONFIG[env];
-
-  const toolArguments = {
-    to: Array.isArray(to) ? to : [to],
-    subject,
-    body,
-    cc,
-    bcc,
-  };
-  if (cc)
-    toolArguments.cc = Array.isArray(cc)
-      ? cc
-      : String(cc)
-        .split(",")
-        .map((s) => s.trim());
-  if (bcc)
-    toolArguments.bcc = Array.isArray(bcc)
-      ? bcc
-      : String(bcc)
-        .split(",")
-        .map((s) => s.trim());
-
-  const payload = {
-    mcp_id: config.gmailMcpId,
-    tool_name: "send_message",
-    arguments: toolArguments,
-  };
-
-  const res = await fetch(`${config.url}/api/execute`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      // mimic what your node script sent
-      Origin: `http://${config.tenantDomain}`,
-    },
-    body: JSON.stringify(payload),
-  });
-
-  const data = await res.json();
-  if (!res.ok) {
-    console.error("MCP email failed:", data);
-    throw new Error(data.error || `MCP email failed with ${res.status}`);
-  }
-  return data;
-}
-
-
-async function patchSendAsViaMcp({
-  sendAsEmail,
-  displayName,
-  replyToAddress,
-  signature,
-  isPrimary,
-  treatAsAlias,
-  env = "production",
-}) {
-  const CONFIG = {
-    local: {
-      url: "http://localhost:3006",
-      tenantDomain: "localhost:8080",
-      gmailMcpId: 1,
-    },
-    production: {
-      url: "https://mcp-api.mobeus.com",
-      tenantDomain: "rfp.mobeus.com",
-      gmailMcpId: 7,
-    },
-  };
-  const config = CONFIG[env];
-
-  const toolArguments = {
-    sendAsEmail,
-    ...(displayName && { displayName }),
-    ...(replyToAddress && { replyToAddress }),
-    ...(signature && { signature }),
-    ...(typeof isPrimary === 'boolean' && { isPrimary }),
-    ...(typeof treatAsAlias === 'boolean' && { treatAsAlias }),
-  };
-
-  const payload = {
-    mcp_id: config.gmailMcpId,
-    tool_name: "patch_send_as",
-    arguments: toolArguments,
-  };
-
-  const res = await fetch(`${config.url}/api/execute`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Origin: `http://${config.tenantDomain}`,
-    },
-    body: JSON.stringify(payload),
-  });
-  const data = await res.json();
-  if (!res.ok) {
-    throw new Error(data.error || `MCP patch_send_as failed with ${res.status}`);
-  }
-  return data;
-}
-
-export const sendNdaAccessRequestEmail = (visitorEmail: string) => {
-  const recipients = ["nima@mobeus.com", "richie@mobeus.com", "a.k.monthrope@accenture.com"];
-  const body = `A visitor with the email address ${visitorEmail} requested access to NDA firewall restricted section`;
-
-  return sendEmailViaMcp({
-    to: recipients,
-    subject: "NDA Firewall Access Request",
-    body,
-    env: "production",
-  });
-};
-
-async function sendOtpEmail(email, code) {
-  patchSendAsViaMcp({
-    sendAsEmail: "richie@mobeus.ai",
-    displayName: "Mobeus RFP tele",
-    replyToAddress: "richie@mobeus.com",
-    signature: "",
-    isPrimary: true,
-    treatAsAlias: true,
-    env: "production", // or "local" if you are hitting a local server
-  }).then((res) => {
-    console.log("Alias updated:", res);
-  }).catch((err) => {
-    console.error("Error updating alias:", err);
-  });
-
-  const subject = "Accenture + Salesforce | RFP NDA Firewall Code";
-  const body = `Hi, Your NDA firewall authorization code is: ${code}`;
-
-  // change env to "local" if you want local MCP
-  return sendEmailViaMcp({
-    to: email,
-    bcc: ["nima.azaraeen@gmail.com", "sean@mobeus.com", "richie@mobeus.com"],
-    subject,
-    body,
-    env: "production",
-  });
-}
-
-async function sendOtpSms(uuid: string, code: string) {
-  const message = `Your NDA firewall authorization code is: ${code}`;
-  const serverUrl = "https://prompt.mobeus.ai";
-
-  try {
-    const response = await fetch(`${serverUrl}/api/send-sms`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        uuid,
-        message,
-      }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error("SMS send failed:", errorData);
-      throw new Error(errorData.error || `SMS send failed with status ${response.status}`);
-    }
-
-    const data = await response.json();
-    console.log("SMS sent successfully:", data);
-    return data;
-  } catch (error) {
-    console.error("Error sending SMS:", error);
-    throw error;
-  }
-}
-
-const setAuthCookie = () => {
-  const expectedValue = buildAuthToken(getTodayToken());
-  document.cookie = `Authed=${expectedValue}; path=/; SameSite=Lax`;
-};
-
-export const sendAuthCode = async (
-  name: string,
-  emailToSend?: string,
-  phoneToSend?: string
-) => {
-  let email: string = "";
-  if (name) {
-    const normalized = name.trim().toLowerCase().split(" ")[0];
-    email = AUTHORIZED_USERS[normalized];
-    if (!email) {
-      return false;
-    }
-  } else {
-    if (!emailToSend && !phoneToSend) {
-      return;
-    }
-    email = emailToSend || "";
-  }
-
-  const code = Math.floor(100000 + Math.random() * 900000).toString();
-  (window as any).__currentAuthCode = code;
-
-  const hasEmail = email || emailToSend;
-  const hasPhone = phoneToSend;
-
-  // Send to appropriate channels based on what's provided
-  const promises: Promise<any>[] = [];
-
-  if (hasEmail) {
-    console.log("Sending OTP via email to:", hasEmail);
-    promises.push(
-      sendOtpEmail(hasEmail, code).catch((error) => {
-        console.error("Email send failed:", error);
-        // Don't throw, allow SMS to still be attempted
-      })
-    );
-  }
-
-  if (hasPhone) {
-    console.log("Sending OTP via SMS to UUID:", hasPhone);
-    promises.push(
-      sendOtpSms(hasPhone, code).catch((error) => {
-        console.error("SMS send failed:", error);
-        // Don't throw, allow email to still work
-      })
-    );
-  }
-
-  try {
-    // Wait for all sends to complete (or fail)
-    await Promise.allSettled(promises);
-    console.log("OTP send completed for available channels");
-  } catch (error) {
-    console.error("Error during OTP send:", error);
-    return false;
-  }
-};
-
-export const verifyAuthCode = (code: string) => {
-  const currentCode = (window as any).__currentAuthCode;
-  if (!currentCode || typeof code !== "string") {
-    return false;
-  }
-
-  if (code.trim() === currentCode) {
-    setAuthCookie();
-    delete (window as any).__currentAuthCode;
-    return true;
-  }
-
-  return false;
-};
-
-if (typeof window !== "undefined") {
-  (window as any).auther = sendAuthCode;
-  (window as any).checker = verifyAuthCode;
-}

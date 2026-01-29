@@ -9,7 +9,7 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { SectionLoadingFallback } from "@/components/SectionLoadingFallback";
 import { SEO, sectionSEO } from "@/components/SEO";
 
-import { notifyTele, handleAcknowledgment, verifyAuthCode, toggleTeleAcknowledgeDebug } from "@/utils/acknowledgmentHelpers";
+import { notifyTele, handleAcknowledgment, toggleTeleAcknowledgeDebug } from "@/utils/acknowledgmentHelpers";
 import { sendSectionContextToTele } from "@/utils/contextEnrichment";
 import { EvidenceData } from "@/types/evidence";
 import { SubsectionMetadata } from "@/types/subsection";
@@ -27,70 +27,160 @@ import { CarColorProvider } from "@/contexts/CarColorContext";
 import { GitVersionIndicator } from "@/components/GitVersionIndicator";
 import { OnboardingTransition } from "@/components/OnboardingTransition";
 import { Logo } from "@/components/Logo";
-import { CursorThinkingIndicator } from "@/components/CursorThinkingIndicator";
 
 
-// Welcome section - Problem-focused carousel leading to hackathon scheduling
+// Welcome section - Multi-template experience: Simplicity, Intuitiveness, Responsiveness
 const WELCOME_VARIANTS = [
   {
-    badge: "THE UI FOR AI",
-    title: "A tele solves the adoption crisis",
-    subtitle: "AI projects fail because there's no user interface. A tele is the missing layer — conversation + visuals, on any device, through any channel. 14.6 trillion micro-frustrations a year. We're Friction Fighters.",
+    badge: "THE SCREEN CARES",
+    title: "A New Kind of Interface",
+    subtitle: "Simple. Intuitive. Responsive. The screen finally cares about your experience.",
     generativeSubsections: [
+      // 1. Hero - The Core Promise
       {
-        id: "journey-carousel",
-        templateId: "WelcomeCarousel",
+        id: "welcome-hero",
+        templateId: "Hero",
         props: {
-          autoPlayInterval: 45000,
+          stat: "14.6T",
+          statLabel: "micro-frustrations we're eliminating",
+          headline: "The Screen Finally Cares",
+          description: "For decades, you've adapted to software. Clicked through menus. Read manuals. Learned interfaces. Now the interface adapts to you.",
+          features: [
+            { icon: "Sparkles", label: "Simple — say what you need" },
+            { icon: "Brain", label: "Intuitive — no learning curve" },
+            { icon: "Zap", label: "Responsive — instant action" },
+            { icon: "Heart", label: "Caring — built for you" }
+          ],
+          insight: { icon: "Lightbulb", title: "The shift", description: "From 'figure it out' to 'help is here'" },
+          quote: "The interface revolution starts now.",
+          ctaLabel: "Experience It",
+          ctaActionPhrase: "show me what a tele can do",
+          variant: "default"
+        }
+      },
+      // 2. Trio - The Three Powers
+      {
+        id: "three-powers",
+        templateId: "Trio",
+        props: {
           cards: [
             {
-              question: "Why do 70% of AI projects fail?",
-              subtext: "It's not the technology — AI works brilliantly. It's the absence of a user interface. Billions invested, nothing deployed. No UI for AI. That's the real problem.",
-              imageUrl: "/assets/carousel-slide-01.png",
-              actionPhrase: "Show me the real problem"
+              icon: "Sparkles",
+              title: "Simplicity",
+              description: "No menus to navigate. No buttons to find. No syntax to learn. Just speak naturally — and things happen.",
+              actionPhrase: "show me simplicity"
             },
             {
-              question: "What exactly is a tele?",
-              subtext: "The missing interface. A tele meets people globally, on any device, through any channel. Conversation + visuals working together. The UI that finally makes AI accessible.",
-              imageUrl: "/assets/carousel-slide-02.png",
-              actionPhrase: "Show me what a tele is"
+              icon: "Compass",
+              title: "Intuitiveness",
+              description: "The screen anticipates what you need. Shows what matters. Hides what doesn't. Every interaction designed around you.",
+              actionPhrase: "show me intuitiveness"
             },
             {
-              question: "What powers the platform?",
-              subtext: "Triple agnostic: any model, any cloud, any channel. SaaS licensed, utilization-based pricing. Text at $0.002, chat free, voice at $0.03/min, avatar at $0.10/min.",
-              imageUrl: "/assets/carousel-slide-03.png",
-              actionPhrase: "Show me the platform"
-            },
-            {
-              question: "What makes it different?",
-              subtext: "Dual agent architecture. DOM-to-LLM bridge. Generative web. Three innovations that make AI interfaces finally work. Marshmallow with copper wire running through it.",
-              imageUrl: "/assets/carousel-slide-06.png",
-              actionPhrase: "Show me the innovations"
-            },
-            {
-              question: "How do I wire a tele?",
-              subtext: "Voice wiring: speak and it learns. Vibe wiring: describe and Claude builds. Six wire commands. Productionizing probabilism — the craft of threading copper through marshmallow.",
-              imageUrl: "/assets/carousel-slide-07.png",
-              actionPhrase: "Show me wiring"
-            },
-            {
-              question: "What can I measure?",
-              subtext: "Agent observability: see AI decisions. Probabilistic CRM: intent scores, not binary. Conversational telemetry: clicks + words + outcomes. Analytics that understand conversation.",
-              imageUrl: "/assets/carousel-slide-02.png",
-              actionPhrase: "Show me analytics"
-            },
-            {
-              question: "Ready to wire your tele?",
-              subtext: "3-hour hackathon. Hands-on wiring with Mobeus experts. Traditional AI: 18 months. Hackathon: 3 hours. Same result. $500 in credits. Live deployment included.",
-              imageUrl: "/assets/hackathon-calendar.png",
-              actionPhrase: "Show me hackathon"
+              icon: "Zap",
+              title: "Responsiveness",
+              description: "Ask and receive. No lag. No loading. No waiting. The screen moves as fast as your thoughts.",
+              actionPhrase: "show me responsiveness"
             }
-          ]
+          ],
+          numbered: true,
+          ctaLabel: "See It In Action",
+          ctaActionPhrase: "show me how this is different"
+        }
+      },
+      // 3. Compare - Old vs New
+      {
+        id: "interface-comparison",
+        templateId: "Compare",
+        props: {
+          headline: "Interfaces That Ignore You vs. Interfaces That Care",
+          subheadline: "The difference is everything",
+          columns: [
+            {
+              icon: "Frown",
+              title: "Traditional Interfaces",
+              value: "You adapt",
+              items: [
+                "Learn the menu structure",
+                "Remember where things are",
+                "Click through 5 screens",
+                "Read the documentation",
+                "Figure it out yourself"
+              ],
+              variant: "bad"
+            },
+            {
+              icon: "Smile",
+              title: "The Tele Way",
+              value: "It adapts",
+              items: [
+                "Just say what you need",
+                "The right screen appears",
+                "One step, done",
+                "It explains as you go",
+                "Help is always here"
+              ],
+              variant: "good"
+            }
+          ],
+          summary: { title: "A fundamental shift", description: "From interfaces that demand to interfaces that serve." },
+          ctaLabel: "Try the Difference",
+          ctaActionPhrase: "show me real examples"
+        }
+      },
+      // 4. Stats - The Impact
+      {
+        id: "impact-stats",
+        templateId: "Stats",
+        props: {
+          stats: [
+            { value: "47 min", label: "Average hold time eliminated", context: "No more waiting", actionPhrase: "show me eliminating wait times" },
+            { value: "94%", label: "First-contact resolution", context: "Ask once, done", actionPhrase: "show me resolution rates" },
+            { value: "100+", label: "Languages understood", context: "Speak naturally", actionPhrase: "show me languages" },
+            { value: "24/7", label: "Always available", context: "Life doesn't wait", actionPhrase: "show me availability" }
+          ],
+          ctaLabel: "See More Impact",
+          ctaActionPhrase: "show me the data"
+        }
+      },
+      // 5. Showcase - What This Enables
+      {
+        id: "what-enables",
+        templateId: "Showcase",
+        props: {
+          headline: "When the Screen Cares, Everything Changes",
+          subheadline: "Real tasks that used to frustrate you — now effortless.",
+          benefits: [
+            { icon: "Calendar", text: "Schedule a doctor's appointment without hold music", actionPhrase: "show me scheduling" },
+            { icon: "GraduationCap", text: "Help your child with homework at their pace", actionPhrase: "show me tutoring" },
+            { icon: "BarChart3", text: "Understand a dashboard in plain English", actionPhrase: "show me dashboards" },
+            { icon: "FileText", text: "Fill out a form correctly the first time", actionPhrase: "show me forms" },
+            { icon: "Heart", text: "Navigate benefits without crying", actionPhrase: "show me benefits" },
+            { icon: "Globe", text: "Get help in your language, any language", actionPhrase: "show me languages" }
+          ],
+          tagline: "This is what interfaces should have always been.",
+          ctaLabel: "Experience It Now",
+          ctaActionPhrase: "show me how a tele works"
+        }
+      },
+      // 6. Banner - The Launch Event CTA
+      {
+        id: "launch-cta",
+        templateId: "Banner",
+        props: {
+          icon: "Rocket",
+          headline: "Be There When Everything Changes",
+          subheadline: "End of Q1 — the Launch Event. The moment teles go live for everyone. Reserve your spot.",
+          ctaLabel: "Sign Up for Launch Event",
+          ctaActionPhrase: "sign up for the launch event",
+          variant: "gradient"
         }
       }
     ]
   },
 ];
+
+
 
 
 
@@ -1181,18 +1271,8 @@ const Index = () => {
   const handleOTPSubmit = async (otp: string) => {
     console.log("OTP submitted:", otp);
     setIsOTPDialogOpen(false);
-
-    const isVerified = verifyAuthCode(otp);
-    if (isVerified) {
-      notifyTele("Show me a success message that I have successfully authenticated and now have access behind the NDA firewall");
-
-      if (backData) {
-        window.teleNavigation.navigateToSection(backData);
-      }
-
-    } else {
-      notifyTele("Show me an error that the code entered is incorrect and ask to try again");
-    }
+    // OTP verification removed - dead code cleanup
+    notifyTele("Authentication submitted");
   };
 
   const disconnect = async () => {
@@ -1553,9 +1633,6 @@ const Index = () => {
           onOpenChange={setIsOTPDialogOpen}
           onSubmit={handleOTPSubmit}
         />
-
-        {/* Cursor Thinking Indicator - shows pulsing rings at click position */}
-        <CursorThinkingIndicator />
       </div>
     </CarColorProvider>
   );
