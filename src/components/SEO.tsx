@@ -16,7 +16,7 @@ export const SEO = ({
   image = '/og-image.png',
   url = '/',
   type = 'website',
-  keywords = ['Mobeus', 'Tele', 'Conversational AI', 'Teleglass', 'Voice Wiring', 'Vibe Wiring', 'AI Development', 'Catherine'],
+  keywords = ['Mobeus', 'Tele', 'Conversational AI', 'Telelabor', 'Voice Wiring', 'Vibe Wiring', 'AI Development', 'Catherine'],
   structuredData,
 }: SEOProps) => {
   useEffect(() => {

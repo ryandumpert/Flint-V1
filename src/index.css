@@ -86,7 +86,7 @@ button,
     --nav-h: 96px;
 
     /* ============================================
-     * TELEGLASS PLATFORM - FUTURISTIC DESIGN SYSTEM
+     * TELELABOR PLATFORM - FUTURISTIC DESIGN SYSTEM
      * ============================================
      * 
      * VOLUMETRIC CONVERSATIONAL MEDIA
@@ -194,8 +194,8 @@ button,
     --chat-glass-width: 24.2rem;
     --chat-glass-width-tablet: 23.76rem;
     --chat-glass-width-mobile: 85vw;
-    --teleglass-top: 2rem;
-    --teleglass-right: 1rem;
+    --telelabor-top: 2rem;
+    --telelabor-right: 1rem;
 
     --radius: 0.5rem;
 
@@ -932,7 +932,7 @@ button,
 
   /* ============================================
    * DARK TEAL GLASS UTILITIES
-   * For Teleglass chat panel and system UI
+   * For Telelabor chat panel and system UI
    * Color: (17, 34, 51) - dark teal
    * ============================================ */
 
@@ -2011,7 +2011,7 @@ button,
       /* No squeeze on mobile/tablet */
     }
 
-    .chat-squeezed .teleglass-panel {
+    .chat-squeezed .telelabor-panel {
       z-index: 60;
       /* Higher z-index for overlay */
     }
@@ -2039,7 +2039,7 @@ button,
       /* No squeeze on mobile */
     }
 
-    .chat-squeezed .teleglass-panel {
+    .chat-squeezed .telelabor-panel {
       z-index: 60;
       /* Higher z-index for overlay */
     }
@@ -2129,18 +2129,18 @@ button,
     }
   }
 
-  /* Teleglass responsive positioning */
+  /* Telelabor responsive positioning */
   @media (max-width: 640px) {
     :root {
-      --teleglass-top: 1.5rem;
-      --teleglass-right: 0.75rem;
+      --telelabor-top: 1.5rem;
+      --telelabor-right: 0.75rem;
     }
   }
 
   @media (min-width: 641px) and (max-width: 1023px) {
     :root {
-      --teleglass-top: 1.75rem;
-      --teleglass-right: 1rem;
+      --telelabor-top: 1.75rem;
+      --telelabor-right: 1rem;
     }
   }
 

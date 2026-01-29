@@ -4,7 +4,7 @@ import { Send, X, User, Bot, Loader2, CheckCircle2, Copy, Check } from "lucide-r
 import { teleAvatar } from "@/assets";
 import { useSound } from "@/hooks/useSound";
 import { Button } from "@/components/ui/button";
-import TeleglassIcons from "@/components/TeleglassIcons";
+import TelelaborIcons from "@/components/TelelaborIcons";
 import { useUIFrameworkChat } from "@/hooks/useUIFrameworkChat";
 
 import { ToolCallIndicator } from "@/components/chat/ToolCallIndicator";
@@ -30,7 +30,7 @@ import { useLightboard } from "@/contexts/LightboardContext";
 
 type AvatarState = "off" | "connecting" | "connected";
 
-interface TeleglassSectionProps {
+interface TelelaborSectionProps {
   onChatGlassChange?: (isOpen: boolean) => void;
   avatarState: AvatarState;
   setAvatarState: (state: AvatarState) => void;
@@ -39,14 +39,14 @@ interface TeleglassSectionProps {
   isConnecting: boolean;
 }
 
-const TeleglassSection = ({
+const TelelaborSection = ({
   onChatGlassChange,
   avatarState,
   setAvatarState,
   showWelcomeVideo,
   onAvatarClick,
   isConnecting,
-}: TeleglassSectionProps) => {
+}: TelelaborSectionProps) => {
   const [isSoundOn, setIsSoundOn] = useState(true);
   const [isChatActive, setIsChatActive] = useState(false);
   const [isSmileyOn, setIsSmileyOn] = useState(true);
@@ -120,7 +120,7 @@ const TeleglassSection = ({
   }, [navigationIsLoading, isConnecting]);
 
   const [isMouseActive, setIsMouseActive] = useState(true);
-  const { playTeleglassSound, playChatSound } = useSound();
+  const { playTelelaborSound, playChatSound } = useSound();
   const messagesContainerRef = useRef<HTMLDivElement | null>(null);
   const chatInputRef = useRef<HTMLInputElement | null>(null);
   const mouseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -140,9 +140,9 @@ const TeleglassSection = ({
 
   // Play sound when thinking starts
   useEffect(() => {
-    console.log("[TeleglassSection] isThinking changed:", isThinking);
+    console.log("[TelelaborSection] isThinking changed:", isThinking);
     if (isThinking) {
-      console.log("[TeleglassSection] Playing thinking sound");
+      console.log("[TelelaborSection] Playing thinking sound");
       playUISound("on", "mic", 0.4);
     }
   }, [isThinking]);
@@ -176,7 +176,7 @@ const TeleglassSection = ({
     };
   }, [isChatGlassOpen]);
 
-  // Keep Teleglass vertical alignment with nav/logo/menu (stable positioning)
+  // Keep Telelabor vertical alignment with nav/logo/menu (stable positioning)
   useEffect(() => {
     const computeVerticalPosition = () => {
       const nav = document.getElementById("site-nav");
@@ -184,7 +184,7 @@ const TeleglassSection = ({
       if (rect) {
         const topPx = Math.max(8, rect.top + rect.height / 2 - 20);
         document.documentElement.style.setProperty(
-          "--teleglass-top",
+          "--telelabor-top",
           `${topPx}px`,
         );
       }
@@ -210,7 +210,7 @@ const TeleglassSection = ({
     const computeHorizontalPosition = () => {
       if (isChatGlassOpen) {
         // When chat open: align to chat bar right edge (minus some padding)
-        document.documentElement.style.setProperty("--teleglass-right", "3rem");
+        document.documentElement.style.setProperty("--telelabor-right", "3rem");
       } else {
         // When chat closed: align to content right edge
         const container = document.querySelector(".container");
@@ -221,7 +221,7 @@ const TeleglassSection = ({
             window.innerWidth - containerRect.right + 16,
           );
           document.documentElement.style.setProperty(
-            "--teleglass-right",
+            "--telelabor-right",
             `${rightPx}px`,
           );
         }
@@ -288,7 +288,7 @@ const TeleglassSection = ({
 
   // Expose setters for parent to update state after connection/disconnection
   useEffect(() => {
-    (window as any).setTeleglassState = {
+    (window as any).setTelelaborState = {
       setIsMicMuted,
       setIsSmileyOn,
       setIsVoiceConnected,
@@ -296,7 +296,7 @@ const TeleglassSection = ({
       setIsChatActive,
     };
     return () => {
-      delete (window as any).setTeleglassState;
+      delete (window as any).setTelelaborState;
     };
   }, []);
 
@@ -671,7 +671,7 @@ const TeleglassSection = ({
       const isTypingInChat = !!(
         activeElement &&
         (activeElement === chatInputRef.current ||
-          activeElement.closest?.("#teleglass#chat-panel")) &&
+          activeElement.closest?.("#telelabor#chat-panel")) &&
         (activeElement instanceof HTMLInputElement ||
           activeElement instanceof HTMLTextAreaElement ||
           activeElement.getAttribute("contenteditable") === "true")
@@ -920,7 +920,7 @@ const TeleglassSection = ({
     <>
       {/* ThinkingIndicator removed - animation now shows around avatar */}
       {/* Normal positioning when chat glass is closed */}
-      <TeleglassIcons
+      <TelelaborIcons
         isChatGlassOpen={isChatGlassOpen}
         isSoundOn={isSoundOn}
         isChatActive={isChatActive}
@@ -940,7 +940,7 @@ const TeleglassSection = ({
 
       {/* Chat Glass Panel - FULLY TRANSPARENT - Avatar fully visible */}
       <div
-        className={`fixed teleglass-panel top-0 h-dvh z-50
+        className={`fixed telelabor-panel top-0 h-dvh z-50
           transform transition-all duration-500 ease-out ${isChatGlassOpen
             ? "translate-x-0 opacity-100"
             : "translate-x-full opacity-0"
@@ -962,10 +962,10 @@ const TeleglassSection = ({
           className={`absolute top-0 left-0 right-0 h-px ${isLightboardMode ? "bg-white/[0.15]" : "bg-white/[0.12]"}`}
         />
 
-        {/* Teleglass Icons at top of chat bar */}
+        {/* Telelabor Icons at top of chat bar */}
         <div
           className="sm:h-10"
-          style={{ paddingTop: "var(--teleglass-top)" }}
+          style={{ paddingTop: "var(--telelabor-top)" }}
         ></div>
 
         {isP2PActive && (
@@ -989,7 +989,7 @@ const TeleglassSection = ({
         <div
           className="flex-1 min-h-0 chat-messages-container px-3 sm:px-4 pt-2 pb-2 space-y-3 sm:space-y-4"
           ref={messagesContainerRef}
-          style={{ marginTop: `var(--teleglass-top)` }}
+          style={{ marginTop: `var(--telelabor-top)` }}
         >
           {displayItems.map((item, index) => {
             // Calculate stagger delay class based on message index
@@ -1373,4 +1373,4 @@ const TeleglassSection = ({
   );
 };
 
-export default TeleglassSection;
+export default TelelaborSection;

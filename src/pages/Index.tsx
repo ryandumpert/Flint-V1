@@ -1,10 +1,10 @@
 
 import { useState, useEffect, useCallback, useRef, useMemo, FormEvent, ChangeEvent } from "react";
 import Navigation from "@/components/Navigation";
-import TeleglassSection from "@/components/TeleglassSection";
+import TelelaborSection from "@/components/TelelaborSection";
 import { useSectionTransition } from "@/utils/useSectionTransition";
 import { backgroundHero, backgroundEmpty } from "@/assets";
-import { AvatarState } from "@/components/TeleglassIcons";
+import { AvatarState } from "@/components/TelelaborIcons";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { SectionLoadingFallback } from "@/components/SectionLoadingFallback";
 import { SEO, sectionSEO } from "@/components/SEO";
@@ -882,7 +882,7 @@ const Index = () => {
       return legacyPayload;
     };
 
-    // Teleglass Navigation System - simplified interface
+    // Telelabor Navigation System - simplified interface
     const teleNavigation = {
       navigateToSection: (...navigationData: any[]) => {
         const payload =
@@ -1288,8 +1288,8 @@ const Index = () => {
       setAvatarState("off");
       setIsConnecting(false);
 
-      // Update TeleglassSection state
-      const setters = (window as any).setTeleglassState;
+      // Update TelelaborSection state
+      const setters = (window as any).setTelelaborState;
       if (setters) {
         setters.setIsMicMuted(true);
         setters.setIsSmileyOn(true);
@@ -1399,8 +1399,8 @@ const Index = () => {
         }
       }
 
-      // Update TeleglassSection state
-      const setters = (window as any).setTeleglassState;
+      // Update TelelaborSection state
+      const setters = (window as any).setTelelaborState;
       if (setters) {
         setters.setIsVoiceConnected(true);
       }
@@ -1566,7 +1566,7 @@ const Index = () => {
   return (
     <CarColorProvider>
       <GitVersionIndicator />
-      {/* Dynamic SEO based on active section - TeleGlass Platform */}
+      {/* Dynamic SEO based on active section - TeleLabor Platform */}
       <SEO {...(sectionSEO[activeSection as keyof typeof sectionSEO] || sectionSEO.welcome)} />
 
       {/* Fixed Background Layer - Portaled to body for absolute stability */}
@@ -1597,15 +1597,15 @@ const Index = () => {
             ======================================== */}
         {isOnboardingComplete && (
           <div className="opacity-100">
-            {/* Platform Header - Navigation and Teleglass Interface */}
+            {/* Platform Header - Navigation and Telelabor Interface */}
             <div className={`no-lightboard flex justify-between align-center container mx-auto max-w-[1400px] px-16 md:px-24 lg:px-32`}>
               <Navigation
                 activeSection={activeSection}
                 isChatGlassOpen={isChatGlassOpen}
                 onSectionChange={handleSectionChange}
               />
-              {/* Teleglass Virtual Assistant Interface */}
-              <TeleglassSection
+              {/* Telelabor Virtual Assistant Interface */}
+              <TelelaborSection
                 onChatGlassChange={setIsChatGlassOpen}
                 avatarState={avatarState}
                 setAvatarState={setAvatarState}

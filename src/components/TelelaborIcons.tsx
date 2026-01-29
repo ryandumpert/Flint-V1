@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export type AvatarState = 'off' | 'connecting' | 'connected';
 
-interface TeleglassIconsProps {
+interface TelelaborIconsProps {
   isChatGlassOpen: boolean;
   isSoundOn: boolean;
   isChatActive: boolean;
@@ -56,7 +56,7 @@ const getIconClasses = (isActive: boolean, isWarning = false) => {
   return `${base} bg-mist/5 border-mist/20 hover:bg-mist/10 hover:border-mist/30 hover:scale-[1.05]`;
 };
 
-export const TeleglassIcons: React.FC<TeleglassIconsProps> = ({
+export const TelelaborIcons: React.FC<TelelaborIconsProps> = ({
   isChatGlassOpen,
   isSoundOn,
   isChatActive,
@@ -115,8 +115,8 @@ export const TeleglassIcons: React.FC<TeleglassIconsProps> = ({
       className={`inline-flex items-center gap-2 sm:gap-4 transition-all duration-300 ease-in-out relative ${containerZIndex}`}
       style={!inChatGlass ? {
         position: useStaticPosition ? 'static' : 'fixed',
-        right: 'calc(var(--teleglass-right) - 0.6rem)',
-        top: 'var(--teleglass-top)',
+        right: 'calc(var(--telelabor-right) - 0.6rem)',
+        top: 'var(--telelabor-top)',
       } : undefined}
     >
       {/* Speaker Icon - Hidden on mobile */}
@@ -242,4 +242,4 @@ export const TeleglassIcons: React.FC<TeleglassIconsProps> = ({
   );
 };
 
-export default React.memo(TeleglassIcons);
+export default React.memo(TelelaborIcons);

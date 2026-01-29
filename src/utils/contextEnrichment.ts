@@ -235,7 +235,7 @@ const formatContextForTele = (context: SectionContext): string => {
 
 /**
  * Sends enriched context to Tele when a section is viewed
- * DISABLED: TeleAcknowledge calls removed from non-Teleglass contexts
+ * DISABLED: TeleAcknowledge calls removed from non-Telelabor contexts
  */
 export const sendSectionContextToTele = (sectionId: string): void => {
   const context = sectionContextRegistry[sectionId];
@@ -266,7 +266,7 @@ export const getSectionContext = (sectionId: string): SectionContext | undefined
 
 /**
  * Helper to extract and send custom context dynamically
- * DISABLED: TeleAcknowledge calls removed from non-Teleglass contexts
+ * DISABLED: TeleAcknowledge calls removed from non-Telelabor contexts
  */
 export const sendCustomContext = (
   sectionName: string,

@@ -5,7 +5,7 @@ import { useVolume } from '@/contexts/VolumeContext';
 
 /**
  * UNIFIED GLASS SOUND HOOK
- * All sounds use the elegant Teleglass UI architecture
+ * All sounds use the elegant Telelabor UI architecture
  */
 export const useSound = () => {
   const audioContextRef = useRef<AudioContext | null>(null);
@@ -79,8 +79,8 @@ export const useSound = () => {
     void playUniversalSound();
   }, [initAudioContext, playUniversalSound]);
 
-  // Teleglass specific
-  const playTeleglassSound = useCallback(() => {
+  // Telelabor specific
+  const playTelelaborSound = useCallback(() => {
     void playUniversalSound();
   }, [playUniversalSound]);
 
@@ -91,6 +91,6 @@ export const useSound = () => {
     playSectionSound,
     playUseCaseSound,
     playChatSound,
-    playTeleglassSound,
+    playTelelaborSound,
   };
 };

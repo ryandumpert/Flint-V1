@@ -1,5 +1,5 @@
 ---
-description: Sync local prompt files to Teleglass — make your tele go live
+description: Sync local prompt files to Telelabor — make your tele go live
 ---
 
 # Publish Workflow

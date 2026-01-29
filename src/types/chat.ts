@@ -1,5 +1,5 @@
 /**
- * Enhanced chat message types for Teleglass chat interface
+ * Enhanced chat message types for Telelabor chat interface
  * 
  * These types define the structure for messages with metadata
  * that will be wired up to actual tool calls and RAG searches.

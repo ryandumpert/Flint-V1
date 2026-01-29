@@ -1,6 +1,6 @@
 /**
  * UNIFIED GLASS SOUND SYSTEM
- * All sounds use the elegant Teleglass UI sound architecture
+ * All sounds use the elegant Telelabor UI sound architecture
  * 
  * Three sound personalities:
  * - 'chat' (C5): Soft, conversational - for generic interactions
