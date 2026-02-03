@@ -207,7 +207,7 @@ export const Article: React.FC<ArticleProps> = ({
                         <SmartImage
                             assetId={allHeroImages[currentHeroIndex].url || allHeroImages[currentHeroIndex].prompt || 'hero'}
                             alt={title || 'Article'}
-                            className="w-full aspect-square object-cover"
+                            className="w-full aspect-[16/6] object-cover"
                         />
                         {allHeroImages.length > 1 && (
                             <>

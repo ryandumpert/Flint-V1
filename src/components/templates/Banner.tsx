@@ -157,7 +157,7 @@ export const Banner: React.FC<BannerProps> = ({
 
                         {/* CTAs */}
                         {(ctaLabel || secondaryCtaLabel) && (
-                            <div className="flex flex-wrap gap-4">
+                            <div className="flex flex-wrap gap-4 justify-end">
                                 {secondaryCtaLabel && secondaryCtaActionPhrase && (
                                     <button
                                         className="inline-flex items-center gap-2 px-6 py-3 bg-white/[0.05] border border-white/[0.1] text-white font-semibold rounded-full 

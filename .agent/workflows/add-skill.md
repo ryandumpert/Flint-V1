@@ -29,6 +29,25 @@ TELE SAYS: "What Catherine says before showing the templates (2-4 sentences)."
 2. **Use 2-3 templates** per shot prompt for rich experiences
 3. **Keep TELE SAYS conversational** — Natural, warm, helpful
 4. **End with a question or CTA** — Guide toward Launch Event
+5. **VALIDATE BEFORE ADDING** — Props MUST match glass-prompt.md examples exactly
+
+## ⚠️ CRITICAL: Template Props Validation
+
+**BEFORE adding any shot prompt:**
+
+```bash
+# Check that your template props match glass-prompt.md
+node scripts/validate-template-docs.cjs
+```
+
+**If validation fails:**
+1. Fix your JSON to match the documented props in glass-prompt.md
+2. OR update glass-prompt.md if the docs are wrong (then validate again)
+
+**Common mistakes:**
+- Using `items` instead of `benefits` for Showcase
+- Using `text` when template expects `description`
+- Missing required props (check the ✅ in glass-prompt.md)
 
 ## Where to Add
 
@@ -36,7 +55,14 @@ Add to `public/prompts/tele-knowledge.md` in the SHOT PROMPTS section.
 
 ## After Adding
 
-Run `/publish` to deploy.
+// turbo-all
+```bash
+# 1. Validate template docs
+node scripts/validate-template-docs.cjs && \
+echo "" && \
+# 2. Publish
+node scripts/publish.cjs
+```
 
 ---
 

@@ -15,7 +15,7 @@ interface BenefitItem {
     icon?: string;
     badge?: string;
     title?: string;
-    text: string;
+    text?: string;  // Made optional - will fall back to description if not provided
     description?: string;
     stat?: { value: string; label: string };
     highlight?: boolean;
@@ -32,6 +32,7 @@ interface ShowcaseProps {
     rating?: number;
     ratingLabel?: string;
     benefits?: BenefitItem[];
+    items?: BenefitItem[];  // Alias for benefits
     tagline?: string;
     taglineIcon?: string;
     taglineActionPhrase?: string;
@@ -56,7 +57,8 @@ export const Showcase: React.FC<ShowcaseProps> = ({
     heroImagePrompt,
     rating,
     ratingLabel,
-    benefits,
+    benefits: benefitsProp,
+    items,
     tagline,
     taglineIcon,
     taglineActionPhrase,
@@ -67,6 +69,9 @@ export const Showcase: React.FC<ShowcaseProps> = ({
 }) => {
     const { playClick } = useSound();
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
+
+    // Support both 'benefits' and 'items' prop names
+    const benefits = benefitsProp || items;
 
     const HeaderIcon = getIcon(icon);
     const TaglineIcon = getIcon(taglineIcon || 'Sparkles');
@@ -165,9 +170,11 @@ export const Showcase: React.FC<ShowcaseProps> = ({
                                 {benefit.title && (
                                     <h4 className="text-lg font-bold text-white mb-2">{benefit.title}</h4>
                                 )}
-                                <span className="text-white font-medium leading-snug block">{benefit.text}</span>
-                                {benefit.description && (
-                                    <p className="text-sm text-mist/50 mt-2">{benefit.description}</p>
+                                {/* Use text if provided, otherwise use description */}
+                                {(benefit.text || benefit.description) && (
+                                    <span className="text-white font-medium leading-snug block">
+                                        {benefit.text || benefit.description}
+                                    </span>
                                 )}
 
                                 {/* Stat */}

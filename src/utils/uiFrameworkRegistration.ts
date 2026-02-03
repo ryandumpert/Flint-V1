@@ -1,14 +1,13 @@
 /**
- * UI Framework Navigation API Exposure
- * 
- * Exposes navigation functions to window.teleNavigation for Tele (conversational AI)
- * to operate the Glass (this UI). Part of the Teleco Platform architecture.
- * 
+ * UIFramework Registration & API Exposure
+ * Exposes runtime agent API functions to the global window object, allowing Catherine (the Runtime Agent)
+ * to operate the Glass (this UI). Part of the Mobeus Platform architecture.
+ *
  * Architecture:
- * - Glass (this code) = Built in Lovable, renders subsections
- * - Tele (separate) = Trained in Teleco Platform, operates Glass via this API
+ * - Glass (this code) = Front-end UI (React/TypeScript), exposes teleNavigation API
+ * - Tele (separate) = Trained in Mobeus Platform, operates Glass via this API
  * - glass-prompt.md = Instructions for Tele to generate Glass JSON
- * 
+ *
  * See /docs/ARCHITECTURE.md for complete system documentation.
  */
 

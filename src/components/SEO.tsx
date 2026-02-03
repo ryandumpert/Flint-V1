@@ -11,12 +11,12 @@ interface SEOProps {
 }
 
 export const SEO = ({
-  title = 'Teleco | The Assisted Future',
+  title = 'Mobeus | The Assisted Future',
   description = 'Machines helping mankind. A population of helpful teles giving humanity space for life. Help is here.',
   image = '/og-image.png',
   url = '/',
   type = 'website',
-  keywords = ['Teleco', 'Tele', 'The Assisted Future', 'Space for Life', 'Conversational Labor', 'Help is Here'],
+  keywords = ['Mobeus', 'Tele', 'The Assisted Future', 'Space for Life', 'Conversational Labor', 'Help is Here'],
   structuredData,
 }: SEOProps) => {
   useEffect(() => {
@@ -47,7 +47,7 @@ export const SEO = ({
     updateMetaTag('og:image', image, true);
     updateMetaTag('og:url', url, true);
     updateMetaTag('og:type', type, true);
-    updateMetaTag('og:site_name', 'Teleco', true);
+    updateMetaTag('og:site_name', 'Mobeus', true);
 
     // Twitter Card tags
     updateMetaTag('twitter:card', 'summary_large_image');
@@ -72,18 +72,18 @@ export const SEO = ({
   return null;
 };
 
-// Pre-configured SEO for sections - Teleco Platform
+// Pre-configured SEO for sections - Mobeus Platform
 export const sectionSEO = {
   welcome: {
-    title: 'Teleco | The Assisted Future',
-    description: 'Machines helping mankind. A population of helpful teles giving humanity space for life.',
-    keywords: ['Teleco', 'The Assisted Future', 'Tele', 'Space for Life', 'Help is Here'],
+    title: 'Mobeus | The Assisted Future',
+    description: 'Experience The Assisted Future. Conversational labor that helps you. Help is here.',
+    keywords: ['Mobeus', 'The Assisted Future', 'Tele', 'Space for Life', 'Help is Here'],
   },
 
   platform: {
-    title: 'The Teleco Platform | Operating System for Conversational Labor',
-    description: 'The infrastructure that deploys a population of helpful teles at scale. Language in, outcomes out.',
-    keywords: ['Teleco Platform', 'Conversational Labor', 'Tele', 'Infrastructure'],
+    title: 'The Mobeus Platform | Operating System for Conversational Labor',
+    description: 'Built on six agnostic foundations. Model, cloud, device, channel, language, and use case agnostic.',
+    keywords: ['Mobeus Platform', 'Conversational Labor', 'Tele', 'Infrastructure'],
   },
 
   teles: {
@@ -99,15 +99,14 @@ export const sectionSEO = {
   },
 
   launch: {
-    title: 'Launch Event | The Assisted Future Arrives',
-    description: 'March/April 2026 — The historic moment when machines start truly helping mankind. Be there.',
-    keywords: ['Launch Event', 'The Assisted Future', 'Teleco', 'March 2026'],
+    title: 'Population Party | The Assisted Future Arrives',
+    description: 'March 15, 2026 - Join the Population Party. Music, dancing, celebration. RSVP now.',
+    keywords: ['Population Party', 'The Assisted Future', 'Mobeus', 'March 2026', 'Celebration'],
   },
 
   home: {
-    title: 'Teleco | The Assisted Future',
-    description: 'Machines helping mankind. A population of helpful teles giving humanity space for life. Help is here.',
-    keywords: ['Teleco', 'The Assisted Future', 'Tele', 'Space for Life'],
+    title: 'Mobeus | The Assisted Future',
+    description: 'Experience The Assisted Future.',
+    keywords: ['Mobeus', 'The Assisted Future', 'Tele', 'Space for Life'],
   },
 };
-

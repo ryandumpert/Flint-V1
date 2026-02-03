@@ -1,7 +1,7 @@
 import { useState, useLayoutEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { default as telecoLogo } from "@/assets/teleco-logo.png";
+import { default as moebeusLogo } from "@/assets/mobeus-logo.png";
 import { handleAcknowledgment } from "@/utils/acknowledgmentHelpers";
 import { sendToTele } from "@/utils/teleInteraction";
 import { useSound } from "@/hooks/useSound";
@@ -35,7 +35,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
   }, []);
 
   // ============================================
-  // TELEUS — Handled.
+  // MOBEUS — Help is here
   // ============================================
   const navItems: Array<{
     id: string;
@@ -47,22 +47,22 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
       {
         id: 'how-it-works',
         label: 'HOW IT WORKS',
-        teleQuery: 'How does Teleus work?'
+        teleQuery: 'How does this work?'
       },
       {
-        id: 'what-we-handle',
-        label: 'WHAT WE HANDLE',
-        teleQuery: 'What does Teleus handle?'
+        id: 'what-we-do',
+        label: 'WHAT WE DO',
+        teleQuery: 'What can you do?'
       },
       {
         id: 'about',
         label: 'ABOUT',
-        teleQuery: 'Tell me about Teleus'
+        teleQuery: 'What is Mobeus?'
       },
       {
         id: 'get-started',
-        label: 'GET STARTED',
-        teleQuery: 'Sign up for the waitlist',
+        label: 'LAUNCH EVENT',
+        teleQuery: 'Sign me up for the launch event',
         isHighlighted: true
       }
     ];
@@ -93,8 +93,8 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
               {/* Logo */}
               <div className="no-lightboard flex items-center">
                 <img
-                  src={telecoLogo}
-                  alt="Teleco"
+                  src={moebeusLogo}
+                  alt="Mobeus"
                   className="no-lightboard h-[27px] w-auto object-contain max-w-none"
                   style={{ aspectRatio: 'auto' }}
                 />

@@ -1,5 +1,5 @@
 /**
- * WelcomeCarousel - Apple-style solid color cards for Teleus
+ * WelcomeCarousel - Apple-style solid color cards for Mobeus
  * Clean cards with icons, large text, no images
  * Adapted from thoughtworks-external pattern
  */
@@ -13,7 +13,7 @@ import {
     Heart, Users, Globe, Calendar, Sparkles, Zap,
     Phone, ClipboardList, Search, Building,
     PhoneOff, FileX, SearchX, UserX, Landmark,
-    CalendarCheck, SearchCheck, ShieldCheck
+    CalendarCheck, SearchCheck, ShieldCheck, Music
 } from 'lucide-react';
 
 interface QuestionCard {
@@ -23,6 +23,7 @@ interface QuestionCard {
     imageUrl?: string;  // For image-based cards
     actionPhrase: string;
     isAccent?: boolean;
+    accentColor?: 'purple' | 'teal';  // Support for different accent colors
 }
 
 interface WelcomeCarouselProps {
@@ -35,43 +36,43 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
     const { playClick } = useSound();
     const [selectedIndex, setSelectedIndex] = useState(0);
 
-    // Default cards: "Handled." brand
+    // Default cards: "Help is here" brand - 5-step journey
     const defaultCards: QuestionCard[] = [
         {
-            question: "Calls? Handled.",
-            subtext: "Hold music is someone else's problem now.",
-            icon: "phoneOff",
-            actionPhrase: "How do you handle calls?"
+            question: "Why do you exist?",
+            subtext: "To do things you have to do but don't want to do",
+            icon: "zap",
+            actionPhrase: "show me the problem you solve"
         },
         {
-            question: "Forms? Handled.",
-            subtext: "We fill them out. You don't.",
-            icon: "fileX",
-            actionPhrase: "How do you handle forms?"
+            question: "How does it work?",
+            subtext: "You talk. We do everything. That's it.",
+            icon: "globe",
+            actionPhrase: "how does this work"
         },
         {
-            question: "Scheduling? Handled.",
-            subtext: "Appointments, reservations, reminders. Done.",
-            icon: "calendarCheck",
-            actionPhrase: "How do you handle scheduling?"
-        },
-        {
-            question: "Research? Handled.",
-            subtext: "We find the answers. You get the results.",
-            icon: "searchCheck",
-            actionPhrase: "How do you handle research?"
-        },
-        {
-            question: "Bureaucracy? Handled.",
-            subtext: "Insurance. Government. Billing. All of it.",
+            question: "Can I trust this?",
+            subtext: "Privacy first. You're in control the whole time.",
             icon: "shieldCheck",
-            actionPhrase: "How do you handle bureaucracy?"
+            actionPhrase: "is this safe"
         },
         {
-            question: "Everything else? Yours.",
-            subtext: "That's the point.",
+            question: "What is a tele?",
+            subtext: "Workers, not chatbots. Labor that shows up ready to help.",
+            icon: "users",
+            actionPhrase: "what is a tele"
+        },
+        {
+            question: "Can I create teles?",
+            subtext: "Soon, anyone can. Your expertise, amplified.",
             icon: "sparkles",
-            actionPhrase: "Tell me about Teleus",
+            actionPhrase: "can i make my own tele"
+        },
+        {
+            question: "When does this launch?",
+            subtext: "March/April 2026 — Be there when help arrives",
+            icon: "calendar",
+            actionPhrase: "sign up for the launch event",
             isAccent: true
         },
     ];
@@ -128,6 +129,7 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
             case 'globe': return <Globe className={iconClass} />;
             case 'zap': return <Zap className={iconClass} />;
             case 'calendar': return <Calendar className={iconClass} />;
+            case 'music': return <Music className={iconClass} />;
             case 'phone': return <Phone className={iconClass} />;
             case 'clipboard': return <ClipboardList className={iconClass} />;
             case 'search': return <Search className={iconClass} />;
@@ -163,6 +165,7 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
                         {cards.map((card, idx) => {
                             const isImageCard = !!card.imageUrl;
 
+                            const accentBgColor = card.accentColor === 'teal' ? 'bg-aqua' : 'bg-amethyst';
                             return (
                                 <div
                                     key={idx}
@@ -171,7 +174,7 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
                                         ${isImageCard
                                             ? ''
                                             : card.isAccent
-                                                ? 'bg-amethyst text-white pt-14 px-8 pb-8'
+                                                ? `${accentBgColor} text-white pt-14 px-8 pb-8`
                                                 : 'bg-mist/90 text-onyx pt-14 px-8 pb-8'
                                         }
                                         ${idx === selectedIndex
@@ -183,24 +186,11 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
                                 >
                                     {isImageCard ? (
                                         <>
-                                            {/* Background image - full brightness */}
+                                            {/* Pure image - no text overlay */}
                                             <div
                                                 className="absolute inset-0 bg-cover bg-center"
                                                 style={{ backgroundImage: `url(${card.imageUrl})` }}
                                             />
-                                            {/* Subtle bottom gradient for text legibility only */}
-                                            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/50 to-transparent" />
-                                            {/* Content at bottom */}
-                                            <div className="mt-auto relative z-10 p-6">
-                                                <h3 className="text-xl font-bold leading-tight mb-2 text-white drop-shadow-lg">
-                                                    {card.question}
-                                                </h3>
-                                                {card.subtext && (
-                                                    <p className="text-sm text-white/90 drop-shadow-md">
-                                                        {card.subtext}
-                                                    </p>
-                                                )}
-                                            </div>
                                         </>
                                     ) : (
                                         <>
@@ -233,18 +223,21 @@ export const WelcomeCarousel: React.FC<WelcomeCarouselProps> = ({
 
             {/* Progress dots */}
             <div className="flex justify-center items-center gap-2 mt-6">
-                {cards.map((card, index) => (
-                    <button
-                        key={index}
-                        className={`rounded-full transition-all duration-300
+                {cards.map((card, index) => {
+                    const dotColor = card.isAccent ? (card.accentColor === 'teal' ? 'bg-aqua' : 'bg-amethyst') : 'bg-mist';
+                    return (
+                        <button
+                            key={index}
+                            className={`rounded-full transition-all duration-300
                             ${index === selectedIndex
-                                ? `w-6 h-2 ${card.isAccent ? 'bg-amethyst' : 'bg-mist'}`
-                                : 'w-2 h-2 bg-mist/20 hover:bg-mist/40'
-                            }`}
-                        onClick={() => scrollTo(index)}
-                        aria-label={`Go to slide ${index + 1}`}
-                    />
-                ))}
+                                    ? `w-6 h-2 ${dotColor}`
+                                    : 'w-2 h-2 bg-mist/20 hover:bg-mist/40'
+                                }`}
+                            onClick={() => scrollTo(index)}
+                            aria-label={`Go to slide ${index + 1}`}
+                        />
+                    );
+                })}
             </div>
         </div>
     );

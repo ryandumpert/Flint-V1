@@ -29,28 +29,30 @@ import { OnboardingTransition } from "@/components/OnboardingTransition";
 import { Logo } from "@/components/Logo";
 
 
-// Welcome section — TELEUS: Handled.
+// Welcome section — MOBEUS: Help is here.
 const WELCOME_VARIANTS = [
   {
-    badge: "TELEUS",
-    title: "Handled.",
-    subtitle: "Everything you have to do but don't want to. We handle it.",
+    badge: "MOBEUS",
+    title: "Help is here",
+    subtitle: "Helpful workers who take care of the friction of life.",
     generativeSubsections: [
-      // 0. WelcomeCarousel - "Handled." Cards
+      // 0. WelcomeCarousel - Journey cards
       {
-        id: "handled-carousel",
+        id: "journey-carousel",
         templateId: "WelcomeCarousel",
         props: {
           cards: [
-            { question: "Calls? Handled.", subtext: "Hold music is someone else's problem now.", icon: "phoneOff", actionPhrase: "How do you handle calls?" },
-            { question: "Joy.", subtext: "This is what free time looks like.", imageUrl: "/images/carousel-joy.png", actionPhrase: "What do I get back?" },
-            { question: "Forms? Handled.", subtext: "We fill them out. You don't.", icon: "fileX", actionPhrase: "How do you handle forms?" },
-            { question: "Scheduling? Handled.", subtext: "Appointments, reservations, reminders. Done.", icon: "calendarCheck", actionPhrase: "How do you handle scheduling?" },
-            { question: "Peace.", subtext: "The weight lifts.", imageUrl: "/images/carousel-peace.png", actionPhrase: "What do I get back?" },
-            { question: "Questions? Handled.", subtext: "We find the answers. You get the results.", icon: "searchCheck", actionPhrase: "How do you handle questions?" },
-            { question: "Bureaucracy? Handled.", subtext: "Insurance. Government. Billing. All of it.", icon: "shieldCheck", actionPhrase: "How do you handle bureaucracy?" },
-            { question: "Relief.", subtext: "Finally.", imageUrl: "/images/carousel-relief.png", actionPhrase: "What do I get back?" },
-            { question: "Everything else? Yours.", subtext: "That's the point.", icon: "sparkles", actionPhrase: "Tell me about Teleus", isAccent: true }
+            { imageUrl: "/images/carousel-relief.png", actionPhrase: "show me the problem you solve" },
+            { question: "Why do you exist?", subtext: "To do things you have to do but don't want to do", icon: "zap", actionPhrase: "show me the problem you solve" },
+            { imageUrl: "/images/carousel-peace.png", actionPhrase: "how does this work" },
+            { question: "How does it work?", subtext: "You talk. We do everything. That's it.", icon: "globe", actionPhrase: "how does this work" },
+            { imageUrl: "/images/carousel-morning-coffee.png", actionPhrase: "is this safe" },
+            { question: "Can I trust this?", subtext: "Privacy first. You're in control the whole time.", icon: "shieldCheck", actionPhrase: "is this safe" },
+            { imageUrl: "/images/carousel-reading-book.png", actionPhrase: "what is a tele" },
+            { question: "What is a tele?", subtext: "Workers, not chatbots. Labor that shows up ready to help.", icon: "users", actionPhrase: "what is a tele" },
+            { imageUrl: "/images/carousel-family-joy.png", actionPhrase: "can i make my own tele" },
+            { question: "Can I create teles?", subtext: "Soon, anyone can. Your expertise, amplified.", icon: "sparkles", actionPhrase: "can i make my own tele" },
+            { question: "When is launch?", subtext: "March/April 2026 — Be there when help arrives", icon: "calendar", actionPhrase: "sign up for the launch event", isAccent: true, accentColor: "purple" }
           ]
         }
       },
@@ -60,14 +62,14 @@ const WELCOME_VARIANTS = [
         templateId: "Hero",
         props: {
           headline: "Life has enough friction.",
-          description: "We handle the rest.",
+          description: "We take care of it.",
           ctaLabel: "See How",
-          ctaActionPhrase: "tell me how teleus works"
+          ctaActionPhrase: "how does this work"
         }
       },
-      // 2. Trio - What We Handle
+      // 2. Trio - What We Do
       {
-        id: "what-we-handle",
+        id: "what-we-do",
         templateId: "Trio",
         props: {
           cards: [
@@ -75,33 +77,33 @@ const WELCOME_VARIANTS = [
               icon: "Phone",
               title: "Communication",
               description: "Calls, emails, messages. We make them. We answer them. You don't have to.",
-              actionPhrase: "tell me about communication handling"
+              actionPhrase: "how do you help with communication"
             },
             {
               icon: "Calendar",
               title: "Coordination",
               description: "Scheduling, reminders, follow-ups. Everything in the right place at the right time.",
-              actionPhrase: "tell me about coordination handling"
+              actionPhrase: "how do you help with coordination"
             },
             {
               icon: "Shield",
               title: "Complexity",
               description: "Insurance claims, government forms, billing disputes. We navigate it all.",
-              actionPhrase: "tell me about complexity handling"
+              actionPhrase: "how do you help with complexity"
             }
           ],
           numbered: false,
           ctaLabel: "Learn More",
-          ctaActionPhrase: "what else do you handle"
+          ctaActionPhrase: "what else can you do"
         }
       },
-      // 3. Quote - The Truth
+      // 3. Quote - The Promise
       {
-        id: "the-truth",
+        id: "the-promise",
         templateId: "Quote",
         props: {
-          quote: "When everything is handled, what will you do?",
-          author: "Teleus",
+          quote: "Help is here.",
+          author: "Mobeus",
           role: ""
         }
       },
@@ -111,9 +113,9 @@ const WELCOME_VARIANTS = [
         templateId: "Banner",
         props: {
           headline: "Get Started",
-          subheadline: "Join the waitlist. Be first when we launch.",
-          ctaLabel: "Join Waitlist",
-          ctaActionPhrase: "sign up for the waitlist",
+          subheadline: "Sign up for the Launch Event — March/April 2026",
+          ctaLabel: "Reserve Your Spot",
+          ctaActionPhrase: "sign up for the launch event",
           variant: "gradient"
         }
       }
@@ -1198,40 +1200,7 @@ const Index = () => {
     };
   }, [activeSection, activeSubSection, handleSectionChange, navigateBack, navigateForward, addToHistory, navigationHistory, historyIndex, navigationBackData]);
 
-  useEffect(() => {
-    console.log("[Index] P2P initialization useEffect running");
-
-    const initializeP2P = async () => {
-      const ui = (window as any).UIFramework;
-      console.log(
-        "[Index] initializeP2P called, UIFramework exists:",
-        !!ui,
-        "has initializeP2PChat:",
-        !!ui?.initializeP2PChat,
-      );
-
-      if (!ui?.initializeP2PChat) return;
-
-      try {
-        let visitorUuid = localStorage.getItem("visitor_uuid");
-        if (!visitorUuid) {
-          visitorUuid = crypto.randomUUID();
-          localStorage.setItem("visitor_uuid", visitorUuid);
-        }
-
-        await ui.initializeP2PChat({
-          visitorUuid,
-          tenantUuid: "0c4f1897-97e9-46da-afb5-abf65982138a",
-        });
-      } catch (error) {
-        // P2P initialization failed
-      }
-    };
-
-    initializeP2P();
-    const retryTimeout = setTimeout(initializeP2P, 1000);
-    return () => clearTimeout(retryTimeout);
-  }, []);
+  // P2P chat initialization removed - this project does not use UUIDs
 
   // Shift+K hotkey to toggle TeleAcknowledge debug notifications
   useEffect(() => {

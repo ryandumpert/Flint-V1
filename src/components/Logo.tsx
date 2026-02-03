@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { default as telecoLogo } from '@/assets/teleco-logo.png';
+import { default as mobeusLogo } from '@/assets/mobeus-logo.png';
 
 interface LogoProps {
     onClick?: () => void;
@@ -25,8 +25,8 @@ export const Logo: React.FC<LogoProps> = ({ onClick, className = '' }) => {
             disabled={!onClick}
         >
             <img
-                src={telecoLogo}
-                alt="Teleco"
+                src={mobeusLogo}
+                alt="Mobeus"
                 className="no-lightboard h-[27px] w-auto object-contain max-w-none transition-all duration-300 ease-in-out"
                 style={{ aspectRatio: 'auto' }}
             />
