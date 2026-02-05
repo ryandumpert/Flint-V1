@@ -29,12 +29,12 @@ import { OnboardingTransition } from "@/components/OnboardingTransition";
 import { Logo } from "@/components/Logo";
 
 
-// Welcome section — MOBEUS: Help is here.
+// Welcome section — MOBEUS UNIVERSITY: The Screen Finally Cares
 const WELCOME_VARIANTS = [
   {
-    badge: "MOBEUS",
-    title: "Help is here",
-    subtitle: "Helpful workers who take care of the friction of life.",
+    badge: "MOBEUS UNIVERSITY",
+    title: "The Screen Finally Cares",
+    subtitle: "Learn how conversational labor changes everything.",
     generativeSubsections: [
       // 0. WelcomeCarousel - Journey cards
       {
@@ -42,17 +42,12 @@ const WELCOME_VARIANTS = [
         templateId: "WelcomeCarousel",
         props: {
           cards: [
-            { imageUrl: "/images/carousel-relief.png", actionPhrase: "show me the problem you solve" },
-            { question: "Why do you exist?", subtext: "To do things you have to do but don't want to do", icon: "zap", actionPhrase: "show me the problem you solve" },
-            { imageUrl: "/images/carousel-peace.png", actionPhrase: "how does this work" },
-            { question: "How does it work?", subtext: "You talk. We do everything. That's it.", icon: "globe", actionPhrase: "how does this work" },
-            { imageUrl: "/images/carousel-morning-coffee.png", actionPhrase: "is this safe" },
-            { question: "Can I trust this?", subtext: "Privacy first. You're in control the whole time.", icon: "shieldCheck", actionPhrase: "is this safe" },
-            { imageUrl: "/images/carousel-reading-book.png", actionPhrase: "what is a tele" },
-            { question: "What is a tele?", subtext: "Workers, not chatbots. Labor that shows up ready to help.", icon: "users", actionPhrase: "what is a tele" },
-            { imageUrl: "/images/carousel-family-joy.png", actionPhrase: "can i make my own tele" },
-            { question: "Can I create teles?", subtext: "Soon, anyone can. Your expertise, amplified.", icon: "sparkles", actionPhrase: "can i make my own tele" },
-            { question: "When is launch?", subtext: "March/April 2026 — Be there when help arrives", icon: "calendar", actionPhrase: "sign up for the launch event", isAccent: true, accentColor: "purple" }
+            { question: "What is Mobeus?", subtext: "Transforming software into conversational labor.", icon: "Sparkles", actionPhrase: "what is mobeus" },
+            { question: "What's a tele?", subtext: "Conversational workers. Not chatbots.", icon: "Users", actionPhrase: "what is a tele" },
+            { question: "What's Teleglass?", subtext: "The platform for conversational labor.", icon: "Globe", actionPhrase: "tell me about teleglass" },
+            { question: "How is this different?", subtext: "50 years: humans→machines. We inverted that.", icon: "Zap", actionPhrase: "how is this different from software" },
+            { question: "Who built this?", subtext: "Richie Etwaru and Mike Sutcliff. 5 years ago.", icon: "Users", actionPhrase: "who founded mobeus" },
+            { question: "When is launch?", subtext: "March/April 2026 — Be there when help arrives.", icon: "Calendar", actionPhrase: "sign up for the launch event", isAccent: true, accentColor: "purple" }
           ]
         }
       },
@@ -61,40 +56,40 @@ const WELCOME_VARIANTS = [
         id: "promise-hero",
         templateId: "Hero",
         props: {
-          headline: "Life has enough friction.",
-          description: "We take care of it.",
+          headline: "The Screen Finally Cares",
+          description: "Conversational labor is coming.",
           ctaLabel: "See How",
-          ctaActionPhrase: "how does this work"
+          ctaActionPhrase: "what is mobeus"
         }
       },
-      // 2. Trio - What We Do
+      // 2. Trio - Three Innovations
       {
-        id: "what-we-do",
+        id: "three-innovations",
         templateId: "Trio",
         props: {
           cards: [
             {
-              icon: "Phone",
-              title: "Communication",
-              description: "Calls, emails, messages. We make them. We answer them. You don't have to.",
-              actionPhrase: "how do you help with communication"
+              icon: "Cpu",
+              title: "Dual-Agent",
+              description: "Build Agent constructs. Runtime Agent delivers.",
+              actionPhrase: "explain dual-agent"
             },
             {
-              icon: "Calendar",
-              title: "Coordination",
-              description: "Scheduling, reminders, follow-ups. Everything in the right place at the right time.",
-              actionPhrase: "how do you help with coordination"
+              icon: "Globe",
+              title: "DOM-LLM Bridge",
+              description: "Language becomes live experiences.",
+              actionPhrase: "explain dom-llm bridge"
             },
             {
-              icon: "Shield",
-              title: "Complexity",
-              description: "Insurance claims, government forms, billing disputes. We navigate it all.",
-              actionPhrase: "how do you help with complexity"
+              icon: "Sparkles",
+              title: "Generative Web",
+              description: "Pages adapt to you.",
+              actionPhrase: "explain generative web"
             }
           ],
           numbered: false,
           ctaLabel: "Learn More",
-          ctaActionPhrase: "what else can you do"
+          ctaActionPhrase: "show me how teleglass works"
         }
       },
       // 3. Quote - The Promise
@@ -103,8 +98,8 @@ const WELCOME_VARIANTS = [
         templateId: "Quote",
         props: {
           quote: "Help is here.",
-          author: "Mobeus",
-          role: ""
+          author: "The Tele Population",
+          role: "Conversational Labor"
         }
       },
       // 4. Banner - Get Started
@@ -112,8 +107,8 @@ const WELCOME_VARIANTS = [
         id: "get-started",
         templateId: "Banner",
         props: {
-          headline: "Get Started",
-          subheadline: "Sign up for the Launch Event — March/April 2026",
+          headline: "The Teleglass Launch Event",
+          subheadline: "March/April 2026",
           ctaLabel: "Reserve Your Spot",
           ctaActionPhrase: "sign up for the launch event",
           variant: "gradient"

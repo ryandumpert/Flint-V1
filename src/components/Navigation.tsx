@@ -47,22 +47,22 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
       {
         id: 'how-it-works',
         label: 'HOW IT WORKS',
-        teleQuery: 'How does this work?'
+        teleQuery: 'show me how it works'
       },
       {
         id: 'what-we-do',
         label: 'WHAT WE DO',
-        teleQuery: 'What can you do?'
+        teleQuery: 'show me what you do'
       },
       {
         id: 'about',
         label: 'ABOUT',
-        teleQuery: 'What is Mobeus?'
+        teleQuery: 'show me what mobeus is'
       },
       {
         id: 'get-started',
         label: 'LAUNCH EVENT',
-        teleQuery: 'Sign me up for the launch event',
+        teleQuery: 'show me launch event registration',
         isHighlighted: true
       }
     ];

@@ -3,7 +3,7 @@ const path = require("path");
 
 async function publish() {
   try {
-    // Hardcoded tenant ID for this project
+    // Put your tenant ID for this project here
     const tenantId = "3883";
     console.log("📋 Using tenant ID: " + tenantId);
 

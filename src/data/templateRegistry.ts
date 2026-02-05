@@ -18,7 +18,7 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
     Story: lazy(() => import("@/components/templates/Story").then(m => ({ default: m.Story }))),
 
     // ═══════════════════════════════════════════════════════════════════════
-    // LAYOUT TEMPLATES (5)
+    // LAYOUT TEMPLATES (6)
     // ═══════════════════════════════════════════════════════════════════════
     Carousel: lazy(() => import("@/components/templates/Carousel").then(m => ({ default: m.Carousel }))),
     WelcomeCarousel: lazy(() => import("@/components/templates/WelcomeCarousel").then(m => ({ default: m.WelcomeCarousel }))),
@@ -28,7 +28,7 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
     ConsultationScheduler: lazy(() => import("@/components/templates/ConsultationScheduler").then(m => ({ default: m.ConsultationScheduler }))),
 
     // ═══════════════════════════════════════════════════════════════════════
-    // CONTENT TEMPLATES (5)
+    // CONTENT TEMPLATES (6)
     // ═══════════════════════════════════════════════════════════════════════
     Showcase: lazy(() => import("@/components/templates/Showcase").then(m => ({ default: m.Showcase }))),
     Guide: lazy(() => import("@/components/templates/Guide").then(m => ({ default: m.Guide }))),
