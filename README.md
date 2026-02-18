@@ -95,4 +95,4 @@ See [`TESTING.md`](./TESTING.md) for manual verification scenarios.
 
 ## License
 
-Proprietary — Mobeus / Ryan Dumpert
+Proprietary — Prime Intelligence / Ryan Dumpert
