@@ -1,7 +1,7 @@
 import { useState, useLayoutEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { default as flintLogo } from "@/assets/air-loan-logo.png";
+import { default as flintLogo } from "@/assets/powered by PI.png";
 import { handleAcknowledgment } from "@/utils/acknowledgmentHelpers";
 import { sendToTele } from "@/utils/teleInteraction";
 import { useSound } from "@/hooks/useSound";
@@ -90,7 +90,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
                 <img
                   src={flintLogo}
                   alt="Flint"
-                  className="no-lightboard h-[27px] w-auto object-contain max-w-none"
+                  className="no-lightboard h-[54px] w-auto object-contain max-w-none"
                   style={{ aspectRatio: 'auto' }}
                 />
               </div>

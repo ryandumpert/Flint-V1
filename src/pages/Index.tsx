@@ -37,82 +37,14 @@ const WELCOME_VARIANTS = [
     title: "AI Contract Risk Review",
     subtitle: "Upload contracts, identify red flags, and get actionable suggestions.",
     generativeSubsections: [
-      // 0. WelcomeCarousel - Quick Actions
       {
-        id: "quick-actions",
-        templateId: "WelcomeCarousel",
-        props: {
-          cards: [
-            { question: "Upload a contract?", subtext: "PDF, DOCX, or plain text.", icon: "Upload", actionPhrase: "upload a contract" },
-            { question: "Review red flags?", subtext: "AI-identified risks and issues.", icon: "AlertTriangle", actionPhrase: "show me the top risks" },
-            { question: "How it works?", subtext: "Upload → Analyze → Review.", icon: "Map", actionPhrase: "show me how it works" },
-            { question: "What does Flint check?", subtext: "Liability, indemnity, termination, and more.", icon: "Shield", actionPhrase: "what does flint check" },
-            { question: "About Flint?", subtext: "AI-powered contract risk advisor.", icon: "Info", actionPhrase: "tell me about flint" },
-            { question: "Upload now?", subtext: "Get your risk review in seconds.", icon: "FileUp", actionPhrase: "upload a contract", isAccent: true, accentColor: "emerald" }
-          ]
-        }
-      },
-      // 1. Hero - The Promise
-      {
-        id: "promise-hero",
+        id: "upload-hero",
         templateId: "Hero",
         props: {
           headline: "Contracts reviewed. Risks revealed.",
-          description: "Upload any contract and get an instant AI-powered risk analysis with highlighted clauses, explanations, and suggested edits.",
+          description: "Upload any contract and get an instant AI-powered risk analysis.",
           ctaLabel: "Upload Contract",
           ctaActionPhrase: "upload a contract"
-        }
-      },
-      // 2. Trio - Three Benefits
-      {
-        id: "three-benefits",
-        templateId: "Trio",
-        props: {
-          cards: [
-            {
-              icon: "AlertTriangle",
-              title: "Red Flag Detection",
-              description: "Automatically identifies risky language, one-sided clauses, and hidden obligations.",
-              actionPhrase: "show me the top risks"
-            },
-            {
-              icon: "FileText",
-              title: "Clause-by-Clause Review",
-              description: "Navigate highlighted clauses with explanations and suggested alternatives.",
-              actionPhrase: "show me clause details"
-            },
-            {
-              icon: "MessageSquare",
-              title: "Ask Flint Anything",
-              description: "Chat about your contract. Get summaries, comparisons, and plain-English explanations.",
-              actionPhrase: "summarize the contract"
-            }
-          ],
-          numbered: false,
-          ctaLabel: "Get Started",
-          ctaActionPhrase: "upload a contract"
-        }
-      },
-      // 3. Quote - The Value
-      {
-        id: "the-value",
-        templateId: "Quote",
-        props: {
-          quote: "Know what you're signing before you sign it.",
-          author: "Flint",
-          role: "AI Contract Risk Advisor"
-        }
-      },
-      // 4. Banner - Get Started
-      {
-        id: "upload-banner",
-        templateId: "Banner",
-        props: {
-          headline: "Upload Your Contract",
-          subheadline: "Get your AI risk review in seconds.",
-          ctaLabel: "Upload Now",
-          ctaActionPhrase: "upload a contract",
-          variant: "gradient"
         }
       }
     ]

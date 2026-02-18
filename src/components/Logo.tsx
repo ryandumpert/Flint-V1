@@ -5,7 +5,7 @@
 
 import React from 'react';
 // Updated logo: Flint branding
-import { default as flintLogo } from '@/assets/air-loan-logo.png';
+import { default as flintLogo } from '@/assets/powered by PI.png';
 
 interface LogoProps {
     onClick?: () => void;
@@ -28,7 +28,7 @@ export const Logo: React.FC<LogoProps> = ({ onClick, className = '' }) => {
             <img
                 src={flintLogo}
                 alt="Flint"
-                className="no-lightboard h-[27px] w-auto object-contain max-w-none transition-all duration-300 ease-in-out"
+                className="no-lightboard h-[54px] w-auto object-contain max-w-none transition-all duration-300 ease-in-out"
                 style={{ aspectRatio: 'auto' }}
             />
         </button>
