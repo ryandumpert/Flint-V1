@@ -1,12 +1,12 @@
 # Template Design System
 
-> Mobeus University | v97.0 | January 2026
+> Cash - Air Loan | v1.0 | February 2026
 
 ---
 
 ## The Goal
 
-Every template should guide users toward one outcome: **Sign up for the Launch Event.**
+Every template should guide users toward one outcome: **Apply for an investment property loan.**
 
 ---
 
@@ -51,10 +51,10 @@ Every template should include a path to the goal:
 
 | Template Type | CTA Text | Action |
 |--------------|----------|--------|
-| Introduction | "Learn More" | Show more about Mobeus |
+| Introduction | "Learn More" | Show loan products |
 | Features | "See It In Action" | Show demo |
 | Examples | "Experience It" | Interactive demo |
-| Any | "Join the Launch" | Launch event signup |
+| Any | "Get My Estimate" | Mortgage estimate |
 
 ---
 
@@ -68,8 +68,8 @@ const handleAction = (actionPhrase: string) => {
   notifyTele(actionPhrase);
 };
 
-<button onClick={() => handleAction("show me the launch event")}>
-  Join the Launch
+<button onClick={() => handleAction("show me mortgage estimate")}>
+  Get My Estimate
 </button>
 ```
 
@@ -82,9 +82,9 @@ Before shipping:
 - [ ] Uses `glass-template-container` wrapper
 - [ ] CTA button is flamingo, rounded-full
 - [ ] Every clickable calls `notifyTele()`
-- [ ] Clear path toward launch event goal
+- [ ] Clear path toward loan application goal
 - [ ] Mobile responsive
 
 ---
 
-_The Screen Finally Cares_
+_Smart lending for smart investments._

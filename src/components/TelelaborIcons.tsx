@@ -196,12 +196,12 @@ export const TelelaborIcons: React.FC<TelelaborIconsProps> = ({
                 className="absolute inset-[2px] rounded-full cursor-pointer overflow-hidden"
                 style={{ pointerEvents: 'auto' }}
                 role="button"
-                aria-label="Catherine avatar — thinking"
-                title="Catherine is thinking..."
+                aria-label="Flint avatar — thinking"
+                title="Flint is thinking..."
               >
                 <img
                   src={avatarSrc}
-                  alt="Catherine Avatar"
+                  alt="Flint Avatar"
                   className="w-full h-full object-cover rounded-full"
                   width={40}
                   height={40}
@@ -218,12 +218,12 @@ export const TelelaborIcons: React.FC<TelelaborIconsProps> = ({
               className={`${getAvatarClasses(avatarState)} ${avatarState === 'off' ? 'hover:scale-[1.02]' : ''}`}
               style={{ pointerEvents: 'auto' }}
               role="button"
-              aria-label={`Catherine avatar — ${avatarState}`}
+              aria-label={`Flint avatar — ${avatarState}`}
               title={avatarState === 'off' ? 'Connect' : avatarState === 'connecting' ? 'Connecting...' : 'Connected'}
             >
               <img
                 src={avatarSrc}
-                alt="Catherine Avatar"
+                alt="Flint Avatar"
                 className={`w-full h-full object-cover rounded-full transition-all duration-300 ${avatarState === 'off' ? 'filter grayscale brightness-75 hover:grayscale-0 hover:brightness-100' :
                   avatarState === 'connecting' ? '' :
                     'filter-none brightness-125'

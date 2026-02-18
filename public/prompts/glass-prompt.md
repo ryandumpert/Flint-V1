@@ -1,5 +1,5 @@
 # navigateToSection Tool
-> v3.0 | CashCo Mortgage Concierge | 21 Templates
+> v4.0 | Flint - Contract Risk Review Advisor | 21 Templates
 
 ## Function Signature
 
@@ -34,22 +34,22 @@ navigateToSection(payload: NavigationPayload): void
 #### Hero
 Primary landing.
 ```json
-{ "headline": "Smart Financing", "description": "Non-QM mortgages", "ctaLabel": "Get Started", "ctaActionPhrase": "show me mortgage estimate" }
+{ "headline": "Contracts Reviewed. Risks Revealed.", "description": "AI-powered contract risk analysis.", "ctaLabel": "Upload Contract", "ctaActionPhrase": "upload a contract" }
 ```
 
 #### Split
 Two columns comparison.
 ```json
 {
-  "leftContent": { "headline": "Purchase to Rent", "body": "Long-term income." },
-  "rightContent": { "headline": "Purchase to Flip", "body": "Short-term profits." }
+  "leftContent": { "headline": "Red Flags", "body": "Risky clauses and one-sided terms." },
+  "rightContent": { "headline": "Suggested Edits", "body": "Alternative language to protect your interests." }
 }
 ```
 
 #### Banner
 Call to action bar.
 ```json
-{ "headline": "Get Your Estimate", "subheadline": "30 days", "ctaLabel": "Start Now", "ctaActionPhrase": "show me mortgage estimate", "variant": "gradient" }
+{ "headline": "Upload Your Contract", "subheadline": "Get AI risk review in seconds.", "ctaLabel": "Upload Now", "ctaActionPhrase": "upload a contract", "variant": "gradient" }
 ```
 
 ---
@@ -59,19 +59,19 @@ Call to action bar.
 #### Paragraph
 Short text block.
 ```json
-{ "text": "CashCo provides non-QM mortgages for investment properties." }
+{ "text": "Flint reviews contracts for risky language, hidden obligations, and one-sided terms." }
 ```
 
 #### Article
 Long-form content.
 ```json
-{ "title": "Non-QM Financing Guide", "description": "Flexible qualification for rental and flip properties." }
+{ "title": "Contract Risk Review", "description": "AI-powered analysis of liability, indemnity, termination, and payment clauses." }
 ```
 
 #### Quote
 Highlighted quote.
 ```json
-{ "quote": "Your property. Our expertise.", "author": "CashCo Team", "role": "Investor Financing Specialists" }
+{ "quote": "Know what you're signing before you sign it.", "author": "Flint", "role": "AI Contract Risk Advisor" }
 ```
 
 #### MediaText
@@ -80,9 +80,9 @@ Text + image or two-column layouts.
 **Text + Image:**
 ```json
 {
-  "headline": "Two Investment Paths",
-  "text": "Rental or flip financing.",
-  "assetId": "mortgage-paths",
+  "headline": "Contract Analysis",
+  "text": "Clause-by-clause risk review with highlighted issues.",
+  "assetId": "contract-review",
   "imagePosition": "right"
 }
 ```
@@ -90,8 +90,8 @@ Text + image or two-column layouts.
 **Two Columns:**
 ```json
 {
-  "leftContent": { "headline": "Rental", "body": "Monthly income" },
-  "rightContent": { "headline": "Flip", "body": "Sale profits" }
+  "leftContent": { "headline": "Issues Found", "body": "Red flags and risky clauses" },
+  "rightContent": { "headline": "Suggestions", "body": "Recommended edits" }
 }
 ```
 
@@ -102,19 +102,19 @@ Text + image or two-column layouts.
 #### Stats
 Key metrics.
 ```json
-{ "stats": [{ "value": "5.5%", "label": "Interest Rate" }, { "value": "30", "label": "Days Valid" }] }
+{ "stats": [{ "value": "12", "label": "Issues Found" }, { "value": "3", "label": "High Risk" }] }
 ```
 
 #### Metric
 Single large number.
 ```json
-{ "value": "$450,000", "label": "Purchase Price", "icon": "DollarSign" }
+{ "value": "7", "label": "Red Flags Detected", "icon": "AlertTriangle" }
 ```
 
 #### Table
 Data table.
 ```json
-{ "headers": ["PropertyType", "Data Required"], "rows": [["Rental", "Price, Rent, Taxes"], ["Flip", "Price, Renovation, Sale"]] }
+{ "headers": ["Clause", "Risk Level", "Issue"], "rows": [["Indemnity §4.2", "High", "Unlimited liability"], ["Termination §8.1", "Medium", "No cure period"]] }
 ```
 
 ---
@@ -124,7 +124,7 @@ Data table.
 #### List
 Bulleted list.
 ```json
-{ "items": ["Purchase Price", "Monthly Rent", "Property Taxes", "Insurance"] }
+{ "items": ["Liability Caps", "Indemnification", "Termination Rights", "Payment Terms"] }
 ```
 
 #### Trio
@@ -132,9 +132,9 @@ Three-column cards.
 ```json
 {
   "cards": [
-    { "icon": "Shield", "title": "Non-Binding", "description": "30-day estimate" },
-    { "icon": "Zap", "title": "Fast Approval", "description": "Non-QM flexibility" },
-    { "icon": "TrendingUp", "title": "Both Paths", "description": "Rental or flip" }
+    { "icon": "AlertTriangle", "title": "Red Flags", "description": "Risky clauses identified" },
+    { "icon": "FileText", "title": "Clause Review", "description": "Navigate highlighted issues" },
+    { "icon": "MessageSquare", "title": "Ask Flint", "description": "Chat about your contract" }
   ],
   "numbered": false
 }
@@ -145,8 +145,8 @@ Auto-scrolling welcome.
 ```json
 {
   "cards": [
-    { "question": "Purchase to Rent?", "subtext": "Rental income", "icon": "Home", "actionPhrase": "show me rental financing" },
-    { "question": "Purchase to Flip?", "subtext": "Flip profits", "icon": "Hammer", "actionPhrase": "show me flip financing" }
+    { "question": "Upload a contract?", "subtext": "PDF, DOCX, or text", "icon": "Upload", "actionPhrase": "upload a contract" },
+    { "question": "Review red flags?", "subtext": "AI-identified risks", "icon": "AlertTriangle", "actionPhrase": "show me the top risks" }
   ]
 }
 ```
@@ -158,216 +158,277 @@ Auto-scrolling welcome.
 #### Steps
 Numbered process flow.
 ```json
-{ "items": [{ "title": "Intent", "description": "Rent or flip?" }, { "title": "Data", "description": "Property details" }] }
+{ "items": [{ "title": "Upload", "description": "Drop your contract" }, { "title": "Analyze", "description": "AI scans for risks" }] }
 ```
 
 #### Compare
 Side-by-side comparison.
 ```json
 {
-  "leftOption": { "title": "Rental", "features": ["Monthly income", "Long-term"] },
-  "rightOption": { "title": "Flip", "features": ["Sale profits", "Short-term"] }
+  "leftOption": { "title": "Current Language", "features": ["Unlimited liability", "No cure period", "Auto-renewal"] },
+  "rightOption": { "title": "Suggested Edits", "features": ["Capped liability", "30-day cure period", "Manual renewal"] }
 }
 ```
 
 ---
 
-### INTERACTIVE (Mortgage-Specific)
+### INTERACTIVE (Contract-Specific)
 
-#### MortgageReview
-**Interactive mortgage calculator with real-time updates.**
+#### ContractUpload
+**Interactive drag-and-drop contract upload with paste option.**
 
-Shows calculated monthly payments with interactive controls for down payment, interest rate, and loan term. Users can adjust sliders/buttons, or the tele can update values conversationally.
+Displays a file upload zone (PDF, DOCX, TXT) with a tab to paste text directly. After file processing, shows a preview with word count and an "Analyze Contract" button. **Use this template when the user wants to upload or review a new contract.**
 
 ```json
 {
-  "propertyAddress": "123 Main St, Austin, TX",
-  "purchasePrice": 450000,
-  "propertyType": "rental",
-  "expectedMonthlyRent": 3200,
-  "annualPropertyTaxes": 9000,
-  "annualInsurance": 2250,
-  "defaultDownPayment": 45000,
-  "defaultInterestRate": 5.5,
-  "defaultTerm": 30
+  "headline": "Upload Your Contract",
+  "subheadline": "Drag and drop a file or paste contract text below.",
+  "submitLabel": "Analyze Contract",
+  "submitActionPhrase": "analyze this contract"
 }
 ```
 
-**For Flip Properties:**
-- Omit `expectedMonthlyRent`
-- Use `propertyType: "flip"`
-- Estimate taxes: `purchasePrice * 0.02`
-- Estimate insurance: `purchasePrice * 0.005`
+**Props:**
+- `headline` (optional): Header text
+- `subheadline` (optional): Description text
+- `submitLabel` (optional): Button label after extraction
+- `submitActionPhrase` (optional): Message sent to Tele with contract text
+- `maxFileSizeMB` (optional, default: 25): Max file size in MB
+- `showPasteOption` (optional, default: true): Show paste text tab
 
-**Tele Can Update Dynamically:**
-```javascript
-window.updateMortgageReview({ defaultDownPayment: 90000 })
-window.updateMortgageReview({ defaultInterestRate: 6.0 })
-window.updateMortgageReview({ defaultTerm: 15 })
-```
+**User Interaction:**
+- Drag file onto drop zone → Auto-extraction → Preview → Click "Analyze Contract"
+- Switch to "Paste Text" tab → Paste contract text → Click "Process Text" → Preview
+- After processing, the user sees word count and a text preview
+- Click "Analyze Contract" → Contract text sent to Tele for analysis
 
-**Example User Interactions:**
-- User: "Show me with 20% down" → `window.updateMortgageReview({ defaultDownPayment: 90000 })`
-- User: "What if the rate is 6%?" → `window.updateMortgageReview({ defaultInterestRate: 6.0 })`
-- User: "Compare with a 15-year loan" → `window.updateMortgageReview({ defaultTerm: 15 })`
+#### IssueCard
+**Displays a single contract risk issue with severity, quote, explanation, and suggested edits.**
 
-#### ComplianceConsent
-**Interactive compliance disclaimer with explicit confirmation.**
-
-Displays mandatory compliance statement requiring user acknowledgment via button click or voice command.
+Use this template for individual issues found during analysis. Renders with severity-colored borders, collapsible detail, redline-style edits, and action buttons.
 
 ```json
-{ "statement": "This mortgage estimate is not legally binding and is valid for 30 days.", "confirmActionPhrase": "yes" }
+{
+  "title": "Unlimited Liability Exposure",
+  "category": "Indemnification",
+  "severity": "critical",
+  "riskType": "legal",
+  "confidence": 0.92,
+  "quote": "Party A shall indemnify, defend, and hold harmless Party B from any and all claims, damages, losses...",
+  "whyConcern": "This clause imposes unlimited indemnification obligations with no cap. It exposes you to uncapped financial liability for any claim, regardless of fault or the contract's value.",
+  "suggestedEdits": [
+    {
+      "type": "change",
+      "proposedText": "any and all claims, damages, losses",
+      "replacementText": "direct claims and damages up to the total value of fees paid under this agreement",
+      "value": "Caps liability to contract value, which is standard in most commercial agreements.",
+      "tradeoffs": "Counterparty may push back; consider mutual cap."
+    }
+  ],
+  "discussionPrompts": ["Why is unlimited liability risky?", "What is a reasonable liability cap?"],
+  "goToClauseActionPhrase": "go to the indemnification clause",
+  "askAboutActionPhrase": "tell me more about this indemnification risk"
+}
+```
+
+**Props:**
+- `title` (required): Issue title
+- `category` (optional): Issue category (e.g., "Indemnification", "Termination")
+- `severity` (required): `low` | `medium` | `high` | `critical`
+- `riskType` (optional): `legal` | `commercial` | `operational` | `security` | `privacy` | `compliance`
+- `confidence` (optional): 0–1 confidence score
+- `quote` (optional): Exact contract excerpt
+- `whyConcern` (optional): 2–5 sentence explanation
+- `suggestedEdits[]` (optional): Array of `{ type, proposedText, replacementText, value, tradeoffs }`
+- `discussionPrompts[]` (optional): Quick chat starters
+- `goToClauseActionPhrase` (optional): Navigate to clause
+- `askAboutActionPhrase` (optional): Ask AI about this issue
+
+#### ContractSummary
+**One-screen overview of the entire contract with risk score bar and key details.**
+
+Use this template after analysis to show the high-level summary.
+
+```json
+{
+  "headline": "Contract Summary",
+  "subheadline": "SaaS Services Agreement — Acme Corp",
+  "overview": "This is a 2-year SaaS services agreement between Acme Corp and Widget LLC. The contract includes standard service terms with several notable risk areas around liability caps and termination rights.",
+  "parties": "Acme Corp (Client) ↔ Widget LLC (Provider)",
+  "term": "24 months, auto-renewal with 90-day notice",
+  "paymentBasics": "$15,000/month, Net 30, 1.5% late fee",
+  "terminationRights": "Either party for cause with 30-day cure; Provider for convenience with 60-day notice",
+  "totalIssues": 12,
+  "criticalCount": 2,
+  "highCount": 4,
+  "mediumCount": 3,
+  "lowCount": 3,
+  "keyRisks": [
+    { "title": "Unlimited indemnification obligation", "severity": "critical", "actionPhrase": "show me the indemnification issue" },
+    { "title": "No cap on liability", "severity": "critical", "actionPhrase": "show me the liability issue" },
+    { "title": "One-sided termination for convenience", "severity": "high", "actionPhrase": "show me the termination issue" }
+  ],
+  "ctaLabel": "View All Issues",
+  "ctaActionPhrase": "show me all the issues"
+}
+```
+
+**Props:**
+- `headline`, `subheadline` (optional): Header text
+- `overview` (optional): One-paragraph summary
+- `parties`, `term`, `paymentBasics`, `terminationRights` (optional): Key contract details
+- `totalIssues`, `criticalCount`, `highCount`, `mediumCount`, `lowCount` (optional): Issue counts for risk bar
+- `keyRisks[]` (optional): Array of `{ title, severity, actionPhrase }`
+- `keyPoints[]` (optional): Array of `{ icon, label, value, severity, actionPhrase }`
+- `ctaLabel`, `ctaActionPhrase` (optional): Call to action
+
+#### ObligationsTable
+**Sortable table of obligations, owners, and deadlines extracted from the contract.**
+
+```json
+{
+  "headline": "Obligations & Deadlines",
+  "subheadline": "Key commitments extracted from this contract",
+  "obligations": [
+    { "id": "ob1", "obligation": "Deliver monthly usage report", "owner": "Provider", "deadline": "5th of each month", "severity": "medium" },
+    { "id": "ob2", "obligation": "Complete security audit", "owner": "Provider", "deadline": "Annually by June 30", "severity": "high", "goToClauseActionPhrase": "go to the audit clause" },
+    { "id": "ob3", "obligation": "Pay invoice", "owner": "Client", "deadline": "Net 30 from receipt", "severity": "low" }
+  ]
+}
+```
+
+**Props:**
+- `headline`, `subheadline` (optional): Header text
+- `searchPlaceholder` (optional): Search input placeholder
+- `obligations[]` (required): Array of `{ id, obligation, owner, deadline, severity?, goToClauseActionPhrase? }`
+- `emptyMessage` (optional): Message when no obligations
+- `ctaLabel`, `ctaActionPhrase` (optional): Call to action
+
+#### MoneyTerms
+**Grouped display of financial terms: fees, payment timing, late fees, credits, and taxes.**
+
+```json
+{
+  "headline": "Financial Terms",
+  "subheadline": "All monetary obligations in this contract",
+  "totalValue": "$360,000/year",
+  "items": [
+    { "id": "mt1", "category": "Fees", "description": "Monthly SaaS subscription", "amount": "$15,000/mo", "severity": "low" },
+    { "id": "mt2", "category": "Fees", "description": "Implementation fee (one-time)", "amount": "$25,000" },
+    { "id": "mt3", "category": "Late Fees", "description": "Late payment interest", "amount": "1.5%/month", "severity": "high", "note": "Compounds monthly — higher than market standard" },
+    { "id": "mt4", "category": "Credits", "description": "SLA credit for downtime", "amount": "5% per incident", "severity": "medium", "note": "Capped at 10% of monthly fees" },
+    { "id": "mt5", "category": "Taxes", "description": "Client responsible for all taxes", "amount": "Varies", "goToClauseActionPhrase": "go to the tax clause" }
+  ]
+}
+```
+
+**Props:**
+- `headline`, `subheadline` (optional): Header text
+- `totalValue` (optional): Total contract value display
+- `items[]` (required): Array of `{ id, category, description, amount?, severity?, note?, goToClauseActionPhrase? }`
+- `emptyMessage` (optional): Message when no financial terms
+- `ctaLabel`, `ctaActionPhrase` (optional): Call to action
+
+#### ContractViewer
+**Scrollable contract text display with issue highlights and search.**
+
+Renders the full extracted contract text with severity-colored underlines at issue anchor positions. Click a highlight to ask the AI about it. Supports text search, zoom, and copy-all.
+
+```json
+{
+  "contractText": "SERVICES AGREEMENT\n\nThis Services Agreement...",
+  "headline": "Contract Text",
+  "subheadline": "SaaS Agreement — Acme Corp",
+  "highlights": [
+    { "issueId": "issue_1", "title": "Unlimited Liability", "severity": "critical", "start": 1024, "end": 1180 },
+    { "issueId": "issue_2", "title": "No Cure Period", "severity": "high", "start": 3200, "end": 3350 }
+  ],
+  "focusIssueId": "issue_1",
+  "askAboutActionPhrase": "tell me about"
+}
+```
+
+**Props:**
+- `contractText` (required): Full extracted contract text
+- `highlights[]` (optional): Array of `{ issueId, title, severity, start, end }`
+- `headline`, `subheadline` (optional): Header text
+- `focusIssueId` (optional): Auto-scroll to this issue's highlight
+- `showLineNumbers` (optional): Show line numbers
+- `askAboutActionPhrase` (optional): Prefix for click-to-ask actions
+
+#### IssuesList
+**Left panel issue navigator with filters, search, sorting, and grouping.**
+
+Shows all extracted issues in a compact list with severity icons, category labels, confidence scores. Supports quick severity filter chips, text search, category filter, sort by severity/category/confidence, and group by severity/category.
+
+```json
+{
+  "headline": "Issues",
+  "subheadline": "12 issues found",
+  "issues": [
+    { "id": "issue_1", "title": "Unlimited Liability", "category": "Indemnification", "severity": "critical", "confidence": 0.95, "actionPhrase": "show me the indemnification issue" },
+    { "id": "issue_2", "title": "No Cure Period", "category": "Termination", "severity": "high", "confidence": 0.88, "actionPhrase": "show me the termination issue" }
+  ],
+  "activeIssueId": "issue_1",
+  "ctaLabel": "Ask about all issues",
+  "ctaActionPhrase": "summarize all the issues for me"
+}
+```
+
+**Props:**
+- `headline`, `subheadline` (optional): Header text
+- `issues[]` (required): Array of `{ id, title, category, severity, riskType?, confidence?, quote?, actionPhrase? }`
+- `activeIssueId` (optional): Highlight this issue as selected
+- `emptyMessage` (optional): Message when no issues
+- `ctaLabel`, `ctaActionPhrase` (optional): Bottom action button
+
+
+#### MortgageReview
+**Repurposed as Contract Summary Dashboard.**
+
+Shows contract risk metrics with interactive navigation. Retained for backward compatibility but should be used for overall contract summary display.
+
+```json
+{
+  "propertyAddress": "Service Agreement - Acme Corp",
+  "purchasePrice": 0,
+  "propertyType": "rental",
+  "expectedMonthlyRent": 0,
+  "annualPropertyTaxes": 0,
+  "annualInsurance": 0,
+  "defaultDownPayment": 0,
+  "defaultInterestRate": 0,
+  "defaultTerm": 0
+}
+```
+
+> Note: This template will be replaced by `ContractSummary` in a future update. For now, use text-based templates (Paragraph, Article, Table) for contract summaries.
+
+#### ComplianceConsent
+**Legal disclaimer with explicit confirmation.**
+
+Displays mandatory disclaimer requiring user acknowledgment.
+
+```json
+{ "statement": "This analysis is for informational purposes only and does not constitute legal advice. Consult a qualified attorney for legal guidance.", "confirmActionPhrase": "yes" }
 ```
 
 **Props:**
 - `icon` (optional): Shield, AlertTriangle, Info
-- `badge` (optional): COMPLIANCE, DISCLOSURE, IMPORTANT
-- `headline` (optional): Important Disclosure
-- `statement` (required): The compliance text
+- `badge` (optional): DISCLAIMER, NOTICE, IMPORTANT
+- `headline` (optional): Important Notice
+- `statement` (required): The disclaimer text
 - `confirmLabel` (optional): I Understand
 - `confirmActionPhrase` (required): yes
 - `variant` (optional): default, warning, info
-
-**User Interaction:**
-- Click "I Understand" button → Sends confirmActionPhrase automatically
-- Say "yes" (or the confirmActionPhrase) → Tele receives confirmation
-
-**Example:**
-```json
-{
-  "statement": "This mortgage estimate is not legally binding and is valid for 30 days.",
-  "confirmActionPhrase": "yes"
-}
-```
-
-When user clicks button or says "yes", tele receives "yes" and can proceed to next step.
-
-#### RentalPropertyReview
-**Review rental property data with AI-generated property image.**
-
-Displays all 5 rental data points plus net cash flow calculation with property image and confirmation buttons.
-
-```json
-{
-  "propertyAddress": "123 Main St, Austin, TX",
-  "purchasePrice": 450000,
-  "expectedMonthlyRent": 3200,
-  "annualPropertyTaxes": 9000,
-  "annualInsurance": 2250,
-  "assetId": "rental-property",
-  "editActionPhrase": "edit details",
-  "confirmActionPhrase": "yes"
-}
-```
-
-**User Interaction:**
-- Click "Edit Details" → Sends editActionPhrase
-- Click "Looks Good" → Sends confirmActionPhrase and proceeds
-
-#### FlipPropertyReview
-**Review flip property data with AI-generated renovation image.**
-
-Displays all 4 flip-specific data points plus calculated profit with renovation image and confirmation buttons.
-
-```json
-{
-  "propertyAddress": "789 Oak Ave, Dallas, TX",
-  "purchasePrice": 300000,
-  "renovationCosts": 75000,
-  "expectedSalePrice": 450000,
-  "assetId": "flip-property",
-  "editActionPhrase": "edit details",
-  "confirmActionPhrase": "yes"
-}
-```
-
-**User Interaction:**
-- Click "Edit Details" → Sends editActionPhrase
-- Click "Looks Good" → Sends confirmActionPhrase and proceeds
-
-#### RentalDataCapture
-**Conversational form to capture all rental property data at once.**
-
-Displays input fields for all 5 required data points with real-time validation and AI-generated property image.
-
-```json
-{
-  "headline": "Rental Property Details",
-  "subheadline": "Provide your property information",
-  "assetId": "rental-property",
-  "submitLabel": "Calculate Estimate",
-  "submitActionPhrase": "submit rental data"
-}
-```
-
-**Optional Pre-fill Props:**
-- `defaultPropertyAddress` (string)
-- `defaultPurchasePrice` (number)
-- `defaultExpectedMonthlyRent` (number)
-- `defaultAnnualPropertyTaxes` (number)
-- `defaultAnnualInsurance` (number)
-
-**User Interaction:**
-- User fills all 5 fields
-- Submit button enables when all fields valid
-- Click submit → Sends `submitActionPhrase` + JSON data
-
-**Data Sent to Tele:**
-```json
-{
-  "propertyAddress": "123 Main St, Austin, TX",
-  "purchasePrice": 450000,
-  "expectedMonthlyRent": 3200,
-  "annualPropertyTaxes": 9000,
-  "annualInsurance": 2250
-}
-```
-
-#### FlipDataCapture
-**Conversational form to capture all flip property data at once.**
-
-Displays input fields for all 4 required data points plus calculated profit preview with AI-generated renovation image.
-
-```json
-{
-  "headline": "Flip Property Details",
-  "subheadline": "Provide your flip project information",
-  "assetId": "flip-property",
-  "submitLabel": "Calculate Estimate",
-  "submitActionPhrase": "submit flip data"
-}
-```
-
-**Optional Pre-fill Props:**
-- `defaultPropertyAddress` (string)
-- `defaultPurchasePrice` (number)
-- `defaultRenovationCosts` (number)
-- `defaultExpectedSalePrice` (number)
-
-**User Interaction:**
-- User fills all 4 fields
-- Live profit calculation shows as fields are filled
-- Submit button enables when all fields valid
-- Click submit → Sends `submitActionPhrase` + JSON data
-
-**Data Sent to Tele:**
-```json
-{
-  "propertyAddress": "789 Oak Ave, Dallas, TX",
-  "purchasePrice": 300000,
-  "renovationCosts": 75000,
-  "expectedSalePrice": 450000
-}
-```
 
 ---
 
 ## 🎯 SHOT PROMPTS
 
-### Shot 1: "What is CashCo?"
+### Shot 1: "What is Flint?"
 
-**User:** "What is CashCo?" / "Tell me about your services"
+**User:** "What is Flint?" / "Tell me about Flint"
 
 **Tele:** "Let me show you."
 
@@ -375,19 +436,19 @@ Displays input fields for all 4 required data points plus calculated profit prev
 ```json
 {
   "badge": "ABOUT",
-  "title": "Smart Financing for Smart Investors",
+  "title": "AI Contract Risk Review",
   "generativeSubsections": [
     {
-      "id": "two-paths",
+      "id": "what-flint-does",
       "templateId": "Split",
       "props": {
         "leftContent": {
-          "headline": "Purchase to Rent",
-          "body": "Long-term rental income strategy. Build wealth through appreciation and monthly cash flow."
+          "headline": "Upload & Analyze",
+          "body": "Drop any contract — PDF, DOCX, or plain text. Flint scans every clause for red flags, hidden obligations, and one-sided terms."
         },
         "rightContent": {
-          "headline": "Purchase to Flip",
-          "body": "Short-term renovation profits. Quick turnaround financing for fix-and-flip investors."
+          "headline": "Review & Discuss",
+          "body": "Navigate highlighted issues, read plain-English explanations, and chat with Flint about any clause or concern."
         }
       }
     },
@@ -396,9 +457,9 @@ Displays input fields for all 4 required data points plus calculated profit prev
       "templateId": "Trio",
       "props": {
         "cards": [
-          { "icon": "Shield", "title": "Non-Binding", "description": "30-day estimates" },
-          { "icon": "Zap", "title": "Fast Approval", "description": "Non-QM flexibility" },
-          { "icon": "TrendingUp", "title": "Both Paths", "description": "Rental or flip" }
+          { "icon": "AlertTriangle", "title": "Red Flags", "description": "Auto-detected risks" },
+          { "icon": "FileText", "title": "Clause Review", "description": "Highlighted issues" },
+          { "icon": "MessageSquare", "title": "Ask Anything", "description": "Chat about your contract" }
         ]
       }
     }
@@ -408,80 +469,143 @@ Displays input fields for all 4 required data points plus calculated profit prev
 
 ---
 
-### Shot 2: "Show me rental financing"
+### Shot 2: "Upload a contract"
 
-**User:** "Show me rental financing" / "Purchase to rent"
+**User:** "Upload a contract" / "I have a contract to review"
 
-**Tele:** "Let's calculate your rental property financing."
+**Tele:** "Let's review your contract. You can upload a file or paste the text directly."
 
 **Call:**
 ```json
 {
-  "badge": "RENTAL FINANCING",
-  "title": "Purchase to Rent",
+  "badge": "UPLOAD",
+  "title": "Upload Your Contract",
   "generativeSubsections": [
     {
-      "id": "rental-info",
-      "templateId": "MediaText",
+      "id": "upload-widget",
+      "templateId": "ContractUpload",
       "props": {
-        "headline": "Generate Rental Income",
-        "text": "Long-term wealth through monthly cash flow and property appreciation.",
-        "assetId": "rental-property"
+        "headline": "Upload Your Contract",
+        "subheadline": "Drag and drop a file or paste contract text below.",
+        "submitLabel": "Analyze Contract",
+        "submitActionPhrase": "analyze this contract"
+      }
+    }
+  ]
+}
+```
+
+**Then:** Wait for the user to upload/paste. When user clicks "Analyze Contract", the contract text is sent. Proceed to show disclaimer (ComplianceConsent), then analysis results.
+
+---
+
+### Shot 3: "Show me the top risks"
+
+**User:** "Show me the top risks" / "What are the red flags?"
+
+**Tele:** "Here are the key issues I found in your contract."
+
+**Call:**
+```json
+{
+  "badge": "RED FLAGS",
+  "title": "Contract Risk Analysis",
+  "generativeSubsections": [
+    {
+      "id": "issue-1",
+      "templateId": "IssueCard",
+      "props": {
+        "title": "Unlimited Indemnification",
+        "category": "Indemnification",
+        "severity": "critical",
+        "riskType": "legal",
+        "confidence": 0.95,
+        "quote": "Party A shall indemnify, defend, and hold harmless Party B from any and all claims...",
+        "whyConcern": "This clause imposes unlimited indemnification obligations with no cap. It exposes you to uncapped financial liability.",
+        "suggestedEdits": [
+          {
+            "type": "change",
+            "proposedText": "any and all claims, damages, losses",
+            "replacementText": "direct claims and damages up to the total fees paid under this agreement",
+            "value": "Caps liability to contract value — standard in commercial agreements."
+          }
+        ],
+        "goToClauseActionPhrase": "go to the indemnification clause",
+        "askAboutActionPhrase": "tell me more about this indemnification risk"
       }
     },
     {
-      "id": "data-needed",
-      "templateId": "List",
+      "id": "issue-2",
+      "templateId": "IssueCard",
       "props": {
-        "headline": "Data We Need",
-        "items": [
-          "Property Address",
-          "Purchase Price",
-          "Expected Monthly Rent",
-          "Annual Property Taxes",
-          "Annual Insurance"
-        ]
+        "title": "No Cure Period Before Termination",
+        "category": "Termination",
+        "severity": "high",
+        "riskType": "commercial",
+        "quote": "Either party may terminate this agreement immediately upon breach...",
+        "whyConcern": "No cure period means any minor breach could lead to immediate termination without opportunity to fix the issue.",
+        "suggestedEdits": [
+          {
+            "type": "add",
+            "proposedText": "...upon breach, provided that the breaching party shall have thirty (30) days from written notice to cure such breach.",
+            "value": "Adds a standard 30-day cure period to prevent surprise termination."
+          }
+        ],
+        "goToClauseActionPhrase": "go to the termination clause"
       }
     }
   ]
 }
 ```
 
-**Then immediately:** Start collecting data in sequence.
+> **Note:** Generate one IssueCard per issue. Populate with actual contract analysis. Show ComplianceConsent disclaimer before first analysis results.
 
 ---
 
-### Shot 3: "Show me flip financing"
+### Shot 4: "Summarize the contract"
 
-**User:** "Show me flip financing" / "Fix and flip"
+**User:** "Summarize the contract" / "Give me an overview"
 
-**Tele:** "Let's structure financing for your flip."
+**Tele:** "Here's a high-level summary of your contract."
 
 **Call:**
 ```json
 {
-  "badge": "FLIP FINANCING",
-  "title": "Purchase to Flip",
+  "badge": "SUMMARY",
+  "title": "Contract Overview",
   "generativeSubsections": [
     {
-      "id": "flip-info",
-      "templateId": "MediaText",
+      "id": "summary",
+      "templateId": "ContractSummary",
       "props": {
-        "headline": "Maximize Flip Profits",
-        "text": "Short-term renovation financing with competitive rates for quick turnarounds.",
-        "assetId": "flip-property"
+        "headline": "Contract Summary",
+        "subheadline": "SaaS Services Agreement — Acme Corp",
+        "overview": "This is a 2-year SaaS services agreement with several notable risk areas around liability and termination.",
+        "parties": "Acme Corp (Client) ↔ Widget LLC (Provider)",
+        "term": "24 months, auto-renewal with 90-day notice",
+        "paymentBasics": "$15,000/month, Net 30",
+        "terminationRights": "Either party for cause with 30-day cure",
+        "totalIssues": 8,
+        "criticalCount": 2,
+        "highCount": 3,
+        "mediumCount": 2,
+        "lowCount": 1,
+        "keyRisks": [
+          { "title": "Unlimited indemnification", "severity": "critical", "actionPhrase": "show me the indemnification issue" },
+          { "title": "No liability cap", "severity": "critical", "actionPhrase": "show me the liability issue" }
+        ],
+        "ctaLabel": "View All Issues",
+        "ctaActionPhrase": "show me all the issues"
       }
     },
     {
-      "id": "data-needed",
-      "templateId": "List",
+      "id": "obligations",
+      "templateId": "ObligationsTable",
       "props": {
-        "headline": "Data We Need",
-        "items": [
-          "Property Address",
-          "Purchase Price",
-          "Renovation Costs",
-          "Expected Sale Price"
+        "headline": "Key Obligations",
+        "obligations": [
+          { "id": "ob1", "obligation": "Monthly usage report", "owner": "Provider", "deadline": "5th of each month" },
+          { "id": "ob2", "obligation": "Pay invoice", "owner": "Client", "deadline": "Net 30 from receipt" }
         ]
       }
     }
@@ -489,51 +613,168 @@ Displays input fields for all 4 required data points plus calculated profit prev
 }
 ```
 
-**Then immediately:** Start collecting data (any order).
-
 ---
 
-### Shot 4: "Compare rental vs flip"
+### Shot 5: "Show me the financial terms"
 
-**User:** "What's the difference?" / "Which should I choose?"
+**User:** "What are the payment terms?" / "Show me the money terms"
 
-**Tele:** "Here's the comparison."
+**Tele:** "Here are all the financial terms in your contract."
 
 **Call:**
 ```json
 {
-  "badge": "COMPARISON",
-  "title": "Rental vs Flip",
+  "badge": "FINANCIAL",
+  "title": "Financial Terms",
   "generativeSubsections": [
     {
-      "id": "path-comparison",
-      "templateId": "Compare",
+      "id": "money",
+      "templateId": "MoneyTerms",
       "props": {
-        "leftOption": {
-          "title": "Purchase to Rent",
-          "features": [
-            "Monthly rental income",
-            "Long-term appreciation",
-            "5.5% interest rate",
-            "10% down payment",
-            "Stable cash flow"
-          ]
-        },
-        "rightOption": {
-          "title": "Purchase to Flip",
-          "features": [
-            "Sale profit on exit",
-            "Short-term investment",
-            "6.5% interest rate",
-            "20% down payment",
-            "Quick turnaround"
-          ]
-        }
+        "headline": "Financial Terms",
+        "totalValue": "$360,000/year",
+        "items": [
+          { "id": "mt1", "category": "Fees", "description": "Monthly subscription", "amount": "$15,000/mo" },
+          { "id": "mt2", "category": "Late Fees", "description": "Late payment interest", "amount": "1.5%/mo", "severity": "high", "note": "Higher than market standard" },
+          { "id": "mt3", "category": "Taxes", "description": "Client responsible for all taxes", "amount": "Varies" }
+        ]
       }
     }
   ]
 }
 ```
+
+---
+
+### Shot 6: "Show me the termination clause" / "Go to clause"
+
+**User:** "Show me the termination clause" / "Find the indemnification section" / "Go to the liability clause"
+
+**Tele:** "Here's the termination clause highlighted in context."
+
+**Call:**
+```json
+{
+  "badge": "CLAUSE",
+  "title": "Termination Clause",
+  "generativeSubsections": [
+    {
+      "id": "viewer",
+      "templateId": "ContractViewer",
+      "props": {
+        "contractText": "[full contract text from window.__flintContractText]",
+        "headline": "Contract Text",
+        "subheadline": "Termination clause highlighted",
+        "highlights": [
+          { "issueId": "clause-termination", "title": "Termination for Convenience", "severity": "high", "start": 5200, "end": 5850 }
+        ],
+        "focusIssueId": "clause-termination",
+        "askAboutActionPhrase": "tell me about"
+      }
+    }
+  ]
+}
+```
+
+**Then:** The ContractViewer auto-scrolls to the highlighted clause. User can click the highlight to ask about it, use search to find more, or zoom in/out.
+
+---
+
+### Shot 7: "Full analysis view" (ContractViewer + IssuesList)
+
+**User:** "Show me the full analysis" / "Show me the contract with all issues"
+
+**Tele:** "Here's your contract with all issues highlighted. Click any issue to jump to it."
+
+**Call:**
+```json
+{
+  "badge": "ANALYSIS",
+  "title": "Full Contract Analysis",
+  "generativeSubsections": [
+    {
+      "id": "issues-nav",
+      "templateId": "IssuesList",
+      "props": {
+        "headline": "Issues",
+        "subheadline": "12 issues found",
+        "issues": [
+          { "id": "issue_1", "title": "Unlimited Liability", "category": "Indemnification", "severity": "critical", "confidence": 0.95, "actionPhrase": "show me the unlimited liability issue in the contract" },
+          { "id": "issue_2", "title": "No Cure Period", "category": "Termination", "severity": "high", "confidence": 0.88, "actionPhrase": "show me the termination issue in the contract" }
+        ],
+        "ctaLabel": "Summarize all issues",
+        "ctaActionPhrase": "summarize all the issues for me"
+      }
+    },
+    {
+      "id": "contract-viewer",
+      "templateId": "ContractViewer",
+      "props": {
+        "contractText": "[full contract text]",
+        "headline": "Contract Text",
+        "highlights": [
+          { "issueId": "issue_1", "title": "Unlimited Liability", "severity": "critical", "start": 1024, "end": 1180 },
+          { "issueId": "issue_2", "title": "No Cure Period", "severity": "high", "start": 3200, "end": 3350 }
+        ],
+        "askAboutActionPhrase": "tell me about"
+      }
+    }
+  ]
+}
+```
+
+---
+
+### Shot 8: "Summarize section X" (Section-level + Issue-level summarization)
+
+**User:** "Summarize the indemnification section" / "Explain issue 3" / "What does the termination section say?"
+
+**Tele:** "Here's my analysis of the indemnification section."
+
+**Call:**
+```json
+{
+  "badge": "SECTION SUMMARY",
+  "title": "Indemnification Analysis",
+  "generativeSubsections": [
+    {
+      "id": "section-summary",
+      "templateId": "Article",
+      "props": {
+        "headline": "Indemnification Section",
+        "body": "This section (clauses 8.1–8.4) establishes mutual indemnification obligations with asymmetric caps. The provider's liability is limited to fees paid, while the client bears unlimited indemnification for IP infringement claims. This creates significant risk exposure.",
+        "variant": "card"
+      }
+    },
+    {
+      "id": "section-issues",
+      "templateId": "IssueCard",
+      "props": {
+        "title": "Asymmetric Indemnification Cap",
+        "category": "Indemnification",
+        "severity": "critical",
+        "riskType": "legal",
+        "confidence": 0.93,
+        "quote": "Client shall indemnify Provider from any and all IP-related claims without limitation.",
+        "whyConcern": "The provider's indemnification is capped at fees paid, but the client's indemnification has no cap. This asymmetric structure exposes you to unlimited liability.",
+        "suggestedEdits": [
+          {
+            "type": "change",
+            "proposedText": "without limitation",
+            "replacementText": "up to the aggregate fees paid under this Agreement",
+            "value": "Equalizes the indemnification caps — industry standard mutual cap."
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+**Note on multi-level summarization:**
+- **Contract level:** Use `ContractSummary` + `ObligationsTable` (Shot 4)
+- **Section level:** Use `Article` + relevant `IssueCard`s (Shot 8)
+- **Issue level:** Use a single `IssueCard` with full details
 
 ---
 
@@ -548,13 +789,23 @@ Displays input fields for all 4 required data points plus calculated profit prev
 
 ## ✅ BEST PRACTICES
 
-- **Always combine 2-4 templates** for complete experiences
-- **Use assetId** for AI-generated images when showing properties
+- **Use IssueCard** for individual contract issues — one card per issue
+- **Use ContractSummary** for high-level overview with risk score
+- **Use ObligationsTable** for obligation/deadline/owner data
+- **Use MoneyTerms** for financial terms grouped by category
+- **Use ContractUpload** when user wants to upload a new contract
+- **Use ContractViewer** for clause navigation — shows full text with highlights
+- **Use IssuesList** for navigable issue panel — filters, search, sort by severity
+- **Combine ContractViewer + IssuesList** for full analysis view (Shot 7)
+- **For clause navigation** ("show me X clause") use ContractViewer with focusIssueId
+- **Combine 2-4 templates** for complete experiences
 - **Include actionPhrase** on clickable elements
-- **Keep text concise** - let templates do the visual work
-- **Match template to data** - don't force complex data into simple templates
+- **Keep text concise** — let templates do the visual work
+- **Show ComplianceConsent disclaimer** before first analysis results
+- **Always cite contract text** — use the `quote` prop in IssueCard
+- **Multi-level summarization:** Contract → Section → Issue
 
 ---
 
-_v3.0 | 21 Core Templates | Your Property. Our Expertise._
+_v6.0 | 28 Core Templates | Know what you're signing._
 

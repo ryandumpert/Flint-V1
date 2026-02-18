@@ -27,6 +27,7 @@ import {
 import { ThinkingIndicator } from "@/components/ThinkingIndicator";
 import { notifyTele } from "@/utils/acknowledgmentHelpers";
 import { useLightboard } from "@/contexts/LightboardContext";
+import { ContractQuickActions } from "@/components/chat/ContractQuickActions";
 
 type AvatarState = "off" | "connecting" | "connected";
 
@@ -72,6 +73,18 @@ const TelelaborSection = ({
   const { isLightboardMode, toggleLightboard } = useLightboard();
   const [isOTPDialogOpen, setIsOTPDialogOpen] = useState(false);
   const [navigationIsLoading, setNavigationIsLoading] = useState(false);
+  const [hasContractLoaded, setHasContractLoaded] = useState(false);
+
+  // Poll for contract availability (set by ContractUpload → window.__flintContractText)
+  useEffect(() => {
+    const check = () => {
+      const hasText = !!(window as any).__flintContractText;
+      setHasContractLoaded(hasText);
+    };
+    check();
+    const interval = setInterval(check, 2000);
+    return () => clearInterval(interval);
+  }, []);
 
   // Track expanded state for function call input/result panels
   const [expandedFunctionPanels, setExpandedFunctionPanels] = useState<
@@ -1312,6 +1325,21 @@ const TelelaborSection = ({
             </div>
           )}
         </div>
+
+        {/* Contract Quick Actions — above input when contract is loaded */}
+        {hasContractLoaded && (
+          <div className="border-t border-white/[0.06]">
+            <ContractQuickActions
+              onAction={async (phrase) => {
+                try {
+                  await sendMessage(phrase);
+                  playChatSound();
+                } catch (_) { }
+              }}
+              compact={false}
+            />
+          </div>
+        )}
 
         {/* Chat Input Area - CLEAN MINIMAL */}
         <div className="border-t border-white/[0.15] bg-white/[0.08] backdrop-blur-sm">

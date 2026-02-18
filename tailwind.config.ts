@@ -33,7 +33,7 @@ export default {
     extend: {
       colors: {
         /* ============================================
-         * 8-COLOR BRAND PALETTE - MOBEUS.COM STYLE
+         * 8-COLOR BRAND PALETTE
          * ============================================
          * Mist Gray:      #F5F5F5 - Light backgrounds, text, icons
          * Onyx Black:     #0D0D0D - Dark backgrounds (deeper black)
@@ -45,13 +45,13 @@ export default {
          * Amethyst Purple:#7C3AED - Deep purple accents
          * ============================================ */
 
-        // The 8 Brand Colors - MOBEUS STYLE
+        // The 8 Brand Colors
         mist: '#F5F5F5',
         onyx: '#0D0D0D',
         flamingo: '#9B5DE5',  // NOW PURPLE - Primary accent
         wave: '#003D4F',
         turmeric: '#CC850A',
-        jade: '#5EEAD4',      // Teal accent like mobeus.com
+        jade: '#5EEAD4',      // Teal accent
         sapphire: '#47A1AD',
         amethyst: '#7C3AED',  // Deeper purple
 

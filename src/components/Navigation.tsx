@@ -1,7 +1,7 @@
 import { useState, useLayoutEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { default as moebeusLogo } from "@/assets/mobeus-logo.png";
+import { default as flintLogo } from "@/assets/air-loan-logo.png";
 import { handleAcknowledgment } from "@/utils/acknowledgmentHelpers";
 import { sendToTele } from "@/utils/teleInteraction";
 import { useSound } from "@/hooks/useSound";
@@ -35,7 +35,7 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
   }, []);
 
   // ============================================
-  // CASHCO — Smart Financing for Smart Investors
+  // FLINT — AI Contract Risk Review
   // ============================================
   const navItems: Array<{
     id: string;
@@ -45,25 +45,20 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
     isHighlighted?: boolean;
   }> = [
       {
-        id: 'rental-financing',
-        label: 'RENTAL FINANCING',
-        teleQuery: 'show me rental financing options'
-      },
-      {
-        id: 'flip-financing',
-        label: 'FLIP FINANCING',
-        teleQuery: 'show me flip financing options'
-      },
-      {
-        id: 'how-it-works',
-        label: 'HOW IT WORKS',
-        teleQuery: 'show me how it works'
-      },
-      {
-        id: 'get-estimate',
-        label: 'GET ESTIMATE',
-        teleQuery: 'show me mortgage estimate',
+        id: 'upload-contract',
+        label: 'UPLOAD CONTRACT',
+        teleQuery: 'upload a contract',
         isHighlighted: true
+      },
+      {
+        id: 'review-issues',
+        label: 'REVIEW ISSUES',
+        teleQuery: 'show me the top risks'
+      },
+      {
+        id: 'summarize',
+        label: 'SUMMARIZE',
+        teleQuery: 'summarize the contract'
       }
     ];
 
@@ -93,8 +88,8 @@ const Navigation = ({ activeSection, isChatGlassOpen, onSectionChange }: Navigat
               {/* Logo */}
               <div className="no-lightboard flex items-center">
                 <img
-                  src={moebeusLogo}
-                  alt="Mobeus"
+                  src={flintLogo}
+                  alt="Flint"
                   className="no-lightboard h-[27px] w-auto object-contain max-w-none"
                   style={{ aspectRatio: 'auto' }}
                 />

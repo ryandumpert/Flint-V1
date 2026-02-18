@@ -4,8 +4,8 @@
  */
 
 import React from 'react';
-// Updated logo: Cashco branding (Feb 5, 2026)
-import { default as cashcoLogo } from '@/assets/cashco-logo.png';
+// Updated logo: Flint branding
+import { default as flintLogo } from '@/assets/air-loan-logo.png';
 
 interface LogoProps {
     onClick?: () => void;
@@ -26,8 +26,8 @@ export const Logo: React.FC<LogoProps> = ({ onClick, className = '' }) => {
             disabled={!onClick}
         >
             <img
-                src={cashcoLogo}
-                alt="Cashco"
+                src={flintLogo}
+                alt="Flint"
                 className="no-lightboard h-[27px] w-auto object-contain max-w-none transition-all duration-300 ease-in-out"
                 style={{ aspectRatio: 'auto' }}
             />

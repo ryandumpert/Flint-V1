@@ -11,6 +11,7 @@ import { useScrollSpacing } from "@/hooks/useScrollSpacing";
 import { useSound } from "@/hooks/useSound";
 import { playUISound } from "@/utils/soundGenerator";
 import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { useContract, Issue, Severity, RiskType } from '@/contexts/ContractContext';
 // Helper to extract title for loading state
 const getLoadingTitle = (id: string): string => {
   // Generative Era: We don't have static data to look up titles from anymore.
@@ -106,6 +107,122 @@ export const DynamicSectionLoader: React.FC<DynamicSectionLoaderProps> = ({
       return () => clearTimeout(timer);
     }
   }, [isWelcome, isExiting, isGenerativeMode, title, badge]);
+
+  // ─── Sync IssueCard / IssuesList / ContractSummary → ContractContext ─
+  const { setIssues, setAnalysisStatus, hasContract, hasIssues } = useContract();
+
+  useEffect(() => {
+    if (!isGenerativeMode || isWelcome || !hasContract) return;
+
+    const collected: Issue[] = [];
+
+    for (const section of generativeSubsections) {
+      const tid = section.templateId;
+      const p = { ...(section.props || {}), ...section }; // merge root + nested props
+
+      // ── IssueCard — one issue per template instance ──
+      if (tid === 'IssueCard') {
+        collected.push({
+          id: section.id || `issue_${Date.now()}_${collected.length}`,
+          contractVersionId: '',
+          title: p.title || 'Untitled Issue',
+          category: p.category || 'General',
+          severity: (p.severity || 'medium') as Severity,
+          riskType: (p.riskType || 'legal') as RiskType,
+          confidence: typeof p.confidence === 'number' ? p.confidence : 0.5,
+          anchor: p.anchor || { start: 0, end: 0 },
+          quote: p.quote || '',
+          whyConcern: p.whyConcern || '',
+          suggestedEdits: Array.isArray(p.suggestedEdits) ? p.suggestedEdits : [],
+          discussionPrompts: Array.isArray(p.discussionPrompts) ? p.discussionPrompts : undefined,
+          createdAt: Date.now(),
+        });
+      }
+
+      // ── IssuesList — array of issues in props.issues ──
+      if (tid === 'IssuesList' && Array.isArray(p.issues)) {
+        for (const item of p.issues) {
+          collected.push({
+            id: item.id || `issue_${Date.now()}_${collected.length}`,
+            contractVersionId: '',
+            title: item.title || 'Untitled Issue',
+            category: item.category || 'General',
+            severity: (item.severity || 'medium') as Severity,
+            riskType: (item.riskType || 'legal') as RiskType,
+            confidence: typeof item.confidence === 'number' ? item.confidence : 0.5,
+            anchor: item.anchor || { start: 0, end: 0 },
+            quote: item.quote || '',
+            whyConcern: item.whyConcern || '',
+            suggestedEdits: Array.isArray(item.suggestedEdits) ? item.suggestedEdits : [],
+            discussionPrompts: Array.isArray(item.discussionPrompts) ? item.discussionPrompts : undefined,
+            createdAt: Date.now(),
+          });
+        }
+      }
+
+      // ── ContractSummary — extract from keyRisks or severity counts ──
+      if (tid === 'ContractSummary') {
+        // Prefer keyRisks if available (has titles)
+        if (Array.isArray(p.keyRisks) && p.keyRisks.length > 0) {
+          for (const risk of p.keyRisks) {
+            collected.push({
+              id: `risk_${Date.now()}_${collected.length}`,
+              contractVersionId: '',
+              title: risk.title || 'Untitled Risk',
+              category: 'Key Risk',
+              severity: (risk.severity || 'medium') as Severity,
+              riskType: 'legal' as RiskType,
+              confidence: 0.5,
+              anchor: { start: 0, end: 0 },
+              quote: '',
+              whyConcern: risk.title || '',
+              suggestedEdits: [],
+              createdAt: Date.now(),
+            });
+          }
+        }
+        // Fallback: create stubs from severity counts so the download button appears
+        else if (collected.length === 0 && (p.totalIssues > 0 || p.criticalCount || p.highCount || p.mediumCount || p.lowCount)) {
+          const counts: { severity: Severity; count: number }[] = [
+            { severity: 'critical', count: p.criticalCount || 0 },
+            { severity: 'high', count: p.highCount || 0 },
+            { severity: 'medium', count: p.mediumCount || 0 },
+            { severity: 'low', count: p.lowCount || 0 },
+          ];
+          for (const { severity, count } of counts) {
+            for (let i = 0; i < count; i++) {
+              collected.push({
+                id: `stub_${severity}_${Date.now()}_${collected.length}`,
+                contractVersionId: '',
+                title: `${severity.charAt(0).toUpperCase() + severity.slice(1)} Issue ${i + 1}`,
+                category: 'Pending Review',
+                severity: severity as Severity,
+                riskType: 'legal' as RiskType,
+                confidence: 0.5,
+                anchor: { start: 0, end: 0 },
+                quote: '',
+                whyConcern: 'Details available in full issue review.',
+                suggestedEdits: [],
+                createdAt: Date.now(),
+              });
+            }
+          }
+        }
+      }
+    }
+
+    // If no issue-bearing templates found, don't overwrite what we already have
+    if (collected.length === 0) return;
+
+    // Only update if new data has more or equal issues (richer data from IssueCard replaces stubs)
+    if (hasIssues && collected.length < (generativeSubsections.filter((s: any) => s.templateId === 'IssueCard').length || 1)) {
+      return; // Keep richer data from a previous IssueCard render
+    }
+
+    console.log('[DynamicSectionLoader] Syncing', collected.length, 'issues to ContractContext');
+    setIssues(collected);
+    setAnalysisStatus('complete');
+  }, [isGenerativeMode, isWelcome, hasContract, hasIssues, generativeSubsections, setIssues, setAnalysisStatus]);
 
   return (
     <div className={`px-4 md:px-8 py-6 md:py-10 ${animationClass} ${!isExiting && !isWelcome ? "animate-page-fade-in" : ""}`}>

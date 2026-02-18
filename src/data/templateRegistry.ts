@@ -1,10 +1,9 @@
 /**
- * Template Registry v105.0
+ * Template Registry v2.0 — Contract Review Edition
  * 
- * 21 Core Templates (Mortgage-Focused) + 3 Legacy Aliases (24 total for LLM compatibility)
+ * 22 Templates: Core (4) + Layout (2) + Contract Review (7) + Compliance (1) + Content (3) + Display (4) + Data (2)
  * All templates documented in glass-prompt.md
  */
-
 
 import { lazy } from 'react';
 
@@ -24,14 +23,20 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
     Split: lazy(() => import("@/components/templates/Split").then(m => ({ default: m.Split }))),
 
     // ═══════════════════════════════════════════════════════════════════════
-    // INTERACTIVE TEMPLATES (6) - MORTGAGE-SPECIFIC
+    // CONTRACT REVIEW TEMPLATES (7)
     // ═══════════════════════════════════════════════════════════════════════
-    MortgageReview: lazy(() => import("@/components/templates/MortgageReview").then(m => ({ default: m.MortgageReview }))),
+    ContractUpload: lazy(() => import("@/components/templates/ContractUpload").then(m => ({ default: m.ContractUpload }))),
+    IssueCard: lazy(() => import("@/components/templates/IssueCard").then(m => ({ default: m.IssueCard }))),
+    ContractSummary: lazy(() => import("@/components/templates/ContractSummary").then(m => ({ default: m.ContractSummary }))),
+    ObligationsTable: lazy(() => import("@/components/templates/ObligationsTable").then(m => ({ default: m.ObligationsTable }))),
+    MoneyTerms: lazy(() => import("@/components/templates/MoneyTerms").then(m => ({ default: m.MoneyTerms }))),
+    ContractViewer: lazy(() => import("@/components/templates/ContractViewer").then(m => ({ default: m.ContractViewer }))),
+    IssuesList: lazy(() => import("@/components/templates/IssuesList").then(m => ({ default: m.IssuesList }))),
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // COMPLIANCE (1)
+    // ═══════════════════════════════════════════════════════════════════════
     ComplianceConsent: lazy(() => import("@/components/templates/ComplianceConsent").then(m => ({ default: m.ComplianceConsent }))),
-    RentalPropertyReview: lazy(() => import("@/components/templates/RentalPropertyReview").then(m => ({ default: m.RentalPropertyReview }))),
-    FlipPropertyReview: lazy(() => import("@/components/templates/FlipPropertyReview").then(m => ({ default: m.FlipPropertyReview }))),
-    RentalDataCapture: lazy(() => import("@/components/templates/RentalDataCapture").then(m => ({ default: m.RentalDataCapture }))),
-    FlipDataCapture: lazy(() => import("@/components/templates/FlipDataCapture").then(m => ({ default: m.FlipDataCapture }))),
 
     // ═══════════════════════════════════════════════════════════════════════
     // CONTENT TEMPLATES (3)
@@ -53,13 +58,6 @@ export const TEMPLATE_REGISTRY: Record<string, React.FC<any>> = {
     // ═══════════════════════════════════════════════════════════════════════
     Table: lazy(() => import("@/components/templates/Table").then(m => ({ default: m.Table }))),
     MediaText: lazy(() => import("@/components/templates/MediaText").then(m => ({ default: m.MediaText }))),
-
-    // ═══════════════════════════════════════════════════════════════════════
-    // LEGACY ALIASES (Backward Compatibility)
-    // ═══════════════════════════════════════════════════════════════════════
-    TextImageLeft: lazy(() => import("@/components/templates/MediaText").then(m => ({ default: m.MediaText }))),
-    TextImageRight: lazy(() => import("@/components/templates/MediaText").then(m => ({ default: m.MediaText }))),
-    TwoColumns: lazy(() => import("@/components/templates/MediaText").then(m => ({ default: m.MediaText }))),
 };
 
 export const TEMPLATE_NAMES = Object.keys(TEMPLATE_REGISTRY);

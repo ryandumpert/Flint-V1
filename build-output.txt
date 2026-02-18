@@ -1,0 +1,64 @@
+﻿[36mvite v5.4.21 [32mbuilding for production...[36m[39m
+transforming...
+[32mΓ£ô[39m 1756 modules transformed.
+rendering chunks...
+node.exe : [1m[33m[plugin:vite:reporter][39m[22m [33m[plugin 
+vite:reporter] 
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([1m[33m[plugi...vite:reporte 
+   r] :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(!) C:/Users/Ryan 
+Dumpert/Documents/Antigravity/Flint-v1/src/hooks/use-toast.ts is 
+dynamically imported by C:/Users/Ryan 
+Dumpert/Documents/Antigravity/Flint-v1/src/utils/acknowledgmentHelpers.ts 
+but also statically imported by C:/Users/Ryan 
+Dumpert/Documents/Antigravity/Flint-v1/src/components/ui/toaster.tsx, 
+C:/Users/Ryan Dumpert/Documents/Antigravity/Flint-v1/src/pages/Index.tsx, 
+dynamic import will not move module into another chunk.
+[39m
+computing gzip size...
+[2mdist/[22m[32mindex.html                               [39m[1m[2m    19.59 kB[22m[1m[22m[2m Γöé gzip:   4.43 kB[22m
+[2mdist/[22m[32massets/air-loan-logo-CHqb5OTU.png        [39m[1m[2m   189.42 kB[22m[1m[22m
+[2mdist/[22m[32massets/avatar_profile-kU_KCVIq.png       [39m[1m[2m 1,406.62 kB[22m[1m[22m
+[2mdist/[22m[32massets/background-empty-C6ubQItP.png     [39m[1m[2m 2,803.57 kB[22m[1m[22m
+[2mdist/[22m[32massets/background-hero-B_d8vbR4.png      [39m[1m[2m13,062.17 kB[22m[1m[22m
+[2mdist/[22m[35massets/index-FOttq3XE.css                [39m[1m[2m   108.55 kB[22m[1m[22m[2m Γöé gzip:  18.64 kB[22m
+[2mdist/[22m[36massets/vendor-VTBdPTlH.js                [39m[1m[2m     0.03 kB[22m[1m[22m[2m Γöé gzip:   0.05 kB[22m
+[2mdist/[22m[36massets/Stats-CPfB11Ju.js                 [39m[1m[2m     1.74 kB[22m[1m[22m[2m Γöé gzip:   0.80 kB[22m
+[2mdist/[22m[36massets/List-RoxLIvJG.js                  [39m[1m[2m     2.10 kB[22m[1m[22m[2m Γöé gzip:   0.84 kB[22m
+[2mdist/[22m[36massets/Metric-cB-MsgH9.js                [39m[1m[2m     2.35 kB[22m[1m[22m[2m Γöé gzip:   1.01 kB[22m
+[2mdist/[22m[36massets/ComplianceConsent-CABvLunT.js     [39m[1m[2m     2.36 kB[22m[1m[22m[2m Γöé gzip:   0.97 kB[22m
+[2mdist/[22m[36massets/MediaText-DHAsRYlm.js             [39m[1m[2m     2.93 kB[22m[1m[22m[2m Γöé gzip:   0.95 kB[22m
+[2mdist/[22m[36massets/Steps-C5JFP-B-.js                 [39m[1m[2m     3.00 kB[22m[1m[22m[2m Γöé gzip:   1.11 kB[22m
+[2mdist/[22m[36massets/Hero-ENSNfCRZ.js                  [39m[1m[2m     3.24 kB[22m[1m[22m[2m Γöé gzip:   1.24 kB[22m
+[2mdist/[22m[36massets/Split-tHnAPSI_.js                 [39m[1m[2m     3.26 kB[22m[1m[22m[2m Γöé gzip:   1.14 kB[22m
+[2mdist/[22m[36massets/Quote-DGxTtZ6D.js                 [39m[1m[2m     3.42 kB[22m[1m[22m[2m Γöé gzip:   1.33 kB[22m
+[2mdist/[22m[36massets/Table-CH1wdGHG.js                 [39m[1m[2m     3.55 kB[22m[1m[22m[2m Γöé gzip:   1.40 kB[22m
+[2mdist/[22m[36massets/Paragraph-DkSijl9k.js             [39m[1m[2m     3.92 kB[22m[1m[22m[2m Γöé gzip:   1.43 kB[22m
+[2mdist/[22m[36massets/Banner-MPH9lZUU.js                [39m[1m[2m     3.97 kB[22m[1m[22m[2m Γöé gzip:   1.42 kB[22m
+[2mdist/[22m[36massets/FlipDataCapture-CgLPBl-F.js       [39m[1m[2m     4.09 kB[22m[1m[22m[2m Γöé gzip:   1.28 kB[22m
+[2mdist/[22m[36massets/RentalDataCapture-MmM3fMw3.js     [39m[1m[2m     4.29 kB[22m[1m[22m[2m Γöé gzip:   1.22 kB[22m
+[2mdist/[22m[36massets/RentalPropertyReview-FG0fa-V8.js  [39m[1m[2m     5.17 kB[22m[1m[22m[2m Γöé gzip:   1.41 kB[22m
+[2mdist/[22m[36massets/FlipPropertyReview-DRm6ofkl.js    [39m[1m[2m     5.17 kB[22m[1m[22m[2m Γöé gzip:   1.44 kB[22m
+[2mdist/[22m[36massets/Trio-Boc_HsN2.js                  [39m[1m[2m     5.53 kB[22m[1m[22m[2m Γöé gzip:   1.62 kB[22m
+[2mdist/[22m[36massets/Compare-KDsAX7pz.js               [39m[1m[2m     6.96 kB[22m[1m[22m[2m Γöé gzip:   1.95 kB[22m
+[2mdist/[22m[36massets/Article-C0FooR_V.js               [39m[1m[2m     7.77 kB[22m[1m[22m[2m Γöé gzip:   2.27 kB[22m
+[2mdist/[22m[36massets/MortgageReview-CHmGvPi2.js        [39m[1m[2m     8.37 kB[22m[1m[22m[2m Γöé gzip:   2.29 kB[22m
+[2mdist/[22m[36massets/ContractUpload-DtDt24Ec.js        [39m[1m[2m    12.70 kB[22m[1m[22m[2m Γöé gzip:   4.16 kB[22m
+[2mdist/[22m[36massets/WelcomeCarousel-B_Nch-mw.js       [39m[1m[2m    26.29 kB[22m[1m[22m[2m Γöé gzip:  10.45 kB[22m
+[2mdist/[22m[36massets/jszip.min-CcWrGBnG.js             [39m[1m[2m    97.42 kB[22m[1m[22m[2m Γöé gzip:  30.28 kB[22m
+[2mdist/[22m[36massets/index-CwCIQMcf.js                 [39m[1m[2m   277.46 kB[22m[1m[22m[2m Γöé gzip:  88.38 kB[22m
+[2mdist/[22m[36massets/pdf-DGRInXsp.js                   [39m[1m[2m   437.16 kB[22m[1m[22m[2m Γöé gzip: 129.43 kB[22m
+[2mdist/[22m[36massets/ui-Cjum7bhF.js                    [39m[1m[33m   952.57 kB[39m[22m[2m Γöé gzip: 191.08 kB[22m
+[33m
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: 
+https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via 
+build.chunkSizeWarningLimit.[39m
+[32mΓ£ô built in 3.86s[39m

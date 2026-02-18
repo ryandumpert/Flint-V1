@@ -63,17 +63,17 @@ export const ImageGeneratingState: React.FC<ImageGeneratingStateProps> = ({ prom
                         <div className="absolute inset-[3px] rounded-full overflow-hidden">
                             <img
                                 src={avatarImage}
-                                alt="Catherine Avatar"
+                                alt="Flint Avatar"
                                 className="w-full h-full object-cover"
                             />
                         </div>
                     </div>
                 </div>
 
-                {/* Catherine is generating message */}
+                {/* Flint is generating message */}
                 <div className="space-y-3">
                     <h3 className="text-xl font-light text-mist tracking-wide">
-                        Catherine is generating...
+                        Flint is generating...
                     </h3>
 
                     {/* Animated dots - using palette colors */}

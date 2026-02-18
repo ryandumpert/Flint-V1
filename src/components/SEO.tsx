@@ -11,12 +11,12 @@ interface SEOProps {
 }
 
 export const SEO = ({
-  title = 'CashCo Mortgage | Smart Financing for Smart Investors',
-  description = 'Non-QM mortgages for rental income and fix-and-flip investments. Get your 30-day non-binding estimate today.',
+  title = 'Flint | AI Contract Risk Review',
+  description = 'AI-powered contract review. Upload contracts, identify red flags, get actionable suggestions, and chat with your AI contract advisor.',
   image = '/og-image.png',
   url = '/',
   type = 'website',
-  keywords = ['CashCo', 'Non-QM Mortgage', 'Rental Property Financing', 'Fix and Flip Loans', 'Investment Property'],
+  keywords = ['Flint', 'Contract Review', 'Risk Analysis', 'Red Flags', 'Legal Review', 'Contract AI', 'Due Diligence'],
   structuredData,
 }: SEOProps) => {
   useEffect(() => {
@@ -47,7 +47,7 @@ export const SEO = ({
     updateMetaTag('og:image', image, true);
     updateMetaTag('og:url', url, true);
     updateMetaTag('og:type', type, true);
-    updateMetaTag('og:site_name', 'CashCo', true);
+    updateMetaTag('og:site_name', 'Flint', true);
 
     // Twitter Card tags
     updateMetaTag('twitter:card', 'summary_large_image');
@@ -72,35 +72,35 @@ export const SEO = ({
   return null;
 };
 
-// Pre-configured SEO for sections - CashCo Mortgage Concierge
+// Pre-configured SEO for sections - Flint Contract Risk Review
 export const sectionSEO = {
   welcome: {
-    title: 'CashCo Mortgage | Smart Financing for Smart Investors',
-    description: 'Non-QM mortgages for rental income and fix-and-flip investments. Get your 30-day non-binding estimate.',
-    keywords: ['CashCo', 'Non-QM Mortgage', 'Rental Property Financing', 'Fix and Flip Loans', 'Investment Property'],
+    title: 'Flint | AI Contract Risk Review',
+    description: 'AI-powered contract review. Upload contracts, identify red flags, get actionable suggestions.',
+    keywords: ['Flint', 'Contract Review', 'Risk Analysis', 'Red Flags', 'Legal Review', 'Due Diligence'],
   },
 
-  rental: {
-    title: 'Purchase to Rent Financing | CashCo Mortgage',
-    description: 'Long-term rental income strategy. Flexible non-QM terms for investment property financing.',
-    keywords: ['Rental Property Financing', 'Non-QM Loans', 'Investment Property', 'Purchase to Rent'],
+  upload: {
+    title: 'Upload Contract | Flint',
+    description: 'Upload your contract for AI-powered risk analysis. Supports PDF, DOCX, and plain text.',
+    keywords: ['Contract Upload', 'Document Review', 'Risk Analysis', 'Flint'],
   },
 
-  flip: {
-    title: 'Purchase to Flip Financing | CashCo Mortgage',
-    description: 'Short-term renovation profits. Quick turnaround financing for fix-and-flip investors.',
-    keywords: ['Fix and Flip Loans', 'Renovation Financing', 'House Flipping', 'Short-term Investment'],
+  analysis: {
+    title: 'Contract Analysis | Flint',
+    description: 'AI-identified red flags, risky clauses, and suggested edits for your contract.',
+    keywords: ['Contract Analysis', 'Red Flags', 'Risk Review', 'Clause Analysis'],
   },
 
-  estimate: {
-    title: 'Get Your Mortgage Estimate | CashCo',
-    description: 'Calculate your mortgage in minutes. Non-binding estimate valid for 30 days.',
-    keywords: ['Mortgage Calculator', 'Mortgage Estimate', 'Non-Binding Quote', 'CashCo'],
+  review: {
+    title: 'Contract Review | Flint',
+    description: 'Review contract issues, suggested edits, and navigate highlighted clauses.',
+    keywords: ['Contract Review', 'Issue Navigation', 'Suggested Edits', 'Flint'],
   },
 
   home: {
-    title: 'CashCo Mortgage | Smart Financing for Smart Investors',
-    description: 'Specialized in non-QM financing for rental and flip properties.',
-    keywords: ['CashCo', 'Investment Property Financing', 'Non-QM Mortgage'],
+    title: 'Flint | AI Contract Risk Review',
+    description: 'AI-powered contract risk review platform. Fast identification of contractual risk and ambiguity.',
+    keywords: ['Flint', 'Contract Review', 'Risk Analysis', 'AI Legal Review'],
   },
 };

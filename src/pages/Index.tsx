@@ -22,32 +22,33 @@ import { DynamicSectionLoader } from "@/components/DynamicSectionLoader";
 import { BackToTop } from "@/components/BackToTop";
 import { OTPDialog } from "@/components/OTPDialog";
 
-import { CarColorProvider } from "@/contexts/CarColorContext";
 
 import { GitVersionIndicator } from "@/components/GitVersionIndicator";
 import { OnboardingTransition } from "@/components/OnboardingTransition";
 import { Logo } from "@/components/Logo";
+import { LegalDisclaimer } from "@/components/LegalDisclaimer";
+import { ContractBar } from "@/components/ContractBar";
 
 
-// Welcome section — CASHCO MORTGAGE CONCIERGE: Smart Financing for Smart Investors
+// Welcome section — FLINT: AI Contract Risk Review
 const WELCOME_VARIANTS = [
   {
-    badge: "CASHCO MORTGAGE",
-    title: "Smart Financing for Smart Investors",
-    subtitle: "Non-QM mortgages for rental income and fix-and-flip investments.",
+    badge: "FLINT",
+    title: "AI Contract Risk Review",
+    subtitle: "Upload contracts, identify red flags, and get actionable suggestions.",
     generativeSubsections: [
-      // 0. WelcomeCarousel - Two Investment Paths
+      // 0. WelcomeCarousel - Quick Actions
       {
-        id: "investment-paths",
+        id: "quick-actions",
         templateId: "WelcomeCarousel",
         props: {
           cards: [
-            { question: "Purchase to Rent?", subtext: "Long-term rental income strategy.", icon: "Home", actionPhrase: "show me rental financing options" },
-            { question: "Purchase to Flip?", subtext: "Short-term renovation profits.", icon: "Hammer", actionPhrase: "show me flip financing options" },
-            { question: "How it works?", subtext: "Simple 5-step mortgage estimation process.", icon: "Map", actionPhrase: "show me how it works" },
-            { question: "Non-QM Financing?", subtext: "Flexible qualification. Competitive rates.", icon: "Shield", actionPhrase: "tell me about non-qm financing" },
-            { question: "Who is CashCo?", subtext: "Specialized in investor financing since 2010.", icon: "Building", actionPhrase: "tell me about cashco" },
-            { question: "Get my estimate?", subtext: "30-day non-binding mortgage calculation.", icon: "Calculator", actionPhrase: "show me mortgage estimate", isAccent: true, accentColor: "emerald" }
+            { question: "Upload a contract?", subtext: "PDF, DOCX, or plain text.", icon: "Upload", actionPhrase: "upload a contract" },
+            { question: "Review red flags?", subtext: "AI-identified risks and issues.", icon: "AlertTriangle", actionPhrase: "show me the top risks" },
+            { question: "How it works?", subtext: "Upload → Analyze → Review.", icon: "Map", actionPhrase: "show me how it works" },
+            { question: "What does Flint check?", subtext: "Liability, indemnity, termination, and more.", icon: "Shield", actionPhrase: "what does flint check" },
+            { question: "About Flint?", subtext: "AI-powered contract risk advisor.", icon: "Info", actionPhrase: "tell me about flint" },
+            { question: "Upload now?", subtext: "Get your risk review in seconds.", icon: "FileUp", actionPhrase: "upload a contract", isAccent: true, accentColor: "emerald" }
           ]
         }
       },
@@ -56,76 +57,61 @@ const WELCOME_VARIANTS = [
         id: "promise-hero",
         templateId: "Hero",
         props: {
-          headline: "Smart Financing for Smart Investors",
-          description: "Non-QM mortgages for rental and flip properties.",
-          ctaLabel: "Get Started",
-          ctaActionPhrase: "show me mortgage estimate"
+          headline: "Contracts reviewed. Risks revealed.",
+          description: "Upload any contract and get an instant AI-powered risk analysis with highlighted clauses, explanations, and suggested edits.",
+          ctaLabel: "Upload Contract",
+          ctaActionPhrase: "upload a contract"
         }
       },
-      // 2. Split - Two Paths
-      {
-        id: "two-paths",
-        templateId: "Split",
-        props: {
-          leftContent: {
-            headline: "Purchase to Rent",
-            body: "Generate consistent monthly income. Build long-term wealth through appreciation. We finance your rental property investment with flexible non-QM terms."
-          },
-          rightContent: {
-            headline: "Purchase to Flip",
-            body: "Maximize short-term profits through strategic renovation. Quick turnaround financing for fix-and-flip investors with competitive rates."
-          }
-        }
-      },
-      // 3. Trio - Three Benefits
+      // 2. Trio - Three Benefits
       {
         id: "three-benefits",
         templateId: "Trio",
         props: {
           cards: [
             {
-              icon: "Shield",
-              title: "Non-Binding Estimates",
-              description: "Get your 30-day mortgage calculation. No commitment required.",
-              actionPhrase: "show me mortgage estimate"
+              icon: "AlertTriangle",
+              title: "Red Flag Detection",
+              description: "Automatically identifies risky language, one-sided clauses, and hidden obligations.",
+              actionPhrase: "show me the top risks"
             },
             {
-              icon: "Zap",
-              title: "Fast Approval",
-              description: "Non-QM flexibility. Investor-focused qualification.",
-              actionPhrase: "tell me about non-qm financing"
+              icon: "FileText",
+              title: "Clause-by-Clause Review",
+              description: "Navigate highlighted clauses with explanations and suggested alternatives.",
+              actionPhrase: "show me clause details"
             },
             {
-              icon: "TrendingUp",
-              title: "Both Paths Covered",
-              description: "Rental income or flip profits. We finance both strategies.",
-              actionPhrase: "show me how it works"
+              icon: "MessageSquare",
+              title: "Ask Flint Anything",
+              description: "Chat about your contract. Get summaries, comparisons, and plain-English explanations.",
+              actionPhrase: "summarize the contract"
             }
           ],
           numbered: false,
-          ctaLabel: "Explore Options",
-          ctaActionPhrase: "show me financing paths"
+          ctaLabel: "Get Started",
+          ctaActionPhrase: "upload a contract"
         }
       },
-      // 4. Quote - The Value
+      // 3. Quote - The Value
       {
         id: "the-value",
         templateId: "Quote",
         props: {
-          quote: "Your property. Our expertise.",
-          author: "CashCo Team",
-          role: "Investor Financing Specialists"
+          quote: "Know what you're signing before you sign it.",
+          author: "Flint",
+          role: "AI Contract Risk Advisor"
         }
       },
-      // 5. Banner - Get Started
+      // 4. Banner - Get Started
       {
-        id: "get-estimate-banner",
+        id: "upload-banner",
         templateId: "Banner",
         props: {
-          headline: "Get Your Mortgage Estimate",
-          subheadline: "Non-binding. Valid for 30 days.",
-          ctaLabel: "Start Now",
-          ctaActionPhrase: "show me mortgage estimate",
+          headline: "Upload Your Contract",
+          subheadline: "Get your AI risk review in seconds.",
+          ctaLabel: "Upload Now",
+          ctaActionPhrase: "upload a contract",
           variant: "gradient"
         }
       }
@@ -1535,7 +1521,7 @@ const Index = () => {
   }
 
   return (
-    <CarColorProvider>
+    <>
       <GitVersionIndicator />
       {/* Dynamic SEO based on active section - TeleLabor Platform */}
       <SEO {...(sectionSEO[activeSection as keyof typeof sectionSEO] || sectionSEO.welcome)} />
@@ -1586,6 +1572,9 @@ const Index = () => {
               />
             </div>
 
+            {/* Contract Title Bar — shows active contract name + download button */}
+            <ContractBar />
+
             {/* Platform Content Sections */}
             <div
               className={`min-h-screen squeeze-target ${isChatGlassOpen ? "max-xl:hidden" : ""}`}
@@ -1596,6 +1585,9 @@ const Index = () => {
 
             {/* Back to Top Button */}
             <BackToTop />
+
+            {/* Legal Disclaimer Banner */}
+            <LegalDisclaimer />
           </div>
         )}
 
@@ -1605,7 +1597,7 @@ const Index = () => {
           onSubmit={handleOTPSubmit}
         />
       </div>
-    </CarColorProvider>
+    </>
   );
 };
 

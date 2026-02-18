@@ -4,14 +4,15 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LightboardProvider } from "@/contexts/LightboardContext";
 import { VolumeProvider } from "@/contexts/VolumeContext";
-import { CarColorProvider } from "@/contexts/CarColorContext";
+
+import { ContractProvider } from "@/contexts/ContractContext";
 import Index from "./pages/Index";
 import DesignTokens from "./pages/DesignTokens";
 
 const App = () => (
   <TooltipProvider>
     <VolumeProvider>
-      <CarColorProvider>
+      <ContractProvider>
         <LightboardProvider>
           <Toaster />
           <Sonner />
@@ -22,7 +23,7 @@ const App = () => (
             </Routes>
           </BrowserRouter>
         </LightboardProvider>
-      </CarColorProvider>
+      </ContractProvider>
     </VolumeProvider>
   </TooltipProvider>
 );

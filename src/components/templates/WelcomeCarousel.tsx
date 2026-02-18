@@ -1,5 +1,5 @@
 /**
- * WelcomeCarousel - Apple-style solid color cards for Mobeus
+ * WelcomeCarousel - Apple-style solid color cards for Flint - Contract Risk Review
  * Clean cards with icons, large text, no images
  * Adapted from thoughtworks-external pattern
  */
