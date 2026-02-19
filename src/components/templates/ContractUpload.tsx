@@ -17,6 +17,7 @@ import { extractFromFile, extractFromText, validateContractText, ExtractionResul
 import { DataHandlingNotice } from '@/components/DataHandlingNotice';
 import { containsHighSeverityPII } from '@/utils/piiMasking';
 import { useContract } from '@/contexts/ContractContext';
+import { analyzeContract, mapToIssues, buildFlintNotification, type AnalysisResponse } from '@/utils/contractAnalysisService';
 
 interface ContractUploadProps {
     headline?: string;
@@ -27,7 +28,7 @@ interface ContractUploadProps {
     showPasteOption?: boolean;
 }
 
-type UploadStage = 'idle' | 'dragging' | 'extracting' | 'preview' | 'error';
+type UploadStage = 'idle' | 'dragging' | 'extracting' | 'preview' | 'analyzing' | 'error';
 
 export const ContractUpload: React.FC<ContractUploadProps> = ({
     headline = 'Upload Your Contract',
@@ -38,7 +39,7 @@ export const ContractUpload: React.FC<ContractUploadProps> = ({
     showPasteOption = true,
 }) => {
     const { playClick } = useSound();
-    const { setContractText, setAnalysisStatus } = useContract();
+    const { setContractText, setIssues, setAnalysisStatus, setAnalysisError, activeVersion } = useContract();
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const [stage, setStage] = useState<UploadStage>('idle');
@@ -48,6 +49,7 @@ export const ContractUpload: React.FC<ContractUploadProps> = ({
     const [fileStats, setFileStats] = useState<{ words: number; chars: number; pages?: number } | null>(null);
     const [warnings, setWarnings] = useState<string[]>([]);
     const [errorMessage, setErrorMessage] = useState('');
+    const [analysisProgress, setAnalysisProgress] = useState('');
     const [activeTab, setActiveTab] = useState<'file' | 'paste'>('file');
 
     // ─── File Processing ─────────────────────────────────────────────────
@@ -153,8 +155,10 @@ export const ContractUpload: React.FC<ContractUploadProps> = ({
 
     // ─── Submit to AI ────────────────────────────────────────────────────
 
-    const handleAnalyze = useCallback(() => {
+    const handleAnalyze = useCallback(async () => {
         playClick();
+        setStage('analyzing');
+        setAnalysisProgress('Sending contract to AI for analysis...');
 
         // Store the contract text on the window for the AI to access
         (window as any).__flintContractText = extractedText;
@@ -173,10 +177,45 @@ export const ContractUpload: React.FC<ContractUploadProps> = ({
         });
         setAnalysisStatus('analyzing');
 
-        // Notify the AI persona with the contract text
-        const preview = extractedText.slice(0, 2000);
-        notifyTele(`${submitActionPhrase}\n\nContract: "${fileName}"\nWord count: ${fileStats?.words || 0}\n\nFirst 2000 characters:\n${preview}`);
-    }, [extractedText, fileName, fileStats, submitActionPhrase, playClick, setContractText, setAnalysisStatus]);
+        try {
+            // ─── Call Gemini analysis via Netlify function ───────────
+            setAnalysisProgress('AI is reading the full contract...');
+            const analysis: AnalysisResponse = await analyzeContract(extractedText, fileName);
+
+            // ─── Store structured results ────────────────────────────
+            setAnalysisProgress('Processing results...');
+
+            // Map raw issues into ContractContext Issue[] format
+            const versionId = (window as any).__flintContractMeta?.versionId || `cv_${Date.now()}`;
+            const mappedIssues = mapToIssues(analysis.issues, versionId);
+            setIssues(mappedIssues);
+
+            // Store full analysis on window for Flint and templates to access
+            (window as any).__flintAnalysisResults = analysis;
+
+            setAnalysisStatus('complete');
+
+            // ─── Notify Flint with structured analysis summary ───────
+            const flintMessage = buildFlintNotification(analysis);
+            notifyTele(flintMessage);
+
+            setStage('preview');
+            setAnalysisProgress('');
+
+        } catch (error) {
+            console.error('[ContractUpload] Analysis failed:', error);
+            const errorMsg = error instanceof Error ? error.message : 'Analysis failed unexpectedly';
+            setAnalysisStatus('error');
+            setAnalysisError(errorMsg);
+            setStage('error');
+            setErrorMessage(`Analysis failed: ${errorMsg}. You can try again or chat with Flint directly.`);
+            setAnalysisProgress('');
+
+            // Fallback: still notify Flint with the preview so the user isn't stuck
+            const preview = extractedText.slice(0, 2000);
+            notifyTele(`${submitActionPhrase}\n\nContract: "${fileName}"\nWord count: ${fileStats?.words || 0}\n\nNote: Automated analysis failed, but here are the first 2000 characters for manual review:\n${preview}`);
+        }
+    }, [extractedText, fileName, fileStats, submitActionPhrase, playClick, setContractText, setIssues, setAnalysisStatus, setAnalysisError]);
 
     // ─── Reset ───────────────────────────────────────────────────────────
 
@@ -210,6 +249,26 @@ export const ContractUpload: React.FC<ContractUploadProps> = ({
                     <Loader2 className="w-10 h-10 text-primary animate-spin" />
                     <p className="text-mist/60 text-lg">Extracting text from <span className="text-white font-medium">{fileName}</span>...</p>
                     <p className="text-mist/40 text-sm">This may take a moment for large files.</p>
+                </div>
+            )}
+
+            {/* ─── ANALYSIS IN PROGRESS ─── */}
+            {stage === 'analyzing' && (
+                <div className="flex flex-col items-center justify-center py-16 gap-6">
+                    <div className="relative">
+                        <div className="w-20 h-20 rounded-full border-2 border-primary/20 flex items-center justify-center">
+                            <Loader2 className="w-10 h-10 text-primary animate-spin" />
+                        </div>
+                        <div className="absolute inset-0 rounded-full border-2 border-primary/40 animate-ping" />
+                    </div>
+                    <div className="text-center space-y-2">
+                        <p className="text-white text-lg font-medium">Analyzing Contract</p>
+                        <p className="text-mist/60 text-sm">{analysisProgress || 'Reading the full document...'}</p>
+                        <p className="text-mist/40 text-xs">Gemini AI is reviewing every clause for risks, obligations, and financial terms.</p>
+                    </div>
+                    <div className="w-64 h-1 bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-primary/50 to-primary rounded-full animate-pulse" style={{ width: '60%' }} />
+                    </div>
                 </div>
             )}
 

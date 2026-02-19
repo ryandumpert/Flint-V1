@@ -1,0 +1,19 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# API routes — must come BEFORE the SPA fallback
+[[redirects]]
+  from = "/api/analyze-contract"
+  to = "/.netlify/functions/analyze-contract"
+  status = 200
+
+# SPA fallback — all other routes go to index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
