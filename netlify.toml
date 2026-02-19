@@ -6,6 +6,10 @@
 [functions]
   node_bundler = "esbuild"
 
+# Extend timeout to maximum (26 seconds) for contract analysis
+[functions."analyze-contract"]
+  timeout = 26
+
 # API routes — must come BEFORE the SPA fallback
 [[redirects]]
   from = "/api/analyze-contract"
