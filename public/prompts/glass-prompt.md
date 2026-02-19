@@ -495,7 +495,87 @@ Displays mandatory disclaimer requiring user acknowledgment.
 }
 ```
 
-**Then:** Wait for the user to upload/paste. When user clicks "Analyze Contract", the contract text is sent. Proceed to show disclaimer (ComplianceConsent), then analysis results.
+**Then:** Wait for the user to upload/paste. When user clicks "Analyze Contract", Gemini AI automatically analyzes the full contract text. You will receive a notification with the structured results. Proceed to Shot 2b.
+
+---
+
+### Shot 2b: Analysis Results Received (AUTO-TRIGGERED)
+
+**System notification:** "Contract analysis complete for [filename]. Summary: [overview]. Issues found: X total..."
+
+**Tele:** "I've finished analyzing your contract. Before I share my findings, I need to show you an important disclaimer."
+
+**Step 1 — Show disclaimer FIRST:**
+```json
+{
+  "badge": "DISCLAIMER",
+  "title": "Important Notice",
+  "generativeSubsections": [
+    {
+      "id": "disclaimer",
+      "templateId": "ComplianceConsent",
+      "props": {
+        "statement": "This analysis is for informational purposes only and does not constitute legal advice. Consult a qualified attorney for legal guidance.",
+        "confirmActionPhrase": "yes I understand, show me the results"
+      }
+    }
+  ]
+}
+```
+
+**Step 2 — After user confirms, show ContractSummary + top issues:**
+
+Use the REAL data from the analysis notification to populate these templates. The issue titles, severity levels, quotes, and suggested edits should all come from the actual analysis — never use placeholder data.
+
+```json
+{
+  "badge": "ANALYSIS",
+  "title": "Contract Analysis Results",
+  "generativeSubsections": [
+    {
+      "id": "summary",
+      "templateId": "ContractSummary",
+      "props": {
+        "headline": "Contract Summary",
+        "subheadline": "[actual contract type] — [actual parties from analysis]",
+        "overview": "[actual overview from analysis summary]",
+        "parties": "[actual parties from analysis]",
+        "term": "[actual term from analysis]",
+        "paymentBasics": "[actual payment info from analysis]",
+        "terminationRights": "[actual termination rights from analysis]",
+        "totalIssues": "[actual total from analysis]",
+        "criticalCount": "[actual count]",
+        "highCount": "[actual count]",
+        "mediumCount": "[actual count]",
+        "lowCount": "[actual count]",
+        "keyRisks": [
+          { "title": "[actual issue title]", "severity": "[actual severity]", "actionPhrase": "show me the [category] issue" }
+        ],
+        "ctaLabel": "View All Issues",
+        "ctaActionPhrase": "show me all the issues"
+      }
+    },
+    {
+      "id": "top-issue-1",
+      "templateId": "IssueCard",
+      "props": {
+        "title": "[actual issue title from analysis]",
+        "category": "[actual category]",
+        "severity": "[actual severity]",
+        "riskType": "[actual riskType]",
+        "confidence": "[actual confidence]",
+        "quote": "[actual quote from contract]",
+        "whyConcern": "[actual explanation from analysis]",
+        "suggestedEdits": "[actual suggested edits from analysis]",
+        "goToClauseActionPhrase": "go to the [category] clause",
+        "askAboutActionPhrase": "tell me more about this [category] risk"
+      }
+    }
+  ]
+}
+```
+
+> **CRITICAL:** Replace ALL bracketed placeholders above with ACTUAL data from the analysis notification. The analysis has already been done by Gemini — your job is to present those results accurately using the template system.
 
 ---
 

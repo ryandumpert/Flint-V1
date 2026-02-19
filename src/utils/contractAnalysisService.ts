@@ -146,12 +146,27 @@ export function buildFlintNotification(analysis: AnalysisResponse): string {
 
     const categories = [...new Set(issues.map(i => i.category))];
 
+    // Sort issues by severity priority for top issues
+    const severityOrder: Record<string, number> = { critical: 0, high: 1, medium: 2, low: 3 };
+    const sortedIssues = [...issues].sort((a, b) =>
+        (severityOrder[a.severity] ?? 3) - (severityOrder[b.severity] ?? 3)
+    );
+    const topIssues = sortedIssues.slice(0, 5);
+
     const parts = [
         `Contract analysis complete for "${analysis.meta.fileName}".`,
         ``,
-        `Summary: ${summary.overview}`,
+        `CONTRACT DETAILS:`,
+        `- Type: ${summary.contractType || 'Not specified'}`,
+        `- Parties: ${summary.parties || 'Not specified'}`,
+        `- Term: ${summary.term || 'Not specified'}`,
+        `- Payment: ${summary.paymentBasics || 'Not specified'}`,
+        `- Termination: ${summary.terminationRights || 'Not specified'}`,
+        `- Jurisdiction: ${summary.jurisdiction || 'Not specified'}`,
         ``,
-        `Issues found: ${issues.length} total`,
+        `SUMMARY: ${summary.overview}`,
+        ``,
+        `ISSUES FOUND: ${issues.length} total`,
         severityCounts.critical > 0 ? `  🔴 ${severityCounts.critical} critical` : '',
         severityCounts.high > 0 ? `  🟠 ${severityCounts.high} high` : '',
         severityCounts.medium > 0 ? `  🟡 ${severityCounts.medium} medium` : '',
@@ -161,8 +176,27 @@ export function buildFlintNotification(analysis: AnalysisResponse): string {
         obligations.length > 0 ? `Obligations: ${obligations.length} tracked` : '',
         financialTerms.length > 0 ? `Financial terms: ${financialTerms.length} identified` : '',
         ``,
-        `Please present the contract summary to the user using the ContractSummary template, followed by the top issues.`,
-    ].filter(Boolean);
+        `TOP ISSUES (use these to populate IssueCard templates):`,
+    ];
 
-    return parts.join('\n');
+    topIssues.forEach((issue, idx) => {
+        const edits = (issue.suggestedEdits || [])
+            .map(e => `${e.type}: "${e.proposedText || ''}" → "${e.replacementText || ''}" (${e.value})`)
+            .join('; ');
+        parts.push(
+            ``,
+            `Issue ${idx + 1}: "${issue.title}"`,
+            `  Severity: ${issue.severity} | Category: ${issue.category} | Risk: ${issue.riskType}`,
+            `  Quote: "${issue.quote}"`,
+            `  Concern: ${issue.whyConcern}`,
+            edits ? `  Suggested edits: ${edits}` : '',
+        );
+    });
+
+    parts.push(
+        ``,
+        `INSTRUCTIONS: First show the ComplianceConsent disclaimer. After user confirms, present ContractSummary with the data above, then show IssueCards for the top issues. Use the REAL data provided above — do not make up different issues.`,
+    );
+
+    return parts.filter(Boolean).join('\n');
 }
