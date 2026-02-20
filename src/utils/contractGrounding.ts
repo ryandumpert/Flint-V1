@@ -102,6 +102,7 @@ export function groundMessageWithContract(
         'summarize', 'review', 'analyze', 'draft', 'safer', 'alternative',
         'financial', 'money', 'deadline', 'critical', 'high', 'medium', 'low',
         'red flag', 'concern', 'suggest', 'edit', 'find', 'show',
+        'what does', 'tell me', 'explain', 'is this', 'fair', 'risky',
     ];
 
     const lower = userMessage.toLowerCase();
@@ -130,8 +131,46 @@ export function groundMessageWithContract(
         parts.push(`[Top categories: ${summary.topCategories.join(', ')}]`);
     }
 
+    // ─── Deep grounding: inject relevant clause text + analysis ───────────
+    // When the user asks about a specific section, find it in the contract
+    // and inject the actual text so Flint can answer accurately.
+    const clauseRequest = parseClauseNavigationRequest(userMessage);
+    if (clauseRequest && typeof window !== 'undefined') {
+        const contractText = (window as any).__flintContractText;
+        if (contractText && typeof contractText === 'string') {
+            const clause = findClauseInText(contractText, clauseRequest.searchQuery);
+            if (clause) {
+                const clauseText = contractText.slice(clause.start, Math.min(clause.end, clause.start + 1500));
+                parts.push(`\n[Relevant clause text for "${clauseRequest.sectionName}":\n${clauseText}\n]`);
+            }
+        }
+
+        // Also inject matching analysis issues
+        const analysis = (window as any).__flintAnalysisResults;
+        if (analysis?.issues && Array.isArray(analysis.issues)) {
+            const matchingIssues = analysis.issues.filter((issue: any) => {
+                const q = clauseRequest.searchQuery.toLowerCase();
+                return (
+                    issue.title?.toLowerCase().includes(q) ||
+                    issue.category?.toLowerCase().includes(q) ||
+                    issue.quote?.toLowerCase().includes(q)
+                );
+            });
+            if (matchingIssues.length > 0) {
+                const issueContext = matchingIssues
+                    .slice(0, 3)
+                    .map((i: any) =>
+                        `- ${i.severity?.toUpperCase()}: "${i.title}" — ${i.whyConcern || ''}\n  Quote: "${(i.quote || '').slice(0, 150)}"\n  Suggested: ${(i.suggestedEdits || []).map((e: any) => e.value).join('; ') || 'None'}`
+                    )
+                    .join('\n');
+                parts.push(`\n[Related analysis findings:\n${issueContext}\n]`);
+            }
+        }
+    }
+
     return `${parts.join(' ')}\n\n${userMessage}`;
 }
+
 
 // ─── Navigate-to-Clause Helpers ──────────────────────────────────────────────
 

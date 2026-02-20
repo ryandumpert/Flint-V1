@@ -46,7 +46,7 @@ const severityColors: Record<Severity, { bg: string; text: string; ring: string;
 };
 
 export const ContractViewer: React.FC<ContractViewerProps> = ({
-    contractText = '',
+    contractText: contractTextProp = '',
     highlights = [],
     headline,
     subheadline,
@@ -61,6 +61,25 @@ export const ContractViewer: React.FC<ContractViewerProps> = ({
     const [searchVisible, setSearchVisible] = useState(false);
     const [fontSize, setFontSize] = useState(14);
     const [hoveredIssue, setHoveredIssue] = useState<string | null>(null);
+
+    // ─── Resolve contract text: prefer prop, fall back to window store ────
+    const contractText = useMemo(() => {
+        // Detect placeholder patterns that Flint might generate instead of real text
+        const isPlaceholder = !contractTextProp
+            || contractTextProp.length < 200
+            || /^\[.*\]$/.test(contractTextProp.trim())
+            || contractTextProp.includes('window.__flintContractText')
+            || contractTextProp.includes('[full contract');
+
+        if (isPlaceholder) {
+            const storedText = (window as any).__flintContractText;
+            if (storedText && typeof storedText === 'string' && storedText.length > 100) {
+                return storedText;
+            }
+        }
+
+        return contractTextProp;
+    }, [contractTextProp]);
 
     const handleAction = (phrase: string) => { playClick(); notifyTele(phrase); };
 
