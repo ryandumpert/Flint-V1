@@ -18,6 +18,7 @@ import { DataHandlingNotice } from '@/components/DataHandlingNotice';
 import { containsHighSeverityPII } from '@/utils/piiMasking';
 import { useContract } from '@/contexts/ContractContext';
 import { analyzeContract, mapToIssues, buildFlintNotification, type AnalysisResponse } from '@/utils/contractAnalysisService';
+import { saveContractToStorage } from '@/utils/contractStorageService';
 
 interface ContractUploadProps {
     headline?: string;
@@ -194,6 +195,18 @@ export const ContractUpload: React.FC<ContractUploadProps> = ({
             (window as any).__flintAnalysisResults = analysis;
 
             setAnalysisStatus('complete');
+
+            // ─── Save to Supabase (background — don't block UI) ──────
+            saveContractToStorage(extractedText, fileName, analysis, {
+                wordCount: fileStats?.words,
+                charCount: fileStats?.chars,
+                pageCount: fileStats?.pages,
+            }).then(({ contractId }) => {
+                console.log(`[ContractUpload] Saved to Supabase: ${contractId}`);
+                (window as any).__flintContractId = contractId;
+            }).catch((err) => {
+                console.warn('[ContractUpload] Failed to save to Supabase (non-blocking):', err);
+            });
 
             // ─── Notify Flint with structured analysis summary ───────
             const flintMessage = buildFlintNotification(analysis);

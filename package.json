@@ -26,6 +26,7 @@
     "@radix-ui/react-toast": "^1.2.14",
     "@radix-ui/react-tooltip": "^1.2.7",
     "@react-google-maps/api": "^2.20.7",
+    "@supabase/supabase-js": "^2.97.0",
     "@types/three": "^0.181.0",
     "canvas-confetti": "^1.9.4",
     "class-variance-authority": "^0.7.1",

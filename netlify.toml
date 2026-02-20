@@ -16,6 +16,21 @@
   to = "/.netlify/functions/analyze-contract"
   status = 200
 
+[[redirects]]
+  from = "/api/save-contract"
+  to = "/.netlify/functions/save-contract"
+  status = 200
+
+[[redirects]]
+  from = "/api/contracts"
+  to = "/.netlify/functions/get-contracts"
+  status = 200
+
+[[redirects]]
+  from = "/api/contract"
+  to = "/.netlify/functions/get-contract"
+  status = 200
+
 # SPA fallback — all other routes go to index.html
 [[redirects]]
   from = "/*"
